@@ -106,15 +106,27 @@ BDD specification viewer with test integration:
 
 Detailed specification page:
 
+**Header (from FeatureView):**
 - Priority and category badges
 - Clickable user story link
+- Test status summary (passed/failed/skipped)
 - Linked screens as buttons
-- Gherkin syntax highlighting with:
-  - Collapsible scenarios
-  - Color-coded keywords
-  - Step definition tooltips
-  - Test status indicators
-  - Error messages for failed scenarios
+
+**Gherkin Display (GherkinHighlighter):**
+- Card-based layout (not code/text style) for better readability
+- System font (not sketchy handwritten font) for clarity
+- Expand/Collapse all toolbar with "Définitions" toggle
+- Background (Contexte) always visible, scenarios collapsible
+- Color-coded step keywords with background highlights:
+  - Blue: Given/Étant donné
+  - Amber: When/Quand
+  - Green: Then/Alors
+  - Gray: And/Et
+- Test status indicators per scenario (pass/fail/skip icons)
+- Error messages displayed for failed scenarios
+- Step definition tooltips (when "Définitions" mode enabled)
+- Tables rendered as styled HTML tables
+- Responsive design with compact padding for mobile
 
 ## Component Library
 

@@ -37,7 +37,8 @@ bun run steps:extract    # Extract step definitions for tooltips
 - UI labels are in French
 - User stories are prefixed US-1 to US-26
 - Screens use the sketchy component library, not Tailwind
-- Specs pages use Tailwind + Shadcn components
+- Specs pages use Tailwind + Shadcn components with system font (not sketchy font)
+- GherkinHighlighter uses card-based layout, not code/text style
 
 ---
 
