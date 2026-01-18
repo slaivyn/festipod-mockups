@@ -66,54 +66,54 @@ export function SpecsPage({ selectedFeatureId, onBack, onSelectScreen, onSelectS
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <div className="border-b border-border px-8 py-6 bg-card">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-4">
+      <div className="border-b border-border px-4 sm:px-8 py-4 sm:py-6 bg-card">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="flex items-center gap-3 sm:gap-4">
             <Button variant="outline" size="sm" onClick={onBack}>
-              <ArrowLeft className="w-4 h-4 mr-2" />
-              Retour
+              <ArrowLeft className="w-4 h-4 sm:mr-2" />
+              <span className="hidden sm:inline">Retour</span>
             </Button>
             <div>
-              <h1 className="text-2xl font-semibold">Specifications BDD</h1>
-              <p className="text-sm text-muted-foreground mt-1">
-                {filteredFeatures.length} / {parsedFeatures.length} fonctionnalites - {filteredFeatures.reduce((acc, f) => acc + f.scenarios.length, 0)} scenarios
+              <h1 className="text-xl sm:text-2xl font-semibold">Specs BDD</h1>
+              <p className="text-xs sm:text-sm text-muted-foreground mt-1">
+                {filteredFeatures.length} / {parsedFeatures.length} fonctionnalités
               </p>
+            </div>
+            <div className="sm:hidden ml-auto">
+              <ThemeToggle />
             </div>
           </div>
           {/* Test Results Summary */}
           {testSummary.totalScenarios > 0 && (
-            <div className="flex items-center gap-4 text-sm">
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-green-500" />
-                <span className="text-green-600 font-medium">{testSummary.passed} passes</span>
+            <div className="flex items-center gap-2 sm:gap-4 text-xs sm:text-sm flex-wrap">
+              <div className="flex items-center gap-1 sm:gap-2">
+                <CheckCircle2 className="w-3 h-3 sm:w-4 sm:h-4 text-green-500" />
+                <span className="text-green-600 font-medium">{testSummary.passed}</span>
               </div>
               {testSummary.failed > 0 && (
-                <div className="flex items-center gap-2">
-                  <XCircle className="w-4 h-4 text-red-500" />
-                  <span className="text-red-600 font-medium">{testSummary.failed} echecs</span>
+                <div className="flex items-center gap-1 sm:gap-2">
+                  <XCircle className="w-3 h-3 sm:w-4 sm:h-4 text-red-500" />
+                  <span className="text-red-600 font-medium">{testSummary.failed}</span>
                 </div>
               )}
               {testSummary.skipped > 0 && (
-                <div className="flex items-center gap-2">
-                  <AlertCircle className="w-4 h-4 text-yellow-500" />
-                  <span className="text-yellow-600 font-medium">{testSummary.skipped} ignores</span>
+                <div className="flex items-center gap-1 sm:gap-2">
+                  <AlertCircle className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-500" />
+                  <span className="text-yellow-600 font-medium">{testSummary.skipped}</span>
                 </div>
               )}
-              {testSummary.lastRun && (
-                <span className="text-muted-foreground">
-                  {testSummary.lastRun.toLocaleString('fr-FR', { dateStyle: 'short', timeStyle: 'short' })}
-                </span>
-              )}
-              <a href="/reports/cucumber" target="_blank" rel="noopener noreferrer">
+              <a href="/reports/cucumber" target="_blank" rel="noopener noreferrer" className="hidden sm:block">
                 <Button variant="outline" size="sm">
                   <ExternalLink className="w-4 h-4 mr-2" />
-                  Rapport HTML
+                  Rapport
                 </Button>
               </a>
-              <ThemeToggle />
+              <div className="hidden sm:block">
+                <ThemeToggle />
+              </div>
             </div>
           )}
-          {testSummary.totalScenarios === 0 && <ThemeToggle />}
+          {testSummary.totalScenarios === 0 && <div className="hidden sm:block"><ThemeToggle /></div>}
         </div>
       </div>
 
@@ -128,7 +128,7 @@ export function SpecsPage({ selectedFeatureId, onBack, onSelectScreen, onSelectS
       />
 
       {/* Feature list */}
-      <div className="px-8 py-6 space-y-8">
+      <div className="px-4 sm:px-8 py-4 sm:py-6 space-y-6 sm:space-y-8">
         {featuresByPriority.map(({ priority, features }) => (
           <div key={priority}>
             <div className="flex items-center gap-3 mb-4">
@@ -146,7 +146,7 @@ export function SpecsPage({ selectedFeatureId, onBack, onSelectScreen, onSelectS
               </span>
             </div>
 
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
               {features.map(feature => (
                 <FeatureCard
                   key={feature.id}

@@ -1,9 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { PhoneFrame } from './sketchy';
 import { screens, getScreen } from '../screens';
 import { getStoriesForScreen, categoryLabels, categoryColors, priorityColors } from '../data';
 import { getStoryUrl } from '../router';
 import { ThemeToggle } from './ThemeToggle';
+
+function useIsMobile(breakpoint = 768) {
+  const [isMobile, setIsMobile] = useState(window.innerWidth < breakpoint);
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < breakpoint);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [breakpoint]);
+  return isMobile;
+}
 
 interface DemoModeProps {
   initialScreenId: string;
@@ -15,6 +25,8 @@ export function DemoMode({ initialScreenId, onBack, onNavigateToStory }: DemoMod
   const [currentScreenId, setCurrentScreenId] = useState(initialScreenId);
   const [history, setHistory] = useState<string[]>([initialScreenId]);
   const [historyIndex, setHistoryIndex] = useState(0);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const isMobile = useIsMobile();
 
   const currentScreen = getScreen(currentScreenId);
   const ScreenComponent = currentScreen?.component;
@@ -56,7 +68,21 @@ export function DemoMode({ initialScreenId, onBack, onNavigateToStory }: DemoMod
       background: 'var(--tool-bg)',
       overflow: 'hidden',
       transition: 'background-color 0.2s ease',
+      position: 'relative',
     }}>
+      {/* Mobile overlay */}
+      {isMobile && sidebarOpen && (
+        <div
+          onClick={() => setSidebarOpen(false)}
+          style={{
+            position: 'fixed',
+            inset: 0,
+            background: 'rgba(0,0,0,0.5)',
+            zIndex: 40,
+          }}
+        />
+      )}
+
       {/* Left Sidebar */}
       <div style={{
         width: 280,
@@ -65,7 +91,15 @@ export function DemoMode({ initialScreenId, onBack, onNavigateToStory }: DemoMod
         flexDirection: 'column',
         borderRight: '2px solid var(--tool-border)',
         background: 'var(--tool-surface)',
-        transition: 'background-color 0.2s ease, border-color 0.2s ease',
+        transition: 'transform 0.3s ease, background-color 0.2s ease, border-color 0.2s ease',
+        ...(isMobile ? {
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          bottom: 0,
+          zIndex: 50,
+          transform: sidebarOpen ? 'translateX(0)' : 'translateX(-100%)',
+        } : {}),
       }}>
         {/* Back button and theme toggle */}
         <div style={{ padding: 16, borderBottom: '1px solid var(--tool-border-light)', display: 'flex', gap: 8 }}>
@@ -253,24 +287,87 @@ export function DemoMode({ initialScreenId, onBack, onNavigateToStory }: DemoMod
       <div style={{
         flex: 1,
         display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: 24,
+        flexDirection: 'column',
         overflow: 'hidden',
       }}>
+        {/* Mobile header */}
+        {isMobile && (
+          <div style={{
+            padding: '12px 16px',
+            borderBottom: '1px solid var(--tool-border-light)',
+            background: 'var(--tool-surface)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: 12,
+          }}>
+            <button
+              onClick={() => setSidebarOpen(true)}
+              style={{
+                padding: '8px 12px',
+                background: 'none',
+                border: '2px solid var(--tool-border)',
+                borderRadius: '255px 15px 225px 15px/15px 225px 15px 255px',
+                fontFamily: 'var(--font-sketch)',
+                cursor: 'pointer',
+                color: 'var(--tool-text)',
+                fontSize: 14,
+              }}
+            >
+              ☰ Menu
+            </button>
+            <span style={{
+              fontFamily: 'var(--font-sketch)',
+              fontSize: 14,
+              fontWeight: 'bold',
+              color: 'var(--tool-text)',
+              flex: 1,
+              textAlign: 'center',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              whiteSpace: 'nowrap',
+            }}>
+              {currentScreen?.name}
+            </span>
+            <button
+              onClick={onBack}
+              style={{
+                padding: '8px 12px',
+                background: 'none',
+                border: '2px solid var(--tool-border)',
+                borderRadius: '255px 15px 225px 15px/15px 225px 15px 255px',
+                fontFamily: 'var(--font-sketch)',
+                cursor: 'pointer',
+                color: 'var(--tool-text)',
+                fontSize: 14,
+              }}
+            >
+              ← Retour
+            </button>
+          </div>
+        )}
         <div style={{
-          maxHeight: '100%',
+          flex: 1,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
+          padding: isMobile ? 12 : 24,
+          overflow: 'hidden',
         }}>
           <div style={{
-            transform: 'scale(var(--phone-scale, 1))',
-            transformOrigin: 'center center',
+            maxHeight: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
           }}>
-            <ScaledPhoneFrame>
-              {ScreenComponent && <ScreenComponent navigate={navigate} />}
-            </ScaledPhoneFrame>
+            <div style={{
+              transform: 'scale(var(--phone-scale, 1))',
+              transformOrigin: 'center center',
+            }}>
+              <ScaledPhoneFrame isMobile={isMobile}>
+                {ScreenComponent && <ScreenComponent navigate={navigate} />}
+              </ScaledPhoneFrame>
+            </div>
           </div>
         </div>
       </div>
@@ -278,7 +375,7 @@ export function DemoMode({ initialScreenId, onBack, onNavigateToStory }: DemoMod
   );
 }
 
-function ScaledPhoneFrame({ children }: { children: React.ReactNode }) {
+function ScaledPhoneFrame({ children, isMobile = false }: { children: React.ReactNode; isMobile?: boolean }) {
   const phoneWidth = 375;
   const phoneHeight = 812;
 
@@ -287,20 +384,24 @@ function ScaledPhoneFrame({ children }: { children: React.ReactNode }) {
 
   React.useEffect(() => {
     const calculateScale = () => {
-      const availableHeight = window.innerHeight - 48; // 24px padding on each side
-      const availableWidth = window.innerWidth - 280 - 48; // sidebar + padding
+      const mobileHeaderHeight = isMobile ? 56 : 0;
+      const padding = isMobile ? 24 : 48;
+      const sidebarWidth = isMobile ? 0 : 280;
+
+      const availableHeight = window.innerHeight - padding - mobileHeaderHeight;
+      const availableWidth = window.innerWidth - sidebarWidth - padding;
 
       const scaleByHeight = availableHeight / phoneHeight;
       const scaleByWidth = availableWidth / phoneWidth;
 
       const newScale = Math.min(scaleByHeight, scaleByWidth, 1);
-      setScale(Math.max(0.5, newScale)); // minimum 50% scale
+      setScale(Math.max(0.4, newScale)); // minimum 40% scale for mobile
     };
 
     calculateScale();
     window.addEventListener('resize', calculateScale);
     return () => window.removeEventListener('resize', calculateScale);
-  }, []);
+  }, [isMobile]);
 
   return (
     <div style={{

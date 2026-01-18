@@ -12,6 +12,16 @@ import {
 import { getScreen, screens } from '../screens';
 import { ThemeToggle } from './ThemeToggle';
 
+function useIsMobile(breakpoint = 768) {
+  const [isMobile, setIsMobile] = useState(window.innerWidth < breakpoint);
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < breakpoint);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [breakpoint]);
+  return isMobile;
+}
+
 interface UserStoriesPageProps {
   selectedStoryId?: string;
   onBack: () => void;
@@ -24,7 +34,9 @@ export function UserStoriesPage({ selectedStoryId, onBack, onSelectScreen }: Use
   const [selectedCategories, setSelectedCategories] = useState<Set<StoryCategory>>(new Set());
   const [selectedPriorities, setSelectedPriorities] = useState<Set<number>>(new Set());
   const [selectedScreens, setSelectedScreens] = useState<Set<string>>(new Set());
+  const [filtersExpanded, setFiltersExpanded] = useState(false);
   const storyRefs = useRef<Map<string, HTMLDivElement>>(new Map());
+  const isMobile = useIsMobile();
 
   // Scroll to selected story on mount
   useEffect(() => {
@@ -105,34 +117,39 @@ export function UserStoriesPage({ selectedStoryId, onBack, onSelectScreen }: Use
     <div style={{ minHeight: '100vh', background: 'var(--tool-bg)', transition: 'background-color 0.2s ease' }}>
       {/* Header */}
       <div style={{
-        padding: '24px 32px',
+        padding: isMobile ? '16px' : '24px 32px',
         borderBottom: '2px solid var(--tool-border)',
         background: 'var(--tool-surface)',
         display: 'flex',
-        alignItems: 'center',
+        flexDirection: isMobile ? 'column' : 'row',
+        alignItems: isMobile ? 'stretch' : 'center',
         justifyContent: 'space-between',
+        gap: isMobile ? 12 : 0,
         transition: 'background-color 0.2s ease, border-color 0.2s ease',
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-          <button
-            onClick={onBack}
-            style={{
-              background: 'none',
-              border: '2px solid var(--tool-border)',
-              borderRadius: '255px 15px 225px 15px/15px 225px 15px 255px',
-              padding: '8px 16px',
-              fontFamily: 'var(--font-sketch)',
-              fontSize: 14,
-              cursor: 'pointer',
-              color: 'var(--tool-text)',
-            }}
-          >
-            ← Retour
-          </button>
+        <div style={{ display: 'flex', alignItems: isMobile ? 'flex-start' : 'center', gap: isMobile ? 12 : 16, flexDirection: isMobile ? 'column' : 'row' }}>
+          <div style={{ display: 'flex', gap: 8, alignItems: 'center', width: isMobile ? '100%' : 'auto', justifyContent: 'space-between' }}>
+            <button
+              onClick={onBack}
+              style={{
+                background: 'none',
+                border: '2px solid var(--tool-border)',
+                borderRadius: '255px 15px 225px 15px/15px 225px 15px 255px',
+                padding: isMobile ? '6px 12px' : '8px 16px',
+                fontFamily: 'var(--font-sketch)',
+                fontSize: isMobile ? 12 : 14,
+                cursor: 'pointer',
+                color: 'var(--tool-text)',
+              }}
+            >
+              ← Retour
+            </button>
+            {isMobile && <ThemeToggle />}
+          </div>
           <div>
             <h1 style={{
               fontFamily: 'var(--font-sketch)',
-              fontSize: 28,
+              fontSize: isMobile ? 22 : 28,
               margin: 0,
               color: 'var(--tool-text)',
             }}>
@@ -140,113 +157,241 @@ export function UserStoriesPage({ selectedStoryId, onBack, onSelectScreen }: Use
             </h1>
             <p style={{
               fontFamily: 'var(--font-sketch)',
-              fontSize: 16,
+              fontSize: isMobile ? 13 : 16,
               color: 'var(--tool-text-muted)',
               margin: '8px 0 0 0',
             }}>
-              {filteredStories.length} / {userStories.length} stories · Cliquez sur un écran pour voir le mockup
+              {filteredStories.length} / {userStories.length} stories
             </p>
           </div>
         </div>
-        <ThemeToggle />
+        {!isMobile && <ThemeToggle />}
       </div>
 
       {/* Filter bar */}
-      <div style={{
-        padding: '16px 32px',
-        borderBottom: '1px solid var(--tool-border-light)',
-        background: 'var(--tool-surface)',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: 12,
-        transition: 'background-color 0.2s ease, border-color 0.2s ease',
-      }}>
-        {/* Category filters */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
-          <span style={{
-            fontFamily: 'var(--font-sketch)',
-            fontSize: 13,
-            color: 'var(--tool-text-muted)',
-            minWidth: 70,
-          }}>
-            Catégorie
-          </span>
-          {categories.map(cat => (
-            <FilterChip
-              key={cat}
-              label={categoryLabels[cat]}
-              color={categoryColors[cat]}
-              selected={selectedCategories.has(cat)}
-              onClick={() => toggleCategory(cat)}
-            />
-          ))}
-        </div>
-
-        {/* Priority filters */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
-          <span style={{
-            fontFamily: 'var(--font-sketch)',
-            fontSize: 13,
-            color: 'var(--tool-text-muted)',
-            minWidth: 70,
-          }}>
-            Priorité
-          </span>
-          {[0, 1, 2, 3].map(p => (
-            <FilterChip
-              key={p}
-              label={`P${p} ${priorityLabels[p]}`}
-              color={priorityColors[p] ?? '#888'}
-              selected={selectedPriorities.has(p)}
-              onClick={() => togglePriority(p)}
-            />
-          ))}
-        </div>
-
-        {/* Screen filters */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
-          <span style={{
-            fontFamily: 'var(--font-sketch)',
-            fontSize: 13,
-            color: 'var(--tool-text-muted)',
-            minWidth: 70,
-          }}>
-            Écran
-          </span>
-          {screensWithStories.map(screen => (
-            <FilterChip
-              key={screen.id}
-              label={screen.name}
-              color="var(--tool-text)"
-              selected={selectedScreens.has(screen.id)}
-              onClick={() => toggleScreen(screen.id)}
-            />
-          ))}
-        </div>
-
-        {/* Clear filters */}
-        {hasFilters && (
+      {isMobile ? (
+        /* Mobile: Collapsible filter bar */
+        <div style={{
+          borderBottom: '1px solid var(--tool-border-light)',
+          background: 'var(--tool-surface)',
+          transition: 'background-color 0.2s ease, border-color 0.2s ease',
+        }}>
+          {/* Filter toggle button */}
           <button
-            onClick={clearFilters}
+            onClick={() => setFiltersExpanded(!filtersExpanded)}
             style={{
-              alignSelf: 'flex-start',
+              width: '100%',
+              padding: '12px 16px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
               background: 'none',
               border: 'none',
               fontFamily: 'var(--font-sketch)',
               fontSize: 13,
-              color: '#c00',
               cursor: 'pointer',
-              padding: 0,
-              textDecoration: 'underline',
+              color: 'var(--tool-text)',
             }}
           >
-            Effacer les filtres
+            <span style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              <span>☰ Filtres</span>
+              {hasFilters && (
+                <span style={{
+                  background: 'var(--tool-text)',
+                  color: 'var(--tool-bg)',
+                  borderRadius: '50%',
+                  width: 20,
+                  height: 20,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: 11,
+                }}>
+                  {selectedCategories.size + selectedPriorities.size}
+                </span>
+              )}
+            </span>
+            <span>{filtersExpanded ? '▲' : '▼'}</span>
           </button>
-        )}
-      </div>
+
+          {/* Expandable filter panel */}
+          {filtersExpanded && (
+            <div style={{
+              padding: '0 16px 12px',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 12,
+              borderTop: '1px solid var(--tool-border-light)',
+              paddingTop: 12,
+            }}>
+              {/* Category filters */}
+              <div>
+                <span style={{
+                  fontFamily: 'var(--font-sketch)',
+                  fontSize: 11,
+                  color: 'var(--tool-text-muted)',
+                  display: 'block',
+                  marginBottom: 6,
+                }}>
+                  Catégorie
+                </span>
+                <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+                  {categories.map(cat => (
+                    <FilterChip
+                      key={cat}
+                      label={categoryLabels[cat]}
+                      color={categoryColors[cat]}
+                      selected={selectedCategories.has(cat)}
+                      onClick={() => toggleCategory(cat)}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              {/* Priority filters */}
+              <div>
+                <span style={{
+                  fontFamily: 'var(--font-sketch)',
+                  fontSize: 11,
+                  color: 'var(--tool-text-muted)',
+                  display: 'block',
+                  marginBottom: 6,
+                }}>
+                  Priorité
+                </span>
+                <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+                  {[0, 1, 2, 3].map(p => (
+                    <FilterChip
+                      key={p}
+                      label={`P${p}`}
+                      color={priorityColors[p] ?? '#888'}
+                      selected={selectedPriorities.has(p)}
+                      onClick={() => togglePriority(p)}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              {/* Clear filters */}
+              {hasFilters && (
+                <button
+                  onClick={clearFilters}
+                  style={{
+                    alignSelf: 'flex-start',
+                    background: 'none',
+                    border: 'none',
+                    fontFamily: 'var(--font-sketch)',
+                    fontSize: 12,
+                    color: '#c00',
+                    cursor: 'pointer',
+                    padding: 0,
+                    textDecoration: 'underline',
+                  }}
+                >
+                  Effacer les filtres
+                </button>
+              )}
+            </div>
+          )}
+        </div>
+      ) : (
+        /* Desktop: Full filter bar */
+        <div style={{
+          padding: '16px 32px',
+          borderBottom: '1px solid var(--tool-border-light)',
+          background: 'var(--tool-surface)',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 12,
+          transition: 'background-color 0.2s ease, border-color 0.2s ease',
+        }}>
+          {/* Category filters */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
+            <span style={{
+              fontFamily: 'var(--font-sketch)',
+              fontSize: 13,
+              color: 'var(--tool-text-muted)',
+              minWidth: 70,
+            }}>
+              Catégorie
+            </span>
+            {categories.map(cat => (
+              <FilterChip
+                key={cat}
+                label={categoryLabels[cat]}
+                color={categoryColors[cat]}
+                selected={selectedCategories.has(cat)}
+                onClick={() => toggleCategory(cat)}
+              />
+            ))}
+          </div>
+
+          {/* Priority filters */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
+            <span style={{
+              fontFamily: 'var(--font-sketch)',
+              fontSize: 13,
+              color: 'var(--tool-text-muted)',
+              minWidth: 70,
+            }}>
+              Priorité
+            </span>
+            {[0, 1, 2, 3].map(p => (
+              <FilterChip
+                key={p}
+                label={`P${p} ${priorityLabels[p]}`}
+                color={priorityColors[p] ?? '#888'}
+                selected={selectedPriorities.has(p)}
+                onClick={() => togglePriority(p)}
+              />
+            ))}
+          </div>
+
+          {/* Screen filters */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
+            <span style={{
+              fontFamily: 'var(--font-sketch)',
+              fontSize: 13,
+              color: 'var(--tool-text-muted)',
+              minWidth: 70,
+            }}>
+              Écran
+            </span>
+            {screensWithStories.map(screen => (
+              <FilterChip
+                key={screen.id}
+                label={screen.name}
+                color="var(--tool-text)"
+                selected={selectedScreens.has(screen.id)}
+                onClick={() => toggleScreen(screen.id)}
+              />
+            ))}
+          </div>
+
+          {/* Clear filters */}
+          {hasFilters && (
+            <button
+              onClick={clearFilters}
+              style={{
+                alignSelf: 'flex-start',
+                background: 'none',
+                border: 'none',
+                fontFamily: 'var(--font-sketch)',
+                fontSize: 13,
+                color: '#c00',
+                cursor: 'pointer',
+                padding: 0,
+                textDecoration: 'underline',
+              }}
+            >
+              Effacer les filtres
+            </button>
+          )}
+        </div>
+      )}
 
       {/* Stories by priority */}
-      <div style={{ padding: 32 }}>
+      <div style={{ padding: isMobile ? 16 : 32 }}>
         {storiesByPriority.length === 0 ? (
           <p style={{
             fontFamily: 'var(--font-sketch)',
