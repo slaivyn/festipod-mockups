@@ -60,7 +60,7 @@ export const screenFieldDetectors: Record<string, Record<string, (source: string
     // EventDetailScreen.tsx lines 77-81: À propos section with description
     'Description': (s) => {
       const match = s.match(/À propos[\s\S]*?<Text[^>]*>([\s\S]*?)<\/Text>/);
-      return match !== null && match[1].trim().length > 50;
+      return match !== null && match[1] !== undefined && match[1].trim().length > 50;
     },
     // EventDetailScreen.tsx lines 8-13: attendees with { name: 'Marie' } rendered via {a.name}
     'Nom': (s) => /name:\s*['"][^'"]+['"]/.test(s) && /\{[^}]*\.name\}/.test(s),

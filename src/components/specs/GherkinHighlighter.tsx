@@ -395,8 +395,9 @@ interface StepRendererProps {
 
 function StepRenderer({ step, showDefinitions }: StepRendererProps) {
   // Always check for step definition to show dotted underline
+  // Use step.text (without keyword) to match against step definition patterns
   const stepDef = step.type !== 'table' && step.type !== 'other' && step.type !== 'examples'
-    ? findStepDefinition(step.originalLine.trim())
+    ? findStepDefinition(step.text)
     : null;
 
   // Keyword colors

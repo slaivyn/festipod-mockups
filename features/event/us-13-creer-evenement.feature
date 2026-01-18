@@ -37,6 +37,6 @@ Fonctionnalité: US-13 Créer/Modifier/Supprimer un événement
     Étant donné je suis sur la page "créer un événement"
     Alors l'écran contient une section "Créer l'événement"
 
-  Scénario: Vérifier la présence du bouton d'annulation
+  Scénario: Pouvoir annuler la création d'événement
     Étant donné je suis sur la page "créer un événement"
-    Alors l'écran contient une section "Annuler"
+    Alors je peux annuler et revenir à l'écran précédent

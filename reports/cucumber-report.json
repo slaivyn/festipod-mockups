@@ -14,7 +14,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 362954
+              "duration": 189443
             }
           },
           {
@@ -27,7 +27,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 317359
+              "duration": 143621
             }
           },
           {
@@ -40,7 +40,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 624171
+              "duration": 335308
             }
           },
           {
@@ -53,7 +53,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 424617
+              "duration": 168917
             }
           },
           {
@@ -62,11 +62,11 @@
             "line": 15,
             "name": "je vois l'écran \"create-event\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:78"
+              "location": "features/step_definitions/navigation.steps.ts:102"
             },
             "result": {
               "status": "passed",
-              "duration": 816523
+              "duration": 477758
             }
           },
           {
@@ -74,7 +74,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 211094
+              "duration": 110768
             }
           }
         ],
@@ -102,7 +102,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 131294
+              "duration": 113848
             }
           },
           {
@@ -115,7 +115,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 162447
+              "duration": 379100
             }
           },
           {
@@ -128,7 +128,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 546824
+              "duration": 202083
             }
           },
           {
@@ -167,11 +167,11 @@
             "line": 19,
             "name": "le formulaire contient les champs obligatoires suivants:",
             "match": {
-              "location": "features/step_definitions/form.steps.ts:41"
+              "location": "features/step_definitions/form.steps.ts:48"
             },
             "result": {
               "status": "passed",
-              "duration": 824702
+              "duration": 517104
             }
           },
           {
@@ -179,7 +179,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 225294
+              "duration": 127872
             }
           }
         ],
@@ -207,7 +207,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 129556
+              "duration": 66567
             }
           },
           {
@@ -220,7 +220,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 131219
+              "duration": 63013
             }
           },
           {
@@ -233,7 +233,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 296553
+              "duration": 199371
             }
           },
           {
@@ -245,9 +245,15 @@
               "location": "features/step_definitions/form.steps.ts:16"
             },
             "result": {
-              "status": "passed",
-              "duration": 241136
-            }
+              "status": "pending",
+              "duration": 289851
+            },
+            "embeddings": [
+              {
+                "data": "Q0FOTk9UIFRFU1Q6IEZpbGxpbmcgZmllbGQgIk5vbSBkZSBsJ8OpdsOpbmVtZW50IiB3aXRoICJNb24gw6l2w6luZW1lbnQiIHJlcXVpcmVzIGJyb3dzZXIgYXV0b21hdGlvbg==",
+                "mime_type": "text/plain"
+              }
+            ]
           },
           {
             "arguments": [],
@@ -258,8 +264,8 @@
               "location": "features/step_definitions/form.steps.ts:16"
             },
             "result": {
-              "status": "passed",
-              "duration": 146626
+              "status": "skipped",
+              "duration": 0
             }
           },
           {
@@ -271,8 +277,8 @@
               "location": "features/step_definitions/form.steps.ts:16"
             },
             "result": {
-              "status": "passed",
-              "duration": 253700
+              "status": "skipped",
+              "duration": 0
             }
           },
           {
@@ -284,8 +290,8 @@
               "location": "features/step_definitions/form.steps.ts:16"
             },
             "result": {
-              "status": "passed",
-              "duration": 174072
+              "status": "skipped",
+              "duration": 0
             }
           },
           {
@@ -297,8 +303,8 @@
               "location": "features/step_definitions/form.steps.ts:16"
             },
             "result": {
-              "status": "passed",
-              "duration": 131244
+              "status": "skipped",
+              "duration": 0
             }
           },
           {
@@ -307,11 +313,11 @@
             "line": 33,
             "name": "le champ \"Nom de l'événement\" affiche \"Mon événement\"",
             "match": {
-              "location": "features/step_definitions/form.steps.ts:57"
+              "location": "features/step_definitions/form.steps.ts:76"
             },
             "result": {
-              "status": "passed",
-              "duration": 235308
+              "status": "skipped",
+              "duration": 0
             }
           },
           {
@@ -320,11 +326,11 @@
             "line": 34,
             "name": "le champ \"Lieu\" affiche \"Lyon\"",
             "match": {
-              "location": "features/step_definitions/form.steps.ts:57"
+              "location": "features/step_definitions/form.steps.ts:76"
             },
             "result": {
-              "status": "passed",
-              "duration": 171684
+              "status": "skipped",
+              "duration": 0
             }
           },
           {
@@ -332,7 +338,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 78961
+              "duration": 52667
             }
           }
         ],
@@ -360,7 +366,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 79005
+              "duration": 60329
             }
           },
           {
@@ -373,7 +379,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 124953
+              "duration": 64099
             }
           },
           {
@@ -386,7 +392,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 210342
+              "duration": 175088
             }
           },
           {
@@ -395,25 +401,19 @@
             "line": 38,
             "name": "l'écran contient une section \"Créer l'événement\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:88"
+              "location": "features/step_definitions/navigation.steps.ts:112"
             },
             "result": {
               "status": "passed",
-              "duration": 542211
-            },
-            "embeddings": [
-              {
-                "data": "VmVyaWZpZWQgc2VjdGlvbjogQ3LDqWVyIGwnw6l2w6luZW1lbnQ=",
-                "mime_type": "text/plain"
-              }
-            ]
+              "duration": 118605
+            }
           },
           {
             "keyword": "After",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 89458
+              "duration": 45155
             }
           }
         ],
@@ -431,17 +431,17 @@
       },
       {
         "description": "",
-        "id": "us-13-créer/modifier/supprimer-un-événement;vérifier-la-présence-du-bouton-d'annulation",
+        "id": "us-13-créer/modifier/supprimer-un-événement;pouvoir-annuler-la-création-d'événement",
         "keyword": "Scénario",
         "line": 40,
-        "name": "Vérifier la présence du bouton d'annulation",
+        "name": "Pouvoir annuler la création d'événement",
         "steps": [
           {
             "keyword": "Before",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 90791
+              "duration": 47617
             }
           },
           {
@@ -454,7 +454,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 93863
+              "duration": 51281
             }
           },
           {
@@ -467,34 +467,28 @@
             },
             "result": {
               "status": "passed",
-              "duration": 413027
+              "duration": 132398
             }
           },
           {
             "arguments": [],
             "keyword": "Alors ",
             "line": 42,
-            "name": "l'écran contient une section \"Annuler\"",
+            "name": "je peux annuler et revenir à l'écran précédent",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:88"
+              "location": "features/step_definitions/navigation.steps.ts:120"
             },
             "result": {
               "status": "passed",
-              "duration": 293664
-            },
-            "embeddings": [
-              {
-                "data": "VmVyaWZpZWQgc2VjdGlvbjogQW5udWxlcg==",
-                "mime_type": "text/plain"
-              }
-            ]
+              "duration": 195536
+            }
           },
           {
             "keyword": "After",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 87235
+              "duration": 42488
             }
           }
         ],
@@ -542,7 +536,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 79385
+              "duration": 57170
             }
           },
           {
@@ -555,7 +549,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 107996
+              "duration": 52049
             }
           },
           {
@@ -568,7 +562,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 173384
+              "duration": 100725
             }
           },
           {
@@ -577,11 +571,11 @@
             "line": 13,
             "name": "je clique sur un événement",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:69"
+              "location": "features/step_definitions/navigation.steps.ts:93"
             },
             "result": {
               "status": "passed",
-              "duration": 197217
+              "duration": 104782
             }
           },
           {
@@ -590,11 +584,11 @@
             "line": 14,
             "name": "je vois l'écran \"event-detail\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:78"
+              "location": "features/step_definitions/navigation.steps.ts:102"
             },
             "result": {
               "status": "passed",
-              "duration": 580138
+              "duration": 87507
             }
           },
           {
@@ -602,7 +596,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 73262
+              "duration": 62342
             }
           }
         ],
@@ -630,7 +624,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 83495
+              "duration": 47121
             }
           },
           {
@@ -643,7 +637,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 108157
+              "duration": 44714
             }
           },
           {
@@ -656,7 +650,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 277099
+              "duration": 98791
             }
           },
           {
@@ -665,11 +659,11 @@
             "line": 18,
             "name": "l'écran affiche les informations de l'événement",
             "match": {
-              "location": "features/step_definitions/screen.steps.ts:91"
+              "location": "features/step_definitions/screen.steps.ts:131"
             },
             "result": {
               "status": "passed",
-              "duration": 484954
+              "duration": 242175
             }
           },
           {
@@ -677,7 +671,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 72749
+              "duration": 44398
             }
           }
         ],
@@ -705,7 +699,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 69483
+              "duration": 38433
             }
           },
           {
@@ -718,7 +712,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 70389
+              "duration": 44301
             }
           },
           {
@@ -731,7 +725,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 203667
+              "duration": 129723
             }
           },
           {
@@ -740,11 +734,11 @@
             "line": 22,
             "name": "je peux voir la liste des participants",
             "match": {
-              "location": "features/step_definitions/screen.steps.ts:6"
+              "location": "features/step_definitions/screen.steps.ts:5"
             },
             "result": {
               "status": "passed",
-              "duration": 871863
+              "duration": 199924
             }
           },
           {
@@ -752,7 +746,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 77255
+              "duration": 35623
             }
           }
         ],
@@ -780,7 +774,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 64592
+              "duration": 56473
             }
           },
           {
@@ -793,7 +787,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 88065
+              "duration": 41708
             }
           },
           {
@@ -806,7 +800,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 166455
+              "duration": 92773
             }
           },
           {
@@ -845,19 +839,25 @@
             "line": 26,
             "name": "le formulaire contient les champs obligatoires suivants:",
             "match": {
-              "location": "features/step_definitions/form.steps.ts:41"
+              "location": "features/step_definitions/form.steps.ts:48"
             },
             "result": {
-              "status": "passed",
-              "duration": 405641
-            }
+              "status": "pending",
+              "duration": 108019
+            },
+            "embeddings": [
+              {
+                "data": "V1JPTkcgU1RFUDogImxlIGZvcm11bGFpcmUgY29udGllbnQgbGVzIGNoYW1wcyBvYmxpZ2F0b2lyZXMiIGlzIGZvciBmb3Jtcy4gU2NyZWVuICJldmVudC1kZXRhaWwiIGlzIG5vdCBhIGZvcm0u",
+                "mime_type": "text/plain"
+              }
+            ]
           },
           {
             "keyword": "After",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 58322
+              "duration": 33684
             }
           }
         ],
@@ -905,7 +905,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 103383
+              "duration": 91695
             }
           },
           {
@@ -918,7 +918,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 66219
+              "duration": 47566
             }
           },
           {
@@ -931,7 +931,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 196591
+              "duration": 112864
             }
           },
           {
@@ -940,15 +940,15 @@
             "line": 14,
             "name": "l'écran contient une section \"Notes personnelles\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:88"
+              "location": "features/step_definitions/navigation.steps.ts:112"
             },
             "result": {
-              "status": "passed",
-              "duration": 218941
+              "status": "pending",
+              "duration": 79100
             },
             "embeddings": [
               {
-                "data": "VmVyaWZpZWQgc2VjdGlvbjogTm90ZXMgcGVyc29ubmVsbGVz",
+                "data": "TUlTU0lORyBTRUNUSU9OOiAiTm90ZXMgcGVyc29ubmVsbGVzIiBub3QgZm91bmQgaW4gc2NyZWVuICJldmVudC1kZXRhaWwi",
                 "mime_type": "text/plain"
               }
             ]
@@ -958,7 +958,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 44611
+              "duration": 24618
             }
           }
         ],
@@ -986,7 +986,7 @@
             "hidden": true,
             "result": {
               "status": "pending",
-              "duration": 60212
+              "duration": 39287
             }
           },
           {
@@ -1034,7 +1034,7 @@
             "line": 20,
             "name": "je peux ajouter un commentaire",
             "match": {
-              "location": "features/step_definitions/screen.steps.ts:114"
+              "location": "features/step_definitions/screen.steps.ts:159"
             },
             "result": {
               "status": "skipped",
@@ -1046,7 +1046,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 42774
+              "duration": 28732
             }
           }
         ],
@@ -1078,7 +1078,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 54523
+              "duration": 55660
             }
           },
           {
@@ -1091,7 +1091,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 61664
+              "duration": 39121
             }
           },
           {
@@ -1104,7 +1104,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 197377
+              "duration": 86641
             }
           },
           {
@@ -1116,12 +1116,12 @@
               "location": "features/step_definitions/navigation.steps.ts:53"
             },
             "result": {
-              "status": "passed",
-              "duration": 203684
+              "status": "pending",
+              "duration": 204858
             },
             "embeddings": [
               {
-                "data": "Q2xpY2tlZCBvbjogTW9kaWZpZXI=",
+                "data": "TUlTU0lORzogQ2xpY2thYmxlIGVsZW1lbnQgIk1vZGlmaWVyIiBub3QgZm91bmQgaW4gc2NyZWVuICJldmVudC1kZXRhaWwi",
                 "mime_type": "text/plain"
               }
             ]
@@ -1132,11 +1132,11 @@
             "line": 25,
             "name": "je peux modifier un commentaire",
             "match": {
-              "location": "features/step_definitions/screen.steps.ts:146"
+              "location": "features/step_definitions/screen.steps.ts:180"
             },
             "result": {
-              "status": "passed",
-              "duration": 189916
+              "status": "skipped",
+              "duration": 0
             }
           },
           {
@@ -1144,7 +1144,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 40077
+              "duration": 25995
             }
           }
         ],
@@ -1172,7 +1172,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 67580
+              "duration": 31836
             }
           },
           {
@@ -1185,7 +1185,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 58371
+              "duration": 35050
             }
           },
           {
@@ -1198,7 +1198,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 220551
+              "duration": 83656
             }
           },
           {
@@ -1210,12 +1210,12 @@
               "location": "features/step_definitions/navigation.steps.ts:53"
             },
             "result": {
-              "status": "passed",
-              "duration": 132792
+              "status": "pending",
+              "duration": 114245
             },
             "embeddings": [
               {
-                "data": "Q2xpY2tlZCBvbjogU3VwcHJpbWVy",
+                "data": "TUlTU0lORzogQ2xpY2thYmxlIGVsZW1lbnQgIlN1cHByaW1lciIgbm90IGZvdW5kIGluIHNjcmVlbiAiZXZlbnQtZGV0YWlsIg==",
                 "mime_type": "text/plain"
               }
             ]
@@ -1226,11 +1226,11 @@
             "line": 30,
             "name": "je peux supprimer un commentaire",
             "match": {
-              "location": "features/step_definitions/screen.steps.ts:152"
+              "location": "features/step_definitions/screen.steps.ts:187"
             },
             "result": {
-              "status": "passed",
-              "duration": 161033
+              "status": "skipped",
+              "duration": 0
             }
           },
           {
@@ -1238,7 +1238,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 43903
+              "duration": 41335
             }
           }
         ],
@@ -1266,7 +1266,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 44632
+              "duration": 28612
             }
           },
           {
@@ -1279,7 +1279,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 61311
+              "duration": 42467
             }
           },
           {
@@ -1292,7 +1292,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 150825
+              "duration": 82155
             }
           },
           {
@@ -1321,19 +1321,25 @@
             "line": 34,
             "name": "le formulaire contient les champs obligatoires suivants:",
             "match": {
-              "location": "features/step_definitions/form.steps.ts:41"
+              "location": "features/step_definitions/form.steps.ts:48"
             },
             "result": {
-              "status": "passed",
-              "duration": 218158
-            }
+              "status": "pending",
+              "duration": 66276
+            },
+            "embeddings": [
+              {
+                "data": "V1JPTkcgU1RFUDogImxlIGZvcm11bGFpcmUgY29udGllbnQgbGVzIGNoYW1wcyBvYmxpZ2F0b2lyZXMiIGlzIGZvciBmb3Jtcy4gU2NyZWVuICJldmVudC1kZXRhaWwiIGlzIG5vdCBhIGZvcm0u",
+                "mime_type": "text/plain"
+              }
+            ]
           },
           {
             "keyword": "After",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 56380
+              "duration": 20141
             }
           }
         ],
@@ -1381,7 +1387,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 44492
+              "duration": 31262
             }
           },
           {
@@ -1394,7 +1400,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 62189
+              "duration": 33704
             }
           },
           {
@@ -1407,7 +1413,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 136200
+              "duration": 73479
             }
           },
           {
@@ -1416,11 +1422,11 @@
             "line": 14,
             "name": "l'écran affiche les informations de l'événement",
             "match": {
-              "location": "features/step_definitions/screen.steps.ts:91"
+              "location": "features/step_definitions/screen.steps.ts:131"
             },
             "result": {
               "status": "passed",
-              "duration": 126882
+              "duration": 105915
             }
           },
           {
@@ -1428,7 +1434,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 36563
+              "duration": 23004
             }
           }
         ],
@@ -1456,7 +1462,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 49749
+              "duration": 27432
             }
           },
           {
@@ -1469,7 +1475,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 96882
+              "duration": 32744
             }
           },
           {
@@ -1482,7 +1488,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 167499
+              "duration": 88125
             }
           },
           {
@@ -1494,12 +1500,12 @@
               "location": "features/step_definitions/navigation.steps.ts:53"
             },
             "result": {
-              "status": "passed",
-              "duration": 129788
+              "status": "pending",
+              "duration": 126037
             },
             "embeddings": [
               {
-                "data": "Q2xpY2tlZCBvbjogUydpbnNjcmlyZQ==",
+                "data": "TUlTU0lORzogQ2xpY2thYmxlIGVsZW1lbnQgIlMnaW5zY3JpcmUiIG5vdCBmb3VuZCBpbiBzY3JlZW4gImV2ZW50LWRldGFpbCI=",
                 "mime_type": "text/plain"
               }
             ]
@@ -1510,11 +1516,11 @@
             "line": 19,
             "name": "je peux m'inscrire à l'événement",
             "match": {
-              "location": "features/step_definitions/screen.steps.ts:158"
+              "location": "features/step_definitions/screen.steps.ts:194"
             },
             "result": {
-              "status": "passed",
-              "duration": 181607
+              "status": "skipped",
+              "duration": 0
             }
           },
           {
@@ -1522,7 +1528,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 57514
+              "duration": 20024
             }
           }
         ],
@@ -1550,7 +1556,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 38656
+              "duration": 32176
             }
           },
           {
@@ -1563,7 +1569,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 56801
+              "duration": 34208
             }
           },
           {
@@ -1576,7 +1582,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 131040
+              "duration": 73776
             }
           },
           {
@@ -1588,12 +1594,12 @@
               "location": "features/step_definitions/navigation.steps.ts:53"
             },
             "result": {
-              "status": "passed",
-              "duration": 121648
+              "status": "pending",
+              "duration": 114190
             },
             "embeddings": [
               {
-                "data": "Q2xpY2tlZCBvbjogU2UgZMOpc2luc2NyaXJl",
+                "data": "TUlTU0lORzogQ2xpY2thYmxlIGVsZW1lbnQgIlNlIGTDqXNpbnNjcmlyZSIgbm90IGZvdW5kIGluIHNjcmVlbiAiZXZlbnQtZGV0YWlsIg==",
                 "mime_type": "text/plain"
               }
             ]
@@ -1604,11 +1610,11 @@
             "line": 24,
             "name": "je peux me désinscrire de l'événement",
             "match": {
-              "location": "features/step_definitions/screen.steps.ts:167"
+              "location": "features/step_definitions/screen.steps.ts:203"
             },
             "result": {
-              "status": "passed",
-              "duration": 186486
+              "status": "skipped",
+              "duration": 0
             }
           },
           {
@@ -1616,7 +1622,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 42128
+              "duration": 19334
             }
           }
         ],
@@ -1644,7 +1650,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 61420
+              "duration": 49465
             }
           },
           {
@@ -1657,7 +1663,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 71894
+              "duration": 30594
             }
           },
           {
@@ -1670,7 +1676,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 192859
+              "duration": 72479
             }
           },
           {
@@ -1679,11 +1685,11 @@
             "line": 28,
             "name": "je peux voir la liste des événements",
             "match": {
-              "location": "features/step_definitions/screen.steps.ts:49"
+              "location": "features/step_definitions/screen.steps.ts:61"
             },
             "result": {
               "status": "passed",
-              "duration": 834350
+              "duration": 144153
             }
           },
           {
@@ -1691,7 +1697,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 90492
+              "duration": 24394
             }
           }
         ],
@@ -1719,7 +1725,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 80377
+              "duration": 20889
             }
           },
           {
@@ -1732,7 +1738,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 110344
+              "duration": 29279
             }
           },
           {
@@ -1745,7 +1751,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 272745
+              "duration": 74336
             }
           },
           {
@@ -1784,19 +1790,25 @@
             "line": 32,
             "name": "le formulaire contient les champs obligatoires suivants:",
             "match": {
-              "location": "features/step_definitions/form.steps.ts:41"
+              "location": "features/step_definitions/form.steps.ts:48"
             },
             "result": {
-              "status": "passed",
-              "duration": 447913
-            }
+              "status": "pending",
+              "duration": 63862
+            },
+            "embeddings": [
+              {
+                "data": "V1JPTkcgU1RFUDogImxlIGZvcm11bGFpcmUgY29udGllbnQgbGVzIGNoYW1wcyBvYmxpZ2F0b2lyZXMiIGlzIGZvciBmb3Jtcy4gU2NyZWVuICJldmVudC1kZXRhaWwiIGlzIG5vdCBhIGZvcm0u",
+                "mime_type": "text/plain"
+              }
+            ]
           },
           {
             "keyword": "After",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 81052
+              "duration": 19572
             }
           }
         ],
@@ -1844,7 +1856,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 69370
+              "duration": 36833
             }
           },
           {
@@ -1857,7 +1869,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 310105
+              "duration": 33528
             }
           },
           {
@@ -1870,7 +1882,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 211865
+              "duration": 119260
             }
           },
           {
@@ -1879,11 +1891,11 @@
             "line": 14,
             "name": "je clique sur un événement",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:69"
+              "location": "features/step_definitions/navigation.steps.ts:93"
             },
             "result": {
               "status": "passed",
-              "duration": 172579
+              "duration": 66014
             }
           },
           {
@@ -1892,11 +1904,11 @@
             "line": 15,
             "name": "je vois l'écran \"event-detail\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:78"
+              "location": "features/step_definitions/navigation.steps.ts:102"
             },
             "result": {
               "status": "passed",
-              "duration": 151082
+              "duration": 63719
             }
           },
           {
@@ -1905,15 +1917,15 @@
             "line": 16,
             "name": "l'écran contient une section \"Événements rattachés\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:88"
+              "location": "features/step_definitions/navigation.steps.ts:112"
             },
             "result": {
-              "status": "passed",
-              "duration": 233113
+              "status": "pending",
+              "duration": 88378
             },
             "embeddings": [
               {
-                "data": "VmVyaWZpZWQgc2VjdGlvbjogw4l2w6luZW1lbnRzIHJhdHRhY2jDqXM=",
+                "data": "TUlTU0lORyBTRUNUSU9OOiAiw4l2w6luZW1lbnRzIHJhdHRhY2jDqXMiIG5vdCBmb3VuZCBpbiBzY3JlZW4gImV2ZW50LWRldGFpbCI=",
                 "mime_type": "text/plain"
               }
             ]
@@ -1923,7 +1935,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 57538
+              "duration": 25756
             }
           }
         ],
@@ -1951,7 +1963,7 @@
             "hidden": true,
             "result": {
               "status": "pending",
-              "duration": 57680
+              "duration": 29957
             }
           },
           {
@@ -1986,7 +1998,7 @@
             "line": 21,
             "name": "l'écran contient une section \"Événements rattachés\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:88"
+              "location": "features/step_definitions/navigation.steps.ts:112"
             },
             "result": {
               "status": "skipped",
@@ -1998,7 +2010,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 60202
+              "duration": 19238
             }
           }
         ],
@@ -2030,7 +2042,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 63065
+              "duration": 23616
             }
           },
           {
@@ -2043,7 +2055,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 102750
+              "duration": 40625
             }
           },
           {
@@ -2056,7 +2068,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 226040
+              "duration": 68779
             }
           },
           {
@@ -2068,12 +2080,12 @@
               "location": "features/step_definitions/navigation.steps.ts:53"
             },
             "result": {
-              "status": "passed",
-              "duration": 313087
+              "status": "pending",
+              "duration": 139676
             },
             "embeddings": [
               {
-                "data": "Q2xpY2tlZCBvbjogUmF0dGFjaGVyIHVuIMOpdsOpbmVtZW50",
+                "data": "TUlTU0lORzogQ2xpY2thYmxlIGVsZW1lbnQgIlJhdHRhY2hlciB1biDDqXbDqW5lbWVudCIgbm90IGZvdW5kIGluIHNjcmVlbiAiZXZlbnQtZGV0YWlsIg==",
                 "mime_type": "text/plain"
               }
             ]
@@ -2084,25 +2096,19 @@
             "line": 26,
             "name": "l'écran contient une section \"Sélection d'événement\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:88"
+              "location": "features/step_definitions/navigation.steps.ts:112"
             },
             "result": {
-              "status": "passed",
-              "duration": 305638
-            },
-            "embeddings": [
-              {
-                "data": "VmVyaWZpZWQgc2VjdGlvbjogU8OpbGVjdGlvbiBkJ8OpdsOpbmVtZW50",
-                "mime_type": "text/plain"
-              }
-            ]
+              "status": "skipped",
+              "duration": 0
+            }
           },
           {
             "keyword": "After",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 69881
+              "duration": 19972
             }
           }
         ],
@@ -2130,7 +2136,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 70515
+              "duration": 27760
             }
           },
           {
@@ -2143,7 +2149,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 87095
+              "duration": 31880
             }
           },
           {
@@ -2156,7 +2162,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 245987
+              "duration": 69452
             }
           },
           {
@@ -2165,11 +2171,11 @@
             "line": 30,
             "name": "je peux voir la liste des participants",
             "match": {
-              "location": "features/step_definitions/screen.steps.ts:6"
+              "location": "features/step_definitions/screen.steps.ts:5"
             },
             "result": {
               "status": "passed",
-              "duration": 334193
+              "duration": 73486
             }
           },
           {
@@ -2178,15 +2184,15 @@
             "line": 31,
             "name": "l'écran contient une section \"Participants consolidés\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:88"
+              "location": "features/step_definitions/navigation.steps.ts:112"
             },
             "result": {
-              "status": "passed",
-              "duration": 274486
+              "status": "pending",
+              "duration": 63951
             },
             "embeddings": [
               {
-                "data": "VmVyaWZpZWQgc2VjdGlvbjogUGFydGljaXBhbnRzIGNvbnNvbGlkw6lz",
+                "data": "TUlTU0lORyBTRUNUSU9OOiAiUGFydGljaXBhbnRzIGNvbnNvbGlkw6lzIiBub3QgZm91bmQgaW4gc2NyZWVuICJldmVudC1kZXRhaWwi",
                 "mime_type": "text/plain"
               }
             ]
@@ -2196,7 +2202,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 58144
+              "duration": 19786
             }
           }
         ],
@@ -2244,7 +2250,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 77416
+              "duration": 47794
             }
           },
           {
@@ -2257,7 +2263,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 85561
+              "duration": 27474
             }
           },
           {
@@ -2270,7 +2276,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 2474697
+              "duration": 81224
             }
           },
           {
@@ -2283,7 +2289,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 347555
+              "duration": 69023
             }
           },
           {
@@ -2292,11 +2298,11 @@
             "line": 15,
             "name": "je vois l'écran \"meeting-points\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:78"
+              "location": "features/step_definitions/navigation.steps.ts:102"
             },
             "result": {
               "status": "passed",
-              "duration": 209623
+              "duration": 97960
             }
           },
           {
@@ -2304,7 +2310,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 70646
+              "duration": 19535
             }
           }
         ],
@@ -2332,7 +2338,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 77651
+              "duration": 20184
             }
           },
           {
@@ -2345,7 +2351,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 97183
+              "duration": 27898
             }
           },
           {
@@ -2358,7 +2364,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 222052
+              "duration": 62437
             }
           },
           {
@@ -2370,12 +2376,12 @@
               "location": "features/step_definitions/navigation.steps.ts:53"
             },
             "result": {
-              "status": "passed",
-              "duration": 236106
+              "status": "pending",
+              "duration": 102984
             },
             "embeddings": [
               {
-                "data": "Q2xpY2tlZCBvbjogQWpvdXRlciB1biBwb2ludCBkZSByZW5jb250cmU=",
+                "data": "TUlTU0lORzogQ2xpY2thYmxlIGVsZW1lbnQgIkFqb3V0ZXIgdW4gcG9pbnQgZGUgcmVuY29udHJlIiBub3QgZm91bmQgaW4gc2NyZWVuICJtZWV0aW5nLXBvaW50cyI=",
                 "mime_type": "text/plain"
               }
             ]
@@ -2386,25 +2392,19 @@
             "line": 20,
             "name": "l'écran contient une section \"Nouveau point de rencontre\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:88"
+              "location": "features/step_definitions/navigation.steps.ts:112"
             },
             "result": {
-              "status": "passed",
-              "duration": 282042
-            },
-            "embeddings": [
-              {
-                "data": "VmVyaWZpZWQgc2VjdGlvbjogTm91dmVhdSBwb2ludCBkZSByZW5jb250cmU=",
-                "mime_type": "text/plain"
-              }
-            ]
+              "status": "skipped",
+              "duration": 0
+            }
           },
           {
             "keyword": "After",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 60291
+              "duration": 19425
             }
           }
         ],
@@ -2432,7 +2432,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 61038
+              "duration": 24049
             }
           },
           {
@@ -2445,7 +2445,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 85963
+              "duration": 57959
             }
           },
           {
@@ -2458,7 +2458,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 328383
+              "duration": 69704
             }
           },
           {
@@ -2467,19 +2467,25 @@
             "line": 24,
             "name": "le champ \"Lieu de rencontre\" est présent",
             "match": {
-              "location": "features/step_definitions/form.steps.ts:62"
+              "location": "features/step_definitions/form.steps.ts:82"
             },
             "result": {
-              "status": "passed",
-              "duration": 271268
-            }
+              "status": "pending",
+              "duration": 154700
+            },
+            "embeddings": [
+              {
+                "data": "Tk9UIEZPVU5EOiBGaWVsZCAiTGlldSBkZSByZW5jb250cmUiIG5vdCBwcmVzZW50IGluIHNjcmVlbiAibWVldGluZy1wb2ludHMi",
+                "mime_type": "text/plain"
+              }
+            ]
           },
           {
             "keyword": "After",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 57862
+              "duration": 20522
             }
           }
         ],
@@ -2507,7 +2513,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 64051
+              "duration": 22724
             }
           },
           {
@@ -2520,7 +2526,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 84135
+              "duration": 26587
             }
           },
           {
@@ -2533,7 +2539,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 233822
+              "duration": 66747
             }
           },
           {
@@ -2542,11 +2548,11 @@
             "line": 28,
             "name": "le champ \"Heure\" est présent",
             "match": {
-              "location": "features/step_definitions/form.steps.ts:62"
+              "location": "features/step_definitions/form.steps.ts:82"
             },
             "result": {
               "status": "passed",
-              "duration": 153368
+              "duration": 57803
             }
           },
           {
@@ -2554,7 +2560,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 54565
+              "duration": 19929
             }
           }
         ],
@@ -2582,7 +2588,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 154804
+              "duration": 20783
             }
           },
           {
@@ -2595,7 +2601,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 81567
+              "duration": 31902
             }
           },
           {
@@ -2608,7 +2614,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 178112
+              "duration": 63513
             }
           },
           {
@@ -2617,15 +2623,15 @@
             "line": 32,
             "name": "l'écran contient une section \"Partage de contact\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:88"
+              "location": "features/step_definitions/navigation.steps.ts:112"
             },
             "result": {
-              "status": "passed",
-              "duration": 212380
+              "status": "pending",
+              "duration": 60636
             },
             "embeddings": [
               {
-                "data": "VmVyaWZpZWQgc2VjdGlvbjogUGFydGFnZSBkZSBjb250YWN0",
+                "data": "TUlTU0lORyBTRUNUSU9OOiAiUGFydGFnZSBkZSBjb250YWN0IiBub3QgZm91bmQgaW4gc2NyZWVuICJtZWV0aW5nLXBvaW50cyI=",
                 "mime_type": "text/plain"
               }
             ]
@@ -2636,11 +2642,11 @@
             "line": 33,
             "name": "je peux voir le QR code",
             "match": {
-              "location": "features/step_definitions/screen.steps.ts:56"
+              "location": "features/step_definitions/screen.steps.ts:75"
             },
             "result": {
-              "status": "passed",
-              "duration": 677636
+              "status": "skipped",
+              "duration": 0
             }
           },
           {
@@ -2648,7 +2654,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 65913
+              "duration": 19976
             }
           }
         ],
@@ -2676,7 +2682,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 60070
+              "duration": 23350
             }
           },
           {
@@ -2689,7 +2695,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 93902
+              "duration": 26443
             }
           },
           {
@@ -2702,7 +2708,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 214091
+              "duration": 70140
             }
           },
           {
@@ -2726,19 +2732,25 @@
             "line": 37,
             "name": "le formulaire contient les champs obligatoires suivants:",
             "match": {
-              "location": "features/step_definitions/form.steps.ts:41"
+              "location": "features/step_definitions/form.steps.ts:48"
             },
             "result": {
-              "status": "passed",
-              "duration": 257076
-            }
+              "status": "pending",
+              "duration": 49593
+            },
+            "embeddings": [
+              {
+                "data": "V1JPTkcgU1RFUDogImxlIGZvcm11bGFpcmUgY29udGllbnQgbGVzIGNoYW1wcyBvYmxpZ2F0b2lyZXMiIGlzIGZvciBmb3Jtcy4gU2NyZWVuICJtZWV0aW5nLXBvaW50cyIgaXMgbm90IGEgZm9ybS4=",
+                "mime_type": "text/plain"
+              }
+            ]
           },
           {
             "keyword": "After",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 65931
+              "duration": 17318
             }
           }
         ],
@@ -2786,7 +2798,7 @@
             "hidden": true,
             "result": {
               "status": "pending",
-              "duration": 64714
+              "duration": 31194
             }
           },
           {
@@ -2834,7 +2846,7 @@
             "line": 17,
             "name": "l'écran contient une section \"Options de partage\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:88"
+              "location": "features/step_definitions/navigation.steps.ts:112"
             },
             "result": {
               "status": "skipped",
@@ -2846,7 +2858,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 59483
+              "duration": 22071
             }
           }
         ],
@@ -2878,7 +2890,7 @@
             "hidden": true,
             "result": {
               "status": "pending",
-              "duration": 60552
+              "duration": 24870
             }
           },
           {
@@ -2926,7 +2938,7 @@
             "line": 23,
             "name": "l'écran contient une section \"Rayon de notification\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:88"
+              "location": "features/step_definitions/navigation.steps.ts:112"
             },
             "result": {
               "status": "skipped",
@@ -2938,7 +2950,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 59399
+              "duration": 24134
             }
           }
         ],
@@ -2970,7 +2982,7 @@
             "hidden": true,
             "result": {
               "status": "pending",
-              "duration": 57882
+              "duration": 23404
             }
           },
           {
@@ -3018,7 +3030,7 @@
             "line": 29,
             "name": "l'écran contient une section \"Thématiques\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:88"
+              "location": "features/step_definitions/navigation.steps.ts:112"
             },
             "result": {
               "status": "skipped",
@@ -3030,7 +3042,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 69241
+              "duration": 23521
             }
           }
         ],
@@ -3062,7 +3074,7 @@
             "hidden": true,
             "result": {
               "status": "pending",
-              "duration": 63003
+              "duration": 22885
             }
           },
           {
@@ -3110,7 +3122,7 @@
             "line": 35,
             "name": "l'écran contient une section \"Mes abonnés\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:88"
+              "location": "features/step_definitions/navigation.steps.ts:112"
             },
             "result": {
               "status": "skipped",
@@ -3122,7 +3134,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 61070
+              "duration": 19112
             }
           }
         ],
@@ -3154,7 +3166,7 @@
             "hidden": true,
             "result": {
               "status": "pending",
-              "duration": 60748
+              "duration": 21986
             }
           },
           {
@@ -3189,7 +3201,7 @@
             "line": 40,
             "name": "l'écran contient une section \"Options de notification\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:88"
+              "location": "features/step_definitions/navigation.steps.ts:112"
             },
             "result": {
               "status": "skipped",
@@ -3201,7 +3213,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 55314
+              "duration": 20169
             }
           }
         ],
@@ -3253,7 +3265,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 73583
+              "duration": 21089
             }
           },
           {
@@ -3266,7 +3278,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 109459
+              "duration": 47116
             }
           },
           {
@@ -3279,7 +3291,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 255115
+              "duration": 70154
             }
           },
           {
@@ -3288,25 +3300,19 @@
             "line": 14,
             "name": "l'écran contient une section \"Notifications\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:88"
+              "location": "features/step_definitions/navigation.steps.ts:112"
             },
             "result": {
               "status": "passed",
-              "duration": 1279737
-            },
-            "embeddings": [
-              {
-                "data": "VmVyaWZpZWQgc2VjdGlvbjogTm90aWZpY2F0aW9ucw==",
-                "mime_type": "text/plain"
-              }
-            ]
+              "duration": 45833
+            }
           },
           {
             "keyword": "After",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 95259
+              "duration": 15496
             }
           }
         ],
@@ -3334,7 +3340,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 74705
+              "duration": 20632
             }
           },
           {
@@ -3347,7 +3353,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 110261
+              "duration": 23591
             }
           },
           {
@@ -3360,7 +3366,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 274887
+              "duration": 60377
             }
           },
           {
@@ -3372,12 +3378,12 @@
               "location": "features/step_definitions/navigation.steps.ts:53"
             },
             "result": {
-              "status": "passed",
-              "duration": 250064
+              "status": "pending",
+              "duration": 116157
             },
             "embeddings": [
               {
-                "data": "Q2xpY2tlZCBvbjogQWN0aXZlciBsZXMgbm90aWZpY2F0aW9ucw==",
+                "data": "TUlTU0lORzogQ2xpY2thYmxlIGVsZW1lbnQgIkFjdGl2ZXIgbGVzIG5vdGlmaWNhdGlvbnMiIG5vdCBmb3VuZCBpbiBzY3JlZW4gImV2ZW50LWRldGFpbCI=",
                 "mime_type": "text/plain"
               }
             ]
@@ -3388,25 +3394,19 @@
             "line": 19,
             "name": "l'écran contient une section \"Notifications activées\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:88"
+              "location": "features/step_definitions/navigation.steps.ts:112"
             },
             "result": {
-              "status": "passed",
-              "duration": 250228
-            },
-            "embeddings": [
-              {
-                "data": "VmVyaWZpZWQgc2VjdGlvbjogTm90aWZpY2F0aW9ucyBhY3RpdsOpZXM=",
-                "mime_type": "text/plain"
-              }
-            ]
+              "status": "skipped",
+              "duration": 0
+            }
           },
           {
             "keyword": "After",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 71239
+              "duration": 19693
             }
           }
         ],
@@ -3434,7 +3434,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 60030
+              "duration": 21462
             }
           },
           {
@@ -3447,7 +3447,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 81503
+              "duration": 28412
             }
           },
           {
@@ -3460,7 +3460,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 216559
+              "duration": 59512
             }
           },
           {
@@ -3472,12 +3472,12 @@
               "location": "features/step_definitions/navigation.steps.ts:53"
             },
             "result": {
-              "status": "passed",
-              "duration": 184615
+              "status": "pending",
+              "duration": 94402
             },
             "embeddings": [
               {
-                "data": "Q2xpY2tlZCBvbjogTW9uIHLDqXNlYXUgdW5pcXVlbWVudA==",
+                "data": "TUlTU0lORzogQ2xpY2thYmxlIGVsZW1lbnQgIk1vbiByw6lzZWF1IHVuaXF1ZW1lbnQiIG5vdCBmb3VuZCBpbiBzY3JlZW4gInNldHRpbmdzIg==",
                 "mime_type": "text/plain"
               }
             ]
@@ -3488,25 +3488,19 @@
             "line": 24,
             "name": "l'écran contient une section \"Filtre réseau\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:88"
+              "location": "features/step_definitions/navigation.steps.ts:112"
             },
             "result": {
-              "status": "passed",
-              "duration": 239025
-            },
-            "embeddings": [
-              {
-                "data": "VmVyaWZpZWQgc2VjdGlvbjogRmlsdHJlIHLDqXNlYXU=",
-                "mime_type": "text/plain"
-              }
-            ]
+              "status": "skipped",
+              "duration": 0
+            }
           },
           {
             "keyword": "After",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 60918
+              "duration": 22308
             }
           }
         ],
@@ -3534,7 +3528,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 60782
+              "duration": 22921
             }
           },
           {
@@ -3547,7 +3541,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 81445
+              "duration": 27396
             }
           },
           {
@@ -3560,7 +3554,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 237209
+              "duration": 69293
             }
           },
           {
@@ -3569,15 +3563,15 @@
             "line": 28,
             "name": "l'écran contient une section \"Nouveaux participants\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:88"
+              "location": "features/step_definitions/navigation.steps.ts:112"
             },
             "result": {
-              "status": "passed",
-              "duration": 283913
+              "status": "pending",
+              "duration": 59691
             },
             "embeddings": [
               {
-                "data": "VmVyaWZpZWQgc2VjdGlvbjogTm91dmVhdXggcGFydGljaXBhbnRz",
+                "data": "TUlTU0lORyBTRUNUSU9OOiAiTm91dmVhdXggcGFydGljaXBhbnRzIiBub3QgZm91bmQgaW4gc2NyZWVuICJob21lIg==",
                 "mime_type": "text/plain"
               }
             ]
@@ -3587,7 +3581,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 65955
+              "duration": 18584
             }
           }
         ],
@@ -3615,7 +3609,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 118669
+              "duration": 24839
             }
           },
           {
@@ -3628,7 +3622,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 96191
+              "duration": 27991
             }
           },
           {
@@ -3641,7 +3635,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 244952
+              "duration": 70094
             }
           },
           {
@@ -3670,19 +3664,25 @@
             "line": 32,
             "name": "le formulaire contient les champs obligatoires suivants:",
             "match": {
-              "location": "features/step_definitions/form.steps.ts:41"
+              "location": "features/step_definitions/form.steps.ts:48"
             },
             "result": {
-              "status": "passed",
-              "duration": 325301
-            }
+              "status": "pending",
+              "duration": 53555
+            },
+            "embeddings": [
+              {
+                "data": "V1JPTkcgU1RFUDogImxlIGZvcm11bGFpcmUgY29udGllbnQgbGVzIGNoYW1wcyBvYmxpZ2F0b2lyZXMiIGlzIGZvciBmb3Jtcy4gU2NyZWVuICJzZXR0aW5ncyIgaXMgbm90IGEgZm9ybS4=",
+                "mime_type": "text/plain"
+              }
+            ]
           },
           {
             "keyword": "After",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 173541
+              "duration": 53870
             }
           }
         ],
@@ -3730,7 +3730,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 64119
+              "duration": 53257
             }
           },
           {
@@ -3743,7 +3743,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 88687
+              "duration": 33043
             }
           },
           {
@@ -3756,7 +3756,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 3027723
+              "duration": 68561
             }
           },
           {
@@ -3765,25 +3765,19 @@
             "line": 16,
             "name": "l'écran contient une section \"Événements à venir\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:88"
+              "location": "features/step_definitions/navigation.steps.ts:112"
             },
             "result": {
               "status": "passed",
-              "duration": 326531
-            },
-            "embeddings": [
-              {
-                "data": "VmVyaWZpZWQgc2VjdGlvbjogw4l2w6luZW1lbnRzIMOgIHZlbmly",
-                "mime_type": "text/plain"
-              }
-            ]
+              "duration": 181841
+            }
           },
           {
             "keyword": "After",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 43660
+              "duration": 21687
             }
           }
         ],
@@ -3811,7 +3805,7 @@
             "hidden": true,
             "result": {
               "status": "pending",
-              "duration": 52182
+              "duration": 19286
             }
           },
           {
@@ -3846,7 +3840,7 @@
             "line": 21,
             "name": "je peux filtrer les événements par période",
             "match": {
-              "location": "features/step_definitions/screen.steps.ts:135"
+              "location": "features/step_definitions/screen.steps.ts:173"
             },
             "result": {
               "status": "skipped",
@@ -3858,7 +3852,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 29065
+              "duration": 16516
             }
           }
         ],
@@ -3890,7 +3884,7 @@
             "hidden": true,
             "result": {
               "status": "pending",
-              "duration": 27064
+              "duration": 1651707
             }
           },
           {
@@ -3925,7 +3919,7 @@
             "line": 26,
             "name": "l'écran contient une section \"Près de chez moi\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:88"
+              "location": "features/step_definitions/navigation.steps.ts:112"
             },
             "result": {
               "status": "skipped",
@@ -3937,7 +3931,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 21296
+              "duration": 21174
             }
           }
         ],
@@ -3969,7 +3963,7 @@
             "hidden": true,
             "result": {
               "status": "pending",
-              "duration": 23664
+              "duration": 20843
             }
           },
           {
@@ -4004,7 +3998,7 @@
             "line": 31,
             "name": "l'écran contient une section \"Mes inscriptions\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:88"
+              "location": "features/step_definitions/navigation.steps.ts:112"
             },
             "result": {
               "status": "skipped",
@@ -4016,7 +4010,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 21263
+              "duration": 13254
             }
           }
         ],
@@ -4048,7 +4042,7 @@
             "hidden": true,
             "result": {
               "status": "pending",
-              "duration": 22121
+              "duration": 18709
             }
           },
           {
@@ -4098,7 +4092,7 @@
             "line": 36,
             "name": "le formulaire contient les champs obligatoires suivants:",
             "match": {
-              "location": "features/step_definitions/form.steps.ts:41"
+              "location": "features/step_definitions/form.steps.ts:48"
             },
             "result": {
               "status": "skipped",
@@ -4110,7 +4104,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 19477
+              "duration": 12233
             }
           }
         ],
@@ -4162,7 +4156,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 25418
+              "duration": 23179
             }
           },
           {
@@ -4175,7 +4169,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 51722
+              "duration": 29525
             }
           },
           {
@@ -4188,7 +4182,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 118119
+              "duration": 83550
             }
           },
           {
@@ -4197,11 +4191,11 @@
             "line": 13,
             "name": "je clique sur un participant",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:65"
+              "location": "features/step_definitions/navigation.steps.ts:89"
             },
             "result": {
               "status": "passed",
-              "duration": 150289
+              "duration": 104032
             }
           },
           {
@@ -4210,11 +4204,11 @@
             "line": 14,
             "name": "je vois l'écran \"user-profile\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:78"
+              "location": "features/step_definitions/navigation.steps.ts:102"
             },
             "result": {
               "status": "passed",
-              "duration": 93142
+              "duration": 61935
             }
           },
           {
@@ -4222,7 +4216,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 22484
+              "duration": 13658
             }
           }
         ],
@@ -4250,7 +4244,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 23060
+              "duration": 13833
             }
           },
           {
@@ -4263,7 +4257,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 34290
+              "duration": 21312
             }
           },
           {
@@ -4276,7 +4270,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 96688
+              "duration": 56255
             }
           },
           {
@@ -4285,11 +4279,11 @@
             "line": 18,
             "name": "je peux voir les événements auxquels l'utilisateur a participé",
             "match": {
-              "location": "features/step_definitions/screen.steps.ts:183"
+              "location": "features/step_definitions/screen.steps.ts:220"
             },
             "result": {
               "status": "passed",
-              "duration": 142292
+              "duration": 102617
             }
           },
           {
@@ -4297,7 +4291,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 22502
+              "duration": 12964
             }
           }
         ],
@@ -4325,7 +4319,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 22886
+              "duration": 13505
             }
           },
           {
@@ -4338,7 +4332,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 34584
+              "duration": 19813
             }
           },
           {
@@ -4351,7 +4345,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 89859
+              "duration": 55744
             }
           },
           {
@@ -4360,11 +4354,11 @@
             "line": 22,
             "name": "je peux contacter l'utilisateur",
             "match": {
-              "location": "features/step_definitions/screen.steps.ts:175"
+              "location": "features/step_definitions/screen.steps.ts:212"
             },
             "result": {
               "status": "passed",
-              "duration": 133664
+              "duration": 80135
             }
           },
           {
@@ -4372,7 +4366,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 23055
+              "duration": 13028
             }
           }
         ],
@@ -4400,7 +4394,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 22354
+              "duration": 12858
             }
           },
           {
@@ -4413,7 +4407,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 32722
+              "duration": 18912
             }
           },
           {
@@ -4426,7 +4420,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 96309
+              "duration": 57405
             }
           },
           {
@@ -4455,19 +4449,25 @@
             "line": 26,
             "name": "le formulaire contient les champs obligatoires suivants:",
             "match": {
-              "location": "features/step_definitions/form.steps.ts:41"
+              "location": "features/step_definitions/form.steps.ts:48"
             },
             "result": {
-              "status": "passed",
-              "duration": 140790
-            }
+              "status": "pending",
+              "duration": 53618
+            },
+            "embeddings": [
+              {
+                "data": "V1JPTkcgU1RFUDogImxlIGZvcm11bGFpcmUgY29udGllbnQgbGVzIGNoYW1wcyBvYmxpZ2F0b2lyZXMiIGlzIGZvciBmb3Jtcy4gU2NyZWVuICJ1c2VyLXByb2ZpbGUiIGlzIG5vdCBhIGZvcm0u",
+                "mime_type": "text/plain"
+              }
+            ]
           },
           {
             "keyword": "After",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 22088
+              "duration": 13124
             }
           }
         ],
@@ -4495,7 +4495,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 24574
+              "duration": 25854
             }
           },
           {
@@ -4508,7 +4508,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 32197
+              "duration": 25447
             }
           },
           {
@@ -4521,7 +4521,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 110955
+              "duration": 58555
             }
           },
           {
@@ -4530,11 +4530,11 @@
             "line": 33,
             "name": "l'écran affiche les informations du profil",
             "match": {
-              "location": "features/step_definitions/screen.steps.ts:107"
+              "location": "features/step_definitions/screen.steps.ts:142"
             },
             "result": {
               "status": "passed",
-              "duration": 221631
+              "duration": 183196
             }
           },
           {
@@ -4542,7 +4542,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 23510
+              "duration": 14989
             }
           }
         ],
@@ -4590,7 +4590,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 25216
+              "duration": 16453
             }
           },
           {
@@ -4603,7 +4603,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 35548
+              "duration": 22279
             }
           },
           {
@@ -4616,7 +4616,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 96951
+              "duration": 61387
             }
           },
           {
@@ -4625,19 +4625,25 @@
             "line": 14,
             "name": "je peux voir la liste des événements",
             "match": {
-              "location": "features/step_definitions/screen.steps.ts:49"
+              "location": "features/step_definitions/screen.steps.ts:61"
             },
             "result": {
-              "status": "passed",
-              "duration": 133075
-            }
+              "status": "pending",
+              "duration": 36969
+            },
+            "embeddings": [
+              {
+                "data": "VU5FWFBFQ1RFRCBTQ1JFRU46ICJwcm9maWxlIiBpcyBub3QgZXhwZWN0ZWQgdG8gc2hvdyBldmVudHMgbGlzdA==",
+                "mime_type": "text/plain"
+              }
+            ]
           },
           {
             "keyword": "After",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 34081
+              "duration": 11969
             }
           }
         ],
@@ -4665,7 +4671,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 23858
+              "duration": 21487
             }
           },
           {
@@ -4678,7 +4684,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 60234
+              "duration": 21861
             }
           },
           {
@@ -4691,7 +4697,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 98044
+              "duration": 55336
             }
           },
           {
@@ -4700,11 +4706,11 @@
             "line": 18,
             "name": "je peux voir la liste des événements",
             "match": {
-              "location": "features/step_definitions/screen.steps.ts:49"
+              "location": "features/step_definitions/screen.steps.ts:61"
             },
             "result": {
               "status": "passed",
-              "duration": 113075
+              "duration": 41858
             }
           },
           {
@@ -4712,7 +4718,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 24314
+              "duration": 12816
             }
           }
         ],
@@ -4740,7 +4746,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 25048
+              "duration": 13880
             }
           },
           {
@@ -4753,7 +4759,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 34093
+              "duration": 17585
             }
           },
           {
@@ -4766,7 +4772,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 87246
+              "duration": 48268
             }
           },
           {
@@ -4778,12 +4784,12 @@
               "location": "features/step_definitions/navigation.steps.ts:53"
             },
             "result": {
-              "status": "passed",
-              "duration": 72463
+              "status": "pending",
+              "duration": 98220
             },
             "embeddings": [
               {
-                "data": "Q2xpY2tlZCBvbjogRmlsdHJlciBwYXIgZGF0ZQ==",
+                "data": "TUlTU0lORzogQ2xpY2thYmxlIGVsZW1lbnQgIkZpbHRyZXIgcGFyIGRhdGUiIG5vdCBmb3VuZCBpbiBzY3JlZW4gImV2ZW50cyI=",
                 "mime_type": "text/plain"
               }
             ]
@@ -4794,25 +4800,19 @@
             "line": 23,
             "name": "l'écran contient une section \"Filtre par date\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:88"
+              "location": "features/step_definitions/navigation.steps.ts:112"
             },
             "result": {
-              "status": "passed",
-              "duration": 83538
-            },
-            "embeddings": [
-              {
-                "data": "VmVyaWZpZWQgc2VjdGlvbjogRmlsdHJlIHBhciBkYXRl",
-                "mime_type": "text/plain"
-              }
-            ]
+              "status": "skipped",
+              "duration": 0
+            }
           },
           {
             "keyword": "After",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 21407
+              "duration": 14469
             }
           }
         ],
@@ -4840,7 +4840,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 23944
+              "duration": 19464
             }
           },
           {
@@ -4853,7 +4853,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 32508
+              "duration": 21885
             }
           },
           {
@@ -4866,7 +4866,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 93597
+              "duration": 55051
             }
           },
           {
@@ -4875,11 +4875,11 @@
             "line": 27,
             "name": "je peux voir les événements auxquels l'utilisateur a participé",
             "match": {
-              "location": "features/step_definitions/screen.steps.ts:183"
+              "location": "features/step_definitions/screen.steps.ts:220"
             },
             "result": {
               "status": "passed",
-              "duration": 70848
+              "duration": 55458
             }
           },
           {
@@ -4887,7 +4887,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 20935
+              "duration": 12179
             }
           }
         ],
@@ -4915,7 +4915,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 24436
+              "duration": 13390
             }
           },
           {
@@ -4928,7 +4928,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 37343
+              "duration": 17574
             }
           },
           {
@@ -4941,7 +4941,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 91150
+              "duration": 51584
             }
           },
           {
@@ -4965,19 +4965,25 @@
             "line": 31,
             "name": "le formulaire contient les champs obligatoires suivants:",
             "match": {
-              "location": "features/step_definitions/form.steps.ts:41"
+              "location": "features/step_definitions/form.steps.ts:48"
             },
             "result": {
-              "status": "passed",
-              "duration": 127817
-            }
+              "status": "pending",
+              "duration": 38062
+            },
+            "embeddings": [
+              {
+                "data": "V1JPTkcgU1RFUDogImxlIGZvcm11bGFpcmUgY29udGllbnQgbGVzIGNoYW1wcyBvYmxpZ2F0b2lyZXMiIGlzIGZvciBmb3Jtcy4gU2NyZWVuICJldmVudHMiIGlzIG5vdCBhIGZvcm0u",
+                "mime_type": "text/plain"
+              }
+            ]
           },
           {
             "keyword": "After",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 21554
+              "duration": 11669
             }
           }
         ],
@@ -5005,7 +5011,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 23705
+              "duration": 24774
             }
           },
           {
@@ -5018,7 +5024,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 32311
+              "duration": 37240
             }
           },
           {
@@ -5031,7 +5037,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 92083
+              "duration": 65201
             }
           },
           {
@@ -5060,19 +5066,25 @@
             "line": 37,
             "name": "le formulaire contient les champs obligatoires suivants:",
             "match": {
-              "location": "features/step_definitions/form.steps.ts:41"
+              "location": "features/step_definitions/form.steps.ts:48"
             },
             "result": {
-              "status": "passed",
-              "duration": 188525
-            }
+              "status": "pending",
+              "duration": 46172
+            },
+            "embeddings": [
+              {
+                "data": "V1JPTkcgU1RFUDogImxlIGZvcm11bGFpcmUgY29udGllbnQgbGVzIGNoYW1wcyBvYmxpZ2F0b2lyZXMiIGlzIGZvciBmb3Jtcy4gU2NyZWVuICJwcm9maWxlIiBpcyBub3QgYSBmb3JtLg==",
+                "mime_type": "text/plain"
+              }
+            ]
           },
           {
             "keyword": "After",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 42094
+              "duration": 11492
             }
           }
         ],
@@ -5120,7 +5132,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 42063
+              "duration": 24734
             }
           },
           {
@@ -5133,7 +5145,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 62090
+              "duration": 25368
             }
           },
           {
@@ -5146,7 +5158,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 159477
+              "duration": 58510
             }
           },
           {
@@ -5155,11 +5167,11 @@
             "line": 14,
             "name": "je peux voir la liste des participants",
             "match": {
-              "location": "features/step_definitions/screen.steps.ts:6"
+              "location": "features/step_definitions/screen.steps.ts:5"
             },
             "result": {
               "status": "passed",
-              "duration": 187263
+              "duration": 57190
             }
           },
           {
@@ -5167,7 +5179,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 48199
+              "duration": 11925
             }
           }
         ],
@@ -5195,7 +5207,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 48982
+              "duration": 13045
             }
           },
           {
@@ -5208,7 +5220,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 65183
+              "duration": 19235
             }
           },
           {
@@ -5221,7 +5233,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 151081
+              "duration": 60801
             }
           },
           {
@@ -5230,25 +5242,19 @@
             "line": 18,
             "name": "l'écran contient une section \"Participants\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:88"
+              "location": "features/step_definitions/navigation.steps.ts:112"
             },
             "result": {
               "status": "passed",
-              "duration": 160568
-            },
-            "embeddings": [
-              {
-                "data": "VmVyaWZpZWQgc2VjdGlvbjogUGFydGljaXBhbnRz",
-                "mime_type": "text/plain"
-              }
-            ]
+              "duration": 40062
+            }
           },
           {
             "keyword": "After",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 40735
+              "duration": 12855
             }
           }
         ],
@@ -5276,7 +5282,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 38376
+              "duration": 12662
             }
           },
           {
@@ -5289,7 +5295,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 44857
+              "duration": 17174
             }
           },
           {
@@ -5302,7 +5308,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 123097
+              "duration": 47283
             }
           },
           {
@@ -5311,11 +5317,11 @@
             "line": 22,
             "name": "je clique sur un participant",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:65"
+              "location": "features/step_definitions/navigation.steps.ts:89"
             },
             "result": {
               "status": "passed",
-              "duration": 82223
+              "duration": 37943
             }
           },
           {
@@ -5324,11 +5330,11 @@
             "line": 23,
             "name": "je vois l'écran \"user-profile\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:78"
+              "location": "features/step_definitions/navigation.steps.ts:102"
             },
             "result": {
               "status": "passed",
-              "duration": 81665
+              "duration": 38793
             }
           },
           {
@@ -5336,7 +5342,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 26903
+              "duration": 11539
             }
           }
         ],
@@ -5364,7 +5370,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 25400
+              "duration": 13385
             }
           },
           {
@@ -5377,7 +5383,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 34862
+              "duration": 17020
             }
           },
           {
@@ -5390,7 +5396,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 99283
+              "duration": 46686
             }
           },
           {
@@ -5419,19 +5425,25 @@
             "line": 27,
             "name": "le formulaire contient les champs obligatoires suivants:",
             "match": {
-              "location": "features/step_definitions/form.steps.ts:41"
+              "location": "features/step_definitions/form.steps.ts:48"
             },
             "result": {
-              "status": "passed",
-              "duration": 133844
-            }
+              "status": "pending",
+              "duration": 42707
+            },
+            "embeddings": [
+              {
+                "data": "V1JPTkcgU1RFUDogImxlIGZvcm11bGFpcmUgY29udGllbnQgbGVzIGNoYW1wcyBvYmxpZ2F0b2lyZXMiIGlzIGZvciBmb3Jtcy4gU2NyZWVuICJldmVudC1kZXRhaWwiIGlzIG5vdCBhIGZvcm0u",
+                "mime_type": "text/plain"
+              }
+            ]
           },
           {
             "keyword": "After",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 33366
+              "duration": 12185
             }
           }
         ],
@@ -5479,7 +5491,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 31148
+              "duration": 24688
             }
           },
           {
@@ -5492,7 +5504,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 39914
+              "duration": 24916
             }
           },
           {
@@ -5505,7 +5517,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 100242
+              "duration": 55980
             }
           },
           {
@@ -5518,7 +5530,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 91059
+              "duration": 47583
             }
           },
           {
@@ -5527,11 +5539,11 @@
             "line": 15,
             "name": "je vois l'écran \"profile\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:78"
+              "location": "features/step_definitions/navigation.steps.ts:102"
             },
             "result": {
               "status": "passed",
-              "duration": 59350
+              "duration": 38341
             }
           },
           {
@@ -5539,7 +5551,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 22286
+              "duration": 11678
             }
           }
         ],
@@ -5567,7 +5579,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 26479
+              "duration": 13474
             }
           },
           {
@@ -5580,7 +5592,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 33779
+              "duration": 17614
             }
           },
           {
@@ -5593,7 +5605,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 83978
+              "duration": 44875
             }
           },
           {
@@ -5602,15 +5614,15 @@
             "line": 19,
             "name": "l'écran contient une section \"Mon réseau\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:88"
+              "location": "features/step_definitions/navigation.steps.ts:112"
             },
             "result": {
-              "status": "passed",
-              "duration": 132292
+              "status": "pending",
+              "duration": 38550
             },
             "embeddings": [
               {
-                "data": "VmVyaWZpZWQgc2VjdGlvbjogTW9uIHLDqXNlYXU=",
+                "data": "TUlTU0lORyBTRUNUSU9OOiAiTW9uIHLDqXNlYXUiIG5vdCBmb3VuZCBpbiBzY3JlZW4gInByb2ZpbGUi",
                 "mime_type": "text/plain"
               }
             ]
@@ -5620,7 +5632,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 43830
+              "duration": 11029
             }
           }
         ],
@@ -5648,7 +5660,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 24459
+              "duration": 34502
             }
           },
           {
@@ -5661,7 +5673,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 35150
+              "duration": 24588
             }
           },
           {
@@ -5674,7 +5686,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 94056
+              "duration": 49538
             }
           },
           {
@@ -5683,11 +5695,11 @@
             "line": 23,
             "name": "je clique sur un participant",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:65"
+              "location": "features/step_definitions/navigation.steps.ts:89"
             },
             "result": {
               "status": "passed",
-              "duration": 69470
+              "duration": 36972
             }
           },
           {
@@ -5696,11 +5708,11 @@
             "line": 24,
             "name": "je vois l'écran \"user-profile\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:78"
+              "location": "features/step_definitions/navigation.steps.ts:102"
             },
             "result": {
               "status": "passed",
-              "duration": 59637
+              "duration": 38614
             }
           },
           {
@@ -5708,7 +5720,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 21041
+              "duration": 11891
             }
           }
         ],
@@ -5736,7 +5748,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 23305
+              "duration": 14525
             }
           },
           {
@@ -5749,7 +5761,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 32367
+              "duration": 22869
             }
           },
           {
@@ -5762,7 +5774,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 97223
+              "duration": 46879
             }
           },
           {
@@ -5771,11 +5783,11 @@
             "line": 28,
             "name": "je clique sur un événement",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:69"
+              "location": "features/step_definitions/navigation.steps.ts:93"
             },
             "result": {
               "status": "passed",
-              "duration": 70804
+              "duration": 37613
             }
           },
           {
@@ -5784,11 +5796,11 @@
             "line": 29,
             "name": "je vois l'écran \"event-detail\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:78"
+              "location": "features/step_definitions/navigation.steps.ts:102"
             },
             "result": {
               "status": "passed",
-              "duration": 56150
+              "duration": 38383
             }
           },
           {
@@ -5796,7 +5808,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 21100
+              "duration": 11208
             }
           }
         ],
@@ -5824,7 +5836,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 24482
+              "duration": 12353
             }
           },
           {
@@ -5837,7 +5849,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 31890
+              "duration": 17212
             }
           },
           {
@@ -5850,7 +5862,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 160897
+              "duration": 53160
             }
           },
           {
@@ -5879,19 +5891,25 @@
             "line": 33,
             "name": "le formulaire contient les champs obligatoires suivants:",
             "match": {
-              "location": "features/step_definitions/form.steps.ts:41"
+              "location": "features/step_definitions/form.steps.ts:48"
             },
             "result": {
-              "status": "passed",
-              "duration": 130104
-            }
+              "status": "pending",
+              "duration": 39421
+            },
+            "embeddings": [
+              {
+                "data": "V1JPTkcgU1RFUDogImxlIGZvcm11bGFpcmUgY29udGllbnQgbGVzIGNoYW1wcyBvYmxpZ2F0b2lyZXMiIGlzIGZvciBmb3Jtcy4gU2NyZWVuICJwcm9maWxlIiBpcyBub3QgYSBmb3JtLg==",
+                "mime_type": "text/plain"
+              }
+            ]
           },
           {
             "keyword": "After",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 23532
+              "duration": 11076
             }
           }
         ],
@@ -5939,7 +5957,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 25304
+              "duration": 24361
             }
           },
           {
@@ -5952,7 +5970,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 33049
+              "duration": 29001
             }
           },
           {
@@ -5965,7 +5983,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 87484
+              "duration": 55634
             }
           },
           {
@@ -5978,7 +5996,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 86902
+              "duration": 53321
             }
           },
           {
@@ -5987,11 +6005,11 @@
             "line": 15,
             "name": "je vois l'écran \"settings\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:78"
+              "location": "features/step_definitions/navigation.steps.ts:102"
             },
             "result": {
               "status": "passed",
-              "duration": 56463
+              "duration": 40909
             }
           },
           {
@@ -5999,7 +6017,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 21573
+              "duration": 12107
             }
           }
         ],
@@ -6027,7 +6045,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 23127
+              "duration": 13759
             }
           },
           {
@@ -6040,7 +6058,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 31468
+              "duration": 17719
             }
           },
           {
@@ -6053,7 +6071,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 76289
+              "duration": 43591
             }
           },
           {
@@ -6062,25 +6080,19 @@
             "line": 19,
             "name": "l'écran contient une section \"Confidentialité\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:88"
+              "location": "features/step_definitions/navigation.steps.ts:112"
             },
             "result": {
               "status": "passed",
-              "duration": 85642
-            },
-            "embeddings": [
-              {
-                "data": "VmVyaWZpZWQgc2VjdGlvbjogQ29uZmlkZW50aWFsaXTDqQ==",
-                "mime_type": "text/plain"
-              }
-            ]
+              "duration": 23016
+            }
           },
           {
             "keyword": "After",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 20313
+              "duration": 10934
             }
           }
         ],
@@ -6108,7 +6120,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 24155
+              "duration": 12873
             }
           },
           {
@@ -6121,7 +6133,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 32779
+              "duration": 17043
             }
           },
           {
@@ -6134,7 +6146,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 77462
+              "duration": 40597
             }
           },
           {
@@ -6146,12 +6158,12 @@
               "location": "features/step_definitions/navigation.steps.ts:53"
             },
             "result": {
-              "status": "passed",
-              "duration": 62679
+              "status": "pending",
+              "duration": 96317
             },
             "embeddings": [
               {
-                "data": "Q2xpY2tlZCBvbjogUHJvZmlsIHB1YmxpYw==",
+                "data": "TUlTU0lORzogQ2xpY2thYmxlIGVsZW1lbnQgIlByb2ZpbCBwdWJsaWMiIG5vdCBmb3VuZCBpbiBzY3JlZW4gInNldHRpbmdzIg==",
                 "mime_type": "text/plain"
               }
             ]
@@ -6162,25 +6174,19 @@
             "line": 24,
             "name": "l'écran contient une section \"Visibilité\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:88"
+              "location": "features/step_definitions/navigation.steps.ts:112"
             },
             "result": {
-              "status": "passed",
-              "duration": 69539
-            },
-            "embeddings": [
-              {
-                "data": "VmVyaWZpZWQgc2VjdGlvbjogVmlzaWJpbGl0w6k=",
-                "mime_type": "text/plain"
-              }
-            ]
+              "status": "skipped",
+              "duration": 0
+            }
           },
           {
             "keyword": "After",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 19535
+              "duration": 12373
             }
           }
         ],
@@ -6208,7 +6214,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 23892
+              "duration": 16774
             }
           },
           {
@@ -6221,7 +6227,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 32067
+              "duration": 20051
             }
           },
           {
@@ -6234,7 +6240,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 85781
+              "duration": 54976
             }
           },
           {
@@ -6263,19 +6269,25 @@
             "line": 28,
             "name": "le formulaire contient les champs obligatoires suivants:",
             "match": {
-              "location": "features/step_definitions/form.steps.ts:41"
+              "location": "features/step_definitions/form.steps.ts:48"
             },
             "result": {
-              "status": "passed",
-              "duration": 114339
-            }
+              "status": "pending",
+              "duration": 35153
+            },
+            "embeddings": [
+              {
+                "data": "V1JPTkcgU1RFUDogImxlIGZvcm11bGFpcmUgY29udGllbnQgbGVzIGNoYW1wcyBvYmxpZ2F0b2lyZXMiIGlzIGZvciBmb3Jtcy4gU2NyZWVuICJzZXR0aW5ncyIgaXMgbm90IGEgZm9ybS4=",
+                "mime_type": "text/plain"
+              }
+            ]
           },
           {
             "keyword": "After",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 23110
+              "duration": 17803
             }
           }
         ],
@@ -6303,7 +6315,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 23587
+              "duration": 23614
             }
           },
           {
@@ -6316,7 +6328,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 32830
+              "duration": 24422
             }
           },
           {
@@ -6329,7 +6341,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 83745
+              "duration": 55775
             }
           },
           {
@@ -6358,19 +6370,25 @@
             "line": 35,
             "name": "le formulaire contient les champs obligatoires suivants:",
             "match": {
-              "location": "features/step_definitions/form.steps.ts:41"
+              "location": "features/step_definitions/form.steps.ts:48"
             },
             "result": {
-              "status": "passed",
-              "duration": 103098
-            }
+              "status": "pending",
+              "duration": 88960
+            },
+            "embeddings": [
+              {
+                "data": "V1JPTkcgU1RFUDogImxlIGZvcm11bGFpcmUgY29udGllbnQgbGVzIGNoYW1wcyBvYmxpZ2F0b2lyZXMiIGlzIGZvciBmb3Jtcy4gU2NyZWVuICJwcm9maWxlIiBpcyBub3QgYSBmb3JtLg==",
+                "mime_type": "text/plain"
+              }
+            ]
           },
           {
             "keyword": "After",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 21334
+              "duration": 13043
             }
           }
         ],
@@ -6418,7 +6436,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 22661
+              "duration": 22710
             }
           },
           {
@@ -6431,7 +6449,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 31990
+              "duration": 23305
             }
           },
           {
@@ -6444,7 +6462,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 83710
+              "duration": 62909
             }
           },
           {
@@ -6453,15 +6471,15 @@
             "line": 14,
             "name": "l'écran contient une section \"Partager mon profil\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:88"
+              "location": "features/step_definitions/navigation.steps.ts:112"
             },
             "result": {
-              "status": "passed",
-              "duration": 84244
+              "status": "pending",
+              "duration": 45734
             },
             "embeddings": [
               {
-                "data": "VmVyaWZpZWQgc2VjdGlvbjogUGFydGFnZXIgbW9uIHByb2ZpbA==",
+                "data": "TUlTU0lORyBTRUNUSU9OOiAiUGFydGFnZXIgbW9uIHByb2ZpbCIgbm90IGZvdW5kIGluIHNjcmVlbiAicHJvZmlsZSI=",
                 "mime_type": "text/plain"
               }
             ]
@@ -6471,7 +6489,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 20301
+              "duration": 13268
             }
           }
         ],
@@ -6499,7 +6517,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 31078
+              "duration": 19155
             }
           },
           {
@@ -6512,7 +6530,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 31000
+              "duration": 20249
             }
           },
           {
@@ -6525,7 +6543,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 78602
+              "duration": 49944
             }
           },
           {
@@ -6534,19 +6552,25 @@
             "line": 18,
             "name": "je peux voir le QR code",
             "match": {
-              "location": "features/step_definitions/screen.steps.ts:56"
+              "location": "features/step_definitions/screen.steps.ts:75"
             },
             "result": {
-              "status": "passed",
-              "duration": 126122
-            }
+              "status": "pending",
+              "duration": 104225
+            },
+            "embeddings": [
+              {
+                "data": "Tk9UIE9OIFRISVMgU0NSRUVOOiBRUiBjb2RlIGlzIG9uIHNoYXJlLXByb2ZpbGUgb3IgbWVldGluZy1wb2ludHMsIG5vdCAicHJvZmlsZSI=",
+                "mime_type": "text/plain"
+              }
+            ]
           },
           {
             "keyword": "After",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 21903
+              "duration": 11874
             }
           }
         ],
@@ -6574,7 +6598,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 23667
+              "duration": 16583
             }
           },
           {
@@ -6587,7 +6611,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 31982
+              "duration": 19833
             }
           },
           {
@@ -6600,7 +6624,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 86259
+              "duration": 51537
             }
           },
           {
@@ -6609,19 +6633,25 @@
             "line": 22,
             "name": "je peux voir le lien de partage",
             "match": {
-              "location": "features/step_definitions/screen.steps.ts:63"
+              "location": "features/step_definitions/screen.steps.ts:92"
             },
             "result": {
-              "status": "passed",
-              "duration": 182177
-            }
+              "status": "pending",
+              "duration": 70426
+            },
+            "embeddings": [
+              {
+                "data": "Tk9UIE9OIFRISVMgU0NSRUVOOiBTaGFyZSBsaW5rIGlzIG9uIHNoYXJlLXByb2ZpbGUsIG5vdCAicHJvZmlsZSI=",
+                "mime_type": "text/plain"
+              }
+            ]
           },
           {
             "keyword": "After",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 23463
+              "duration": 12088
             }
           }
         ],
@@ -6649,7 +6679,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 23446
+              "duration": 17500
             }
           },
           {
@@ -6662,7 +6692,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 34777
+              "duration": 20668
             }
           },
           {
@@ -6675,7 +6705,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 89229
+              "duration": 54238
             }
           },
           {
@@ -6684,15 +6714,15 @@
             "line": 26,
             "name": "l'écran contient une section \"Mes parrainages\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:88"
+              "location": "features/step_definitions/navigation.steps.ts:112"
             },
             "result": {
-              "status": "passed",
-              "duration": 78690
+              "status": "pending",
+              "duration": 36624
             },
             "embeddings": [
               {
-                "data": "VmVyaWZpZWQgc2VjdGlvbjogTWVzIHBhcnJhaW5hZ2Vz",
+                "data": "TUlTU0lORyBTRUNUSU9OOiAiTWVzIHBhcnJhaW5hZ2VzIiBub3QgZm91bmQgaW4gc2NyZWVuICJwcm9maWxlIg==",
                 "mime_type": "text/plain"
               }
             ]
@@ -6702,7 +6732,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 20203
+              "duration": 11418
             }
           }
         ],
@@ -6730,7 +6760,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 25389
+              "duration": 16623
             }
           },
           {
@@ -6743,7 +6773,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 32758
+              "duration": 19131
             }
           },
           {
@@ -6756,7 +6786,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 95292
+              "duration": 48355
             }
           },
           {
@@ -6785,19 +6815,25 @@
             "line": 30,
             "name": "le formulaire contient les champs obligatoires suivants:",
             "match": {
-              "location": "features/step_definitions/form.steps.ts:41"
+              "location": "features/step_definitions/form.steps.ts:48"
             },
             "result": {
-              "status": "passed",
-              "duration": 119618
-            }
+              "status": "pending",
+              "duration": 30967
+            },
+            "embeddings": [
+              {
+                "data": "V1JPTkcgU1RFUDogImxlIGZvcm11bGFpcmUgY29udGllbnQgbGVzIGNoYW1wcyBvYmxpZ2F0b2lyZXMiIGlzIGZvciBmb3Jtcy4gU2NyZWVuICJwcm9maWxlIiBpcyBub3QgYSBmb3JtLg==",
+                "mime_type": "text/plain"
+              }
+            ]
           },
           {
             "keyword": "After",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 24258
+              "duration": 12714
             }
           }
         ],
@@ -6845,7 +6881,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 28531
+              "duration": 21232
             }
           },
           {
@@ -6858,7 +6894,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 33995
+              "duration": 20737
             }
           },
           {
@@ -6871,7 +6907,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 93721
+              "duration": 52351
             }
           },
           {
@@ -6880,25 +6916,19 @@
             "line": 14,
             "name": "l'écran contient une section \"Partager\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:88"
+              "location": "features/step_definitions/navigation.steps.ts:112"
             },
             "result": {
               "status": "passed",
-              "duration": 80246
-            },
-            "embeddings": [
-              {
-                "data": "VmVyaWZpZWQgc2VjdGlvbjogUGFydGFnZXI=",
-                "mime_type": "text/plain"
-              }
-            ]
+              "duration": 25038
+            }
           },
           {
             "keyword": "After",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 22673
+              "duration": 12046
             }
           }
         ],
@@ -6926,7 +6956,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 26139
+              "duration": 13856
             }
           },
           {
@@ -6939,7 +6969,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 30779
+              "duration": 17030
             }
           },
           {
@@ -6952,7 +6982,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 83930
+              "duration": 45981
             }
           },
           {
@@ -6961,19 +6991,25 @@
             "line": 18,
             "name": "je peux voir le QR code",
             "match": {
-              "location": "features/step_definitions/screen.steps.ts:56"
+              "location": "features/step_definitions/screen.steps.ts:75"
             },
             "result": {
-              "status": "passed",
-              "duration": 147119
-            }
+              "status": "pending",
+              "duration": 30228
+            },
+            "embeddings": [
+              {
+                "data": "Tk9UIE9OIFRISVMgU0NSRUVOOiBRUiBjb2RlIGlzIG9uIHNoYXJlLXByb2ZpbGUgb3IgbWVldGluZy1wb2ludHMsIG5vdCAicHJvZmlsZSI=",
+                "mime_type": "text/plain"
+              }
+            ]
           },
           {
             "keyword": "After",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 24202
+              "duration": 10889
             }
           }
         ],
@@ -7001,7 +7037,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 25860
+              "duration": 16209
             }
           },
           {
@@ -7014,7 +7050,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 37397
+              "duration": 18379
             }
           },
           {
@@ -7027,7 +7063,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 95230
+              "duration": 53771
             }
           },
           {
@@ -7036,19 +7072,25 @@
             "line": 22,
             "name": "je peux voir le lien de partage",
             "match": {
-              "location": "features/step_definitions/screen.steps.ts:63"
+              "location": "features/step_definitions/screen.steps.ts:92"
             },
             "result": {
-              "status": "passed",
-              "duration": 109492
-            }
+              "status": "pending",
+              "duration": 30232
+            },
+            "embeddings": [
+              {
+                "data": "Tk9UIE9OIFRISVMgU0NSRUVOOiBTaGFyZSBsaW5rIGlzIG9uIHNoYXJlLXByb2ZpbGUsIG5vdCAicHJvZmlsZSI=",
+                "mime_type": "text/plain"
+              }
+            ]
           },
           {
             "keyword": "After",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 21572
+              "duration": 10757
             }
           }
         ],
@@ -7076,7 +7118,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 23126
+              "duration": 15827
             }
           },
           {
@@ -7089,7 +7131,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 32540
+              "duration": 18382
             }
           },
           {
@@ -7102,7 +7144,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 84555
+              "duration": 49394
             }
           },
           {
@@ -7115,7 +7157,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 94374
+              "duration": 44398
             }
           },
           {
@@ -7124,11 +7166,11 @@
             "line": 27,
             "name": "je vois l'écran \"share-profile\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:78"
+              "location": "features/step_definitions/navigation.steps.ts:102"
             },
             "result": {
               "status": "passed",
-              "duration": 151956
+              "duration": 40585
             }
           },
           {
@@ -7136,7 +7178,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 23115
+              "duration": 20701
             }
           }
         ],
@@ -7164,7 +7206,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 23783
+              "duration": 14251
             }
           },
           {
@@ -7177,7 +7219,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 34208
+              "duration": 17969
             }
           },
           {
@@ -7190,7 +7232,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 92568
+              "duration": 45872
             }
           },
           {
@@ -7219,19 +7261,25 @@
             "line": 31,
             "name": "le formulaire contient les champs obligatoires suivants:",
             "match": {
-              "location": "features/step_definitions/form.steps.ts:41"
+              "location": "features/step_definitions/form.steps.ts:48"
             },
             "result": {
-              "status": "passed",
-              "duration": 113928
-            }
+              "status": "pending",
+              "duration": 36702
+            },
+            "embeddings": [
+              {
+                "data": "V1JPTkcgU1RFUDogImxlIGZvcm11bGFpcmUgY29udGllbnQgbGVzIGNoYW1wcyBvYmxpZ2F0b2lyZXMiIGlzIGZvciBmb3Jtcy4gU2NyZWVuICJwcm9maWxlIiBpcyBub3QgYSBmb3JtLg==",
+                "mime_type": "text/plain"
+              }
+            ]
           },
           {
             "keyword": "After",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 22146
+              "duration": 11599
             }
           }
         ],
@@ -7279,7 +7327,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 23476
+              "duration": 23295
             }
           },
           {
@@ -7292,7 +7340,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 31498
+              "duration": 22954
             }
           },
           {
@@ -7305,7 +7353,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 87112
+              "duration": 52042
             }
           },
           {
@@ -7314,25 +7362,19 @@
             "line": 13,
             "name": "l'écran contient une section \"Notifications\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:88"
+              "location": "features/step_definitions/navigation.steps.ts:112"
             },
             "result": {
               "status": "passed",
-              "duration": 79524
-            },
-            "embeddings": [
-              {
-                "data": "VmVyaWZpZWQgc2VjdGlvbjogTm90aWZpY2F0aW9ucw==",
-                "mime_type": "text/plain"
-              }
-            ]
+              "duration": 26330
+            }
           },
           {
             "keyword": "After",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 21859
+              "duration": 11431
             }
           }
         ],
@@ -7360,7 +7402,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 23916
+              "duration": 12980
             }
           },
           {
@@ -7373,7 +7415,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 30180
+              "duration": 16933
             }
           },
           {
@@ -7386,7 +7428,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 79635
+              "duration": 43275
             }
           },
           {
@@ -7395,11 +7437,11 @@
             "line": 17,
             "name": "je peux configurer mes notifications",
             "match": {
-              "location": "features/step_definitions/screen.steps.ts:191"
+              "location": "features/step_definitions/screen.steps.ts:228"
             },
             "result": {
               "status": "passed",
-              "duration": 128457
+              "duration": 116239
             }
           },
           {
@@ -7407,7 +7449,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 22829
+              "duration": 14086
             }
           }
         ],
@@ -7435,7 +7477,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 24248
+              "duration": 13584
             }
           },
           {
@@ -7448,7 +7490,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 34301
+              "duration": 19389
             }
           },
           {
@@ -7461,7 +7503,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 98157
+              "duration": 52853
             }
           },
           {
@@ -7470,15 +7512,15 @@
             "line": 21,
             "name": "l'écran contient une section \"Activités de mes contacts\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:88"
+              "location": "features/step_definitions/navigation.steps.ts:112"
             },
             "result": {
-              "status": "passed",
-              "duration": 81948
+              "status": "pending",
+              "duration": 39385
             },
             "embeddings": [
               {
-                "data": "VmVyaWZpZWQgc2VjdGlvbjogQWN0aXZpdMOpcyBkZSBtZXMgY29udGFjdHM=",
+                "data": "TUlTU0lORyBTRUNUSU9OOiAiQWN0aXZpdMOpcyBkZSBtZXMgY29udGFjdHMiIG5vdCBmb3VuZCBpbiBzY3JlZW4gImhvbWUi",
                 "mime_type": "text/plain"
               }
             ]
@@ -7488,7 +7530,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 21250
+              "duration": 11457
             }
           }
         ],
@@ -7516,7 +7558,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 22328
+              "duration": 21834
             }
           },
           {
@@ -7529,7 +7571,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 31106
+              "duration": 22457
             }
           },
           {
@@ -7542,7 +7584,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 87436
+              "duration": 55995
             }
           },
           {
@@ -7571,19 +7613,25 @@
             "line": 25,
             "name": "le formulaire contient les champs obligatoires suivants:",
             "match": {
-              "location": "features/step_definitions/form.steps.ts:41"
+              "location": "features/step_definitions/form.steps.ts:48"
             },
             "result": {
-              "status": "passed",
-              "duration": 108800
-            }
+              "status": "pending",
+              "duration": 41744
+            },
+            "embeddings": [
+              {
+                "data": "V1JPTkcgU1RFUDogImxlIGZvcm11bGFpcmUgY29udGllbnQgbGVzIGNoYW1wcyBvYmxpZ2F0b2lyZXMiIGlzIGZvciBmb3Jtcy4gU2NyZWVuICJzZXR0aW5ncyIgaXMgbm90IGEgZm9ybS4=",
+                "mime_type": "text/plain"
+              }
+            ]
           },
           {
             "keyword": "After",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 20685
+              "duration": 12506
             }
           }
         ],
@@ -7631,7 +7679,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 23866
+              "duration": 22189
             }
           },
           {
@@ -7644,7 +7692,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 36326
+              "duration": 22213
             }
           },
           {
@@ -7657,7 +7705,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 96175
+              "duration": 58384
             }
           },
           {
@@ -7666,25 +7714,19 @@
             "line": 14,
             "name": "l'écran contient une section \"Notifications\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:88"
+              "location": "features/step_definitions/navigation.steps.ts:112"
             },
             "result": {
               "status": "passed",
-              "duration": 94438
-            },
-            "embeddings": [
-              {
-                "data": "VmVyaWZpZWQgc2VjdGlvbjogTm90aWZpY2F0aW9ucw==",
-                "mime_type": "text/plain"
-              }
-            ]
+              "duration": 24724
+            }
           },
           {
             "keyword": "After",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 20337
+              "duration": 12093
             }
           }
         ],
@@ -7712,7 +7754,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 25332
+              "duration": 13668
             }
           },
           {
@@ -7725,7 +7767,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 33029
+              "duration": 17702
             }
           },
           {
@@ -7738,7 +7780,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 80153
+              "duration": 44178
             }
           },
           {
@@ -7747,19 +7789,25 @@
             "line": 18,
             "name": "je peux définir mon rayon de notification",
             "match": {
-              "location": "features/step_definitions/screen.steps.ts:198"
+              "location": "features/step_definitions/screen.steps.ts:236"
             },
             "result": {
-              "status": "passed",
-              "duration": 137784
-            }
+              "status": "pending",
+              "duration": 62766
+            },
+            "embeddings": [
+              {
+                "data": "Tk9UIElNUExFTUVOVEVEOiBSYWRpdXMgc2V0dGluZyAocmF5b24va20pIGlzIG5vdCBpbiBTZXR0aW5nc1NjcmVlbi50c3g=",
+                "mime_type": "text/plain"
+              }
+            ]
           },
           {
             "keyword": "After",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 23823
+              "duration": 12874
             }
           }
         ],
@@ -7787,7 +7835,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 24513
+              "duration": 19016
             }
           },
           {
@@ -7800,7 +7848,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 34635
+              "duration": 20847
             }
           },
           {
@@ -7813,7 +7861,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 88060
+              "duration": 52088
             }
           },
           {
@@ -7822,19 +7870,25 @@
             "line": 22,
             "name": "je peux définir mes thématiques d'intérêt",
             "match": {
-              "location": "features/step_definitions/screen.steps.ts:206"
+              "location": "features/step_definitions/screen.steps.ts:243"
             },
             "result": {
-              "status": "passed",
-              "duration": 115110
-            }
+              "status": "pending",
+              "duration": 55316
+            },
+            "embeddings": [
+              {
+                "data": "Tk9UIElNUExFTUVOVEVEOiBUaGVtYXRpYy9pbnRlcmVzdCBzZXR0aW5ncyBub3QgaW4gU2V0dGluZ3NTY3JlZW4udHN4",
+                "mime_type": "text/plain"
+              }
+            ]
           },
           {
             "keyword": "After",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 22370
+              "duration": 12604
             }
           }
         ],
@@ -7862,7 +7916,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 24823
+              "duration": 17443
             }
           },
           {
@@ -7875,7 +7929,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 36123
+              "duration": 20013
             }
           },
           {
@@ -7888,7 +7942,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 84295
+              "duration": 63543
             }
           },
           {
@@ -7917,19 +7971,25 @@
             "line": 26,
             "name": "le formulaire contient les champs obligatoires suivants:",
             "match": {
-              "location": "features/step_definitions/form.steps.ts:41"
+              "location": "features/step_definitions/form.steps.ts:48"
             },
             "result": {
-              "status": "passed",
-              "duration": 116053
-            }
+              "status": "pending",
+              "duration": 36038
+            },
+            "embeddings": [
+              {
+                "data": "V1JPTkcgU1RFUDogImxlIGZvcm11bGFpcmUgY29udGllbnQgbGVzIGNoYW1wcyBvYmxpZ2F0b2lyZXMiIGlzIGZvciBmb3Jtcy4gU2NyZWVuICJzZXR0aW5ncyIgaXMgbm90IGEgZm9ybS4=",
+                "mime_type": "text/plain"
+              }
+            ]
           },
           {
             "keyword": "After",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 59137
+              "duration": 11774
             }
           }
         ],
@@ -7977,7 +8037,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 95712
+              "duration": 23706
             }
           },
           {
@@ -7990,7 +8050,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 92641
+              "duration": 35356
             }
           },
           {
@@ -8003,7 +8063,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 201795
+              "duration": 76090
             }
           },
           {
@@ -8012,15 +8072,15 @@
             "line": 14,
             "name": "l'écran contient une section \"Portée de l'événement\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:88"
+              "location": "features/step_definitions/navigation.steps.ts:112"
             },
             "result": {
-              "status": "passed",
-              "duration": 361571
+              "status": "pending",
+              "duration": 57657
             },
             "embeddings": [
               {
-                "data": "VmVyaWZpZWQgc2VjdGlvbjogUG9ydMOpZSBkZSBsJ8OpdsOpbmVtZW50",
+                "data": "TUlTU0lORyBTRUNUSU9OOiAiUG9ydMOpZSBkZSBsJ8OpdsOpbmVtZW50IiBub3QgZm91bmQgaW4gc2NyZWVuICJjcmVhdGUtZXZlbnQi",
                 "mime_type": "text/plain"
               }
             ]
@@ -8030,7 +8090,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 32229
+              "duration": 21996
             }
           }
         ],
@@ -8058,7 +8118,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 31438
+              "duration": 22397
             }
           },
           {
@@ -8071,7 +8131,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 42509
+              "duration": 25797
             }
           },
           {
@@ -8084,7 +8144,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 104369
+              "duration": 71640
             }
           },
           {
@@ -8096,12 +8156,12 @@
               "location": "features/step_definitions/navigation.steps.ts:53"
             },
             "result": {
-              "status": "passed",
-              "duration": 68922
+              "status": "pending",
+              "duration": 104613
             },
             "embeddings": [
               {
-                "data": "Q2xpY2tlZCBvbjogRMOpZmluaXIgbGEgcG9ydMOpZQ==",
+                "data": "TUlTU0lORzogQ2xpY2thYmxlIGVsZW1lbnQgIkTDqWZpbmlyIGxhIHBvcnTDqWUiIG5vdCBmb3VuZCBpbiBzY3JlZW4gImNyZWF0ZS1ldmVudCI=",
                 "mime_type": "text/plain"
               }
             ]
@@ -8112,25 +8172,19 @@
             "line": 19,
             "name": "l'écran contient une section \"Rayon en kilomètres\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:88"
+              "location": "features/step_definitions/navigation.steps.ts:112"
             },
             "result": {
-              "status": "passed",
-              "duration": 96675
-            },
-            "embeddings": [
-              {
-                "data": "VmVyaWZpZWQgc2VjdGlvbjogUmF5b24gZW4ga2lsb23DqHRyZXM=",
-                "mime_type": "text/plain"
-              }
-            ]
+              "status": "skipped",
+              "duration": 0
+            }
           },
           {
             "keyword": "After",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 25397
+              "duration": 12897
             }
           }
         ],
@@ -8158,7 +8212,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 23777
+              "duration": 22308
             }
           },
           {
@@ -8171,7 +8225,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 35256
+              "duration": 23708
             }
           },
           {
@@ -8184,7 +8238,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 91923
+              "duration": 57403
             }
           },
           {
@@ -8193,25 +8247,19 @@
             "line": 23,
             "name": "l'écran contient une section \"Thématique\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:88"
+              "location": "features/step_definitions/navigation.steps.ts:112"
             },
             "result": {
               "status": "passed",
-              "duration": 79914
-            },
-            "embeddings": [
-              {
-                "data": "VmVyaWZpZWQgc2VjdGlvbjogVGjDqW1hdGlxdWU=",
-                "mime_type": "text/plain"
-              }
-            ]
+              "duration": 25000
+            }
           },
           {
             "keyword": "After",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 21433
+              "duration": 11940
             }
           }
         ],
@@ -8239,7 +8287,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 23888
+              "duration": 14461
             }
           },
           {
@@ -8252,7 +8300,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 33138
+              "duration": 17185
             }
           },
           {
@@ -8265,7 +8313,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 85394
+              "duration": 46055
             }
           },
           {
@@ -8304,11 +8352,11 @@
             "line": 27,
             "name": "le formulaire contient les champs obligatoires suivants:",
             "match": {
-              "location": "features/step_definitions/form.steps.ts:41"
+              "location": "features/step_definitions/form.steps.ts:48"
             },
             "result": {
               "status": "passed",
-              "duration": 157391
+              "duration": 95474
             }
           },
           {
@@ -8316,7 +8364,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 48817
+              "duration": 12440
             }
           }
         ],
@@ -8364,7 +8412,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 26084
+              "duration": 12901
             }
           },
           {
@@ -8377,7 +8425,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 40173
+              "duration": 18260
             }
           },
           {
@@ -8390,7 +8438,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 133204
+              "duration": 65285
             }
           },
           {
@@ -8399,11 +8447,11 @@
             "line": 14,
             "name": "je vois l'écran \"profile\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:78"
+              "location": "features/step_definitions/navigation.steps.ts:102"
             },
             "result": {
               "status": "passed",
-              "duration": 92804
+              "duration": 42416
             }
           },
           {
@@ -8412,15 +8460,15 @@
             "line": 15,
             "name": "l'écran contient une section \"Photo de profil\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:88"
+              "location": "features/step_definitions/navigation.steps.ts:112"
             },
             "result": {
-              "status": "passed",
-              "duration": 90555
+              "status": "pending",
+              "duration": 36561
             },
             "embeddings": [
               {
-                "data": "VmVyaWZpZWQgc2VjdGlvbjogUGhvdG8gZGUgcHJvZmls",
+                "data": "TUlTU0lORyBTRUNUSU9OOiAiUGhvdG8gZGUgcHJvZmlsIiBub3QgZm91bmQgaW4gc2NyZWVuICJwcm9maWxlIg==",
                 "mime_type": "text/plain"
               }
             ]
@@ -8430,7 +8478,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 30959
+              "duration": 12045
             }
           }
         ],
@@ -8458,7 +8506,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 39615
+              "duration": 18571
             }
           },
           {
@@ -8471,7 +8519,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 40973
+              "duration": 22684
             }
           },
           {
@@ -8484,7 +8532,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 103958
+              "duration": 55360
             }
           },
           {
@@ -8493,11 +8541,11 @@
             "line": 19,
             "name": "je clique sur un participant",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:65"
+              "location": "features/step_definitions/navigation.steps.ts:89"
             },
             "result": {
               "status": "passed",
-              "duration": 80155
+              "duration": 44126
             }
           },
           {
@@ -8506,11 +8554,11 @@
             "line": 20,
             "name": "je suis redirigé vers \"profil utilisateur\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:73"
+              "location": "features/step_definitions/navigation.steps.ts:97"
             },
             "result": {
               "status": "passed",
-              "duration": 160449
+              "duration": 76649
             }
           },
           {
@@ -8519,11 +8567,11 @@
             "line": 21,
             "name": "l'écran affiche les informations du profil",
             "match": {
-              "location": "features/step_definitions/screen.steps.ts:107"
+              "location": "features/step_definitions/screen.steps.ts:142"
             },
             "result": {
               "status": "passed",
-              "duration": 129410
+              "duration": 49781
             }
           },
           {
@@ -8531,7 +8579,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 27962
+              "duration": 12116
             }
           }
         ],
@@ -8559,7 +8607,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 44151
+              "duration": 13420
             }
           },
           {
@@ -8572,7 +8620,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 39039
+              "duration": 17803
             }
           },
           {
@@ -8585,7 +8633,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 99950
+              "duration": 51861
             }
           },
           {
@@ -8594,11 +8642,11 @@
             "line": 25,
             "name": "je peux voir la liste des participants",
             "match": {
-              "location": "features/step_definitions/screen.steps.ts:6"
+              "location": "features/step_definitions/screen.steps.ts:5"
             },
             "result": {
               "status": "passed",
-              "duration": 109265
+              "duration": 47754
             }
           },
           {
@@ -8606,7 +8654,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 27285
+              "duration": 11784
             }
           }
         ],
@@ -8634,7 +8682,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 24438
+              "duration": 13192
             }
           },
           {
@@ -8647,7 +8695,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 35853
+              "duration": 19933
             }
           },
           {
@@ -8660,7 +8708,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 99105
+              "duration": 49809
             }
           },
           {
@@ -8689,19 +8737,25 @@
             "line": 29,
             "name": "le formulaire contient les champs obligatoires suivants:",
             "match": {
-              "location": "features/step_definitions/form.steps.ts:41"
+              "location": "features/step_definitions/form.steps.ts:48"
             },
             "result": {
-              "status": "passed",
-              "duration": 106531
-            }
+              "status": "pending",
+              "duration": 37653
+            },
+            "embeddings": [
+              {
+                "data": "V1JPTkcgU1RFUDogImxlIGZvcm11bGFpcmUgY29udGllbnQgbGVzIGNoYW1wcyBvYmxpZ2F0b2lyZXMiIGlzIGZvciBmb3Jtcy4gU2NyZWVuICJwcm9maWxlIiBpcyBub3QgYSBmb3JtLg==",
+                "mime_type": "text/plain"
+              }
+            ]
           },
           {
             "keyword": "After",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 32726
+              "duration": 12402
             }
           }
         ],
@@ -8749,7 +8803,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 24579
+              "duration": 21869
             }
           },
           {
@@ -8762,7 +8816,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 33767
+              "duration": 21429
             }
           },
           {
@@ -8775,7 +8829,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 88481
+              "duration": 53276
             }
           },
           {
@@ -8788,7 +8842,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 87473
+              "duration": 48653
             }
           },
           {
@@ -8797,11 +8851,11 @@
             "line": 14,
             "name": "je vois l'écran \"event-detail\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:78"
+              "location": "features/step_definitions/navigation.steps.ts:102"
             },
             "result": {
               "status": "passed",
-              "duration": 56303
+              "duration": 39856
             }
           },
           {
@@ -8810,15 +8864,15 @@
             "line": 15,
             "name": "l'écran contient une section \"Programme des ateliers\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:88"
+              "location": "features/step_definitions/navigation.steps.ts:112"
             },
             "result": {
-              "status": "passed",
-              "duration": 79851
+              "status": "pending",
+              "duration": 36052
             },
             "embeddings": [
               {
-                "data": "VmVyaWZpZWQgc2VjdGlvbjogUHJvZ3JhbW1lIGRlcyBhdGVsaWVycw==",
+                "data": "TUlTU0lORyBTRUNUSU9OOiAiUHJvZ3JhbW1lIGRlcyBhdGVsaWVycyIgbm90IGZvdW5kIGluIHNjcmVlbiAiZXZlbnQtZGV0YWlsIg==",
                 "mime_type": "text/plain"
               }
             ]
@@ -8828,7 +8882,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 21399
+              "duration": 12111
             }
           }
         ],
@@ -8856,7 +8910,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 23054
+              "duration": 19619
             }
           },
           {
@@ -8869,7 +8923,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 32184
+              "duration": 21782
             }
           },
           {
@@ -8882,7 +8936,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 85169
+              "duration": 56213
             }
           },
           {
@@ -8891,11 +8945,11 @@
             "line": 19,
             "name": "je peux voir la liste des participants",
             "match": {
-              "location": "features/step_definitions/screen.steps.ts:6"
+              "location": "features/step_definitions/screen.steps.ts:5"
             },
             "result": {
               "status": "passed",
-              "duration": 115530
+              "duration": 53899
             }
           },
           {
@@ -8903,7 +8957,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 21984
+              "duration": 11943
             }
           }
         ],
@@ -8931,7 +8985,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 22791
+              "duration": 13431
             }
           },
           {
@@ -8944,7 +8998,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 32333
+              "duration": 17317
             }
           },
           {
@@ -8957,7 +9011,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 86135
+              "duration": 49192
             }
           },
           {
@@ -8966,15 +9020,15 @@
             "line": 23,
             "name": "l'écran contient une section \"Ressources\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:88"
+              "location": "features/step_definitions/navigation.steps.ts:112"
             },
             "result": {
-              "status": "passed",
-              "duration": 77862
+              "status": "pending",
+              "duration": 39957
             },
             "embeddings": [
               {
-                "data": "VmVyaWZpZWQgc2VjdGlvbjogUmVzc291cmNlcw==",
+                "data": "TUlTU0lORyBTRUNUSU9OOiAiUmVzc291cmNlcyIgbm90IGZvdW5kIGluIHNjcmVlbiAiZXZlbnQtZGV0YWlsIg==",
                 "mime_type": "text/plain"
               }
             ]
@@ -8985,25 +9039,19 @@
             "line": 24,
             "name": "l'écran contient une section \"Zone de partage collective\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:88"
+              "location": "features/step_definitions/navigation.steps.ts:112"
             },
             "result": {
-              "status": "passed",
-              "duration": 65363
-            },
-            "embeddings": [
-              {
-                "data": "VmVyaWZpZWQgc2VjdGlvbjogWm9uZSBkZSBwYXJ0YWdlIGNvbGxlY3RpdmU=",
-                "mime_type": "text/plain"
-              }
-            ]
+              "status": "skipped",
+              "duration": 0
+            }
           },
           {
             "keyword": "After",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 21453
+              "duration": 12056
             }
           }
         ],
@@ -9031,7 +9079,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 44024
+              "duration": 18182
             }
           },
           {
@@ -9044,7 +9092,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 57056
+              "duration": 20178
             }
           },
           {
@@ -9057,7 +9105,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 142785
+              "duration": 53091
             }
           },
           {
@@ -9091,19 +9139,25 @@
             "line": 28,
             "name": "le formulaire contient les champs obligatoires suivants:",
             "match": {
-              "location": "features/step_definitions/form.steps.ts:41"
+              "location": "features/step_definitions/form.steps.ts:48"
             },
             "result": {
-              "status": "passed",
-              "duration": 211535
-            }
+              "status": "pending",
+              "duration": 35535
+            },
+            "embeddings": [
+              {
+                "data": "V1JPTkcgU1RFUDogImxlIGZvcm11bGFpcmUgY29udGllbnQgbGVzIGNoYW1wcyBvYmxpZ2F0b2lyZXMiIGlzIGZvciBmb3Jtcy4gU2NyZWVuICJldmVudC1kZXRhaWwiIGlzIG5vdCBhIGZvcm0u",
+                "mime_type": "text/plain"
+              }
+            ]
           },
           {
             "keyword": "After",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 37560
+              "duration": 11703
             }
           }
         ],
@@ -9151,7 +9205,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 42422
+              "duration": 25411
             }
           },
           {
@@ -9164,7 +9218,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 56975
+              "duration": 26106
             }
           },
           {
@@ -9177,7 +9231,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 147910
+              "duration": 61470
             }
           },
           {
@@ -9186,15 +9240,15 @@
             "line": 14,
             "name": "l'écran contient une section \"Bilan\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:88"
+              "location": "features/step_definitions/navigation.steps.ts:112"
             },
             "result": {
-              "status": "passed",
-              "duration": 132036
+              "status": "pending",
+              "duration": 41325
             },
             "embeddings": [
               {
-                "data": "VmVyaWZpZWQgc2VjdGlvbjogQmlsYW4=",
+                "data": "TUlTU0lORyBTRUNUSU9OOiAiQmlsYW4iIG5vdCBmb3VuZCBpbiBzY3JlZW4gImV2ZW50LWRldGFpbCI=",
                 "mime_type": "text/plain"
               }
             ]
@@ -9204,7 +9258,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 36405
+              "duration": 12472
             }
           }
         ],
@@ -9232,7 +9286,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 37079
+              "duration": 18537
             }
           },
           {
@@ -9245,7 +9299,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 55799
+              "duration": 20987
             }
           },
           {
@@ -9258,7 +9312,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 138653
+              "duration": 53521
             }
           },
           {
@@ -9270,12 +9324,12 @@
               "location": "features/step_definitions/navigation.steps.ts:53"
             },
             "result": {
-              "status": "passed",
-              "duration": 117334
+              "status": "pending",
+              "duration": 100038
             },
             "embeddings": [
               {
-                "data": "Q2xpY2tlZCBvbjogVm9pciBsZSBiaWxhbg==",
+                "data": "TUlTU0lORzogQ2xpY2thYmxlIGVsZW1lbnQgIlZvaXIgbGUgYmlsYW4iIG5vdCBmb3VuZCBpbiBzY3JlZW4gImV2ZW50LWRldGFpbCI=",
                 "mime_type": "text/plain"
               }
             ]
@@ -9286,25 +9340,19 @@
             "line": 19,
             "name": "l'écran contient une section \"Commentaires par atelier\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:88"
+              "location": "features/step_definitions/navigation.steps.ts:112"
             },
             "result": {
-              "status": "passed",
-              "duration": 122510
-            },
-            "embeddings": [
-              {
-                "data": "VmVyaWZpZWQgc2VjdGlvbjogQ29tbWVudGFpcmVzIHBhciBhdGVsaWVy",
-                "mime_type": "text/plain"
-              }
-            ]
+              "status": "skipped",
+              "duration": 0
+            }
           },
           {
             "keyword": "After",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 37962
+              "duration": 13060
             }
           }
         ],
@@ -9332,7 +9380,7 @@
             "hidden": true,
             "result": {
               "status": "pending",
-              "duration": 39249
+              "duration": 18278
             }
           },
           {
@@ -9367,7 +9415,7 @@
             "line": 24,
             "name": "l'écran contient une section \"Synthèse\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:88"
+              "location": "features/step_definitions/navigation.steps.ts:112"
             },
             "result": {
               "status": "skipped",
@@ -9379,7 +9427,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 39216
+              "duration": 12405
             }
           }
         ],
@@ -9411,7 +9459,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 37448
+              "duration": 45306
             }
           },
           {
@@ -9424,7 +9472,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 61071
+              "duration": 23362
             }
           },
           {
@@ -9437,7 +9485,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 382618
+              "duration": 57550
             }
           },
           {
@@ -9466,19 +9514,25 @@
             "line": 28,
             "name": "le formulaire contient les champs obligatoires suivants:",
             "match": {
-              "location": "features/step_definitions/form.steps.ts:41"
+              "location": "features/step_definitions/form.steps.ts:48"
             },
             "result": {
-              "status": "passed",
-              "duration": 261534
-            }
+              "status": "pending",
+              "duration": 35446
+            },
+            "embeddings": [
+              {
+                "data": "V1JPTkcgU1RFUDogImxlIGZvcm11bGFpcmUgY29udGllbnQgbGVzIGNoYW1wcyBvYmxpZ2F0b2lyZXMiIGlzIGZvciBmb3Jtcy4gU2NyZWVuICJldmVudC1kZXRhaWwiIGlzIG5vdCBhIGZvcm0u",
+                "mime_type": "text/plain"
+              }
+            ]
           },
           {
             "keyword": "After",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 72744
+              "duration": 13436
             }
           }
         ],
@@ -9526,7 +9580,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 61360
+              "duration": 20287
             }
           },
           {
@@ -9539,7 +9593,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 82757
+              "duration": 21740
             }
           },
           {
@@ -9552,7 +9606,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 212714
+              "duration": 56815
             }
           },
           {
@@ -9561,15 +9615,15 @@
             "line": 14,
             "name": "l'écran contient une section \"Ateliers\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:88"
+              "location": "features/step_definitions/navigation.steps.ts:112"
             },
             "result": {
-              "status": "passed",
-              "duration": 222848
+              "status": "pending",
+              "duration": 37508
             },
             "embeddings": [
               {
-                "data": "VmVyaWZpZWQgc2VjdGlvbjogQXRlbGllcnM=",
+                "data": "TUlTU0lORyBTRUNUSU9OOiAiQXRlbGllcnMiIG5vdCBmb3VuZCBpbiBzY3JlZW4gImNyZWF0ZS1ldmVudCI=",
                 "mime_type": "text/plain"
               }
             ]
@@ -9579,7 +9633,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 47756
+              "duration": 13081
             }
           }
         ],
@@ -9607,7 +9661,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 45341
+              "duration": 21446
             }
           },
           {
@@ -9620,7 +9674,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 68669
+              "duration": 20734
             }
           },
           {
@@ -9633,7 +9687,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 204492
+              "duration": 52847
             }
           },
           {
@@ -9672,11 +9726,11 @@
             "line": 18,
             "name": "le formulaire contient les champs obligatoires suivants:",
             "match": {
-              "location": "features/step_definitions/form.steps.ts:41"
+              "location": "features/step_definitions/form.steps.ts:48"
             },
             "result": {
               "status": "passed",
-              "duration": 226536
+              "duration": 85139
             }
           },
           {
@@ -9684,7 +9738,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 37324
+              "duration": 12436
             }
           }
         ],
@@ -9712,7 +9766,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 45645
+              "duration": 13444
             }
           },
           {
@@ -9725,7 +9779,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 66194
+              "duration": 17917
             }
           },
           {
@@ -9738,7 +9792,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 182019
+              "duration": 52318
             }
           },
           {
@@ -9750,12 +9804,12 @@
               "location": "features/step_definitions/navigation.steps.ts:53"
             },
             "result": {
-              "status": "passed",
-              "duration": 152695
+              "status": "pending",
+              "duration": 82256
             },
             "embeddings": [
               {
-                "data": "Q2xpY2tlZCBvbjogQWpvdXRlciB1biBhdGVsaWVy",
+                "data": "TUlTU0lORzogQ2xpY2thYmxlIGVsZW1lbnQgIkFqb3V0ZXIgdW4gYXRlbGllciIgbm90IGZvdW5kIGluIHNjcmVlbiAiY3JlYXRlLWV2ZW50Ig==",
                 "mime_type": "text/plain"
               }
             ]
@@ -9766,25 +9820,19 @@
             "line": 28,
             "name": "l'écran contient une section \"Nouvel atelier\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:88"
+              "location": "features/step_definitions/navigation.steps.ts:112"
             },
             "result": {
-              "status": "passed",
-              "duration": 121444
-            },
-            "embeddings": [
-              {
-                "data": "VmVyaWZpZWQgc2VjdGlvbjogTm91dmVsIGF0ZWxpZXI=",
-                "mime_type": "text/plain"
-              }
-            ]
+              "status": "skipped",
+              "duration": 0
+            }
           },
           {
             "keyword": "After",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 30300
+              "duration": 13453
             }
           }
         ],
@@ -9812,7 +9860,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 30636
+              "duration": 16742
             }
           },
           {
@@ -9825,7 +9873,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 45569
+              "duration": 25070
             }
           },
           {
@@ -9838,7 +9886,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 106852
+              "duration": 55019
             }
           },
           {
@@ -9850,12 +9898,12 @@
               "location": "features/step_definitions/navigation.steps.ts:53"
             },
             "result": {
-              "status": "passed",
-              "duration": 67499
+              "status": "pending",
+              "duration": 74466
             },
             "embeddings": [
               {
-                "data": "Q2xpY2tlZCBvbjogTW9kaWZpZXIgbCdhdGVsaWVy",
+                "data": "TUlTU0lORzogQ2xpY2thYmxlIGVsZW1lbnQgIk1vZGlmaWVyIGwnYXRlbGllciIgbm90IGZvdW5kIGluIHNjcmVlbiAiY3JlYXRlLWV2ZW50Ig==",
                 "mime_type": "text/plain"
               }
             ]
@@ -9866,25 +9914,19 @@
             "line": 33,
             "name": "l'écran contient une section \"Modifier l'atelier\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:88"
+              "location": "features/step_definitions/navigation.steps.ts:112"
             },
             "result": {
-              "status": "passed",
-              "duration": 90700
-            },
-            "embeddings": [
-              {
-                "data": "VmVyaWZpZWQgc2VjdGlvbjogTW9kaWZpZXIgbCdhdGVsaWVy",
-                "mime_type": "text/plain"
-              }
-            ]
+              "status": "skipped",
+              "duration": 0
+            }
           },
           {
             "keyword": "After",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 27499
+              "duration": 15236
             }
           }
         ],
@@ -9912,7 +9954,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 28757
+              "duration": 16713
             }
           },
           {
@@ -9925,7 +9967,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 38119
+              "duration": 21544
             }
           },
           {
@@ -9938,7 +9980,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 110665
+              "duration": 53694
             }
           },
           {
@@ -9950,12 +9992,12 @@
               "location": "features/step_definitions/navigation.steps.ts:53"
             },
             "result": {
-              "status": "passed",
-              "duration": 72051
+              "status": "pending",
+              "duration": 77109
             },
             "embeddings": [
               {
-                "data": "Q2xpY2tlZCBvbjogU3VwcHJpbWVyIGwnYXRlbGllcg==",
+                "data": "TUlTU0lORzogQ2xpY2thYmxlIGVsZW1lbnQgIlN1cHByaW1lciBsJ2F0ZWxpZXIiIG5vdCBmb3VuZCBpbiBzY3JlZW4gImNyZWF0ZS1ldmVudCI=",
                 "mime_type": "text/plain"
               }
             ]
@@ -9966,25 +10008,19 @@
             "line": 38,
             "name": "l'écran contient une section \"Confirmation\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:88"
+              "location": "features/step_definitions/navigation.steps.ts:112"
             },
             "result": {
-              "status": "passed",
-              "duration": 84343
-            },
-            "embeddings": [
-              {
-                "data": "VmVyaWZpZWQgc2VjdGlvbjogQ29uZmlybWF0aW9u",
-                "mime_type": "text/plain"
-              }
-            ]
+              "status": "skipped",
+              "duration": 0
+            }
           },
           {
             "keyword": "After",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 26867
+              "duration": 12536
             }
           }
         ],
@@ -10032,7 +10068,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 39840
+              "duration": 17982
             }
           },
           {
@@ -10045,7 +10081,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 62794
+              "duration": 20662
             }
           },
           {
@@ -10058,7 +10094,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 120016
+              "duration": 54124
             }
           },
           {
@@ -10067,15 +10103,15 @@
             "line": 13,
             "name": "l'écran contient une section \"Notes personnelles\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:88"
+              "location": "features/step_definitions/navigation.steps.ts:112"
             },
             "result": {
-              "status": "passed",
-              "duration": 104842
+              "status": "pending",
+              "duration": 41605
             },
             "embeddings": [
               {
-                "data": "VmVyaWZpZWQgc2VjdGlvbjogTm90ZXMgcGVyc29ubmVsbGVz",
+                "data": "TUlTU0lORyBTRUNUSU9OOiAiTm90ZXMgcGVyc29ubmVsbGVzIiBub3QgZm91bmQgaW4gc2NyZWVuICJldmVudC1kZXRhaWwi",
                 "mime_type": "text/plain"
               }
             ]
@@ -10085,7 +10121,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 26124
+              "duration": 11867
             }
           }
         ],
@@ -10113,7 +10149,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 28571
+              "duration": 17188
             }
           },
           {
@@ -10126,7 +10162,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 42950
+              "duration": 27220
             }
           },
           {
@@ -10139,7 +10175,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 100929
+              "duration": 54412
             }
           },
           {
@@ -10148,15 +10184,15 @@
             "line": 17,
             "name": "l'écran contient une section \"Zone de partage publique\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:88"
+              "location": "features/step_definitions/navigation.steps.ts:112"
             },
             "result": {
-              "status": "passed",
-              "duration": 105905
+              "status": "pending",
+              "duration": 38635
             },
             "embeddings": [
               {
-                "data": "VmVyaWZpZWQgc2VjdGlvbjogWm9uZSBkZSBwYXJ0YWdlIHB1YmxpcXVl",
+                "data": "TUlTU0lORyBTRUNUSU9OOiAiWm9uZSBkZSBwYXJ0YWdlIHB1YmxpcXVlIiBub3QgZm91bmQgaW4gc2NyZWVuICJldmVudC1kZXRhaWwi",
                 "mime_type": "text/plain"
               }
             ]
@@ -10166,7 +10202,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 25548
+              "duration": 12430
             }
           }
         ],
@@ -10194,7 +10230,7 @@
             "hidden": true,
             "result": {
               "status": "pending",
-              "duration": 28092
+              "duration": 16855
             }
           },
           {
@@ -10242,7 +10278,7 @@
             "line": 23,
             "name": "je peux ajouter une note",
             "match": {
-              "location": "features/step_definitions/screen.steps.ts:125"
+              "location": "features/step_definitions/screen.steps.ts:166"
             },
             "result": {
               "status": "skipped",
@@ -10254,7 +10290,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 32728
+              "duration": 13331
             }
           }
         ],
@@ -10286,7 +10322,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 26740
+              "duration": 16057
             }
           },
           {
@@ -10299,7 +10335,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 50030
+              "duration": 21445
             }
           },
           {
@@ -10312,7 +10348,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 103887
+              "duration": 54108
             }
           },
           {
@@ -10324,12 +10360,12 @@
               "location": "features/step_definitions/navigation.steps.ts:53"
             },
             "result": {
-              "status": "passed",
-              "duration": 65653
+              "status": "pending",
+              "duration": 89183
             },
             "embeddings": [
               {
-                "data": "Q2xpY2tlZCBvbjogQWpvdXRlciB1bmUgcmVzc291cmNl",
+                "data": "TUlTU0lORzogQ2xpY2thYmxlIGVsZW1lbnQgIkFqb3V0ZXIgdW5lIHJlc3NvdXJjZSIgbm90IGZvdW5kIGluIHNjcmVlbiAiZXZlbnQtZGV0YWlsIg==",
                 "mime_type": "text/plain"
               }
             ]
@@ -10340,25 +10376,19 @@
             "line": 28,
             "name": "l'écran contient une section \"Ressources\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:88"
+              "location": "features/step_definitions/navigation.steps.ts:112"
             },
             "result": {
-              "status": "passed",
-              "duration": 79243
-            },
-            "embeddings": [
-              {
-                "data": "VmVyaWZpZWQgc2VjdGlvbjogUmVzc291cmNlcw==",
-                "mime_type": "text/plain"
-              }
-            ]
+              "status": "skipped",
+              "duration": 0
+            }
           },
           {
             "keyword": "After",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 26604
+              "duration": 13418
             }
           }
         ],
@@ -10406,7 +10436,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 40854
+              "duration": 18119
             }
           },
           {
@@ -10419,7 +10449,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 39030
+              "duration": 27528
             }
           },
           {
@@ -10432,7 +10462,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 111604
+              "duration": 75658
             }
           },
           {
@@ -10441,15 +10471,15 @@
             "line": 14,
             "name": "l'écran contient une section \"Commentaires\"",
             "match": {
-              "location": "features/step_definitions/navigation.steps.ts:88"
+              "location": "features/step_definitions/navigation.steps.ts:112"
             },
             "result": {
-              "status": "passed",
-              "duration": 96255
+              "status": "pending",
+              "duration": 37728
             },
             "embeddings": [
               {
-                "data": "VmVyaWZpZWQgc2VjdGlvbjogQ29tbWVudGFpcmVz",
+                "data": "TUlTU0lORyBTRUNUSU9OOiAiQ29tbWVudGFpcmVzIiBub3QgZm91bmQgaW4gc2NyZWVuICJldmVudC1kZXRhaWwi",
                 "mime_type": "text/plain"
               }
             ]
@@ -10459,7 +10489,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 21649
+              "duration": 11601
             }
           }
         ],
@@ -10487,7 +10517,7 @@
             "hidden": true,
             "result": {
               "status": "pending",
-              "duration": 26683
+              "duration": 33355
             }
           },
           {
@@ -10535,7 +10565,7 @@
             "line": 20,
             "name": "je peux ajouter un commentaire",
             "match": {
-              "location": "features/step_definitions/screen.steps.ts:114"
+              "location": "features/step_definitions/screen.steps.ts:159"
             },
             "result": {
               "status": "skipped",
@@ -10547,7 +10577,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 25061
+              "duration": 26682
             }
           }
         ],
@@ -10579,7 +10609,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 23003
+              "duration": 28382
             }
           },
           {
@@ -10592,7 +10622,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 37950
+              "duration": 29794
             }
           },
           {
@@ -10605,7 +10635,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 98615
+              "duration": 90725
             }
           },
           {
@@ -10617,12 +10647,12 @@
               "location": "features/step_definitions/navigation.steps.ts:53"
             },
             "result": {
-              "status": "passed",
-              "duration": 62585
+              "status": "pending",
+              "duration": 53150
             },
             "embeddings": [
               {
-                "data": "Q2xpY2tlZCBvbjogTW9kaWZpZXI=",
+                "data": "TUlTU0lORzogQ2xpY2thYmxlIGVsZW1lbnQgIk1vZGlmaWVyIiBub3QgZm91bmQgaW4gc2NyZWVuICJldmVudC1kZXRhaWwi",
                 "mime_type": "text/plain"
               }
             ]
@@ -10633,11 +10663,11 @@
             "line": 25,
             "name": "je peux modifier un commentaire",
             "match": {
-              "location": "features/step_definitions/screen.steps.ts:146"
+              "location": "features/step_definitions/screen.steps.ts:180"
             },
             "result": {
-              "status": "passed",
-              "duration": 64721
+              "status": "skipped",
+              "duration": 0
             }
           },
           {
@@ -10645,7 +10675,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 20583
+              "duration": 13067
             }
           }
         ],
@@ -10673,7 +10703,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 22960
+              "duration": 19928
             }
           },
           {
@@ -10686,7 +10716,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 30979
+              "duration": 23946
             }
           },
           {
@@ -10699,7 +10729,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 86105
+              "duration": 56691
             }
           },
           {
@@ -10711,12 +10741,12 @@
               "location": "features/step_definitions/navigation.steps.ts:53"
             },
             "result": {
-              "status": "passed",
-              "duration": 65811
+              "status": "pending",
+              "duration": 42191
             },
             "embeddings": [
               {
-                "data": "Q2xpY2tlZCBvbjogU3VwcHJpbWVy",
+                "data": "TUlTU0lORzogQ2xpY2thYmxlIGVsZW1lbnQgIlN1cHByaW1lciIgbm90IGZvdW5kIGluIHNjcmVlbiAiZXZlbnQtZGV0YWlsIg==",
                 "mime_type": "text/plain"
               }
             ]
@@ -10727,11 +10757,11 @@
             "line": 30,
             "name": "je peux supprimer un commentaire",
             "match": {
-              "location": "features/step_definitions/screen.steps.ts:152"
+              "location": "features/step_definitions/screen.steps.ts:187"
             },
             "result": {
-              "status": "passed",
-              "duration": 93433
+              "status": "skipped",
+              "duration": 0
             }
           },
           {
@@ -10739,7 +10769,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 22584
+              "duration": 11705
             }
           }
         ],
@@ -10787,7 +10817,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 40945
+              "duration": 20495
             }
           },
           {
@@ -10800,7 +10830,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 37742
+              "duration": 21716
             }
           },
           {
@@ -10813,7 +10843,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 93751
+              "duration": 55520
             }
           },
           {
@@ -10822,11 +10852,11 @@
             "line": 14,
             "name": "je peux voir la liste des événements",
             "match": {
-              "location": "features/step_definitions/screen.steps.ts:49"
+              "location": "features/step_definitions/screen.steps.ts:61"
             },
             "result": {
               "status": "passed",
-              "duration": 154264
+              "duration": 41773
             }
           },
           {
@@ -10834,7 +10864,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 25951
+              "duration": 11745
             }
           }
         ],
@@ -10862,7 +10892,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 24285
+              "duration": 13343
             }
           },
           {
@@ -10875,7 +10905,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 32861
+              "duration": 18156
             }
           },
           {
@@ -10888,7 +10918,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 89696
+              "duration": 50592
             }
           },
           {
@@ -10897,11 +10927,11 @@
             "line": 18,
             "name": "je peux voir la liste des participants",
             "match": {
-              "location": "features/step_definitions/screen.steps.ts:6"
+              "location": "features/step_definitions/screen.steps.ts:5"
             },
             "result": {
               "status": "passed",
-              "duration": 106266
+              "duration": 53901
             }
           },
           {
@@ -10909,7 +10939,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 21024
+              "duration": 11303
             }
           }
         ],
@@ -10937,7 +10967,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 25929
+              "duration": 12697
             }
           },
           {
@@ -10950,7 +10980,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 31286
+              "duration": 16690
             }
           },
           {
@@ -10963,7 +10993,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 88973
+              "duration": 46964
             }
           },
           {
@@ -10975,12 +11005,12 @@
               "location": "features/step_definitions/navigation.steps.ts:53"
             },
             "result": {
-              "status": "passed",
-              "duration": 66173
+              "status": "pending",
+              "duration": 39814
             },
             "embeddings": [
               {
-                "data": "Q2xpY2tlZCBvbjogUydpbnNjcmlyZQ==",
+                "data": "TUlTU0lORzogQ2xpY2thYmxlIGVsZW1lbnQgIlMnaW5zY3JpcmUiIG5vdCBmb3VuZCBpbiBzY3JlZW4gImV2ZW50LWRldGFpbCI=",
                 "mime_type": "text/plain"
               }
             ]
@@ -10991,11 +11021,11 @@
             "line": 23,
             "name": "je peux m'inscrire à l'événement",
             "match": {
-              "location": "features/step_definitions/screen.steps.ts:158"
+              "location": "features/step_definitions/screen.steps.ts:194"
             },
             "result": {
-              "status": "passed",
-              "duration": 64139
+              "status": "skipped",
+              "duration": 0
             }
           },
           {
@@ -11003,7 +11033,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 22644
+              "duration": 11303
             }
           }
         ],
@@ -11031,7 +11061,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 24950
+              "duration": 21001
             }
           },
           {
@@ -11044,7 +11074,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 59732
+              "duration": 24022
             }
           },
           {
@@ -11057,7 +11087,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 88632
+              "duration": 57341
             }
           },
           {
@@ -11069,12 +11099,12 @@
               "location": "features/step_definitions/navigation.steps.ts:53"
             },
             "result": {
-              "status": "passed",
-              "duration": 69022
+              "status": "pending",
+              "duration": 42257
             },
             "embeddings": [
               {
-                "data": "Q2xpY2tlZCBvbjogU2UgZMOpc2luc2NyaXJl",
+                "data": "TUlTU0lORzogQ2xpY2thYmxlIGVsZW1lbnQgIlNlIGTDqXNpbnNjcmlyZSIgbm90IGZvdW5kIGluIHNjcmVlbiAiZXZlbnQtZGV0YWlsIg==",
                 "mime_type": "text/plain"
               }
             ]
@@ -11085,11 +11115,11 @@
             "line": 28,
             "name": "je peux me désinscrire de l'événement",
             "match": {
-              "location": "features/step_definitions/screen.steps.ts:167"
+              "location": "features/step_definitions/screen.steps.ts:203"
             },
             "result": {
-              "status": "passed",
-              "duration": 68417
+              "status": "skipped",
+              "duration": 0
             }
           },
           {
@@ -11097,7 +11127,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 22811
+              "duration": 16339
             }
           }
         ],

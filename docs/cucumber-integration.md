@@ -17,7 +17,7 @@ Step Definition Matching
     ↓
 World Instance (FestipodWorld)
     ↓
-Screen Source Analysis (regex field detectors)
+Inline Detection Logic (screen-specific regex patterns)
     ↓
 Chai Assertions
     ↓
@@ -29,8 +29,8 @@ JSON + HTML Reports
 ```
 features/
 ├── support/
-│   ├── world.ts           # Custom World class with state management
-│   └── hooks.ts           # Before/After lifecycle hooks
+│   ├── world.ts              # Custom World class with state management
+│   └── hooks.ts              # Before/After lifecycle hooks
 ├── step_definitions/
 │   ├── navigation.steps.ts  # Screen navigation steps
 │   ├── form.steps.ts        # Form validation steps
@@ -131,7 +131,70 @@ Field detection is screen-specific, defined in `screenFieldDetectors` map. Each 
 | Pseudo | `@username` pattern |
 | Photo / Photo de profil | `<Avatar` component |
 
-This approach makes tests resilient to minor UI changes while still validating the semantic structure of screens.
+These patterns match what currently exists in each screen's source code. When UI changes, patterns must be updated accordingly.
+
+## Step Definition Design Principles
+
+Step definitions follow strict principles to ensure they are **readable**, **specific**, and **verifiable**:
+
+### 1. Inline Detection Logic (No Abstraction)
+
+All detection logic must be written directly in step definitions, not in separate utility functions. This is critical because:
+- The step definition code is displayed in the app's "Définitions" view
+- Users must see the exact detection logic when reviewing specs
+- Abstraction hides the "how" and prevents quick verification
+
+**Correct approach:**
+```typescript
+Then('je peux annuler et revenir à l\'écran précédent', async function (this: FestipodWorld) {
+  expect(this.currentScreenId).to.equal('create-event');
+  const source = this.getRenderedText();
+  // Detect ✕ close button with onClick handler that calls navigate()
+  const found = /onClick\s*=\s*\{\s*\(\)\s*=>\s*navigate\s*\(['"]home['"]\)\s*\}[^>]*>✕</.test(source);
+  expect(found, 'Create event screen should have ✕ button with navigate("home")').to.be.true;
+});
+```
+
+**Avoid (abstraction hides logic):**
+```typescript
+// DON'T DO THIS - the function hides the detection logic from the UI
+const result = hasBackNavigation(source);
+expect(result.found).to.be.true;
+```
+
+### 2. Specific Patterns (No Future Anticipation)
+
+Detection patterns must match **exactly what exists in the codebase today**. Do not use OR patterns or generic matching to anticipate future variations that don't exist yet.
+
+**Correct approach:**
+```typescript
+// CreateEventScreen.tsx has: onClick={() => navigate('home')}...>✕<
+const found = /onClick\s*=\s*\{\s*\(\)\s*=>\s*navigate\s*\(['"]home['"]\)\s*\}[^>]*>✕</.test(source);
+```
+
+**Avoid (anticipates variations that don't exist):**
+```typescript
+// DON'T DO THIS - the app doesn't have "Retour", "←", or "Annuler" buttons
+const found = /✕|←|Retour|Annuler/.test(source);
+```
+
+### 3. Code Duplication is Acceptable
+
+If multiple steps need similar detection logic, duplicate the code. This maintains readability and allows each step to evolve independently based on actual screen content.
+
+### 4. Screen-Specific Detection
+
+Each step should know exactly which screen it's testing and what specific patterns to look for in that screen's source code.
+
+### When Tests Fail
+
+A failing test means a specific UI element was removed or changed:
+
+```
+AssertionError: Create event screen should have ✕ button with navigate("home")
+```
+
+This tells the developer exactly what's missing and where to look. The regex in the step definition shows exactly what pattern was expected.
 
 ## Step Definitions
 
@@ -178,15 +241,86 @@ Alors une erreur de validation est affichée pour "Date"
 Alors je peux voir la liste des participants
 Alors l'écran affiche les informations de l'événement
 
-# Feature detection (returns 'pending' if not implemented)
+# Feature detection (may return 'pending' - see Test Outcomes section below)
 Alors je peux ajouter un commentaire
 Alors je peux ajouter une note
-Alors je peux modifier un commentaire
-Alors je peux supprimer un commentaire
 Alors je peux m'inscrire à l'événement
 Alors je peux voir le QR code
-Alors je peux filtrer les événements par période
 ```
+
+## Test Outcomes
+
+Every step definition must produce one of two outcomes:
+
+### 1. Pass/Fail (Testable)
+
+When we **can verify** the feature through static source analysis:
+- The step runs assertions (`expect(...).to.be.true`)
+- If the assertion passes → test passes
+- If the assertion fails → test fails with descriptive error message
+
+```typescript
+Then('je peux voir la liste des participants', async function (this: FestipodWorld) {
+  expect(this.currentScreenId).to.equal('event-detail');
+  const source = this.getRenderedText();
+  // EventDetailScreen.tsx has: <Avatar components and "Participants (12)" text
+  const hasAvatars = /<Avatar/.test(source);
+  expect(hasAvatars, 'Event detail should have Avatar components for participants').to.be.true;
+});
+```
+
+### 2. Pending (Not Testable)
+
+When we **cannot verify** the feature, the step must return `'pending'` with an explanatory message. There are four reasons a test may be pending:
+
+| Prefix | Reason | Example |
+|--------|--------|---------|
+| `NOT IMPLEMENTED` | Feature doesn't exist in the UI | Comment functionality not in EventDetailScreen.tsx |
+| `CANNOT TEST` | Requires browser automation, backend, or database | Form submission requires browser automation |
+| `WRONG STEP` | Step is being used on inappropriate screen type | "le formulaire contient..." on a display screen |
+| `NOT ON THIS SCREEN` | Feature exists but on a different screen | QR code is on share-profile, not profile |
+
+```typescript
+// NOT IMPLEMENTED - feature doesn't exist
+Then('je peux ajouter un commentaire', async function (this: FestipodWorld) {
+  this.attach('NOT IMPLEMENTED: Comment functionality not in EventDetailScreen.tsx', 'text/plain');
+  return 'pending';
+});
+
+// CANNOT TEST - requires browser automation
+When('je remplis le champ {string} avec {string}', async function (this: FestipodWorld, fieldName: string, value: string) {
+  this.attach(`CANNOT TEST: Filling field "${fieldName}" with "${value}" requires browser automation`, 'text/plain');
+  return 'pending';
+});
+
+// WRONG STEP - step used on wrong screen type
+Then('le formulaire contient le champ obligatoire {string}', async function (this: FestipodWorld, fieldName: string) {
+  if (this.currentScreenId !== 'create-event') {
+    this.attach(`WRONG STEP: "le formulaire contient le champ obligatoire" is for forms. Screen "${this.currentScreenId}" is not a form.`, 'text/plain');
+    return 'pending';
+  }
+  // ... actual test logic ...
+});
+
+// NOT ON THIS SCREEN - feature exists elsewhere
+Then('je peux voir le QR code', async function (this: FestipodWorld) {
+  const source = this.getRenderedText();
+  if (this.currentScreenId === 'share-profile') {
+    expect(/QR Code/.test(source), 'Share profile should have "QR Code" text').to.be.true;
+  } else {
+    this.attach(`NOT ON THIS SCREEN: QR code is on share-profile, not "${this.currentScreenId}"`, 'text/plain');
+    return 'pending';
+  }
+});
+```
+
+### No Silent Tests
+
+**Critical rule**: A test must never do nothing. Every step definition must either:
+1. Run assertions that can pass or fail, OR
+2. Return `'pending'` with an explanatory message
+
+This ensures the test suite provides clear feedback about what is tested, what is not testable, and why.
 
 ## Hooks
 
@@ -230,12 +364,15 @@ When a scenario fails, the `After` hook attaches:
 ## Running Tests
 
 ```bash
-# Run all tests end-to-end (runs tests + generates internal report)
+# Run all tests end-to-end (runs tests + generates all data files)
 bun run test:cucumber
+# This runs: cucumber:run → cucumber:report → features:parse → steps:extract
 
 # Sub-commands for individual steps:
 bun run cucumber:run      # Only run cucumber tests (generates HTML/JSON reports)
-bun run cucumber:report   # Only parse results to generate internal report
+bun run cucumber:report   # Parse results to generate testResults.ts
+bun run features:parse    # Parse .feature files to generate features.ts
+bun run steps:extract     # Extract step definitions to generate stepDefinitions.ts
 
 # Run by category tag
 bun run cucumber:run --tags "@USER"
@@ -251,17 +388,12 @@ bun run cucumber:run --tags "not @pending"
 
 ## Parsing Results
 
-After running tests, parse results for the UI:
+All parsing is included in `bun run test:cucumber`. For manual regeneration:
 
 ```bash
-# Generate testResults.ts from cucumber-report.json (included in test:cucumber)
-bun run cucumber:report
-
-# Regenerate step definitions data
-bun run steps:extract
-
-# Parse feature files for UI display
-bun run features:parse
+bun run cucumber:report   # testResults.ts from cucumber-report.json
+bun run steps:extract     # stepDefinitions.ts from step definition files
+bun run features:parse    # features.ts from .feature files
 ```
 
 ## Example Feature File
@@ -310,9 +442,13 @@ All Gherkin keywords and step definitions use French:
 - `Quand` instead of `When`
 - `Alors` instead of `Then`
 
-### Semantic Field Detection
+### Specific Detection (Not Generic)
 
-Rather than checking for specific CSS selectors or test IDs, the integration uses semantic patterns to detect features. For example, detecting a "Date" field by looking for the 📅 emoji pattern makes tests resilient to UI changes.
+Tests use patterns that match exactly what exists in the codebase today:
+- No OR patterns to anticipate future variations
+- No abstraction functions that hide detection logic
+- Tests break when UI changes - this is intentional to catch regressions
+- When a test fails, the developer must update both the UI and the test pattern
 
 ## UI Integration
 
