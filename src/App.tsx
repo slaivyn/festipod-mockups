@@ -1,5 +1,6 @@
 import React from 'react';
 import { RouterProvider, useRouter } from './router';
+import { ThemeProvider } from './context/ThemeContext';
 import { Gallery } from './components/Gallery';
 import { DemoMode } from './components/DemoMode';
 import { UserStoriesPage } from './components/UserStoriesPage';
@@ -50,9 +51,11 @@ function AppContent() {
 
 export function App() {
   return (
-    <RouterProvider>
-      <AppContent />
-    </RouterProvider>
+    <ThemeProvider>
+      <RouterProvider>
+        <AppContent />
+      </RouterProvider>
+    </ThemeProvider>
   );
 }
 

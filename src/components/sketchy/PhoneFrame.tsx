@@ -13,7 +13,7 @@ export function PhoneFrame({ children, scale = 1, className = '' }: PhoneFramePr
 
   return (
     <div
-      className={className}
+      className={`phone-frame-wrapper ${className}`}
       style={{
         width: width * scale,
         height: height * scale,
@@ -67,6 +67,7 @@ export function PhoneFrame({ children, scale = 1, className = '' }: PhoneFramePr
             fontSize: 12 * scale,
             fontFamily: 'var(--font-sketch)',
             flexShrink: 0,
+            color: 'var(--sketch-black)',
           }}
         >
           <span>9:41</span>

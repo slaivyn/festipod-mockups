@@ -8,6 +8,7 @@ import { Card, CardHeader, CardTitle, CardContent, CardDescription } from '../ui
 import { Button } from '../ui/button';
 import { ArrowLeft, FileText, Monitor, CheckCircle2, XCircle, AlertCircle, ExternalLink } from 'lucide-react';
 import type { ParsedFeature } from '../../types/gherkin';
+import { ThemeToggle } from '../ThemeToggle';
 
 interface SpecsPageProps {
   selectedFeatureId?: string;
@@ -109,8 +110,10 @@ export function SpecsPage({ selectedFeatureId, onBack, onSelectScreen, onSelectS
                   Rapport HTML
                 </Button>
               </a>
+              <ThemeToggle />
             </div>
           )}
+          {testSummary.totalScenarios === 0 && <ThemeToggle />}
         </div>
       </div>
 

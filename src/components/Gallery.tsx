@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { PhoneFrame } from './sketchy';
 import { screenGroups, type Screen } from '../screens';
+import { ThemeToggle } from './ThemeToggle';
 
 interface GalleryProps {
   onSelectScreen: (screenId: string) => void;
@@ -19,8 +20,9 @@ export function Gallery({ onSelectScreen, onShowStories, onShowSpecs }: GalleryP
     <div>
       <div style={{
         padding: '24px 32px',
-        borderBottom: '2px solid var(--sketch-black)',
-        background: 'var(--sketch-white)',
+        borderBottom: '2px solid var(--tool-border)',
+        background: 'var(--tool-surface)',
+        transition: 'background-color 0.2s ease, border-color 0.2s ease',
       }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
           <div>
@@ -28,13 +30,14 @@ export function Gallery({ onSelectScreen, onShowStories, onShowSpecs }: GalleryP
               fontFamily: 'var(--font-sketch)',
               fontSize: 28,
               margin: 0,
+              color: 'var(--tool-text)',
             }}>
               Festipod
             </h1>
             <p style={{
               fontFamily: 'var(--font-sketch)',
               fontSize: 16,
-              color: 'var(--sketch-gray)',
+              color: 'var(--tool-text-muted)',
               margin: '8px 0 0 0',
             }}>
               Cliquez sur un écran pour le prévisualiser
@@ -51,12 +54,13 @@ export function Gallery({ onSelectScreen, onShowStories, onShowSpecs }: GalleryP
               onClick={onShowStories}
               style={{
                 background: 'none',
-                border: '2px solid var(--sketch-black)',
+                border: '2px solid var(--tool-border)',
                 borderRadius: '255px 15px 225px 15px/15px 225px 15px 255px',
                 padding: '8px 16px',
                 fontFamily: 'var(--font-sketch)',
                 fontSize: 14,
                 cursor: 'pointer',
+                color: 'var(--tool-text)',
               }}
             >
               User Stories
@@ -67,9 +71,9 @@ export function Gallery({ onSelectScreen, onShowStories, onShowSpecs }: GalleryP
               <button
                 onClick={onShowSpecs}
                 style={{
-                  background: 'var(--sketch-black)',
-                  color: 'var(--sketch-white)',
-                  border: '2px solid var(--sketch-black)',
+                  background: 'var(--tool-text)',
+                  color: 'var(--tool-bg)',
+                  border: '2px solid var(--tool-border)',
                   borderRadius: '255px 15px 225px 15px/15px 225px 15px 255px',
                   padding: '8px 16px',
                   fontFamily: 'var(--font-sketch)',
@@ -88,7 +92,7 @@ export function Gallery({ onSelectScreen, onShowStories, onShowSpecs }: GalleryP
               gap: 12,
               fontFamily: 'var(--font-sketch)',
             }}>
-              <span style={{ fontSize: 14, color: 'var(--sketch-gray)' }}>Zoom</span>
+              <span style={{ fontSize: 14, color: 'var(--tool-text-muted)' }}>Zoom</span>
             <input
               type="range"
               min={MIN_SCALE * 100}
@@ -97,11 +101,14 @@ export function Gallery({ onSelectScreen, onShowStories, onShowSpecs }: GalleryP
               onChange={(e) => setScale(Number(e.target.value) / 100)}
               style={{
                 width: 100,
-                accentColor: 'var(--sketch-black)',
+                accentColor: 'var(--tool-text)',
               }}
             />
             <span style={{ fontSize: 14, width: 40 }}>{Math.round(scale * 100)}%</span>
             </div>
+
+            {/* Theme toggle */}
+            <ThemeToggle />
           </div>
         </div>
       </div>
@@ -114,7 +121,7 @@ export function Gallery({ onSelectScreen, onShowStories, onShowSpecs }: GalleryP
               fontFamily: 'var(--font-sketch)',
               fontSize: 18,
               margin: '0 0 16px 32px',
-              color: 'var(--sketch-black)',
+              color: 'var(--tool-text)',
             }}>
               {group.name}
             </h2>
@@ -179,7 +186,7 @@ function GalleryItem({ screen, scale, onClick }: GalleryItemProps) {
         fontSize: 14,
         textAlign: 'center',
         marginTop: 8,
-        color: 'var(--sketch-black)',
+        color: 'var(--tool-text)',
       }}>
         {screen.name}
       </p>

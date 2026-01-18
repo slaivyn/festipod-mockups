@@ -10,6 +10,24 @@
   --sketch-accent: #4a90d9;
   --sketch-line-width: 2px;
   --font-sketch: 'Architects Daughter', cursive;
+
+  /* Prototyping tool theme (outer app) */
+  --tool-bg: #fafafa;
+  --tool-surface: #ffffff;
+  --tool-text: #2d2d2d;
+  --tool-text-muted: #666;
+  --tool-border: #2d2d2d;
+  --tool-border-light: #e5e5e5;
+}
+
+/* Dark mode for prototyping tool only */
+.dark {
+  --tool-bg: #1a1a1a;
+  --tool-surface: #2d2d2d;
+  --tool-text: #f5f5f5;
+  --tool-text-muted: #a0a0a0;
+  --tool-border: #4a4a4a;
+  --tool-border-light: #3a3a3a;
 }
 
 * {
@@ -18,10 +36,11 @@
 
 body {
   font-family: var(--font-sketch);
-  background-color: var(--sketch-bg);
-  color: var(--sketch-black);
+  background-color: var(--tool-bg);
+  color: var(--tool-text);
   margin: 0;
   padding: 0;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 /* Sketchy border effect using border-radius variations */
@@ -311,6 +330,18 @@ body {
    - Black = structural UI (labels, counters, buttons, borders)
    - Blue = user-provided content only (names, event titles, descriptions, usernames)
    =========================================== */
+
+/* Force phone screen to always use light mode colors */
+.phone-screen {
+  color: var(--sketch-black);
+  background: var(--sketch-white);
+}
+
+/* Dark mode: add outer glow to phone frame for visibility */
+.dark .phone-frame-wrapper {
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.15);
+  border-radius: 44px;
+}
 
 /* User content - displayed in blue */
 .phone-screen .user-content {

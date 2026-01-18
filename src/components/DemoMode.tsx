@@ -3,6 +3,7 @@ import { PhoneFrame } from './sketchy';
 import { screens, getScreen } from '../screens';
 import { getStoriesForScreen, categoryLabels, categoryColors, priorityColors } from '../data';
 import { getStoryUrl } from '../router';
+import { ThemeToggle } from './ThemeToggle';
 
 interface DemoModeProps {
   initialScreenId: string;
@@ -52,8 +53,9 @@ export function DemoMode({ initialScreenId, onBack, onNavigateToStory }: DemoMod
       display: 'flex',
       flexDirection: 'row',
       height: '100vh',
-      background: 'var(--sketch-bg)',
+      background: 'var(--tool-bg)',
       overflow: 'hidden',
+      transition: 'background-color 0.2s ease',
     }}>
       {/* Left Sidebar */}
       <div style={{
@@ -61,26 +63,36 @@ export function DemoMode({ initialScreenId, onBack, onNavigateToStory }: DemoMod
         flexShrink: 0,
         display: 'flex',
         flexDirection: 'column',
-        borderRight: '2px solid var(--sketch-black)',
-        background: 'var(--sketch-white)',
+        borderRight: '2px solid var(--tool-border)',
+        background: 'var(--tool-surface)',
+        transition: 'background-color 0.2s ease, border-color 0.2s ease',
       }}>
-        {/* Back button */}
-        <div style={{ padding: 16, borderBottom: '1px solid var(--sketch-light-gray)' }}>
+        {/* Back button and theme toggle */}
+        <div style={{ padding: 16, borderBottom: '1px solid var(--tool-border-light)', display: 'flex', gap: 8 }}>
           <button
             onClick={onBack}
-            className="sketchy-btn"
-            style={{ padding: '8px 16px', width: '100%' }}
+            style={{
+              flex: 1,
+              padding: '8px 16px',
+              background: 'none',
+              border: '2px solid var(--tool-border)',
+              borderRadius: '255px 15px 225px 15px/15px 225px 15px 255px',
+              fontFamily: 'var(--font-sketch)',
+              cursor: 'pointer',
+              color: 'var(--tool-text)',
+            }}
           >
             ← Galerie
           </button>
+          <ThemeToggle />
         </div>
 
         {/* Current screen & navigation */}
-        <div style={{ padding: 16, borderBottom: '1px solid var(--sketch-light-gray)' }}>
+        <div style={{ padding: 16, borderBottom: '1px solid var(--tool-border-light)' }}>
           <div style={{
             fontFamily: 'var(--font-sketch)',
             fontSize: 12,
-            color: 'var(--sketch-gray)',
+            color: 'var(--tool-text-muted)',
             marginBottom: 8,
           }}>
             Écran actuel
@@ -90,22 +102,41 @@ export function DemoMode({ initialScreenId, onBack, onNavigateToStory }: DemoMod
             fontSize: 16,
             fontWeight: 'bold',
             marginBottom: 12,
+            color: 'var(--tool-text)',
           }}>
             {currentScreen?.name}
           </div>
           <div style={{ display: 'flex', gap: 8 }}>
             <button
               onClick={goBack}
-              className="sketchy-btn"
-              style={{ padding: '6px 12px', opacity: canGoBack ? 1 : 0.4, flex: 1 }}
+              style={{
+                padding: '6px 12px',
+                opacity: canGoBack ? 1 : 0.4,
+                flex: 1,
+                background: 'none',
+                border: '2px solid var(--tool-border)',
+                borderRadius: '255px 15px 225px 15px/15px 225px 15px 255px',
+                fontFamily: 'var(--font-sketch)',
+                cursor: canGoBack ? 'pointer' : 'default',
+                color: 'var(--tool-text)',
+              }}
               disabled={!canGoBack}
             >
               ‹ Retour
             </button>
             <button
               onClick={goForward}
-              className="sketchy-btn"
-              style={{ padding: '6px 12px', opacity: canGoForward ? 1 : 0.4, flex: 1 }}
+              style={{
+                padding: '6px 12px',
+                opacity: canGoForward ? 1 : 0.4,
+                flex: 1,
+                background: 'none',
+                border: '2px solid var(--tool-border)',
+                borderRadius: '255px 15px 225px 15px/15px 225px 15px 255px',
+                fontFamily: 'var(--font-sketch)',
+                cursor: canGoForward ? 'pointer' : 'default',
+                color: 'var(--tool-text)',
+              }}
               disabled={!canGoForward}
             >
               Suivant ›
@@ -116,18 +147,18 @@ export function DemoMode({ initialScreenId, onBack, onNavigateToStory }: DemoMod
         {/* User Stories for this screen */}
         {linkedStories.length > 0 && (
           <div style={{
-            borderBottom: '1px solid var(--sketch-light-gray)',
+            borderBottom: '1px solid var(--tool-border-light)',
             maxHeight: '40%',
             overflow: 'auto',
           }}>
             <div style={{
               fontFamily: 'var(--font-sketch)',
               fontSize: 12,
-              color: 'var(--sketch-gray)',
+              color: 'var(--tool-text-muted)',
               padding: '12px 16px 8px',
               position: 'sticky',
               top: 0,
-              background: 'var(--sketch-white)',
+              background: 'var(--tool-surface)',
             }}>
               User Stories ({linkedStories.length})
             </div>
@@ -142,9 +173,9 @@ export function DemoMode({ initialScreenId, onBack, onNavigateToStory }: DemoMod
                 style={{
                   display: 'block',
                   padding: '8px 16px',
-                  borderBottom: '1px solid var(--sketch-light-gray)',
+                  borderBottom: '1px solid var(--tool-border-light)',
                   textDecoration: 'none',
-                  color: 'inherit',
+                  color: 'var(--tool-text)',
                   cursor: 'pointer',
                 }}
               >
@@ -193,7 +224,7 @@ export function DemoMode({ initialScreenId, onBack, onNavigateToStory }: DemoMod
           <div style={{
             fontFamily: 'var(--font-sketch)',
             fontSize: 12,
-            color: 'var(--sketch-gray)',
+            color: 'var(--tool-text-muted)',
             padding: '8px 16px',
           }}>
             Tous les écrans
@@ -207,8 +238,9 @@ export function DemoMode({ initialScreenId, onBack, onNavigateToStory }: DemoMod
                 fontFamily: 'var(--font-sketch)',
                 fontSize: 14,
                 cursor: 'pointer',
-                background: s.id === currentScreenId ? 'var(--sketch-light-gray)' : 'transparent',
-                borderLeft: s.id === currentScreenId ? '3px solid var(--sketch-black)' : '3px solid transparent',
+                background: s.id === currentScreenId ? 'var(--tool-border-light)' : 'transparent',
+                borderLeft: s.id === currentScreenId ? '3px solid var(--tool-text)' : '3px solid transparent',
+                color: 'var(--tool-text)',
               }}
             >
               {s.name}

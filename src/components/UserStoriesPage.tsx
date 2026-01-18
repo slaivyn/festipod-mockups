@@ -10,6 +10,7 @@ import {
   type StoryCategory,
 } from '../data';
 import { getScreen, screens } from '../screens';
+import { ThemeToggle } from './ThemeToggle';
 
 interface UserStoriesPageProps {
   selectedStoryId?: string;
@@ -101,64 +102,71 @@ export function UserStoriesPage({ selectedStoryId, onBack, onSelectScreen }: Use
   const hasFilters = selectedCategories.size > 0 || selectedPriorities.size > 0 || selectedScreens.size > 0;
 
   return (
-    <div style={{ minHeight: '100vh', background: 'var(--sketch-white)' }}>
+    <div style={{ minHeight: '100vh', background: 'var(--tool-bg)', transition: 'background-color 0.2s ease' }}>
       {/* Header */}
       <div style={{
         padding: '24px 32px',
-        borderBottom: '2px solid var(--sketch-black)',
-        background: 'var(--sketch-white)',
+        borderBottom: '2px solid var(--tool-border)',
+        background: 'var(--tool-surface)',
         display: 'flex',
         alignItems: 'center',
-        gap: 16,
+        justifyContent: 'space-between',
+        transition: 'background-color 0.2s ease, border-color 0.2s ease',
       }}>
-        <button
-          onClick={onBack}
-          style={{
-            background: 'none',
-            border: '2px solid var(--sketch-black)',
-            borderRadius: '255px 15px 225px 15px/15px 225px 15px 255px',
-            padding: '8px 16px',
-            fontFamily: 'var(--font-sketch)',
-            fontSize: 14,
-            cursor: 'pointer',
-          }}
-        >
-          ← Retour
-        </button>
-        <div>
-          <h1 style={{
-            fontFamily: 'var(--font-sketch)',
-            fontSize: 28,
-            margin: 0,
-          }}>
-            User Stories
-          </h1>
-          <p style={{
-            fontFamily: 'var(--font-sketch)',
-            fontSize: 16,
-            color: 'var(--sketch-gray)',
-            margin: '8px 0 0 0',
-          }}>
-            {filteredStories.length} / {userStories.length} stories · Cliquez sur un écran pour voir le mockup
-          </p>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+          <button
+            onClick={onBack}
+            style={{
+              background: 'none',
+              border: '2px solid var(--tool-border)',
+              borderRadius: '255px 15px 225px 15px/15px 225px 15px 255px',
+              padding: '8px 16px',
+              fontFamily: 'var(--font-sketch)',
+              fontSize: 14,
+              cursor: 'pointer',
+              color: 'var(--tool-text)',
+            }}
+          >
+            ← Retour
+          </button>
+          <div>
+            <h1 style={{
+              fontFamily: 'var(--font-sketch)',
+              fontSize: 28,
+              margin: 0,
+              color: 'var(--tool-text)',
+            }}>
+              User Stories
+            </h1>
+            <p style={{
+              fontFamily: 'var(--font-sketch)',
+              fontSize: 16,
+              color: 'var(--tool-text-muted)',
+              margin: '8px 0 0 0',
+            }}>
+              {filteredStories.length} / {userStories.length} stories · Cliquez sur un écran pour voir le mockup
+            </p>
+          </div>
         </div>
+        <ThemeToggle />
       </div>
 
       {/* Filter bar */}
       <div style={{
         padding: '16px 32px',
-        borderBottom: '1px solid var(--sketch-light-gray)',
-        background: 'var(--sketch-white)',
+        borderBottom: '1px solid var(--tool-border-light)',
+        background: 'var(--tool-surface)',
         display: 'flex',
         flexDirection: 'column',
         gap: 12,
+        transition: 'background-color 0.2s ease, border-color 0.2s ease',
       }}>
         {/* Category filters */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
           <span style={{
             fontFamily: 'var(--font-sketch)',
             fontSize: 13,
-            color: 'var(--sketch-gray)',
+            color: 'var(--tool-text-muted)',
             minWidth: 70,
           }}>
             Catégorie
@@ -179,7 +187,7 @@ export function UserStoriesPage({ selectedStoryId, onBack, onSelectScreen }: Use
           <span style={{
             fontFamily: 'var(--font-sketch)',
             fontSize: 13,
-            color: 'var(--sketch-gray)',
+            color: 'var(--tool-text-muted)',
             minWidth: 70,
           }}>
             Priorité
@@ -200,7 +208,7 @@ export function UserStoriesPage({ selectedStoryId, onBack, onSelectScreen }: Use
           <span style={{
             fontFamily: 'var(--font-sketch)',
             fontSize: 13,
-            color: 'var(--sketch-gray)',
+            color: 'var(--tool-text-muted)',
             minWidth: 70,
           }}>
             Écran
@@ -209,7 +217,7 @@ export function UserStoriesPage({ selectedStoryId, onBack, onSelectScreen }: Use
             <FilterChip
               key={screen.id}
               label={screen.name}
-              color="var(--sketch-black)"
+              color="var(--tool-text)"
               selected={selectedScreens.has(screen.id)}
               onClick={() => toggleScreen(screen.id)}
             />
@@ -243,7 +251,7 @@ export function UserStoriesPage({ selectedStoryId, onBack, onSelectScreen }: Use
           <p style={{
             fontFamily: 'var(--font-sketch)',
             fontSize: 16,
-            color: 'var(--sketch-gray)',
+            color: 'var(--tool-text-muted)',
             textAlign: 'center',
             padding: 40,
           }}>
@@ -259,6 +267,7 @@ export function UserStoriesPage({ selectedStoryId, onBack, onSelectScreen }: Use
                 display: 'flex',
                 alignItems: 'center',
                 gap: 12,
+                color: 'var(--tool-text)',
               }}>
                 <span style={{
                   display: 'inline-block',
@@ -273,7 +282,7 @@ export function UserStoriesPage({ selectedStoryId, onBack, onSelectScreen }: Use
                 Priorité {priorityLabels[priority]}
                 <span style={{
                   fontSize: 14,
-                  color: 'var(--sketch-gray)',
+                  color: 'var(--tool-text-muted)',
                   fontWeight: 'normal',
                 }}>
                   ({stories.length} stories)
@@ -345,10 +354,10 @@ const StoryCard = React.forwardRef<HTMLDivElement, StoryCardProps>(
     <div
       ref={ref}
       style={{
-        border: isSelected ? '3px solid #2563eb' : '2px solid var(--sketch-black)',
+        border: isSelected ? '3px solid #2563eb' : '2px solid var(--tool-border)',
         borderRadius: '255px 15px 225px 15px/15px 225px 15px 255px',
         padding: 16,
-        background: isSelected ? '#eff6ff' : 'var(--sketch-white)',
+        background: isSelected ? '#eff6ff' : 'var(--tool-surface)',
         transition: 'all 0.2s ease',
       }}
     >
@@ -370,6 +379,7 @@ const StoryCard = React.forwardRef<HTMLDivElement, StoryCardProps>(
           fontFamily: 'var(--font-sketch)',
           fontSize: 16,
           margin: 0,
+          color: 'var(--tool-text)',
         }}>
           {story.title}
         </h3>
@@ -378,7 +388,7 @@ const StoryCard = React.forwardRef<HTMLDivElement, StoryCardProps>(
       <p style={{
         fontFamily: 'var(--font-sketch)',
         fontSize: 13,
-        color: 'var(--sketch-gray)',
+        color: 'var(--tool-text-muted)',
         margin: '0 0 12px 0',
         lineHeight: 1.5,
       }}>
@@ -392,13 +402,14 @@ const StoryCard = React.forwardRef<HTMLDivElement, StoryCardProps>(
               key={id}
               onClick={() => onSelectScreen(id)}
               style={{
-                background: 'var(--sketch-light-gray)',
-                border: '1px solid var(--sketch-black)',
+                background: 'var(--tool-border-light)',
+                border: '1px solid var(--tool-border)',
                 borderRadius: '255px 15px 225px 15px/15px 225px 15px 255px',
                 padding: '6px 12px',
                 fontFamily: 'var(--font-sketch)',
                 fontSize: 13,
                 cursor: 'pointer',
+                color: 'var(--tool-text)',
               }}
             >
               → {screen!.name}
@@ -409,7 +420,7 @@ const StoryCard = React.forwardRef<HTMLDivElement, StoryCardProps>(
         <p style={{
           fontFamily: 'var(--font-sketch)',
           fontSize: 13,
-          color: 'var(--sketch-gray)',
+          color: 'var(--tool-text-muted)',
           fontStyle: 'italic',
           margin: 0,
         }}>
