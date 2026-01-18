@@ -7,14 +7,14 @@ Fonctionnalité: US-14 Créer/Modifier/Supprimer un atelier
   Afin de définir le programme de mon événement et ajouter une description
 
   Contexte:
-    Étant donné je suis connecté en tant qu'utilisateur
+    Étant donné que je suis connecté en tant qu'utilisateur
 
   Scénario: Accéder à la création d'atelier
-    Étant donné je suis sur la page "créer un événement"
+    Étant donné que je suis sur la page "créer un événement"
     Alors l'écran contient une section "Ateliers"
 
   Scénario: Vérifier les champs obligatoires pour créer un atelier
-    Étant donné l'écran "create-event" est affiché
+    Étant donné que l'écran "create-event" est affiché
     Alors le formulaire contient les champs obligatoires suivants:
       | Nom de l'événement |
       | Date               |
@@ -23,16 +23,16 @@ Fonctionnalité: US-14 Créer/Modifier/Supprimer un atelier
       | Thématique         |
 
   Scénario: Créer un atelier
-    Étant donné je suis sur la page "créer un événement"
+    Étant donné que je suis sur la page "créer un événement"
     Quand je clique sur "Ajouter un atelier"
     Alors l'écran contient une section "Nouvel atelier"
 
   Scénario: Modifier un atelier existant
-    Étant donné je suis sur la page "créer un événement"
+    Étant donné que je suis sur la page "créer un événement"
     Quand je clique sur "Modifier l'atelier"
     Alors l'écran contient une section "Modifier l'atelier"
 
   Scénario: Supprimer un atelier
-    Étant donné je suis sur la page "créer un événement"
+    Étant donné que je suis sur la page "créer un événement"
     Quand je clique sur "Supprimer l'atelier"
     Alors l'écran contient une section "Confirmation"

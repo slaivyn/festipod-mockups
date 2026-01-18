@@ -6,23 +6,23 @@ Fonctionnalité: US-3 Visualiser un événement terminé
   Afin de voir les personnes qui ont participé à cet événement
 
   Contexte:
-    Étant donné je suis connecté en tant qu'utilisateur
+    Étant donné que je suis connecté en tant qu'utilisateur
 
   Scénario: Accéder aux détails d'un événement terminé
-    Étant donné je suis sur la page "accueil"
+    Étant donné que je suis sur la page "accueil"
     Quand je clique sur un événement
     Alors je vois l'écran "event-detail"
 
   Scénario: Voir la description de l'événement
-    Étant donné je suis sur la page "détail événement"
+    Étant donné que je suis sur la page "détail événement"
     Alors l'écran affiche les informations de l'événement
 
   Scénario: Voir la liste des participants
-    Étant donné je suis sur la page "détail événement"
+    Étant donné que je suis sur la page "détail événement"
     Alors je peux voir la liste des participants
 
   Scénario: Vérifier les données affichées
-    Étant donné l'écran "event-detail" est affiché
+    Étant donné que l'écran "event-detail" est affiché
     Alors le formulaire contient les champs obligatoires suivants:
       | Titre               |
       | Date                |

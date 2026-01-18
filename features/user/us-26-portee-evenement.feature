@@ -7,23 +7,23 @@ Fonctionnalité: US-26 Définir la portée d'un événement
   Afin de m'assurer que les utilisateurs qui habitent trop loin ne reçoivent pas de notification
 
   Contexte:
-    Étant donné je suis connecté en tant qu'utilisateur
+    Étant donné que je suis connecté en tant qu'utilisateur
 
   Scénario: Accéder à la création d'événement
-    Étant donné je suis sur la page "créer un événement"
+    Étant donné que je suis sur la page "créer un événement"
     Alors l'écran contient une section "Portée de l'événement"
 
   Scénario: Définir le rayon d'intérêt
-    Étant donné je suis sur la page "créer un événement"
+    Étant donné que je suis sur la page "créer un événement"
     Quand je clique sur "Définir la portée"
     Alors l'écran contient une section "Rayon en kilomètres"
 
   Scénario: Choisir une thématique
-    Étant donné je suis sur la page "créer un événement"
+    Étant donné que je suis sur la page "créer un événement"
     Alors l'écran contient une section "Thématique"
 
   Scénario: Vérifier les champs obligatoires
-    Étant donné l'écran "create-event" est affiché
+    Étant donné que l'écran "create-event" est affiché
     Alors le formulaire contient les champs obligatoires suivants:
       | Nom de l'événement |
       | Date               |

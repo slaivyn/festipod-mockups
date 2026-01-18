@@ -28,7 +28,7 @@ const keywords = {
   feature: ['Fonctionnalité:', 'Feature:'],
   background: ['Contexte:', 'Background:'],
   scenario: ['Scénario:', 'Scenario:', 'Plan du Scénario:', 'Scenario Outline:'],
-  given: ['Étant donné', 'Etant donné', 'Given', 'Soit'],
+  given: ['Étant donné que ', "Étant donné qu'", 'Étant donné', 'Etant donné que ', "Etant donné qu'", 'Etant donné', 'Given', 'Soit'],
   when: ['Quand', 'When', 'Lorsque'],
   then: ['Alors', 'Then'],
   and: ['Et', 'And', 'Mais', 'But'],

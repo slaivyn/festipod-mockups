@@ -140,7 +140,7 @@ function parseGherkinContent(content: string, filePath: string): ParsedFeature |
     }
 
     // Parse steps
-    const stepKeywords = ['Étant donné', 'Etant donné', 'Quand', 'Lorsque', 'Alors', 'Et', 'Mais'];
+    const stepKeywords = ['Étant donné que ', "Étant donné qu'", 'Étant donné', 'Etant donné que ', "Etant donné qu'", 'Etant donné', 'Quand', 'Lorsque', 'Alors', 'Et', 'Mais'];
     for (const keyword of stepKeywords) {
       if (trimmed.startsWith(keyword)) {
         const step: ParsedStep = {
