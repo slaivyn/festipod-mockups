@@ -15,15 +15,14 @@ function useIsMobile(breakpoint = 768) {
 
 interface GalleryProps {
   onSelectScreen: (screenId: string) => void;
-  onShowStories: () => void;
-  onShowSpecs?: () => void;
+  onShowSpecs: () => void;
 }
 
 const MIN_SCALE = 0.32;
 const MAX_SCALE = 0.75;
 const DEFAULT_SCALE = 0.5;
 
-export function Gallery({ onSelectScreen, onShowStories, onShowSpecs }: GalleryProps) {
+export function Gallery({ onSelectScreen, onShowSpecs }: GalleryProps) {
   const [scale, setScale] = useState(DEFAULT_SCALE);
   const isMobile = useIsMobile();
 
@@ -67,41 +66,22 @@ export function Gallery({ onSelectScreen, onShowStories, onShowSpecs }: GalleryP
             gap: isMobile ? 8 : 24,
             flexWrap: 'wrap',
           }}>
-            {/* User Stories button */}
+            {/* Specs BDD button */}
             <button
-              onClick={onShowStories}
+              onClick={onShowSpecs}
               style={{
-                background: 'none',
+                background: 'var(--tool-text)',
+                color: 'var(--tool-bg)',
                 border: '2px solid var(--tool-border)',
                 borderRadius: '255px 15px 225px 15px/15px 225px 15px 255px',
                 padding: isMobile ? '6px 12px' : '8px 16px',
                 fontFamily: 'var(--font-sketch)',
                 fontSize: isMobile ? 12 : 14,
                 cursor: 'pointer',
-                color: 'var(--tool-text)',
               }}
             >
-              User Stories
+              Specs BDD
             </button>
-
-            {/* Specs BDD button */}
-            {onShowSpecs && (
-              <button
-                onClick={onShowSpecs}
-                style={{
-                  background: 'var(--tool-text)',
-                  color: 'var(--tool-bg)',
-                  border: '2px solid var(--tool-border)',
-                  borderRadius: '255px 15px 225px 15px/15px 225px 15px 255px',
-                  padding: isMobile ? '6px 12px' : '8px 16px',
-                  fontFamily: 'var(--font-sketch)',
-                  fontSize: isMobile ? 12 : 14,
-                  cursor: 'pointer',
-                }}
-              >
-                Specs BDD
-              </button>
-            )}
 
             {/* Zoom control - hide on mobile */}
             {!isMobile && (

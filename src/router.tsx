@@ -2,9 +2,8 @@ import React, { createContext, useContext, useState, useEffect, useCallback } fr
 
 type Route =
   | { page: 'gallery' }
-  | { page: 'stories'; storyId?: string }
   | { page: 'demo'; screenId: string }
-  | { page: 'specs'; featureId?: string };
+  | { page: 'specs'; featureId?: string; storyId?: string };
 
 interface RouterContextValue {
   route: Route;
@@ -21,14 +20,16 @@ function parseHash(hash: string): Route {
     return { page: 'gallery' };
   }
 
+  // Redirect /stories to /specs (backward compatibility)
   if (path === 'stories') {
-    return { page: 'stories' };
+    return { page: 'specs' };
   }
 
+  // Redirect /stories/{id} to /specs with storyId (backward compatibility)
   if (path.startsWith('stories/')) {
     const storyId = path.replace('stories/', '');
     if (storyId) {
-      return { page: 'stories', storyId };
+      return { page: 'specs', storyId };
     }
   }
 
@@ -57,12 +58,12 @@ function routeToHash(route: Route): string {
   switch (route.page) {
     case 'gallery':
       return '#/';
-    case 'stories':
-      return route.storyId ? `#/stories/${route.storyId}` : '#/stories';
     case 'demo':
       return `#/demo/${route.screenId}`;
     case 'specs':
-      return route.featureId ? `#/specs/${route.featureId}` : '#/specs';
+      if (route.featureId) return `#/specs/${route.featureId}`;
+      if (route.storyId) return `#/specs/${route.storyId}`;
+      return '#/specs';
   }
 }
 
@@ -112,10 +113,10 @@ export function useGoBack() {
 }
 
 /**
- * Generate a URL for a specific story
+ * Generate a URL for a specific story (now redirects to specs)
  */
 export function getStoryUrl(storyId: string): string {
-  return `#/stories/${storyId}`;
+  return `#/specs/${storyId}`;
 }
 
 /**

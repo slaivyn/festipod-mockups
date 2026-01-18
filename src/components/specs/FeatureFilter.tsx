@@ -16,11 +16,19 @@ function useIsMobile(breakpoint = 640) {
   return isMobile;
 }
 
+interface ScreenInfo {
+  id: string;
+  screen: { id: string; name: string } | undefined;
+}
+
 interface FeatureFilterProps {
   selectedCategories: Set<string>;
   onCategoriesChange: (categories: Set<string>) => void;
   selectedPriorities: Set<number>;
   onPrioritiesChange: (priorities: Set<number>) => void;
+  selectedScreens: Set<string>;
+  onScreensChange: (screens: Set<string>) => void;
+  screensWithStories: ScreenInfo[];
   searchQuery: string;
   onSearchChange: (query: string) => void;
 }
@@ -30,6 +38,9 @@ export function FeatureFilter({
   onCategoriesChange,
   selectedPriorities,
   onPrioritiesChange,
+  selectedScreens,
+  onScreensChange,
+  screensWithStories,
   searchQuery,
   onSearchChange,
 }: FeatureFilterProps) {
@@ -56,14 +67,25 @@ export function FeatureFilter({
     onPrioritiesChange(newSet);
   };
 
+  const toggleScreen = (screenId: string) => {
+    const newSet = new Set(selectedScreens);
+    if (newSet.has(screenId)) {
+      newSet.delete(screenId);
+    } else {
+      newSet.add(screenId);
+    }
+    onScreensChange(newSet);
+  };
+
   const clearFilters = () => {
     onCategoriesChange(new Set());
     onPrioritiesChange(new Set());
+    onScreensChange(new Set());
     onSearchChange('');
   };
 
-  const hasFilters = selectedCategories.size > 0 || selectedPriorities.size > 0 || searchQuery;
-  const activeFilterCount = selectedCategories.size + selectedPriorities.size + (searchQuery ? 1 : 0);
+  const hasFilters = selectedCategories.size > 0 || selectedPriorities.size > 0 || selectedScreens.size > 0 || searchQuery;
+  const activeFilterCount = selectedCategories.size + selectedPriorities.size + selectedScreens.size + (searchQuery ? 1 : 0);
 
   // On mobile, show compact filter bar with expand button
   if (isMobile) {
@@ -141,6 +163,26 @@ export function FeatureFilter({
               </div>
             </div>
 
+            {/* Screen filters */}
+            {screensWithStories.length > 0 && (
+              <div>
+                <span className="text-xs text-muted-foreground block mb-2">Écran</span>
+                <div className="flex gap-1.5 flex-wrap">
+                  {screensWithStories.map(({ id, screen }) => (
+                    <Button
+                      key={id}
+                      variant={selectedScreens.has(id) ? 'default' : 'outline'}
+                      size="sm"
+                      className="text-xs px-2 h-7"
+                      onClick={() => toggleScreen(id)}
+                    >
+                      {screen?.name || id}
+                    </Button>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {/* Clear filters */}
             {hasFilters && (
               <Button variant="ghost" size="sm" onClick={clearFilters} className="text-destructive hover:text-destructive text-xs p-0 h-auto">
@@ -210,6 +252,25 @@ export function FeatureFilter({
           ))}
         </div>
       </div>
+
+      {/* Screen filters */}
+      {screensWithStories.length > 0 && (
+        <div className="flex items-center gap-3">
+          <span className="text-sm text-muted-foreground w-20 shrink-0">Écran</span>
+          <div className="flex gap-2 flex-wrap">
+            {screensWithStories.map(({ id, screen }) => (
+              <Button
+                key={id}
+                variant={selectedScreens.has(id) ? 'default' : 'outline'}
+                size="sm"
+                onClick={() => toggleScreen(id)}
+              >
+                {screen?.name || id}
+              </Button>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Clear filters */}
       {hasFilters && (

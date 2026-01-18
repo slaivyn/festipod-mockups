@@ -1,7 +1,8 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { parsedFeatures, getFeatureById } from '../../data/features';
-import { categoryLabels, categoryColors, priorityLabels, priorityColors, getStoryById, type StoryCategory } from '../../data';
+import { categoryLabels, categoryColors, priorityLabels, priorityColors, getStoryById, getScreenIdsWithStories, type StoryCategory } from '../../data';
 import { getTestStatus, getTestSummary } from '../../data/testResults';
+import { getScreen } from '../../screens';
 import { FeatureView } from './FeatureView';
 import { FeatureFilter } from './FeatureFilter';
 import { Card, CardHeader, CardTitle, CardContent } from '../ui/card';
@@ -12,15 +13,36 @@ import { ThemeToggle } from '../ThemeToggle';
 
 interface SpecsPageProps {
   selectedFeatureId?: string;
+  selectedStoryId?: string;
   onBack: () => void;
   onSelectScreen: (screenId: string) => void;
   onSelectStory: (storyId: string) => void;
 }
 
-export function SpecsPage({ selectedFeatureId, onBack, onSelectScreen, onSelectStory }: SpecsPageProps) {
+export function SpecsPage({ selectedFeatureId, selectedStoryId, onBack, onSelectScreen, onSelectStory }: SpecsPageProps) {
   const [selectedCategories, setSelectedCategories] = useState<Set<string>>(new Set());
   const [selectedPriorities, setSelectedPriorities] = useState<Set<number>>(new Set());
+  const [selectedScreens, setSelectedScreens] = useState<Set<string>>(new Set());
   const [searchQuery, setSearchQuery] = useState('');
+  const featureRefs = useRef<Map<string, HTMLDivElement>>(new Map());
+
+  // Get screens that have linked stories for the filter
+  const screensWithStories = useMemo(() => {
+    const screenIds = getScreenIdsWithStories();
+    return screenIds
+      .map(id => ({ id, screen: getScreen(id) }))
+      .filter(({ screen }) => screen !== undefined);
+  }, []);
+
+  // Scroll to selected story on mount
+  useEffect(() => {
+    if (selectedStoryId) {
+      const element = featureRefs.current.get(selectedStoryId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+  }, [selectedStoryId]);
 
   // Filter features - must be before any conditional returns to respect hooks rules
   const filteredFeatures = useMemo(() => {
@@ -31,6 +53,12 @@ export function SpecsPage({ selectedFeatureId, onBack, onSelectScreen, onSelectS
       if (selectedPriorities.size > 0 && !selectedPriorities.has(feature.priority)) {
         return false;
       }
+      if (selectedScreens.size > 0) {
+        const linkedStory = getStoryById(feature.id);
+        if (!linkedStory || !linkedStory.screenIds.some(id => selectedScreens.has(id))) {
+          return false;
+        }
+      }
       if (searchQuery) {
         const query = searchQuery.toLowerCase();
         return feature.name.toLowerCase().includes(query) ||
@@ -38,7 +66,7 @@ export function SpecsPage({ selectedFeatureId, onBack, onSelectScreen, onSelectS
       }
       return true;
     });
-  }, [selectedCategories, selectedPriorities, searchQuery]);
+  }, [selectedCategories, selectedPriorities, selectedScreens, searchQuery]);
 
   // Group by priority
   const featuresByPriority = [0, 1, 2, 3].map(priority => ({
@@ -123,6 +151,9 @@ export function SpecsPage({ selectedFeatureId, onBack, onSelectScreen, onSelectS
         onCategoriesChange={setSelectedCategories}
         selectedPriorities={selectedPriorities}
         onPrioritiesChange={setSelectedPriorities}
+        selectedScreens={selectedScreens}
+        onScreensChange={setSelectedScreens}
+        screensWithStories={screensWithStories}
         searchQuery={searchQuery}
         onSearchChange={setSearchQuery}
       />
@@ -150,8 +181,13 @@ export function SpecsPage({ selectedFeatureId, onBack, onSelectScreen, onSelectS
               {features.map(feature => (
                 <FeatureCard
                   key={feature.id}
+                  ref={(el) => {
+                    if (el) featureRefs.current.set(feature.id, el);
+                  }}
                   feature={feature}
+                  isSelected={feature.id === selectedStoryId}
                   onClick={() => window.location.hash = `#/specs/${feature.id}`}
+                  onSelectScreen={onSelectScreen}
                 />
               ))}
             </div>
@@ -179,11 +215,17 @@ function formatUserStory(description: string): string[] {
 
 interface FeatureCardProps {
   feature: ParsedFeature;
+  isSelected?: boolean;
   onClick: () => void;
+  onSelectScreen: (screenId: string) => void;
 }
 
-function FeatureCard({ feature, onClick }: FeatureCardProps) {
+const FeatureCard = React.forwardRef<HTMLDivElement, FeatureCardProps>(
+  function FeatureCard({ feature, isSelected, onClick, onSelectScreen }, ref) {
   const linkedStory = getStoryById(feature.id);
+  const linkedScreens = linkedStory?.screenIds
+    .map(id => ({ id, screen: getScreen(id) }))
+    .filter(({ screen }) => screen !== undefined) || [];
   const testStatus = getTestStatus(feature.id);
 
   const getStatusIcon = () => {
@@ -210,7 +252,10 @@ function FeatureCard({ feature, onClick }: FeatureCardProps) {
 
   return (
     <Card
-      className="cursor-pointer hover:border-primary hover:shadow-md transition-all"
+      ref={ref}
+      className={`cursor-pointer hover:border-primary hover:shadow-md transition-all ${
+        isSelected ? 'border-2 border-blue-500 bg-blue-50 dark:bg-blue-950/20' : ''
+      }`}
       onClick={onClick}
     >
       <CardHeader className="pb-3">
@@ -247,19 +292,42 @@ function FeatureCard({ feature, onClick }: FeatureCardProps) {
             ))}
           </div>
         )}
-        <div className="flex items-center gap-4 text-xs text-muted-foreground">
+        <div className="flex items-center gap-4 text-xs text-muted-foreground mb-3">
           <span className="flex items-center gap-1">
             <FileText className="w-3 h-3" />
             {feature.scenarios.length} scenarios
           </span>
-          {linkedStory && linkedStory.screenIds.length > 0 && (
+          {linkedScreens.length > 0 && (
             <span className="flex items-center gap-1">
               <Monitor className="w-3 h-3" />
-              {linkedStory.screenIds.length} ecrans
+              {linkedScreens.length} ecrans
             </span>
           )}
         </div>
+        {/* Screen buttons */}
+        {linkedScreens.length > 0 ? (
+          <div className="flex gap-2 flex-wrap">
+            {linkedScreens.map(({ id, screen }) => (
+              <Button
+                key={id}
+                variant="outline"
+                size="sm"
+                className="text-xs"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onSelectScreen(id);
+                }}
+              >
+                {screen!.name}
+              </Button>
+            ))}
+          </div>
+        ) : (
+          <p className="text-xs text-muted-foreground italic">
+            Pas encore de mockup
+          </p>
+        )}
       </CardContent>
     </Card>
   );
-}
+});
