@@ -58,7 +58,7 @@ function parseGherkinContent(content: string, filePath: string): ParsedFeature |
   let contentStartIndex = 0;
 
   for (let i = 0; i < lines.length; i++) {
-    const line = lines[i].trim();
+    const line = lines[i]?.trim() ?? '';
     if (line.startsWith('#')) {
       contentStartIndex = i + 1;
       continue;

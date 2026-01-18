@@ -4,6 +4,7 @@ interface TextProps {
   children: React.ReactNode;
   className?: string;
   style?: React.CSSProperties;
+  onClick?: () => void;
 }
 
 export function Title({ children, className = '', style }: TextProps) {
@@ -14,6 +15,6 @@ export function Subtitle({ children, className = '', style }: TextProps) {
   return <h2 className={`sketchy-subtitle ${className}`} style={style}>{children}</h2>;
 }
 
-export function Text({ children, className = '', style }: TextProps) {
-  return <p className={`sketchy-text ${className}`} style={style}>{children}</p>;
+export function Text({ children, className = '', style, onClick }: TextProps) {
+  return <p className={`sketchy-text ${className}`} style={style} onClick={onClick}>{children}</p>;
 }

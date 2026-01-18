@@ -60,8 +60,8 @@ function extractStepDefinitions(): StepDefinition[] {
 function extractFunctionBody(lines: string[], startLine: number): string {
   // Look for the closing }); which marks the end of a step definition
   for (let i = startLine; i < lines.length; i++) {
-    const line = lines[i].trim();
-    if (line === '});' || line.endsWith('});')) {
+    const line = lines[i]?.trim();
+    if (line === '});' || line?.endsWith('});')) {
       const extracted = lines.slice(startLine, i + 1);
       return extracted.join('\n');
     }
