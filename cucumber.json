@@ -1,0 +1,19 @@
+{
+  "default": {
+    "import": [
+      "features/support/**/*.ts",
+      "features/step_definitions/**/*.ts"
+    ],
+    "paths": ["features/**/*.feature"],
+    "format": [
+      "progress-bar",
+      "json:reports/cucumber-report.json",
+      "html:reports/cucumber-report.html"
+    ],
+    "language": "fr",
+    "formatOptions": {
+      "snippetInterface": "async-await"
+    },
+    "strict": false
+  }
+}

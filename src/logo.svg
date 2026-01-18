@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Festival tent icon -->
+  <defs>
+    <linearGradient id="tentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF6B6B"/>
+      <stop offset="100%" style="stop-color:#FF8E53"/>
+    </linearGradient>
+  </defs>
+  <!-- Main tent -->
+  <path d="M32 8 L56 52 L8 52 Z" fill="url(#tentGrad)" stroke="#E55039" stroke-width="2"/>
+  <!-- Tent stripes -->
+  <path d="M32 8 L24 52" stroke="#fff" stroke-width="2" opacity="0.5"/>
+  <path d="M32 8 L40 52" stroke="#fff" stroke-width="2" opacity="0.5"/>
+  <!-- Tent pole top -->
+  <circle cx="32" cy="8" r="3" fill="#FFD93D"/>
+  <!-- Flag -->
+  <path d="M32 5 L32 -2 L42 1.5 L32 5" fill="#FFD93D"/>
+</svg>
