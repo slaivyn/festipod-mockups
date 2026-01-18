@@ -82,14 +82,9 @@ export function FeatureView({ feature, onBack, onSelectScreen, onSelectStory }: 
           )}
         </div>
 
-        <h1 className="text-2xl font-semibold mb-2">
+        <h1 className="text-2xl font-semibold">
           {feature.name.replace(/^US-\d+\s*/, '')}
         </h1>
-        {feature.description && (
-          <p className="text-muted-foreground max-w-3xl">
-            {feature.description}
-          </p>
-        )}
       </div>
 
       <div className="px-4 sm:px-8 py-6">

@@ -4,7 +4,7 @@ import { categoryLabels, categoryColors, priorityLabels, priorityColors, getStor
 import { getTestStatus, getTestSummary } from '../../data/testResults';
 import { FeatureView } from './FeatureView';
 import { FeatureFilter } from './FeatureFilter';
-import { Card, CardHeader, CardTitle, CardContent, CardDescription } from '../ui/card';
+import { Card, CardHeader, CardTitle, CardContent } from '../ui/card';
 import { Button } from '../ui/button';
 import { ArrowLeft, FileText, Monitor, CheckCircle2, XCircle, AlertCircle, ExternalLink } from 'lucide-react';
 import type { ParsedFeature } from '../../types/gherkin';
@@ -146,7 +146,7 @@ export function SpecsPage({ selectedFeatureId, onBack, onSelectScreen, onSelectS
               </span>
             </div>
 
-            <div className="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="flex flex-col gap-3 sm:gap-4">
               {features.map(feature => (
                 <FeatureCard
                   key={feature.id}
@@ -166,6 +166,15 @@ export function SpecsPage({ selectedFeatureId, onBack, onSelectScreen, onSelectS
       </div>
     </div>
   );
+}
+
+// Split user story description into separate lines
+function formatUserStory(description: string): string[] {
+  // Split on user story keywords while keeping the keywords
+  return description
+    .split(/(?=En tant qu|Je peux|Je veux|Et |Afin d)/)
+    .map(s => s.trim())
+    .filter(Boolean);
 }
 
 interface FeatureCardProps {
@@ -230,9 +239,13 @@ function FeatureCard({ feature, onClick }: FeatureCardProps) {
       </CardHeader>
       <CardContent>
         {feature.description && (
-          <CardDescription className="line-clamp-2 text-sm mb-3">
-            {feature.description}
-          </CardDescription>
+          <div className="text-sm text-muted-foreground mb-3 space-y-1">
+            {formatUserStory(feature.description).map((line, i) => (
+              <div key={i} className="leading-snug">
+                {line}
+              </div>
+            ))}
+          </div>
         )}
         <div className="flex items-center gap-4 text-xs text-muted-foreground">
           <span className="flex items-center gap-1">

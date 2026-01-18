@@ -121,8 +121,8 @@ export function GherkinHighlighter({ content, scenarioResults = [] }: GherkinHig
         </Button>
       </div>
 
-      {/* Scenario/Background Blocks */}
-      {blocks.filter(b => b.type !== 'header').map((block, blockIndex) => (
+      {/* All Blocks including header */}
+      {blocks.map((block, blockIndex) => (
         <BlockRenderer
           key={blockIndex}
           block={block}
@@ -206,8 +206,31 @@ interface BlockRendererProps {
 
 function BlockRenderer({ block, isCollapsed, onToggle, showDefinitions }: BlockRendererProps) {
   if (block.type === 'header') {
-    // Header is now handled separately in the main component
-    return null;
+    // Extract user story lines (En tant que, Je peux/Je veux, Afin de)
+    const userStoryLines = block.lines.filter(line => {
+      const trimmed = line.trim();
+      return trimmed.startsWith('En tant qu') ||
+             trimmed.startsWith('Je peux') ||
+             trimmed.startsWith('Je veux') ||
+             trimmed.startsWith('Et ') ||
+             trimmed.startsWith('Afin ');
+    });
+
+    if (userStoryLines.length === 0) return null;
+
+    return (
+      <Card className="border-l-4 border-l-violet-500 bg-violet-50/50 dark:bg-violet-950/20">
+        <CardContent className="p-3">
+          <div className="space-y-0.5">
+            {userStoryLines.map((line, index) => (
+              <div key={index} className="text-sm text-foreground">
+                {line.trim()}
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+    );
   }
 
   const restLines = block.lines.slice(1);
