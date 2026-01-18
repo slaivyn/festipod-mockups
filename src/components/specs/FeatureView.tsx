@@ -115,7 +115,6 @@ export function FeatureView({ feature, onBack, onSelectScreen, onSelectStory }: 
         <GherkinHighlighter
           content={feature.rawContent}
           scenarioResults={scenarioResults}
-          filePath={feature.filePath}
         />
       </div>
     </div>

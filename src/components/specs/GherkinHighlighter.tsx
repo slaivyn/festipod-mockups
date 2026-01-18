@@ -1,12 +1,7 @@
-import React, { useState, useMemo } from 'react';
-import { ChevronDown, ChevronRight, ChevronsDownUp, ChevronsUpDown, Code2 } from 'lucide-react';
+import React, { useState, useMemo, useRef, useEffect } from 'react';
+import { ChevronDown, ChevronRight, ChevronsDownUp, ChevronsUpDown, Code2, CheckCircle2, XCircle, AlertCircle, Clock, Table2 } from 'lucide-react';
 import { Button } from '../ui/button';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '../ui/tooltip';
+import { Card, CardContent, CardHeader } from '../ui/card';
 import { findStepDefinition, type StepDefinitionInfo } from '../../data/stepDefinitions';
 
 interface ScenarioResult {
@@ -18,7 +13,6 @@ interface ScenarioResult {
 interface GherkinHighlighterProps {
   content: string;
   scenarioResults?: ScenarioResult[];
-  filePath?: string;
 }
 
 interface ParsedBlock {
@@ -41,25 +35,28 @@ const keywords = {
   examples: ['Exemples:', 'Examples:'],
 };
 
-export function GherkinHighlighter({ content, scenarioResults = [], filePath }: GherkinHighlighterProps) {
+export function GherkinHighlighter({ content, scenarioResults = [] }: GherkinHighlighterProps) {
   const lines = content.split('\n');
 
   // Parse content into blocks
   const blocks = useMemo(() => parseBlocks(lines, scenarioResults), [lines, scenarioResults]);
 
-  // Determine initial collapsed state - collapsed by default, open if failed
+  // Determine initial collapsed state - scenarios collapsed by default (open if failed), background always open
   const initialCollapsed = useMemo(() => {
     const state: Record<number, boolean> = {};
     blocks.forEach((block, index) => {
-      if (block.type === 'scenario' || block.type === 'background') {
+      if (block.type === 'scenario') {
         state[index] = block.status !== 'failed';
+      } else if (block.type === 'background') {
+        // Background is always expanded
+        state[index] = false;
       }
     });
     return state;
   }, [blocks]);
 
   const [collapsed, setCollapsed] = useState<Record<number, boolean>>(initialCollapsed);
-  const [showDefinitions, setShowDefinitions] = useState(false);
+  const [showDefinitions, setShowDefinitions] = useState(true);
 
   const toggleBlock = (index: number) => {
     setCollapsed(prev => ({ ...prev, [index]: !prev[index] }));
@@ -76,76 +73,65 @@ export function GherkinHighlighter({ content, scenarioResults = [], filePath }: 
   const collapseAll = () => {
     const newState: Record<number, boolean> = {};
     blocks.forEach((block, index) => {
-      if (block.type === 'scenario' || block.type === 'background') {
+      if (block.type === 'scenario') {
         newState[index] = true;
       }
+      // Background stays expanded
     });
     setCollapsed(newState);
   };
 
-  const collapsibleCount = blocks.filter(b => b.type === 'scenario' || b.type === 'background').length;
-  const collapsedCount = Object.values(collapsed).filter(Boolean).length;
-  const allCollapsed = collapsedCount === collapsibleCount;
+  const scenarioCount = blocks.filter(b => b.type === 'scenario').length;
+  const collapsedScenarioCount = blocks.filter((b, i) => b.type === 'scenario' && collapsed[i]).length;
+  const allCollapsed = collapsedScenarioCount === scenarioCount;
 
   return (
-    <TooltipProvider delayDuration={300}>
-      <div className="rounded-lg border border-border bg-zinc-950 overflow-hidden">
-        {/* Toolbar */}
-        <div className="flex items-center justify-between gap-2 px-4 py-2 bg-zinc-900 border-b border-zinc-800">
-          <div className="flex items-center gap-2">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={allCollapsed ? expandAll : collapseAll}
-              className="h-7 px-2 text-xs cursor-pointer text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800"
-            >
-              {allCollapsed ? (
-                <>
-                  <ChevronsUpDown className="w-3.5 h-3.5 mr-1" />
-                  Tout déplier
-                </>
-              ) : (
-                <>
-                  <ChevronsDownUp className="w-3.5 h-3.5 mr-1" />
-                  Tout replier
-                </>
-              )}
-            </Button>
-            <Button
-              variant={showDefinitions ? 'secondary' : 'ghost'}
-              size="sm"
-              onClick={() => setShowDefinitions(!showDefinitions)}
-              className="h-7 px-2 text-xs cursor-pointer text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800"
-            >
-              <Code2 className="w-3.5 h-3.5 mr-1" />
-              Définitions
-            </Button>
-          </div>
-          {filePath && (
-            <code className="text-xs text-zinc-500 truncate max-w-md">
-              {filePath}
-            </code>
+    <div className="space-y-2" style={{ fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}>
+      {/* Toolbar */}
+      <div className="flex items-center gap-2">
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={allCollapsed ? expandAll : collapseAll}
+          className="h-7 px-2 text-xs"
+        >
+          {allCollapsed ? (
+            <>
+              <ChevronsUpDown className="w-3.5 h-3.5 mr-1" />
+              <span className="hidden sm:inline">Tout déplier</span>
+              <span className="sm:hidden">Déplier</span>
+            </>
+          ) : (
+            <>
+              <ChevronsDownUp className="w-3.5 h-3.5 mr-1" />
+              <span className="hidden sm:inline">Tout replier</span>
+              <span className="sm:hidden">Replier</span>
+            </>
           )}
-        </div>
-
-        {/* Content */}
-        <div className="p-4 overflow-x-auto">
-          <pre className="font-mono text-sm leading-relaxed text-zinc-300">
-            <code>
-              {blocks.map((block, blockIndex) => (
-                <BlockRenderer
-                  key={blockIndex}
-                  block={block}
-                  isCollapsed={collapsed[blockIndex] ?? false}
-                  onToggle={() => toggleBlock(blockIndex)}
-                  showDefinitions={showDefinitions}
-                />
-              ))}
-            </code>
-          </pre>
-        </div>
+        </Button>
+        <Button
+          variant={showDefinitions ? 'secondary' : 'outline'}
+          size="sm"
+          onClick={() => setShowDefinitions(!showDefinitions)}
+          className="h-7 px-2 text-xs"
+        >
+          <Code2 className="w-3.5 h-3.5 mr-1" />
+          <span className="hidden sm:inline">Définitions</span>
+          <span className="sm:hidden">Déf.</span>
+        </Button>
       </div>
-    </TooltipProvider>
+
+      {/* Scenario/Background Blocks */}
+      {blocks.filter(b => b.type !== 'header').map((block, blockIndex) => (
+        <BlockRenderer
+          key={blockIndex}
+          block={block}
+          isCollapsed={collapsed[blocks.indexOf(block)] ?? false}
+          onToggle={() => toggleBlock(blocks.indexOf(block))}
+          showDefinitions={showDefinitions}
+        />
+      ))}
+    </div>
   );
 }
 
@@ -220,86 +206,368 @@ interface BlockRendererProps {
 
 function BlockRenderer({ block, isCollapsed, onToggle, showDefinitions }: BlockRendererProps) {
   if (block.type === 'header') {
-    return (
-      <>
-        {block.lines.map((line, index) => (
-          <LineRenderer
-            key={block.startLine + index}
-            line={line}
-            showDefinitions={showDefinitions}
-          />
-        ))}
-      </>
-    );
+    // Header is now handled separately in the main component
+    return null;
   }
 
-  const firstLine = block.lines[0] ?? '';
   const restLines = block.lines.slice(1);
-  const isCollapsible = block.type === 'scenario' || block.type === 'background';
+  const isBackground = block.type === 'background';
+
+  // Parse steps from rest lines
+  const parsedSteps = parseStepsFromLines(restLines);
+
+  // Determine border color based on status
+  const borderColor = block.status === 'passed' ? 'border-l-green-500' :
+                      block.status === 'failed' ? 'border-l-red-500' :
+                      block.status === 'skipped' ? 'border-l-yellow-500' :
+                      isBackground ? 'border-l-zinc-400' : 'border-l-cyan-500';
+
+  // Status icon
+  const StatusIcon = () => {
+    if (!block.status || block.status === 'unknown') return null;
+    if (block.status === 'passed') return <CheckCircle2 className="w-4 h-4 text-green-500 shrink-0" />;
+    if (block.status === 'failed') return <XCircle className="w-4 h-4 text-red-500 shrink-0" />;
+    if (block.status === 'skipped') return <AlertCircle className="w-4 h-4 text-yellow-500 shrink-0" />;
+    return <Clock className="w-4 h-4 text-zinc-400 shrink-0" />;
+  };
 
   return (
-    <>
-      {/* Scenario/Background header line */}
-      <div
-        className={`flex hover:bg-zinc-800/50 ${isCollapsible ? 'cursor-pointer' : ''}`}
-        onClick={isCollapsible ? onToggle : undefined}
+    <Card className={`border-l-4 ${borderColor}`}>
+      {/* Clickable header */}
+      <CardHeader
+        className="p-2 cursor-pointer hover:bg-muted/50 transition-colors"
+        onClick={onToggle}
       >
-        <span className="flex items-center gap-1 flex-1">
-          {isCollapsible && (
-            <span className="w-4 h-4 flex items-center justify-center text-zinc-500">
-              {isCollapsed ? <ChevronRight className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
+        <div className="flex items-center gap-1.5">
+          <span className="text-muted-foreground shrink-0">
+            {isCollapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+          </span>
+          <StatusIcon />
+          <div className="flex-1 min-w-0 flex items-center gap-1.5 flex-wrap">
+            <span className={`text-xs font-medium px-1.5 py-0.5 rounded shrink-0 ${
+              isBackground
+                ? 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400'
+                : 'bg-cyan-100 dark:bg-cyan-900/30 text-cyan-700 dark:text-cyan-400'
+            }`}>
+              {isBackground ? 'Contexte' : 'Scénario'}
+            </span>
+            <span className="font-medium text-foreground text-sm truncate sm:whitespace-normal">
+              {block.name}
+            </span>
+          </div>
+          {parsedSteps.length > 0 && (
+            <span className="text-xs text-muted-foreground shrink-0 hidden sm:block">
+              {parsedSteps.length} étapes
             </span>
           )}
-          {block.status && block.status !== 'unknown' && (
-            <span className={`w-2 h-2 rounded-full mr-1 ${
-              block.status === 'passed' ? 'bg-green-500' :
-              block.status === 'failed' ? 'bg-red-500' :
-              block.status === 'skipped' ? 'bg-yellow-500' :
-              'bg-zinc-600'
-            }`} />
-          )}
-          {highlightLine(firstLine, false)}
-        </span>
-      </div>
+        </div>
+      </CardHeader>
 
       {/* Collapsible content */}
-      {!isCollapsed && restLines.map((line, index) => (
-        <LineRenderer
-          key={block.startLine + index + 1}
-          line={line}
-          showDefinitions={showDefinitions}
-        />
-      ))}
+      {!isCollapsed && (
+        <CardContent className="pt-0 px-2 pb-2">
+          <div className="space-y-0.5 ml-0 sm:ml-6">
+            {parsedSteps.map((step, index) => (
+              <StepRenderer
+                key={index}
+                step={step}
+                showDefinitions={showDefinitions}
+              />
+            ))}
+          </div>
 
-      {/* Error message for failed scenarios */}
-      {!isCollapsed && block.status === 'failed' && block.errorMessage && (
-        <div className="ml-5 my-2 p-3 bg-red-950 border border-red-800 rounded-md">
-          <div className="text-xs font-medium text-red-400 mb-1">Erreur:</div>
-          <pre className="text-xs text-red-300 whitespace-pre-wrap break-words font-mono">
-            {block.errorMessage}
-          </pre>
-        </div>
+          {/* Error message for failed scenarios */}
+          {block.status === 'failed' && block.errorMessage && (
+            <div className="ml-0 sm:ml-6 mt-2 p-2 bg-red-50 dark:bg-red-950/50 border border-red-200 dark:border-red-800 rounded-md">
+              <div className="text-xs font-medium text-red-600 dark:text-red-400 mb-1">Erreur:</div>
+              <pre className="text-xs text-red-700 dark:text-red-300 whitespace-pre-wrap break-words font-mono overflow-x-auto">
+                {block.errorMessage}
+              </pre>
+            </div>
+          )}
+        </CardContent>
       )}
-    </>
+    </Card>
   );
 }
 
-interface LineRendererProps {
-  line: string;
+interface ParsedStep {
+  type: 'given' | 'when' | 'then' | 'and' | 'examples' | 'table' | 'other';
+  keyword: string;
+  text: string;
+  originalLine: string;
+  tableRows?: string[][];
+}
+
+function parseStepsFromLines(lines: string[]): ParsedStep[] {
+  const steps: ParsedStep[] = [];
+  let currentStep: ParsedStep | null = null;
+
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (!trimmed) continue;
+
+    // Check for table row
+    if (trimmed.startsWith('|')) {
+      const cells = trimmed.split('|').slice(1, -1).map(c => c.trim());
+      if (currentStep) {
+        if (!currentStep.tableRows) currentStep.tableRows = [];
+        currentStep.tableRows.push(cells);
+      } else {
+        // Standalone table row (shouldn't happen, but handle it)
+        steps.push({
+          type: 'table',
+          keyword: '',
+          text: trimmed,
+          originalLine: line,
+          tableRows: [cells]
+        });
+      }
+      continue;
+    }
+
+    // Check for step keywords
+    let matched = false;
+
+    for (const kw of keywords.given) {
+      if (trimmed.startsWith(kw)) {
+        if (currentStep) steps.push(currentStep);
+        currentStep = { type: 'given', keyword: kw, text: trimmed.slice(kw.length).trim(), originalLine: line };
+        matched = true;
+        break;
+      }
+    }
+    if (!matched) {
+      for (const kw of keywords.when) {
+        if (trimmed.startsWith(kw)) {
+          if (currentStep) steps.push(currentStep);
+          currentStep = { type: 'when', keyword: kw, text: trimmed.slice(kw.length).trim(), originalLine: line };
+          matched = true;
+          break;
+        }
+      }
+    }
+    if (!matched) {
+      for (const kw of keywords.then) {
+        if (trimmed.startsWith(kw)) {
+          if (currentStep) steps.push(currentStep);
+          currentStep = { type: 'then', keyword: kw, text: trimmed.slice(kw.length).trim(), originalLine: line };
+          matched = true;
+          break;
+        }
+      }
+    }
+    if (!matched) {
+      for (const kw of keywords.and) {
+        if (trimmed.startsWith(kw)) {
+          if (currentStep) steps.push(currentStep);
+          currentStep = { type: 'and', keyword: kw, text: trimmed.slice(kw.length).trim(), originalLine: line };
+          matched = true;
+          break;
+        }
+      }
+    }
+    if (!matched) {
+      for (const kw of keywords.examples) {
+        if (trimmed.startsWith(kw)) {
+          if (currentStep) steps.push(currentStep);
+          currentStep = { type: 'examples', keyword: kw, text: trimmed.slice(kw.length).trim(), originalLine: line };
+          matched = true;
+          break;
+        }
+      }
+    }
+    if (!matched && trimmed) {
+      if (currentStep) steps.push(currentStep);
+      currentStep = { type: 'other', keyword: '', text: trimmed, originalLine: line };
+    }
+  }
+
+  if (currentStep) steps.push(currentStep);
+
+  return steps;
+}
+
+interface StepRendererProps {
+  step: ParsedStep;
   showDefinitions: boolean;
 }
 
-function LineRenderer({ line, showDefinitions }: LineRendererProps) {
-  const trimmed = line.trim();
-  const isStep = [...keywords.given, ...keywords.when, ...keywords.then, ...keywords.and]
-    .some(kw => trimmed.startsWith(kw));
+function StepRenderer({ step, showDefinitions }: StepRendererProps) {
+  // Always check for step definition to show dotted underline
+  const stepDef = step.type !== 'table' && step.type !== 'other' && step.type !== 'examples'
+    ? findStepDefinition(step.originalLine.trim())
+    : null;
 
-  const stepDef = isStep && showDefinitions ? findStepDefinition(trimmed) : null;
+  // Keyword colors
+  const keywordColor = step.type === 'given' ? 'text-blue-600 dark:text-blue-400' :
+                       step.type === 'when' ? 'text-amber-600 dark:text-amber-400' :
+                       step.type === 'then' ? 'text-green-600 dark:text-green-400' :
+                       step.type === 'and' ? 'text-zinc-500 dark:text-zinc-400' :
+                       step.type === 'examples' ? 'text-purple-600 dark:text-purple-400' :
+                       'text-muted-foreground';
+
+  const keywordBg = step.type === 'given' ? 'bg-blue-50 dark:bg-blue-950/30' :
+                    step.type === 'when' ? 'bg-amber-50 dark:bg-amber-950/30' :
+                    step.type === 'then' ? 'bg-green-50 dark:bg-green-950/30' :
+                    step.type === 'and' ? 'bg-zinc-50 dark:bg-zinc-800/50' :
+                    step.type === 'examples' ? 'bg-purple-50 dark:bg-purple-950/30' :
+                    '';
+
+  if (step.type === 'table') {
+    return (
+      <div className="ml-2 sm:ml-4 my-2">
+        <Table2 className="w-4 h-4 text-muted-foreground inline mr-2" />
+        <span className="text-sm text-muted-foreground">{step.text}</span>
+      </div>
+    );
+  }
+
+  // Show popover only when definitions mode is active, but always show dotted underline for steps with definitions
+  const dottedUnderlineStyle = {
+    borderBottom: '1.3px dashed',
+    borderColor: 'rgb(161 161 170)', // zinc-400
+  };
+  const stepTextElement = stepDef ? (
+    showDefinitions ? (
+      <StepDefinitionPopover stepDef={stepDef}>
+        {highlightStringsInText(step.text)}
+      </StepDefinitionPopover>
+    ) : (
+      <span style={dottedUnderlineStyle}>
+        {highlightStringsInText(step.text)}
+      </span>
+    )
+  ) : (
+    <span>{highlightStringsInText(step.text)}</span>
+  );
 
   return (
-    <div className="hover:bg-zinc-800/50">
-      {highlightLineWithTooltip(line, stepDef)}
+    <div className="py-0.5">
+      <div className={`flex items-start gap-1.5 px-1.5 py-0.5 rounded ${keywordBg}`}>
+        {step.keyword && (
+          <span className={`font-medium text-sm shrink-0 ${keywordColor}`}>
+            {step.keyword}
+          </span>
+        )}
+        <span className="text-sm text-foreground break-words">
+          {stepTextElement}
+        </span>
+      </div>
+      {/* Render table if present */}
+      {step.tableRows && step.tableRows.length > 0 && (
+        <div className="ml-0 sm:ml-4 mt-1 overflow-x-auto -mx-1 px-1">
+          <table className="text-sm border-collapse min-w-full">
+            <tbody>
+              {step.tableRows.map((row, rowIndex) => (
+                <tr key={rowIndex} className={rowIndex === 0 ? 'font-medium' : ''}>
+                  {row.map((cell, cellIndex) => (
+                    <td
+                      key={cellIndex}
+                      className="px-2 py-1 border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800/50"
+                    >
+                      {cell}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
+  );
+}
+
+function highlightStringsInText(text: string): React.ReactNode {
+  const parts: React.ReactNode[] = [];
+  let lastIndex = 0;
+  const regex = /"[^"]*"/g;
+  let match;
+
+  while ((match = regex.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      parts.push(<span key={`text-${lastIndex}`}>{text.slice(lastIndex, match.index)}</span>);
+    }
+    parts.push(
+      <span key={`string-${match.index}`} className="font-medium text-orange-600 dark:text-orange-400">
+        {match[0]}
+      </span>
+    );
+    lastIndex = regex.lastIndex;
+  }
+
+  if (lastIndex < text.length) {
+    parts.push(<span key={`text-${lastIndex}`}>{text.slice(lastIndex)}</span>);
+  }
+
+  return parts.length > 0 ? <>{parts}</> : text;
+}
+
+// Click-based popover for step definitions (works on mobile and desktop)
+function StepDefinitionPopover({
+  stepDef,
+  children
+}: {
+  stepDef: StepDefinitionInfo;
+  children: React.ReactNode;
+}) {
+  const [isOpen, setIsOpen] = useState(false);
+  const triggerRef = useRef<HTMLSpanElement>(null);
+  const popoverRef = useRef<HTMLDivElement>(null);
+
+  // Close on click outside
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleClickOutside = (e: MouseEvent) => {
+      if (
+        popoverRef.current &&
+        !popoverRef.current.contains(e.target as Node) &&
+        triggerRef.current &&
+        !triggerRef.current.contains(e.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    // Close on escape key
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setIsOpen(false);
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('keydown', handleEscape);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleEscape);
+    };
+  }, [isOpen]);
+
+  const dottedUnderlineStyle = {
+    borderBottom: '1.3px dashed rgb(161 161 170)', // zinc-400
+  };
+
+  return (
+    <span className="relative inline">
+      <span
+        ref={triggerRef}
+        onClick={() => setIsOpen(!isOpen)}
+        className="cursor-pointer"
+        style={dottedUnderlineStyle}
+      >
+        {children}
+      </span>
+      {isOpen && (
+        <div
+          ref={popoverRef}
+          className="absolute left-0 top-full mt-1 z-50 shadow-xl rounded-lg"
+          style={{ minWidth: '300px', maxWidth: 'min(90vw, 500px)' }}
+        >
+          <SourceCodePopup stepDef={stepDef} />
+        </div>
+      )}
+    </span>
   );
 }
 
@@ -401,173 +669,4 @@ function highlightTypeScript(code: string): React.ReactNode {
   }
 
   return <>{parts}</>;
-}
-
-function highlightLine(line: string, hasDefinition: boolean): React.ReactNode {
-  const trimmed = line.trim();
-
-  // Check for tags
-  if (trimmed.startsWith('@')) {
-    return <span className="text-zinc-500">{line}</span>;
-  }
-
-  // Check for comments
-  if (trimmed.startsWith('#') && !trimmed.includes('language:')) {
-    return <span className="text-zinc-600 italic">{line}</span>;
-  }
-
-  // Check for language declaration
-  if (trimmed.includes('# language:')) {
-    return <span className="text-zinc-600">{line}</span>;
-  }
-
-  // Check for feature keywords
-  for (const kw of keywords.feature) {
-    if (trimmed.startsWith(kw)) {
-      return highlightKeyword(line, kw, 'text-purple-400 font-semibold', hasDefinition);
-    }
-  }
-
-  // Check for background
-  for (const kw of keywords.background) {
-    if (trimmed.startsWith(kw)) {
-      return highlightKeyword(line, kw, 'text-zinc-400 font-medium', hasDefinition);
-    }
-  }
-
-  // Check for scenario keywords
-  for (const kw of keywords.scenario) {
-    if (trimmed.startsWith(kw)) {
-      return highlightKeyword(line, kw, 'text-cyan-400 font-medium', hasDefinition);
-    }
-  }
-
-  // Check for step keywords
-  for (const kw of [...keywords.given, ...keywords.when, ...keywords.then, ...keywords.and]) {
-    if (trimmed.startsWith(kw)) {
-      const color = keywords.given.includes(kw) ? 'text-blue-400' :
-                   keywords.when.includes(kw) ? 'text-amber-400' :
-                   keywords.then.includes(kw) ? 'text-green-400' :
-                   'text-zinc-400';
-      return highlightKeyword(line, kw, color, hasDefinition);
-    }
-  }
-
-  // Check for examples
-  for (const kw of keywords.examples) {
-    if (trimmed.startsWith(kw)) {
-      return highlightKeyword(line, kw, 'text-zinc-400 font-medium', hasDefinition);
-    }
-  }
-
-  // Check for table rows
-  if (trimmed.startsWith('|')) {
-    return <span className="text-zinc-500">{line}</span>;
-  }
-
-  return <span className="text-zinc-400">{line}</span>;
-}
-
-function highlightLineWithTooltip(line: string, stepDef: StepDefinitionInfo | null): React.ReactNode {
-  const trimmed = line.trim();
-
-  // Find which step keyword this line starts with
-  const allStepKeywords = [...keywords.given, ...keywords.when, ...keywords.then, ...keywords.and];
-  let matchedKeyword: string | null = null;
-  for (const kw of allStepKeywords) {
-    if (trimmed.startsWith(kw)) {
-      matchedKeyword = kw;
-      break;
-    }
-  }
-
-  // If no step keyword or no definition, use regular highlighting
-  if (!matchedKeyword || !stepDef) {
-    return highlightLine(line, false);
-  }
-
-  // Split the line: indentation + keyword + step text
-  const index = line.indexOf(matchedKeyword);
-  const before = line.slice(0, index);
-  const after = line.slice(index + matchedKeyword.length);
-
-  // Determine keyword color
-  const color = keywords.given.includes(matchedKeyword) ? 'text-blue-400' :
-               keywords.when.includes(matchedKeyword) ? 'text-amber-400' :
-               keywords.then.includes(matchedKeyword) ? 'text-green-400' :
-               'text-zinc-400';
-
-  // Separate leading space from the step text
-  const leadingSpaceMatch = after.match(/^(\s*)/);
-  const leadingSpace = leadingSpaceMatch?.[1] ?? '';
-  const stepText = after.slice(leadingSpace.length);
-
-  // Wrap only the step text (after keyword and space) with tooltip
-  const stepTextElement = (
-    <Tooltip>
-      <TooltipTrigger asChild>
-        <span className="underline decoration-dotted decoration-zinc-600 cursor-help">
-          {highlightStrings(stepText)}
-        </span>
-      </TooltipTrigger>
-      <TooltipContent
-        side="bottom"
-        align="start"
-        sideOffset={4}
-        className="p-0 max-w-lg border-0 shadow-xl"
-      >
-        <SourceCodePopup stepDef={stepDef} />
-      </TooltipContent>
-    </Tooltip>
-  );
-
-  return (
-    <span>
-      <span>{before}</span>
-      <span className={color}>{matchedKeyword}</span>
-      <span>{leadingSpace}</span>
-      {stepTextElement}
-    </span>
-  );
-}
-
-function highlightKeyword(line: string, keyword: string, className: string, hasDefinition: boolean): React.ReactNode {
-  const index = line.indexOf(keyword);
-  const before = line.slice(0, index);
-  const after = line.slice(index + keyword.length);
-
-  return (
-    <span>
-      <span>{before}</span>
-      <span className={className}>{keyword}</span>
-      <span className={hasDefinition ? 'underline decoration-dotted decoration-zinc-600' : ''}>
-        {highlightStrings(after)}
-      </span>
-    </span>
-  );
-}
-
-function highlightStrings(text: string): React.ReactNode {
-  const parts: React.ReactNode[] = [];
-  let lastIndex = 0;
-  const regex = /"[^"]*"/g;
-  let match;
-
-  while ((match = regex.exec(text)) !== null) {
-    if (match.index > lastIndex) {
-      parts.push(<span key={`text-${lastIndex}`}>{text.slice(lastIndex, match.index)}</span>);
-    }
-    parts.push(
-      <span key={`string-${match.index}`} className="text-orange-300">
-        {match[0]}
-      </span>
-    );
-    lastIndex = regex.lastIndex;
-  }
-
-  if (lastIndex < text.length) {
-    parts.push(<span key={`text-${lastIndex}`}>{text.slice(lastIndex)}</span>);
-  }
-
-  return parts.length > 0 ? <>{parts}</> : text;
 }

@@ -33,10 +33,12 @@ function extractStepDefinitions(): StepDefinition[] {
       const line = lines[i];
 
       // Match Given/When/Then at the start of a line
-      const match = line.match(/^(Given|When|Then)\s*\(\s*['"`]([^'"`]+)['"`]/);
-      if (match) {
+      // Handle escaped quotes in patterns (e.g., 'l\'écran contient')
+      const match = line?.match(/^(Given|When|Then)\s*\(\s*(['"`])((?:[^\\]|\\.)*?)\2/);
+      if (match && match[3]) {
         const keyword = match[1] as 'Given' | 'When' | 'Then';
-        const pattern = match[2];
+        // Unescape the pattern (remove backslashes before quotes)
+        const pattern = match[3].replace(/\\(['"`])/g, '$1');
 
         // Extract the full function body
         const sourceCode = extractFunctionBody(lines, i);

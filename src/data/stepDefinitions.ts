@@ -18,7 +18,7 @@ export const stepDefinitions: StepDefinitionInfo[] = [
     "lineNumber": 31
   },
   {
-    "pattern": "je suis connecté en tant qu\\",
+    "pattern": "je suis connecté en tant qu'utilisateur",
     "keyword": "Given",
     "file": "navigation.steps.ts",
     "sourceCode": "Given('je suis connecté en tant qu\\'utilisateur', async function (this: FestipodWorld) {\n  this.isAuthenticated = true;\n});",
@@ -88,7 +88,7 @@ export const stepDefinitions: StepDefinitionInfo[] = [
     "lineNumber": 73
   },
   {
-    "pattern": "je vois l\\",
+    "pattern": "je vois l'écran {string}",
     "keyword": "Then",
     "file": "navigation.steps.ts",
     "sourceCode": "Then('je vois l\\'écran {string}', async function (this: FestipodWorld, pageName: string) {\n  const screenId = resolveScreenId(pageName);\n  expect(this.currentScreenId).to.equal(screenId);\n});",
@@ -102,28 +102,35 @@ export const stepDefinitions: StepDefinitionInfo[] = [
     "lineNumber": 83
   },
   {
-    "pattern": "l\\",
+    "pattern": "l'écran contient une section {string}",
     "keyword": "Then",
     "file": "navigation.steps.ts",
-    "sourceCode": "Then('l\\'écran contient une section {string}', async function (this: FestipodWorld, sectionName: string) {\n  expect(this.currentScreenId).to.not.be.null;\n  this.attach(`Verified section: ${sectionName}`, 'text/plain');\n});",
+    "sourceCode": "Then('l\\'écran contient une section {string}', async function (this: FestipodWorld, sectionName: string) {\n  const hasSection = this.hasText(sectionName);\n  expect(hasSection, `Section \"${sectionName}\" should be visible on screen \"${this.currentScreenId}\"`).to.be.true;\n});",
     "lineNumber": 88
+  },
+  {
+    "pattern": "je peux annuler et revenir à l'écran précédent",
+    "keyword": "Then",
+    "file": "navigation.steps.ts",
+    "sourceCode": "Then('je peux annuler et revenir à l\\'écran précédent', async function (this: FestipodWorld) {\n  expect(this.currentScreenId).to.equal('create-event');\n  // CreateEventScreen has a ✕ close button in the header with onClick={() => navigate('home')}\n  const source = this.getRenderedText();\n  const hasCloseButton = /onClick[^>]*>[^<]*✕/.test(source);\n  expect(hasCloseButton, 'Create event screen should have a close button (✕) with navigation action').to.be.true;\n});",
+    "lineNumber": 93
   },
   {
     "pattern": "je peux naviguer vers {string}",
     "keyword": "Then",
     "file": "navigation.steps.ts",
     "sourceCode": "Then('je peux naviguer vers {string}', async function (this: FestipodWorld, pageName: string) {\n  const screenId = resolveScreenId(pageName);\n  this.attach(`Navigation available to: ${screenId}`, 'text/plain');\n});",
-    "lineNumber": 93
+    "lineNumber": 101
   },
   {
     "pattern": "la navigation affiche {string} comme actif",
     "keyword": "Then",
     "file": "navigation.steps.ts",
     "sourceCode": "Then('la navigation affiche {string} comme actif', async function (this: FestipodWorld, menuItem: string) {\n  this.attach(`Active menu: ${menuItem}`, 'text/plain');\n});",
-    "lineNumber": 98
+    "lineNumber": 106
   },
   {
-    "pattern": "l\\",
+    "pattern": "l'écran {string} est affiché",
     "keyword": "Given",
     "file": "form.steps.ts",
     "sourceCode": "Given('l\\'écran {string} est affiché', async function (this: FestipodWorld, screenName: string) {\n  const screenId = screenName.toLowerCase().replace(/ /g, '-');\n  this.navigateTo(`#/demo/${screenId}`);\n});",
@@ -214,7 +221,7 @@ export const stepDefinitions: StepDefinitionInfo[] = [
     "lineNumber": 6
   },
   {
-    "pattern": "je peux voir les détails de l\\",
+    "pattern": "je peux voir les détails de l'événement",
     "keyword": "Then",
     "file": "screen.steps.ts",
     "sourceCode": "Then('je peux voir les détails de l\\'événement', async function (this: FestipodWorld) {\n  expect(this.currentScreenId).to.equal('event-detail');\n  // Verify event detail content is rendered\n  const hasEventInfo = this.hasText('Description') || this.hasText('Participant') || this.hasText('inscrits');\n  expect(hasEventInfo, 'Event detail page should show event information').to.be.true;\n});",
@@ -242,7 +249,7 @@ export const stepDefinitions: StepDefinitionInfo[] = [
     "lineNumber": 36
   },
   {
-    "pattern": "je peux voir le profil de l\\",
+    "pattern": "je peux voir le profil de l'utilisateur",
     "keyword": "Then",
     "file": "screen.steps.ts",
     "sourceCode": "Then('je peux voir le profil de l\\'utilisateur', async function (this: FestipodWorld) {\n  expect(this.currentScreenId).to.equal('user-profile');\n  const hasProfileContent = this.hasText('Profil') || this.hasText('@');\n  expect(hasProfileContent, 'User profile should display profile information').to.be.true;\n});",
@@ -284,7 +291,7 @@ export const stepDefinitions: StepDefinitionInfo[] = [
     "lineNumber": 74
   },
   {
-    "pattern": "je visualise l\\",
+    "pattern": "je visualise l'événement {string}",
     "keyword": "Given",
     "file": "screen.steps.ts",
     "sourceCode": "Given('je visualise l\\'événement {string}', async function (this: FestipodWorld, eventName: string) {\n  this.navigateTo('#/demo/event-detail');\n  expect(this.currentScreen, 'Event detail screen should be loaded').to.not.be.null;\n  this.attach(`Viewing event: ${eventName}`, 'text/plain');\n});",
@@ -298,14 +305,14 @@ export const stepDefinitions: StepDefinitionInfo[] = [
     "lineNumber": 85
   },
   {
-    "pattern": "l\\",
+    "pattern": "l'écran affiche les informations de l'événement",
     "keyword": "Then",
     "file": "screen.steps.ts",
     "sourceCode": "Then('l\\'écran affiche les informations de l\\'événement', async function (this: FestipodWorld) {\n  expect(this.currentScreenId).to.equal('event-detail');\n  // Verify actual content is rendered\n  const expectedContent = screenExpectedContent['event-detail'] || [];\n  const renderedText = this.getRenderedText();\n\n  let foundCount = 0;\n  for (const content of expectedContent) {\n    if (renderedText.includes(content)) {\n      foundCount++;\n    }\n  }\n\n  expect(foundCount, `At least one expected content item should be present`).to.be.greaterThan(0);\n});",
     "lineNumber": 91
   },
   {
-    "pattern": "l\\",
+    "pattern": "l'écran affiche les informations du profil",
     "keyword": "Then",
     "file": "screen.steps.ts",
     "sourceCode": "Then('l\\'écran affiche les informations du profil', async function (this: FestipodWorld) {\n  expect(['profile', 'user-profile']).to.include(this.currentScreenId);\n  // Verify profile info is rendered\n  const hasProfileInfo = this.hasText('Profil') || this.hasText('@') || this.hasText('Événement');\n  expect(hasProfileInfo, 'Profile information should be displayed').to.be.true;\n});",
@@ -347,28 +354,28 @@ export const stepDefinitions: StepDefinitionInfo[] = [
     "lineNumber": 152
   },
   {
-    "pattern": "je peux m\\",
+    "pattern": "je peux m'inscrire à l'événement",
     "keyword": "Then",
     "file": "screen.steps.ts",
     "sourceCode": "Then('je peux m\\'inscrire à l\\'événement', async function (this: FestipodWorld) {\n  expect(this.currentScreenId).to.equal('event-detail');\n  // Check for registration button\n  const hasRegisterFeature = this.hasText('inscription') || this.hasText('Participer') ||\n                             this.hasText('participer') || this.hasText('S\\'inscrire') ||\n                             this.hasText('Rejoindre');\n  expect(hasRegisterFeature, 'Registration feature should be available').to.be.true;\n});",
     "lineNumber": 158
   },
   {
-    "pattern": "je peux me désinscrire de l\\",
+    "pattern": "je peux me désinscrire de l'événement",
     "keyword": "Then",
     "file": "screen.steps.ts",
     "sourceCode": "Then('je peux me désinscrire de l\\'événement', async function (this: FestipodWorld) {\n  expect(this.currentScreenId).to.equal('event-detail');\n  // Unregister is typically on the same page as register\n  const hasUnregisterFeature = this.hasText('désinscri') || this.hasText('Annuler') ||\n                               this.hasText('Quitter') || this.hasElement('button');\n  expect(hasUnregisterFeature, 'Unregister feature should be available').to.be.true;\n});",
     "lineNumber": 167
   },
   {
-    "pattern": "je peux contacter l\\",
+    "pattern": "je peux contacter l'utilisateur",
     "keyword": "Then",
     "file": "screen.steps.ts",
     "sourceCode": "Then('je peux contacter l\\'utilisateur', async function (this: FestipodWorld) {\n  expect(this.currentScreenId).to.equal('user-profile');\n  // Check for contact functionality\n  const hasContactFeature = this.hasText('Contact') || this.hasText('Message') ||\n                            this.hasText('message') || this.hasElement('button');\n  expect(hasContactFeature, 'Contact feature should be available').to.be.true;\n});",
     "lineNumber": 175
   },
   {
-    "pattern": "je peux voir les événements auxquels l\\",
+    "pattern": "je peux voir les événements auxquels l'utilisateur a participé",
     "keyword": "Then",
     "file": "screen.steps.ts",
     "sourceCode": "Then('je peux voir les événements auxquels l\\'utilisateur a participé', async function (this: FestipodWorld) {\n  expect(this.currentScreenId).to.equal('user-profile');\n  // Check for user's events\n  const hasUserEvents = this.hasText('Événement') || this.hasText('événement') ||\n                        this.hasText('Participation') || this.hasText('participation');\n  expect(hasUserEvents, 'User events should be visible').to.be.true;\n});",
@@ -389,7 +396,7 @@ export const stepDefinitions: StepDefinitionInfo[] = [
     "lineNumber": 198
   },
   {
-    "pattern": "je peux définir mes thématiques d\\",
+    "pattern": "je peux définir mes thématiques d'intérêt",
     "keyword": "Then",
     "file": "screen.steps.ts",
     "sourceCode": "Then('je peux définir mes thématiques d\\'intérêt', async function (this: FestipodWorld) {\n  expect(this.currentScreenId).to.equal('settings');\n  // Settings page should allow configuring interests (or it could be on profile)\n  // For now just verify we're on settings\n  expect(this.currentScreen, 'Settings screen should be loaded').to.not.be.null;\n});",
