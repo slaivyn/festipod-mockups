@@ -31,9 +31,12 @@ const keywords = {
   given: ['Étant donné que ', "Étant donné qu'", 'Étant donné', 'Etant donné que ', "Etant donné qu'", 'Etant donné', 'Given', 'Soit'],
   when: ['Quand', 'When', 'Lorsque'],
   then: ['Alors', 'Then'],
-  and: ['Et', 'And', 'Mais', 'But'],
+  and: ['Et', 'And', 'Mais', 'But', '* '],
   examples: ['Exemples:', 'Examples:'],
 };
+
+// Placeholder step text for skipped/not-implemented scenarios
+const SKIP_PLACEHOLDER = 'Scénario non implémenté';
 
 export function GherkinHighlighter({ content, scenarioResults = [] }: GherkinHighlighterProps) {
   const lines = content.split('\n');
@@ -237,7 +240,12 @@ function BlockRenderer({ block, isCollapsed, onToggle, showDefinitions }: BlockR
   const isBackground = block.type === 'background';
 
   // Parse steps from rest lines
-  const parsedSteps = parseStepsFromLines(restLines);
+  let parsedSteps = parseStepsFromLines(restLines);
+
+  // For skipped scenarios, filter out the placeholder step
+  if (block.status === 'skipped') {
+    parsedSteps = parsedSteps.filter(step => step.text !== SKIP_PLACEHOLDER);
+  }
 
   // Determine border color based on status
   const borderColor = block.status === 'passed' ? 'border-l-green-500' :
@@ -254,17 +262,25 @@ function BlockRenderer({ block, isCollapsed, onToggle, showDefinitions }: BlockR
     return <Clock className="w-4 h-4 text-zinc-400 shrink-0" />;
   };
 
+  // Skipped scenarios are not expandable (no steps to show)
+  const isExpandable = block.status !== 'skipped' && parsedSteps.length > 0;
+
   return (
     <Card className={`border-l-4 ${borderColor}`}>
-      {/* Clickable header */}
+      {/* Header - clickable only if expandable */}
       <CardHeader
-        className="p-2 cursor-pointer hover:bg-muted/50 transition-colors"
-        onClick={onToggle}
+        className={`p-2 ${isExpandable ? 'cursor-pointer hover:bg-muted/50' : ''} transition-colors`}
+        onClick={isExpandable ? onToggle : undefined}
       >
         <div className="flex items-center gap-1.5">
-          <span className="text-muted-foreground shrink-0">
-            {isCollapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
-          </span>
+          {/* Show chevron only if expandable */}
+          {isExpandable ? (
+            <span className="text-muted-foreground shrink-0">
+              {isCollapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+            </span>
+          ) : (
+            <span className="w-4 shrink-0" /> // Spacer to maintain alignment
+          )}
           <StatusIcon />
           <div className="flex-1 min-w-0 flex items-center gap-1.5 flex-wrap">
             <span className={`text-xs font-medium px-1.5 py-0.5 rounded shrink-0 ${
@@ -278,7 +294,8 @@ function BlockRenderer({ block, isCollapsed, onToggle, showDefinitions }: BlockR
               {block.name}
             </span>
           </div>
-          {parsedSteps.length > 0 && (
+          {/* Show step count only if expandable */}
+          {isExpandable && parsedSteps.length > 0 && (
             <span className="text-xs text-muted-foreground shrink-0 hidden sm:block">
               {parsedSteps.length} étapes
             </span>
@@ -286,8 +303,8 @@ function BlockRenderer({ block, isCollapsed, onToggle, showDefinitions }: BlockR
         </div>
       </CardHeader>
 
-      {/* Collapsible content */}
-      {!isCollapsed && (
+      {/* Collapsible content - only shown if expandable and not collapsed */}
+      {isExpandable && !isCollapsed && (
         <CardContent className="pt-0 px-2 pb-2">
           <div className="space-y-0.5 ml-0 sm:ml-6">
             {parsedSteps.map((step, index) => (

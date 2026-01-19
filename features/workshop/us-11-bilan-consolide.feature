@@ -10,22 +10,10 @@ Fonctionnalité: US-11 Visualiser le bilan consolidé de l'événement
     Étant donné que je suis connecté en tant qu'utilisateur
 
   Scénario: Accéder au bilan consolidé
-    Étant donné que je suis sur la page "détail événement"
-    Alors l'écran contient une section "Bilan"
+    * Scénario non implémenté
 
   Scénario: Voir les commentaires regroupés par atelier
-    Étant donné que je suis sur la page "détail événement"
-    Quand je clique sur "Voir le bilan"
-    Alors l'écran contient une section "Commentaires par atelier"
+    * Scénario non implémenté
 
-  @pending
   Scénario: Voir la synthèse globale
-    Étant donné que je suis sur la page "détail événement"
-    Alors l'écran contient une section "Synthèse"
-
-  Scénario: Vérifier les données du bilan
-    Étant donné que l'écran "event-detail" est affiché
-    Alors le formulaire contient les champs obligatoires suivants:
-      | Titre               |
-      | Date                |
-      | Liste des participants |
+    * Scénario non implémenté

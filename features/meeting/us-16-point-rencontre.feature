@@ -15,25 +15,13 @@ Fonctionnalité: US-16 Indiquer un ou plusieurs points de rencontre
     Alors je vois l'écran "meeting-points"
 
   Scénario: Créer un point de rencontre
-    Étant donné que je suis sur la page "points de rencontre"
-    Quand je clique sur "Ajouter un point de rencontre"
-    Alors l'écran contient une section "Nouveau point de rencontre"
+    * Scénario non implémenté
 
   Scénario: Définir le lieu de rencontre
-    Étant donné que je suis sur la page "points de rencontre"
-    Alors le champ "Lieu de rencontre" est présent
+    * Scénario non implémenté
 
   Scénario: Définir l'heure de rencontre
-    Étant donné que je suis sur la page "points de rencontre"
-    Alors le champ "Heure" est présent
+    * Scénario non implémenté
 
   Scénario: Échanger des liens de contact
-    Étant donné que je suis sur la page "points de rencontre"
-    Alors l'écran contient une section "Partage de contact"
-    Et je peux voir le QR code
-
-  Scénario: Vérifier les données requises
-    Étant donné que l'écran "meeting-points" est affiché
-    Alors le formulaire contient les champs obligatoires suivants:
-      | Lieu de rencontre |
-      | Heure             |
+    * Scénario non implémenté

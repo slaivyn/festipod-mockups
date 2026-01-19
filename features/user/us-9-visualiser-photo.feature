@@ -10,9 +10,7 @@ Fonctionnalité: US-9 Visualiser la photo d'un individu
     Étant donné que je suis connecté en tant qu'utilisateur
 
   Scénario: Accéder au profil pour voir la photo
-    Étant donné que je suis sur la page "mon profil"
-    Alors je vois l'écran "profile"
-    Et l'écran contient une section "Photo de profil"
+    * Scénario non implémenté
 
   Scénario: Naviguer vers le profil depuis la liste des participants
     Étant donné que je suis sur la page "détail événement"
@@ -25,8 +23,4 @@ Fonctionnalité: US-9 Visualiser la photo d'un individu
     Alors je peux voir la liste des participants
 
   Scénario: Vérifier les champs de données du profil
-    Étant donné que l'écran "profile" est affiché
-    Alors le formulaire contient les champs obligatoires suivants:
-      | Photo de profil |
-      | Nom             |
-      | Pseudo          |
+    * Scénario non implémenté

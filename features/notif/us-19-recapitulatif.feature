@@ -15,24 +15,14 @@ Fonctionnalité: US-19 Recevoir un récapitulatif des prochaines rencontres
     Étant donné que je suis sur la page "accueil"
     Alors l'écran contient une section "Événements à venir"
 
-  @pending
   Scénario: Voir le récapitulatif par période
-    Étant donné que je suis sur la page "accueil"
-    Alors je peux filtrer les événements par période
+    * Scénario non implémenté
 
-  @pending
   Scénario: Voir les événements proches géographiquement
-    Étant donné que je suis sur la page "accueil"
-    Alors l'écran contient une section "Près de chez moi"
+    * Scénario non implémenté
 
-  @pending
   Scénario: Voir mes inscriptions
-    Étant donné que je suis sur la page "accueil"
-    Alors l'écran contient une section "Mes inscriptions"
+    * Scénario non implémenté
 
-  @pending
   Scénario: Vérifier les données de l'accueil
-    Étant donné que l'écran "home" est affiché
-    Alors le formulaire contient les champs obligatoires suivants:
-      | Événements à venir |
-      | Navigation         |
+    * Scénario non implémenté

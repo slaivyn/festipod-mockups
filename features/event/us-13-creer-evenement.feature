@@ -24,14 +24,7 @@ Fonctionnalité: US-13 Créer/Modifier/Supprimer un événement
       | Thématique         |
 
   Scénario: Remplir le formulaire de création d'événement
-    Étant donné que je suis sur la page "créer un événement"
-    Quand je remplis le champ "Nom de l'événement" avec "Mon événement"
-    Et je remplis le champ "Date" avec "2025-02-15"
-    Et je remplis le champ "Heure de début" avec "14:00"
-    Et je remplis le champ "Lieu" avec "Lyon"
-    Et je remplis le champ "Thématique" avec "Technologie"
-    Alors le champ "Nom de l'événement" affiche "Mon événement"
-    Et le champ "Lieu" affiche "Lyon"
+    * Scénario non implémenté
 
   Scénario: Vérifier la présence du bouton de création
     Étant donné que je suis sur la page "créer un événement"

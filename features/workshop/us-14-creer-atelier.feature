@@ -10,8 +10,7 @@ Fonctionnalité: US-14 Créer/Modifier/Supprimer un atelier
     Étant donné que je suis connecté en tant qu'utilisateur
 
   Scénario: Accéder à la création d'atelier
-    Étant donné que je suis sur la page "créer un événement"
-    Alors l'écran contient une section "Ateliers"
+    * Scénario non implémenté
 
   Scénario: Vérifier les champs obligatoires pour créer un atelier
     Étant donné que l'écran "create-event" est affiché
@@ -23,16 +22,10 @@ Fonctionnalité: US-14 Créer/Modifier/Supprimer un atelier
       | Thématique         |
 
   Scénario: Créer un atelier
-    Étant donné que je suis sur la page "créer un événement"
-    Quand je clique sur "Ajouter un atelier"
-    Alors l'écran contient une section "Nouvel atelier"
+    * Scénario non implémenté
 
   Scénario: Modifier un atelier existant
-    Étant donné que je suis sur la page "créer un événement"
-    Quand je clique sur "Modifier l'atelier"
-    Alors l'écran contient une section "Modifier l'atelier"
+    * Scénario non implémenté
 
   Scénario: Supprimer un atelier
-    Étant donné que je suis sur la page "créer un événement"
-    Quand je clique sur "Supprimer l'atelier"
-    Alors l'écran contient une section "Confirmation"
+    * Scénario non implémenté

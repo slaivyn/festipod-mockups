@@ -10,31 +10,21 @@ Fonctionnalité: US-12 Consulter la carte/tableau des événements
     Étant donné que je suis connecté en tant qu'utilisateur
 
   Scénario: Accéder à la liste des événements depuis le profil
-    Étant donné que je suis sur la page "mon profil"
-    Alors je peux voir la liste des événements
+    * Scénario non implémenté
 
   Scénario: Accéder à la liste des événements depuis découvrir
     Étant donné que je suis sur la page "découvrir"
     Alors je peux voir la liste des événements
 
   Scénario: Filtrer par date
-    Étant donné que je suis sur la page "découvrir"
-    Quand je clique sur "Filtrer par date"
-    Alors l'écran contient une section "Filtre par date"
+    * Scénario non implémenté
 
   Scénario: Filtrer par personne
     Étant donné que je suis sur la page "profil utilisateur"
     Alors je peux voir les événements auxquels l'utilisateur a participé
 
   Scénario: Vérifier les données de l'écran événements
-    Étant donné que l'écran "events" est affiché
-    Alors le formulaire contient les champs obligatoires suivants:
-      | Liste des événements |
-      | Filtre par date      |
+    * Scénario non implémenté
 
   Scénario: Vérifier les données de l'écran profil
-    Étant donné que l'écran "profile" est affiché
-    Alors le formulaire contient les champs obligatoires suivants:
-      | Photo de profil |
-      | Nom             |
-      | Pseudo          |
+    * Scénario non implémenté

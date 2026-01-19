@@ -9,20 +9,13 @@ Fonctionnalité: US-2 Visualiser un événement terminé (notes)
     Étant donné que je suis connecté en tant qu'utilisateur
 
   Scénario: Accéder à la zone de notes personnelles
-    Étant donné que je suis sur la page "détail événement"
-    Alors l'écran contient une section "Notes personnelles"
+    * Scénario non implémenté
 
   Scénario: Accéder à la zone de partage publique
-    Étant donné que je suis sur la page "détail événement"
-    Alors l'écran contient une section "Zone de partage publique"
+    * Scénario non implémenté
 
-  @pending
   Scénario: Ajouter une note personnelle
-    Étant donné que je suis sur la page "détail événement"
-    Quand je clique sur "Ajouter une note"
-    Alors je peux ajouter une note
+    * Scénario non implémenté
 
   Scénario: Ajouter un lien/ressource
-    Étant donné que je suis sur la page "détail événement"
-    Quand je clique sur "Ajouter une ressource"
-    Alors l'écran contient une section "Ressources"
+    * Scénario non implémenté

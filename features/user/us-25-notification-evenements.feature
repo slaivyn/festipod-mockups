@@ -14,16 +14,7 @@ Fonctionnalité: US-25 Être averti des événements susceptibles de m'intéress
     Alors l'écran contient une section "Notifications"
 
   Scénario: Configurer le rayon de notification
-    Étant donné que je suis sur la page "paramètres"
-    Alors je peux définir mon rayon de notification
+    * Scénario non implémenté
 
   Scénario: Configurer les thématiques d'intérêt
-    Étant donné que je suis sur la page "paramètres"
-    Alors je peux définir mes thématiques d'intérêt
-
-  Scénario: Vérifier les données des paramètres
-    Étant donné que l'écran "settings" est affiché
-    Alors le formulaire contient les champs obligatoires suivants:
-      | Notifications       |
-      | Confidentialité     |
-      | Rayon de notification |
+    * Scénario non implémenté

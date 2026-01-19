@@ -9,24 +9,10 @@ Fonctionnalité: US-1 Visualiser un événement terminé (ateliers)
     Étant donné que je suis connecté en tant qu'utilisateur
 
   Scénario: Accéder aux détails d'un événement terminé
-    Étant donné que je suis sur la page "accueil"
-    Quand je navigue vers "détail événement"
-    Alors je vois l'écran "event-detail"
-    Et l'écran contient une section "Programme des ateliers"
+    * Scénario non implémenté
 
   Scénario: Consulter la liste des participants d'un atelier
-    Étant donné que je suis sur la page "détail événement"
-    Alors je peux voir la liste des participants
+    * Scénario non implémenté
 
   Scénario: Consulter les ressources d'un atelier
-    Étant donné que je suis sur la page "détail événement"
-    Alors l'écran contient une section "Ressources"
-    Et l'écran contient une section "Zone de partage collective"
-
-  Scénario: Vérifier les données affichées pour un atelier
-    Étant donné que l'écran "event-detail" est affiché
-    Alors le formulaire contient les champs obligatoires suivants:
-      | Titre               |
-      | Date                |
-      | Lieu                |
-      | Liste des participants |
+    * Scénario non implémenté

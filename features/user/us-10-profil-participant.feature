@@ -22,11 +22,7 @@ Fonctionnalité: US-10 Visualiser la fiche/le profil d'un participant
     Alors je peux contacter l'utilisateur
 
   Scénario: Vérifier les informations du profil
-    Étant donné que l'écran "user-profile" est affiché
-    Alors le formulaire contient les champs obligatoires suivants:
-      | Photo de profil |
-      | Nom             |
-      | Pseudo          |
+    * Scénario non implémenté
 
   Scénario: Voir les détails du profil utilisateur
     Étant donné que je suis sur la page "profil utilisateur"

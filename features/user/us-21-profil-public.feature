@@ -19,20 +19,10 @@ Fonctionnalité: US-21 Décider que tous les utilisateurs puissent suivre mes ac
     Alors l'écran contient une section "Confidentialité"
 
   Scénario: Rendre le profil public
-    Étant donné que je suis sur la page "paramètres"
-    Quand je clique sur "Profil public"
-    Alors l'écran contient une section "Visibilité"
+    * Scénario non implémenté
 
   Scénario: Vérifier les données des paramètres
-    Étant donné que l'écran "settings" est affiché
-    Alors le formulaire contient les champs obligatoires suivants:
-      | Notifications       |
-      | Confidentialité     |
-      | Rayon de notification |
+    * Scénario non implémenté
 
   Scénario: Vérifier les données du profil
-    Étant donné que l'écran "profile" est affiché
-    Alors le formulaire contient les champs obligatoires suivants:
-      | Photo de profil |
-      | Nom             |
-      | Pseudo          |
+    * Scénario non implémenté

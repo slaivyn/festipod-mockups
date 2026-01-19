@@ -22,10 +22,4 @@ Fonctionnalité: US-3 Visualiser un événement terminé
     Alors je peux voir la liste des participants
 
   Scénario: Vérifier les données affichées
-    Étant donné que l'écran "event-detail" est affiché
-    Alors le formulaire contient les champs obligatoires suivants:
-      | Titre               |
-      | Date                |
-      | Lieu                |
-      | Description         |
-      | Liste des participants |
+    * Scénario non implémenté

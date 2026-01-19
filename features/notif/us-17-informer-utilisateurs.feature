@@ -10,31 +10,17 @@ Fonctionnalité: US-17 Informer automatiquement d'autres utilisateurs
   Contexte:
     Étant donné que je suis connecté en tant qu'utilisateur
 
-  @pending
   Scénario: Partager un événement auquel je participe
-    Étant donné que je suis sur la page "détail événement"
-    Quand je clique sur "Partager"
-    Alors l'écran contient une section "Options de partage"
+    * Scénario non implémenté
 
-  @pending
   Scénario: Informer les utilisateurs à proximité
-    Étant donné que je suis sur la page "détail événement"
-    Quand je clique sur "Notifier à proximité"
-    Alors l'écran contient une section "Rayon de notification"
+    * Scénario non implémenté
 
-  @pending
   Scénario: Informer les utilisateurs par thématique
-    Étant donné que je suis sur la page "détail événement"
-    Quand je clique sur "Notifier par thématique"
-    Alors l'écran contient une section "Thématiques"
+    * Scénario non implémenté
 
-  @pending
   Scénario: Informer mes abonnés
-    Étant donné que je suis sur la page "détail événement"
-    Quand je clique sur "Notifier mes abonnés"
-    Alors l'écran contient une section "Mes abonnés"
+    * Scénario non implémenté
 
-  @pending
   Scénario: Combiner les options de notification
-    Étant donné que je suis sur la page "détail événement"
-    Alors l'écran contient une section "Options de notification"
+    * Scénario non implémenté

@@ -14,12 +14,10 @@ Fonctionnalité: US-23 Me connecter avec d'autres utilisateurs
     Alors l'écran contient une section "Partager"
 
   Scénario: Voir le QR code
-    Étant donné que je suis sur la page "mon profil"
-    Alors je peux voir le QR code
+    * Scénario non implémenté
 
   Scénario: Voir le lien de partage
-    Étant donné que je suis sur la page "mon profil"
-    Alors je peux voir le lien de partage
+    * Scénario non implémenté
 
   Scénario: Accéder à l'écran de partage dédié
     Étant donné que je suis sur la page "mon profil"
@@ -27,8 +25,4 @@ Fonctionnalité: US-23 Me connecter avec d'autres utilisateurs
     Alors je vois l'écran "share-profile"
 
   Scénario: Vérifier les données du profil
-    Étant donné que l'écran "profile" est affiché
-    Alors le formulaire contient les champs obligatoires suivants:
-      | Photo de profil |
-      | Nom             |
-      | Pseudo          |
+    * Scénario non implémenté

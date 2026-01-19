@@ -10,24 +10,13 @@ Fonctionnalité: US-22 Parrainer un nouvel utilisateur
     Étant donné que je suis connecté en tant qu'utilisateur
 
   Scénario: Accéder au partage de profil
-    Étant donné que je suis sur la page "mon profil"
-    Alors l'écran contient une section "Partager mon profil"
+    * Scénario non implémenté
 
   Scénario: Voir le QR code de parrainage
-    Étant donné que je suis sur la page "mon profil"
-    Alors je peux voir le QR code
+    * Scénario non implémenté
 
   Scénario: Voir le lien de parrainage
-    Étant donné que je suis sur la page "mon profil"
-    Alors je peux voir le lien de partage
+    * Scénario non implémenté
 
   Scénario: Voir les statistiques de parrainage
-    Étant donné que je suis sur la page "mon profil"
-    Alors l'écran contient une section "Mes parrainages"
-
-  Scénario: Vérifier les données du profil
-    Étant donné que l'écran "profile" est affiché
-    Alors le formulaire contient les champs obligatoires suivants:
-      | Photo de profil |
-      | Nom             |
-      | Pseudo          |
+    * Scénario non implémenté

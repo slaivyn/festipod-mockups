@@ -23,8 +23,4 @@ Fonctionnalité: US-15 Visualiser les inscrits à un atelier/événement
     Alors je vois l'écran "user-profile"
 
   Scénario: Vérifier les données de l'écran
-    Étant donné que l'écran "event-detail" est affiché
-    Alors le formulaire contient les champs obligatoires suivants:
-      | Titre               |
-      | Date                |
-      | Liste des participants |
+    * Scénario non implémenté

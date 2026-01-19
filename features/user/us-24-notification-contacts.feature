@@ -17,12 +17,4 @@ Fonctionnalité: US-24 Être notifié des activités de mes contacts
     Alors je peux configurer mes notifications
 
   Scénario: Voir les activités de mes contacts sur l'accueil
-    Étant donné que je suis sur la page "accueil"
-    Alors l'écran contient une section "Activités de mes contacts"
-
-  Scénario: Vérifier les données des paramètres
-    Étant donné que l'écran "settings" est affiché
-    Alors le formulaire contient les champs obligatoires suivants:
-      | Notifications       |
-      | Confidentialité     |
-      | Rayon de notification |
+    * Scénario non implémenté

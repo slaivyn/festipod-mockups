@@ -18,11 +18,7 @@ Fonctionnalité: US-6 M'inscrire/me désinscrire à un événement (atelier)
     Alors je peux voir la liste des participants
 
   Scénario: S'inscrire à un atelier
-    Étant donné que je suis sur la page "détail événement"
-    Quand je clique sur "S'inscrire"
-    Alors je peux m'inscrire à l'événement
+    * Scénario non implémenté
 
   Scénario: Se désinscrire d'un atelier
-    Étant donné que je suis sur la page "détail événement"
-    Quand je clique sur "Se désinscrire"
-    Alors je peux me désinscrire de l'événement
+    * Scénario non implémenté

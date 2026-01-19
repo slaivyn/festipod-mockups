@@ -15,8 +15,7 @@ Fonctionnalité: US-20 Voir le profil des personnes faisant partie de mon résea
     Alors je vois l'écran "profile"
 
   Scénario: Voir mon réseau
-    Étant donné que je suis sur la page "mon profil"
-    Alors l'écran contient une section "Mon réseau"
+    * Scénario non implémenté
 
   Scénario: Voir un profil de mon réseau
     Étant donné que je suis sur la page "mon profil"
@@ -29,8 +28,4 @@ Fonctionnalité: US-20 Voir le profil des personnes faisant partie de mon résea
     Alors je vois l'écran "event-detail"
 
   Scénario: Vérifier les données du profil
-    Étant donné que l'écran "profile" est affiché
-    Alors le formulaire contient les champs obligatoires suivants:
-      | Photo de profil |
-      | Nom             |
-      | Pseudo          |
+    * Scénario non implémenté

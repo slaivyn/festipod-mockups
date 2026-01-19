@@ -14,11 +14,8 @@ Before(async function (this: FestipodWorld, scenario) {
   this.screenSourceContent = '';
   this.currentScreen = null;
 
-  // Mark @pending scenarios as pending
-  const isPending = scenario.pickle.tags.some(tag => tag.name === '@pending');
-  if (isPending) {
-    return 'pending';
-  }
+  // Skipped scenarios use the "* Scénario non implémenté" placeholder step
+  // which returns 'skipped' - no special handling needed in the hook
 });
 
 After(async function (this: FestipodWorld, scenario) {

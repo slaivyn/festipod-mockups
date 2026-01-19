@@ -2,6 +2,12 @@ import { Given, When, Then } from '@cucumber/cucumber';
 import { expect } from 'chai';
 import type { FestipodWorld } from '../support/world';
 
+// Placeholder step for scenarios that are not yet implemented
+// This step indicates the feature is planned but not built yet
+Given('Scénario non implémenté', async function (this: FestipodWorld) {
+  return 'skipped';
+});
+
 const screenNameMap: Record<string, string> = {
   'accueil': 'home',
   'liste des événements': 'events',

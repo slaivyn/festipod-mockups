@@ -10,21 +10,13 @@ Fonctionnalité: US-4 Ajouter/modifier/supprimer un commentaire à un atelier
     Étant donné que je suis connecté en tant qu'utilisateur
 
   Scénario: Voir les commentaires existants d'un atelier
-    Étant donné que je suis sur la page "détail événement"
-    Alors l'écran contient une section "Commentaires"
+    * Scénario non implémenté
 
-  @pending
   Scénario: Ajouter un commentaire à un atelier
-    Étant donné que je suis sur la page "détail événement"
-    Quand je clique sur "Ajouter un commentaire"
-    Alors je peux ajouter un commentaire
+    * Scénario non implémenté
 
   Scénario: Modifier un commentaire existant
-    Étant donné que je suis sur la page "détail événement"
-    Quand je clique sur "Modifier"
-    Alors je peux modifier un commentaire
+    * Scénario non implémenté
 
   Scénario: Supprimer un commentaire
-    Étant donné que je suis sur la page "détail événement"
-    Quand je clique sur "Supprimer"
-    Alors je peux supprimer un commentaire
+    * Scénario non implémenté

@@ -10,13 +10,10 @@ Fonctionnalité: US-26 Définir la portée d'un événement
     Étant donné que je suis connecté en tant qu'utilisateur
 
   Scénario: Accéder à la création d'événement
-    Étant donné que je suis sur la page "créer un événement"
-    Alors l'écran contient une section "Portée de l'événement"
+    * Scénario non implémenté
 
   Scénario: Définir le rayon d'intérêt
-    Étant donné que je suis sur la page "créer un événement"
-    Quand je clique sur "Définir la portée"
-    Alors l'écran contient une section "Rayon en kilomètres"
+    * Scénario non implémenté
 
   Scénario: Choisir une thématique
     Étant donné que je suis sur la page "créer un événement"

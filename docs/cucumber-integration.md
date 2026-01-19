@@ -250,12 +250,13 @@ Alors je peux voir le QR code
 
 ## Test Outcomes
 
-Every step definition must produce one of two outcomes:
+Tests in this project serve to **consolidate features and prevent regressions**. This shapes the testing strategy.
 
-### 1. Pass/Fail (Testable)
+### 1. Pass/Fail (Implemented Features)
 
-When we **can verify** the feature through static source analysis:
-- The step runs assertions (`expect(...).to.be.true`)
+When a feature **exists and can be verified** through static source analysis:
+- The scenario has full steps (Given/When/Then)
+- Step definitions run assertions (`expect(...).to.be.true`)
 - If the assertion passes → test passes
 - If the assertion fails → test fails with descriptive error message
 
@@ -269,58 +270,41 @@ Then('je peux voir la liste des participants', async function (this: FestipodWor
 });
 ```
 
-### 2. Pending (Not Testable)
+### 2. Skipped (Not Yet Implemented)
 
-When we **cannot verify** the feature, the step must return `'pending'` with an explanatory message. There are four reasons a test may be pending:
+When a feature **is not yet implemented**, the scenario uses a placeholder step.
 
-| Prefix | Reason | Example |
-|--------|--------|---------|
-| `NOT IMPLEMENTED` | Feature doesn't exist in the UI | Comment functionality not in EventDetailScreen.tsx |
-| `CANNOT TEST` | Requires browser automation, backend, or database | Form submission requires browser automation |
-| `WRONG STEP` | Step is being used on inappropriate screen type | "le formulaire contient..." on a display screen |
-| `NOT ON THIS SCREEN` | Feature exists but on a different screen | QR code is on share-profile, not profile |
+**Rationale**: Since tests exist to consolidate features and prevent regressions, there is no value in writing detailed steps for features that don't exist yet. The placeholder step `* Scénario non implémenté` makes it clear this is a planned feature while allowing Cucumber to properly report it as "skipped".
+
+**Format for skipped scenarios:**
+```gherkin
+Scénario: Modifier ma photo de profil
+  * Scénario non implémenté
+```
+
+The `*` is a Gherkin keyword that matches any step type (Given/When/Then). The step definition returns `'skipped'`:
 
 ```typescript
-// NOT IMPLEMENTED - feature doesn't exist
-Then('je peux ajouter un commentaire', async function (this: FestipodWorld) {
-  this.attach('NOT IMPLEMENTED: Comment functionality not in EventDetailScreen.tsx', 'text/plain');
-  return 'pending';
-});
-
-// CANNOT TEST - requires browser automation
-When('je remplis le champ {string} avec {string}', async function (this: FestipodWorld, fieldName: string, value: string) {
-  this.attach(`CANNOT TEST: Filling field "${fieldName}" with "${value}" requires browser automation`, 'text/plain');
-  return 'pending';
-});
-
-// WRONG STEP - step used on wrong screen type
-Then('le formulaire contient le champ obligatoire {string}', async function (this: FestipodWorld, fieldName: string) {
-  if (this.currentScreenId !== 'create-event') {
-    this.attach(`WRONG STEP: "le formulaire contient le champ obligatoire" is for forms. Screen "${this.currentScreenId}" is not a form.`, 'text/plain');
-    return 'pending';
-  }
-  // ... actual test logic ...
-});
-
-// NOT ON THIS SCREEN - feature exists elsewhere
-Then('je peux voir le QR code', async function (this: FestipodWorld) {
-  const source = this.getRenderedText();
-  if (this.currentScreenId === 'share-profile') {
-    expect(/QR Code/.test(source), 'Share profile should have "QR Code" text').to.be.true;
-  } else {
-    this.attach(`NOT ON THIS SCREEN: QR code is on share-profile, not "${this.currentScreenId}"`, 'text/plain');
-    return 'pending';
-  }
+Given('Scénario non implémenté', async function (this: FestipodWorld) {
+  return 'skipped';
 });
 ```
 
-### No Silent Tests
+**Do NOT write detailed steps for unimplemented features:**
+```gherkin
+# DON'T DO THIS - speculation about future implementation
+Scénario: Modifier ma photo de profil
+  Étant donné je suis sur la page "mon profil"
+  Quand je clique sur "Modifier la photo"
+  Alors je peux sélectionner une nouvelle image
+```
 
-**Critical rule**: A test must never do nothing. Every step definition must either:
-1. Run assertions that can pass or fail, OR
-2. Return `'pending'` with an explanatory message
+### UI Behavior for Skipped Scenarios
 
-This ensures the test suite provides clear feedback about what is tested, what is not testable, and why.
+In the GherkinHighlighter component:
+- Scenarios with skipped status appear with yellow/amber indicator
+- They show only the scenario name (the placeholder step is hidden)
+- This provides a clear visual distinction between tested and planned features
 
 ## Hooks
 
@@ -329,28 +313,15 @@ Lifecycle hooks in `features/support/hooks.ts`:
 | Hook | Purpose |
 |------|---------|
 | `BeforeAll` | Log test suite start |
-| `Before` | Reset World state, mark `@pending` scenarios as pending |
+| `Before` | Reset World state |
 | `After` | Attach debug info on failure, cleanup |
 | `AfterAll` | Log test suite completion |
 
-### Pending Scenarios
+### Skipped Scenarios
 
-Scenarios tagged with `@pending` are automatically marked as pending in the Before hook:
+Scenarios use the placeholder step `* Scénario non implémenté` which returns `'skipped'`. This is handled by the step definition in `navigation.steps.ts`, not by hooks.
 
-```typescript
-Before(async function (this: FestipodWorld, scenario) {
-  // ... reset state ...
-  const isPending = scenario.pickle.tags.some(tag => tag.name === '@pending');
-  if (isPending) {
-    return 'pending';
-  }
-});
-```
-
-Use `@pending` for:
-- Features not yet implemented
-- Email/notification features that cannot be tested via screen analysis
-- Scenarios waiting for UI implementation
+Use `* Scénario non implémenté` for scenarios that represent features not yet implemented.
 
 ### Debug Information on Failure
 
@@ -381,9 +352,6 @@ bun run cucumber:run --tags "@NOTIF"
 
 # Run by priority
 bun run cucumber:run --tags "@priority-0"
-
-# Exclude pending tests
-bun run cucumber:run --tags "not @pending"
 ```
 
 ## Parsing Results
@@ -406,22 +374,21 @@ Fonctionnalité: US-9 Visualiser la photo d'un individu
   Je peux visualiser la photo d'un individu
 
   Contexte:
-    Étant donné je suis connecté en tant qu'utilisateur
+    Étant donné que je suis connecté en tant qu'utilisateur
 
   Scénario: Accéder au profil pour voir la photo
-    Étant donné je suis sur la page "mon profil"
+    Étant donné que je suis sur la page "mon profil"
     Alors je vois l'écran "profile"
     Et l'écran contient une section "Photo de profil"
 
   Scénario: Naviguer vers le profil depuis la liste des participants
-    Étant donné je suis sur la page "détail événement"
+    Étant donné que je suis sur la page "détail événement"
     Quand je clique sur un participant
     Alors je suis redirigé vers "profil utilisateur"
 
-  @pending
-  Scénario: Fonctionnalité non encore implémentée
-    Étant donné je suis sur la page "mon profil"
-    Alors je peux modifier ma photo de profil
+  # Skipped scenarios use placeholder step
+  Scénario: Modifier ma photo de profil
+    * Scénario non implémenté
 ```
 
 ## Key Design Decisions

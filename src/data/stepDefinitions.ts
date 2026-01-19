@@ -11,123 +11,130 @@ export interface StepDefinitionInfo {
 
 export const stepDefinitions: StepDefinitionInfo[] = [
   {
+    "pattern": "Scénario non implémenté",
+    "keyword": "Given",
+    "file": "navigation.steps.ts",
+    "sourceCode": "Given('Scénario non implémenté', async function (this: FestipodWorld) {\n  return 'skipped';\n});",
+    "lineNumber": 7
+  },
+  {
     "pattern": "je suis sur la page {string}",
     "keyword": "Given",
     "file": "navigation.steps.ts",
     "sourceCode": "Given('je suis sur la page {string}', async function (this: FestipodWorld, pageName: string) {\n  const screenId = resolveScreenId(pageName);\n  this.navigateTo(`#/demo/${screenId}`);\n});",
-    "lineNumber": 31
+    "lineNumber": 37
   },
   {
     "pattern": "je suis connecté en tant qu'utilisateur",
     "keyword": "Given",
     "file": "navigation.steps.ts",
     "sourceCode": "Given('je suis connecté en tant qu\\'utilisateur', async function (this: FestipodWorld) {\n  this.isAuthenticated = true;\n});",
-    "lineNumber": 36
+    "lineNumber": 42
   },
   {
     "pattern": "je suis connecté",
     "keyword": "Given",
     "file": "navigation.steps.ts",
     "sourceCode": "Given('je suis connecté', async function (this: FestipodWorld) {\n  this.isAuthenticated = true;\n});",
-    "lineNumber": 40
+    "lineNumber": 46
   },
   {
     "pattern": "je ne suis pas connecté",
     "keyword": "Given",
     "file": "navigation.steps.ts",
     "sourceCode": "Given('je ne suis pas connecté', async function (this: FestipodWorld) {\n  this.isAuthenticated = false;\n});",
-    "lineNumber": 44
+    "lineNumber": 50
   },
   {
     "pattern": "je navigue vers {string}",
     "keyword": "When",
     "file": "navigation.steps.ts",
     "sourceCode": "When('je navigue vers {string}', async function (this: FestipodWorld, pageName: string) {\n  const screenId = resolveScreenId(pageName);\n  this.navigateTo(`#/demo/${screenId}`);\n});",
-    "lineNumber": 48
+    "lineNumber": 54
   },
   {
     "pattern": "je clique sur {string}",
     "keyword": "When",
     "file": "navigation.steps.ts",
     "sourceCode": "When('je clique sur {string}', async function (this: FestipodWorld, elementName: string) {\n  const source = this.getRenderedText();\n  // Check that a clickable element with this text exists (onClick handler + text content)\n  const escapedName = elementName.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&');\n  const pattern = new RegExp(`onClick[^>]*>[^<]*${escapedName}`, 'i');\n  const found = pattern.test(source);\n  if (!found) {\n    this.attach(`MISSING: Clickable element \"${elementName}\" not found in screen \"${this.currentScreenId}\"`, 'text/plain');\n    return 'pending';\n  }\n});",
-    "lineNumber": 53
+    "lineNumber": 59
   },
   {
     "pattern": "je sélectionne {string}",
     "keyword": "When",
     "file": "navigation.steps.ts",
     "sourceCode": "When('je sélectionne {string}', async function (this: FestipodWorld, elementName: string) {\n  const source = this.getRenderedText();\n  // Check that a selectable element with this text exists\n  const escapedName = elementName.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&');\n  const pattern = new RegExp(`onClick[^>]*>[^<]*${escapedName}`, 'i');\n  const found = pattern.test(source);\n  if (!found) {\n    this.attach(`MISSING: Selectable element \"${elementName}\" not found in screen \"${this.currentScreenId}\"`, 'text/plain');\n    return 'pending';\n  }\n});",
-    "lineNumber": 65
+    "lineNumber": 71
   },
   {
     "pattern": "je clique sur le bouton {string}",
     "keyword": "When",
     "file": "navigation.steps.ts",
     "sourceCode": "When('je clique sur le bouton {string}', async function (this: FestipodWorld, buttonName: string) {\n  const source = this.getRenderedText();\n  // Check that a Button component with this label exists\n  const escapedName = buttonName.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&');\n  const pattern = new RegExp(`<Button[^>]*>[^<]*${escapedName}[^<]*</Button>`, 'i');\n  const found = pattern.test(source);\n  if (!found) {\n    this.attach(`MISSING: Button \"${buttonName}\" not found in screen \"${this.currentScreenId}\"`, 'text/plain');\n    return 'pending';\n  }\n});",
-    "lineNumber": 77
+    "lineNumber": 83
   },
   {
     "pattern": "je clique sur un participant",
     "keyword": "When",
     "file": "navigation.steps.ts",
     "sourceCode": "When('je clique sur un participant', async function (this: FestipodWorld) {\n  this.navigateTo('#/demo/user-profile');\n});",
-    "lineNumber": 89
+    "lineNumber": 95
   },
   {
     "pattern": "je clique sur un événement",
     "keyword": "When",
     "file": "navigation.steps.ts",
     "sourceCode": "When('je clique sur un événement', async function (this: FestipodWorld) {\n  this.navigateTo('#/demo/event-detail');\n});",
-    "lineNumber": 93
+    "lineNumber": 99
   },
   {
     "pattern": "je suis redirigé vers {string}",
     "keyword": "Then",
     "file": "navigation.steps.ts",
     "sourceCode": "Then('je suis redirigé vers {string}', async function (this: FestipodWorld, pageName: string) {\n  const screenId = resolveScreenId(pageName);\n  expect(this.currentScreenId).to.equal(screenId);\n});",
-    "lineNumber": 97
+    "lineNumber": 103
   },
   {
     "pattern": "je vois l'écran {string}",
     "keyword": "Then",
     "file": "navigation.steps.ts",
     "sourceCode": "Then('je vois l\\'écran {string}', async function (this: FestipodWorld, pageName: string) {\n  const screenId = resolveScreenId(pageName);\n  expect(this.currentScreenId).to.equal(screenId);\n});",
-    "lineNumber": 102
+    "lineNumber": 108
   },
   {
     "pattern": "je reste sur la page {string}",
     "keyword": "Then",
     "file": "navigation.steps.ts",
     "sourceCode": "Then('je reste sur la page {string}', async function (this: FestipodWorld, pageName: string) {\n  const screenId = resolveScreenId(pageName);\n  expect(this.currentScreenId).to.equal(screenId);\n});",
-    "lineNumber": 107
+    "lineNumber": 113
   },
   {
     "pattern": "l'écran contient une section {string}",
     "keyword": "Then",
     "file": "navigation.steps.ts",
     "sourceCode": "Then('l\\'écran contient une section {string}', async function (this: FestipodWorld, sectionName: string) {\n  const found = this.hasText(sectionName);\n  if (!found) {\n    this.attach(`MISSING SECTION: \"${sectionName}\" not found in screen \"${this.currentScreenId}\"`, 'text/plain');\n    return 'pending';\n  }\n});",
-    "lineNumber": 112
+    "lineNumber": 118
   },
   {
     "pattern": "je peux annuler et revenir à l'écran précédent",
     "keyword": "Then",
     "file": "navigation.steps.ts",
     "sourceCode": "Then('je peux annuler et revenir à l\\'écran précédent', async function (this: FestipodWorld) {\n  expect(this.currentScreenId).to.equal('create-event');\n  const source = this.getRenderedText();\n  // Detect ✕ close button with onClick handler that calls navigate()\n  const found = /onClick\\s*=\\s*\\{\\s*\\(\\)\\s*=>\\s*navigate\\s*\\(['\"]home['\"]\\)\\s*\\}[^>]*>✕</.test(source);\n  expect(found, 'Create event screen should have ✕ button with navigate(\"home\")').to.be.true;\n});",
-    "lineNumber": 120
+    "lineNumber": 126
   },
   {
     "pattern": "je peux naviguer vers {string}",
     "keyword": "Then",
     "file": "navigation.steps.ts",
     "sourceCode": "Then('je peux naviguer vers {string}', async function (this: FestipodWorld, pageName: string) {\n  const screenId = resolveScreenId(pageName);\n  const source = this.getRenderedText();\n  // Check that a navigation link to this screen exists: navigate('screenId') or onClick={() => navigate('screenId')}\n  const pattern = new RegExp(`navigate\\\\s*\\\\(\\\\s*['\"]${screenId}['\"]\\\\s*\\\\)`);\n  const found = pattern.test(source);\n  if (!found) {\n    this.attach(`MISSING: Navigation to \"${screenId}\" not found in screen \"${this.currentScreenId}\"`, 'text/plain');\n    return 'pending';\n  }\n});",
-    "lineNumber": 128
+    "lineNumber": 134
   },
   {
     "pattern": "la navigation affiche {string} comme actif",
     "keyword": "Then",
     "file": "navigation.steps.ts",
     "sourceCode": "Then('la navigation affiche {string} comme actif', async function (this: FestipodWorld, menuItem: string) {\n  const source = this.getRenderedText();\n  // Check that NavBar has an item with this label and active: true\n  // Pattern: { icon: '...', label: 'menuItem', active: true }\n  const escapedItem = menuItem.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&');\n  const pattern = new RegExp(`label:\\\\s*['\"]${escapedItem}['\"][^}]*active:\\\\s*true`, 'i');\n  const found = pattern.test(source);\n  if (!found) {\n    this.attach(`MISSING: Menu item \"${menuItem}\" is not active in NavBar of screen \"${this.currentScreenId}\"`, 'text/plain');\n    return 'pending';\n  }\n});",
-    "lineNumber": 140
+    "lineNumber": 146
   },
   {
     "pattern": "l'écran {string} est affiché",
