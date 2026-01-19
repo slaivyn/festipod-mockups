@@ -21,6 +21,7 @@ export interface ParsedFeature {
   scenarios: ParsedScenario[];
   filePath: string;
   rawContent: string;
+  screenIds: string[];
 }
 
 export interface TestResult {

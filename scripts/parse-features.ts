@@ -1,6 +1,77 @@
 import { Glob } from 'bun';
 import type { ParsedFeature, ParsedScenario, ParsedStep } from '../src/types/gherkin';
 
+// Map French screen names to screen IDs (same as navigation.steps.ts)
+const screenNameMap: Record<string, string> = {
+  'accueil': 'home',
+  'liste des événements': 'events',
+  'découvrir': 'events',
+  'détail événement': 'event-detail',
+  'détail de l\'événement': 'event-detail',
+  'créer un événement': 'create-event',
+  'création d\'événement': 'create-event',
+  'inviter des amis': 'invite',
+  'invitation': 'invite',
+  'mon profil': 'profile',
+  'profil': 'profile',
+  'profil utilisateur': 'user-profile',
+  'profil d\'un utilisateur': 'user-profile',
+  'connexion': 'login',
+  'paramètres': 'settings',
+  'réglages': 'settings',
+  'points de rencontre': 'meeting-points',
+  'partage de profil': 'share-profile',
+  'mon réseau': 'friends-list',
+  'liste des participants': 'participants-list',
+};
+
+// Valid screen IDs (for direct matches)
+const validScreenIds = new Set([
+  'home', 'events', 'event-detail', 'create-event', 'invite',
+  'profile', 'user-profile', 'login', 'settings',
+  'meeting-points', 'share-profile', 'friends-list', 'participants-list',
+]);
+
+function resolveScreenId(name: string): string | null {
+  const normalized = name.toLowerCase().trim();
+  // First check if it's already a valid screen ID
+  if (validScreenIds.has(normalized)) {
+    return normalized;
+  }
+  // Then check the French name map
+  return screenNameMap[normalized] || null;
+}
+
+function extractScreenIdsFromSteps(steps: ParsedStep[]): Set<string> {
+  const screenIds = new Set<string>();
+
+  for (const step of steps) {
+    // Match patterns like: je vois l'écran "event-detail", je suis sur la page "accueil", etc.
+    const patterns = [
+      /je vois l'écran "([^"]+)"/gi,
+      /je suis sur la page "([^"]+)"/gi,
+      /je suis redirigé vers "([^"]+)"/gi,
+      /je navigue vers "([^"]+)"/gi,
+      /l'écran "([^"]+)" est affiché/gi,
+    ];
+
+    for (const pattern of patterns) {
+      let match;
+      while ((match = pattern.exec(step.text)) !== null) {
+        const captured = match[1];
+        if (captured) {
+          const screenId = resolveScreenId(captured);
+          if (screenId) {
+            screenIds.add(screenId);
+          }
+        }
+      }
+    }
+  }
+
+  return screenIds;
+}
+
 async function parseFeatures(): Promise<ParsedFeature[]> {
   const glob = new Glob('features/**/*.feature');
   const features: ParsedFeature[] = [];
@@ -163,6 +234,13 @@ function parseGherkinContent(content: string, filePath: string): ParsedFeature |
     scenarios.push(currentScenario);
   }
 
+  // Extract screen IDs from all steps (background + all scenarios)
+  const allSteps = [...background];
+  for (const scenario of scenarios) {
+    allSteps.push(...scenario.steps);
+  }
+  const screenIds = Array.from(extractScreenIdsFromSteps(allSteps)).sort();
+
   return {
     id,
     name,
@@ -174,6 +252,7 @@ function parseGherkinContent(content: string, filePath: string): ParsedFeature |
     scenarios,
     filePath,
     rawContent: content,
+    screenIds,
   };
 }
 
