@@ -20,3 +20,6 @@ Fonctionnalité: US-4 Ajouter/modifier/supprimer un commentaire à un atelier
 
   Scénario: Supprimer un commentaire
     * Scénario non implémenté
+
+  Scénario: Accéder à l'icône ajouter un commentaire
+    * Scénario non implémenté

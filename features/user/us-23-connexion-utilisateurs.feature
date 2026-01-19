@@ -14,10 +14,12 @@ Fonctionnalité: US-23 Me connecter avec d'autres utilisateurs
     Alors l'écran contient une section "Partager"
 
   Scénario: Voir le QR code
-    * Scénario non implémenté
+    Étant donné que je suis sur la page "partage profil"
+    Alors l'écran contient un texte "Scannez pour me retrouver sur Festipod"
 
   Scénario: Voir le lien de partage
-    * Scénario non implémenté
+    Étant donné que je suis sur la page "partage profil"
+    Alors l'écran contient une section "Mon lien de profil"
 
   Scénario: Accéder à l'écran de partage dédié
     Étant donné que je suis sur la page "mon profil"
@@ -25,4 +27,5 @@ Fonctionnalité: US-23 Me connecter avec d'autres utilisateurs
     Alors je vois l'écran "share-profile"
 
   Scénario: Vérifier les données du profil
-    * Scénario non implémenté
+    Étant donné que je suis sur la page "partage profil"
+    Alors l'écran contient un texte "Marie Dupont"

@@ -16,3 +16,9 @@ Fonctionnalité: US-1 Visualiser un événement terminé (ateliers)
 
   Scénario: Consulter les ressources d'un atelier
     * Scénario non implémenté
+
+  Scénario: Consulter le programme détaillé par journée/heure
+    * Scénario non implémenté
+
+  Scénario: Accéder à la zone de partage collective
+    * Scénario non implémenté

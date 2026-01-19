@@ -25,3 +25,6 @@ Fonctionnalité: US-7 M'inscrire/me désinscrire à un événement
 
   Scénario: Vérifier les données de l'écran
     * Scénario non implémenté
+
+  Scénario: Rechercher dans une base existante (Mobilizon)
+    * Scénario non implémenté

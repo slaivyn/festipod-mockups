@@ -6,7 +6,7 @@ import { findStepDefinition, type StepDefinitionInfo } from '../../data/stepDefi
 
 interface ScenarioResult {
   name: string;
-  status: 'passed' | 'failed' | 'skipped' | 'pending' | 'unknown';
+  status: 'passed' | 'failed' | 'skipped' | 'unknown';
   errorMessage?: string;
 }
 
@@ -20,7 +20,7 @@ interface ParsedBlock {
   lines: string[];
   startLine: number;
   name?: string;
-  status?: 'passed' | 'failed' | 'skipped' | 'pending' | 'unknown';
+  status?: 'passed' | 'failed' | 'skipped' | 'unknown';
   errorMessage?: string;
 }
 

@@ -9,18 +9,21 @@ Fonctionnalité: US-15 Visualiser les inscrits à un atelier/événement
   Contexte:
     Étant donné que je suis connecté en tant qu'utilisateur
 
-  Scénario: Accéder à la liste des inscrits
+  Scénario: Accéder à la liste des inscrits d'un événement
     Étant donné que je suis sur la page "détail événement"
     Alors je peux voir la liste des participants
 
-  Scénario: Voir la liste triée
+  Scénario: Accéder à la liste des inscrits d'un atelier
+    * Scénario non implémenté
+
+  Scénario: Voir la liste des participants d'un événement
     Étant donné que je suis sur la page "détail événement"
     Alors l'écran contient une section "Participants"
+
+  Scénario: Voir la liste des participants d'un atelier
+    * Scénario non implémenté
 
   Scénario: Cliquer sur un inscrit pour voir son profil
     Étant donné que je suis sur la page "détail événement"
     Quand je clique sur un participant
     Alors je vois l'écran "user-profile"
-
-  Scénario: Vérifier les données de l'écran
-    * Scénario non implémenté

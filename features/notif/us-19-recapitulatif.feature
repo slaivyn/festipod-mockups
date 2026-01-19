@@ -22,7 +22,10 @@ Fonctionnalité: US-19 Recevoir un récapitulatif des prochaines rencontres
     * Scénario non implémenté
 
   Scénario: Voir mes inscriptions
-    * Scénario non implémenté
+    Étant donné que je suis sur la page "mon profil"
+    Alors l'écran contient une section "Mes événements à venir"
 
   Scénario: Vérifier les données de l'accueil
-    * Scénario non implémenté
+    Étant donné que je suis sur la page "accueil"
+    Alors l'écran contient un texte "Barbecue d'été"
+    Et l'écran contient un texte "Soirée jeux de société"

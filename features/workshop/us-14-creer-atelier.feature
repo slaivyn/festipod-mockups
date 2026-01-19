@@ -13,13 +13,7 @@ Fonctionnalité: US-14 Créer/Modifier/Supprimer un atelier
     * Scénario non implémenté
 
   Scénario: Vérifier les champs obligatoires pour créer un atelier
-    Étant donné que l'écran "create-event" est affiché
-    Alors le formulaire contient les champs obligatoires suivants:
-      | Nom de l'événement |
-      | Date               |
-      | Heure de début     |
-      | Lieu               |
-      | Thématique         |
+    * Scénario non implémenté
 
   Scénario: Créer un atelier
     * Scénario non implémenté
@@ -28,4 +22,10 @@ Fonctionnalité: US-14 Créer/Modifier/Supprimer un atelier
     * Scénario non implémenté
 
   Scénario: Supprimer un atelier
+    * Scénario non implémenté
+
+  Scénario: Sélectionner mon événement parent
+    * Scénario non implémenté
+
+  Scénario: Définir les horaires de fin de l'atelier
     * Scénario non implémenté

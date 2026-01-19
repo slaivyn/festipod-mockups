@@ -24,17 +24,9 @@ export interface ParsedFeature {
   screenIds: string[];
 }
 
-export interface TestResult {
-  featureId: string;
-  scenarioName: string;
-  status: 'passed' | 'failed' | 'skipped' | 'pending';
-  duration?: number;
-  errorMessage?: string;
-}
-
 export interface ScenarioTestResult {
   name: string;
-  status: 'passed' | 'failed' | 'skipped' | 'pending' | 'unknown';
+  status: 'passed' | 'failed' | 'skipped' | 'unknown';
   errorMessage?: string;
 }
 

@@ -22,119 +22,147 @@ export const stepDefinitions: StepDefinitionInfo[] = [
     "keyword": "Given",
     "file": "navigation.steps.ts",
     "sourceCode": "Given('je suis sur la page {string}', async function (this: FestipodWorld, pageName: string) {\n  const screenId = resolveScreenId(pageName);\n  this.navigateTo(`#/demo/${screenId}`);\n});",
-    "lineNumber": 37
+    "lineNumber": 38
   },
   {
     "pattern": "je suis connecté en tant qu'utilisateur",
     "keyword": "Given",
     "file": "navigation.steps.ts",
     "sourceCode": "Given('je suis connecté en tant qu\\'utilisateur', async function (this: FestipodWorld) {\n  this.isAuthenticated = true;\n});",
-    "lineNumber": 42
+    "lineNumber": 43
   },
   {
     "pattern": "je suis connecté",
     "keyword": "Given",
     "file": "navigation.steps.ts",
     "sourceCode": "Given('je suis connecté', async function (this: FestipodWorld) {\n  this.isAuthenticated = true;\n});",
-    "lineNumber": 46
+    "lineNumber": 47
   },
   {
     "pattern": "je ne suis pas connecté",
     "keyword": "Given",
     "file": "navigation.steps.ts",
     "sourceCode": "Given('je ne suis pas connecté', async function (this: FestipodWorld) {\n  this.isAuthenticated = false;\n});",
-    "lineNumber": 50
+    "lineNumber": 51
   },
   {
     "pattern": "je navigue vers {string}",
     "keyword": "When",
     "file": "navigation.steps.ts",
     "sourceCode": "When('je navigue vers {string}', async function (this: FestipodWorld, pageName: string) {\n  const screenId = resolveScreenId(pageName);\n  this.navigateTo(`#/demo/${screenId}`);\n});",
-    "lineNumber": 54
+    "lineNumber": 55
   },
   {
     "pattern": "je clique sur {string}",
     "keyword": "When",
     "file": "navigation.steps.ts",
-    "sourceCode": "When('je clique sur {string}', async function (this: FestipodWorld, elementName: string) {\n  const source = this.getRenderedText();\n  // Check that a clickable element with this text exists (onClick handler + text content)\n  const escapedName = elementName.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&');\n  const pattern = new RegExp(`onClick[^>]*>[^<]*${escapedName}`, 'i');\n  const found = pattern.test(source);\n  if (!found) {\n    this.attach(`MISSING: Clickable element \"${elementName}\" not found in screen \"${this.currentScreenId}\"`, 'text/plain');\n    return 'pending';\n  }\n});",
-    "lineNumber": 59
+    "sourceCode": "When('je clique sur {string}', async function (this: FestipodWorld, elementName: string) {\n  const source = this.getRenderedText();\n  // Check that a clickable element with this text exists (onClick handler + text content)\n  const escapedName = elementName.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&');\n  const pattern = new RegExp(`onClick[^>]*>[^<]*${escapedName}`, 'i');\n  expect(pattern.test(source), `Clickable element \"${elementName}\" should exist in screen \"${this.currentScreenId}\"`).to.be.true;\n});",
+    "lineNumber": 60
   },
   {
     "pattern": "je sélectionne {string}",
     "keyword": "When",
     "file": "navigation.steps.ts",
-    "sourceCode": "When('je sélectionne {string}', async function (this: FestipodWorld, elementName: string) {\n  const source = this.getRenderedText();\n  // Check that a selectable element with this text exists\n  const escapedName = elementName.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&');\n  const pattern = new RegExp(`onClick[^>]*>[^<]*${escapedName}`, 'i');\n  const found = pattern.test(source);\n  if (!found) {\n    this.attach(`MISSING: Selectable element \"${elementName}\" not found in screen \"${this.currentScreenId}\"`, 'text/plain');\n    return 'pending';\n  }\n});",
-    "lineNumber": 71
+    "sourceCode": "When('je sélectionne {string}', async function (this: FestipodWorld, elementName: string) {\n  const source = this.getRenderedText();\n  // Check that a selectable element with this text exists\n  const escapedName = elementName.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&');\n  const pattern = new RegExp(`onClick[^>]*>[^<]*${escapedName}`, 'i');\n  expect(pattern.test(source), `Selectable element \"${elementName}\" should exist in screen \"${this.currentScreenId}\"`).to.be.true;\n});",
+    "lineNumber": 68
   },
   {
     "pattern": "je clique sur le bouton {string}",
     "keyword": "When",
     "file": "navigation.steps.ts",
-    "sourceCode": "When('je clique sur le bouton {string}', async function (this: FestipodWorld, buttonName: string) {\n  const source = this.getRenderedText();\n  // Check that a Button component with this label exists\n  const escapedName = buttonName.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&');\n  const pattern = new RegExp(`<Button[^>]*>[^<]*${escapedName}[^<]*</Button>`, 'i');\n  const found = pattern.test(source);\n  if (!found) {\n    this.attach(`MISSING: Button \"${buttonName}\" not found in screen \"${this.currentScreenId}\"`, 'text/plain');\n    return 'pending';\n  }\n});",
-    "lineNumber": 83
+    "sourceCode": "When('je clique sur le bouton {string}', async function (this: FestipodWorld, buttonName: string) {\n  const source = this.getRenderedText();\n  // Check that a Button component with this label exists\n  const escapedName = buttonName.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&');\n  const pattern = new RegExp(`<Button[^>]*>[^<]*${escapedName}[^<]*</Button>`, 'i');\n  expect(pattern.test(source), `Button \"${buttonName}\" should exist in screen \"${this.currentScreenId}\"`).to.be.true;\n});",
+    "lineNumber": 76
   },
   {
     "pattern": "je clique sur un participant",
     "keyword": "When",
     "file": "navigation.steps.ts",
     "sourceCode": "When('je clique sur un participant', async function (this: FestipodWorld) {\n  this.navigateTo('#/demo/user-profile');\n});",
-    "lineNumber": 95
+    "lineNumber": 84
   },
   {
     "pattern": "je clique sur un événement",
     "keyword": "When",
     "file": "navigation.steps.ts",
     "sourceCode": "When('je clique sur un événement', async function (this: FestipodWorld) {\n  this.navigateTo('#/demo/event-detail');\n});",
-    "lineNumber": 99
+    "lineNumber": 88
   },
   {
     "pattern": "je suis redirigé vers {string}",
     "keyword": "Then",
     "file": "navigation.steps.ts",
     "sourceCode": "Then('je suis redirigé vers {string}', async function (this: FestipodWorld, pageName: string) {\n  const screenId = resolveScreenId(pageName);\n  expect(this.currentScreenId).to.equal(screenId);\n});",
-    "lineNumber": 103
+    "lineNumber": 92
   },
   {
     "pattern": "je vois l'écran {string}",
     "keyword": "Then",
     "file": "navigation.steps.ts",
     "sourceCode": "Then('je vois l\\'écran {string}', async function (this: FestipodWorld, pageName: string) {\n  const screenId = resolveScreenId(pageName);\n  expect(this.currentScreenId).to.equal(screenId);\n});",
-    "lineNumber": 108
+    "lineNumber": 97
   },
   {
     "pattern": "je reste sur la page {string}",
     "keyword": "Then",
     "file": "navigation.steps.ts",
     "sourceCode": "Then('je reste sur la page {string}', async function (this: FestipodWorld, pageName: string) {\n  const screenId = resolveScreenId(pageName);\n  expect(this.currentScreenId).to.equal(screenId);\n});",
-    "lineNumber": 113
+    "lineNumber": 102
   },
   {
     "pattern": "l'écran contient une section {string}",
     "keyword": "Then",
     "file": "navigation.steps.ts",
-    "sourceCode": "Then('l\\'écran contient une section {string}', async function (this: FestipodWorld, sectionName: string) {\n  const found = this.hasText(sectionName);\n  if (!found) {\n    this.attach(`MISSING SECTION: \"${sectionName}\" not found in screen \"${this.currentScreenId}\"`, 'text/plain');\n    return 'pending';\n  }\n});",
-    "lineNumber": 118
+    "sourceCode": "Then('l\\'écran contient une section {string}', async function (this: FestipodWorld, sectionName: string) {\n  expect(this.hasText(sectionName), `Section \"${sectionName}\" should be present in screen \"${this.currentScreenId}\"`).to.be.true;\n});",
+    "lineNumber": 107
   },
   {
     "pattern": "je peux annuler et revenir à l'écran précédent",
     "keyword": "Then",
     "file": "navigation.steps.ts",
     "sourceCode": "Then('je peux annuler et revenir à l\\'écran précédent', async function (this: FestipodWorld) {\n  expect(this.currentScreenId).to.equal('create-event');\n  const source = this.getRenderedText();\n  // Detect ✕ close button with onClick handler that calls navigate()\n  const found = /onClick\\s*=\\s*\\{\\s*\\(\\)\\s*=>\\s*navigate\\s*\\(['\"]home['\"]\\)\\s*\\}[^>]*>✕</.test(source);\n  expect(found, 'Create event screen should have ✕ button with navigate(\"home\")').to.be.true;\n});",
-    "lineNumber": 126
+    "lineNumber": 111
   },
   {
     "pattern": "je peux naviguer vers {string}",
     "keyword": "Then",
     "file": "navigation.steps.ts",
-    "sourceCode": "Then('je peux naviguer vers {string}', async function (this: FestipodWorld, pageName: string) {\n  const screenId = resolveScreenId(pageName);\n  const source = this.getRenderedText();\n  // Check that a navigation link to this screen exists: navigate('screenId') or onClick={() => navigate('screenId')}\n  const pattern = new RegExp(`navigate\\\\s*\\\\(\\\\s*['\"]${screenId}['\"]\\\\s*\\\\)`);\n  const found = pattern.test(source);\n  if (!found) {\n    this.attach(`MISSING: Navigation to \"${screenId}\" not found in screen \"${this.currentScreenId}\"`, 'text/plain');\n    return 'pending';\n  }\n});",
-    "lineNumber": 134
+    "sourceCode": "Then('je peux naviguer vers {string}', async function (this: FestipodWorld, pageName: string) {\n  const screenId = resolveScreenId(pageName);\n  const source = this.getRenderedText();\n  // Check that a navigation link to this screen exists: navigate('screenId') or onClick={() => navigate('screenId')}\n  const pattern = new RegExp(`navigate\\\\s*\\\\(\\\\s*['\"]${screenId}['\"]\\\\s*\\\\)`);\n  expect(pattern.test(source), `Navigation to \"${screenId}\" should exist in screen \"${this.currentScreenId}\"`).to.be.true;\n});",
+    "lineNumber": 119
   },
   {
     "pattern": "la navigation affiche {string} comme actif",
     "keyword": "Then",
     "file": "navigation.steps.ts",
-    "sourceCode": "Then('la navigation affiche {string} comme actif', async function (this: FestipodWorld, menuItem: string) {\n  const source = this.getRenderedText();\n  // Check that NavBar has an item with this label and active: true\n  // Pattern: { icon: '...', label: 'menuItem', active: true }\n  const escapedItem = menuItem.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&');\n  const pattern = new RegExp(`label:\\\\s*['\"]${escapedItem}['\"][^}]*active:\\\\s*true`, 'i');\n  const found = pattern.test(source);\n  if (!found) {\n    this.attach(`MISSING: Menu item \"${menuItem}\" is not active in NavBar of screen \"${this.currentScreenId}\"`, 'text/plain');\n    return 'pending';\n  }\n});",
-    "lineNumber": 146
+    "sourceCode": "Then('la navigation affiche {string} comme actif', async function (this: FestipodWorld, menuItem: string) {\n  const source = this.getRenderedText();\n  // Check that NavBar has an item with this label and active: true\n  // Pattern: { icon: '...', label: 'menuItem', active: true }\n  const escapedItem = menuItem.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&');\n  const pattern = new RegExp(`label:\\\\s*['\"]${escapedItem}['\"][^}]*active:\\\\s*true`, 'i');\n  expect(pattern.test(source), `Menu item \"${menuItem}\" should be active in NavBar of screen \"${this.currentScreenId}\"`).to.be.true;\n});",
+    "lineNumber": 127
+  },
+  {
+    "pattern": "l'écran contient un bouton {string}",
+    "keyword": "Then",
+    "file": "navigation.steps.ts",
+    "sourceCode": "Then('l\\'écran contient un bouton {string}', async function (this: FestipodWorld, buttonText: string) {\n  expect(this.hasText(buttonText), `Button \"${buttonText}\" should be present in screen \"${this.currentScreenId}\"`).to.be.true;\n});",
+    "lineNumber": 136
+  },
+  {
+    "pattern": "l'écran contient un champ {string}",
+    "keyword": "Then",
+    "file": "navigation.steps.ts",
+    "sourceCode": "Then('l\\'écran contient un champ {string}', async function (this: FestipodWorld, fieldLabel: string) {\n  expect(this.hasText(fieldLabel), `Field \"${fieldLabel}\" should be present in screen \"${this.currentScreenId}\"`).to.be.true;\n});",
+    "lineNumber": 140
+  },
+  {
+    "pattern": "l'écran contient un texte {string}",
+    "keyword": "Then",
+    "file": "navigation.steps.ts",
+    "sourceCode": "Then('l\\'écran contient un texte {string}', async function (this: FestipodWorld, text: string) {\n  expect(this.hasText(text), `Text \"${text}\" should be present in screen \"${this.currentScreenId}\"`).to.be.true;\n});",
+    "lineNumber": 144
+  },
+  {
+    "pattern": "l'écran contient un avatar",
+    "keyword": "Then",
+    "file": "navigation.steps.ts",
+    "sourceCode": "Then('l\\'écran contient un avatar', async function (this: FestipodWorld) {\n  const source = this.getRenderedText();\n  const hasAvatar = /<Avatar/.test(source);\n  expect(hasAvatar, `Avatar should be present in screen \"${this.currentScreenId}\"`).to.be.true;\n});",
+    "lineNumber": 148
   },
   {
     "pattern": "l'écran {string} est affiché",
@@ -151,74 +179,32 @@ export const stepDefinitions: StepDefinitionInfo[] = [
     "lineNumber": 10
   },
   {
-    "pattern": "je remplis le champ {string} avec {string}",
-    "keyword": "When",
-    "file": "form.steps.ts",
-    "sourceCode": "When('je remplis le champ {string} avec {string}', async function (this: FestipodWorld, fieldName: string, value: string) {\n  // Cannot fill form fields without browser automation\n  this.attach(`CANNOT TEST: Filling field \"${fieldName}\" with \"${value}\" requires browser automation`, 'text/plain');\n  return 'pending';\n});",
-    "lineNumber": 16
-  },
-  {
-    "pattern": "je laisse le champ {string} vide",
-    "keyword": "When",
-    "file": "form.steps.ts",
-    "sourceCode": "When('je laisse le champ {string} vide', async function (this: FestipodWorld, fieldName: string) {\n  // Cannot manipulate form fields without browser automation\n  this.attach(`CANNOT TEST: Leaving field \"${fieldName}\" empty requires browser automation`, 'text/plain');\n  return 'pending';\n});",
-    "lineNumber": 22
-  },
-  {
-    "pattern": "je soumets le formulaire",
-    "keyword": "When",
-    "file": "form.steps.ts",
-    "sourceCode": "When('je soumets le formulaire', async function (this: FestipodWorld) {\n  // Cannot submit forms without browser automation\n  this.attach('CANNOT TEST: Form submission requires browser automation', 'text/plain');\n  return 'pending';\n});",
-    "lineNumber": 28
-  },
-  {
     "pattern": "le formulaire contient le champ obligatoire {string}",
     "keyword": "Then",
     "file": "form.steps.ts",
-    "sourceCode": "Then('le formulaire contient le champ obligatoire {string}', async function (this: FestipodWorld, fieldName: string) {\n  // This step is for form screens only (create-event)\n  // For display screens, use different steps\n  if (this.currentScreenId !== 'create-event') {\n    this.attach(`WRONG STEP: \"le formulaire contient le champ obligatoire\" is for forms. Screen \"${this.currentScreenId}\" is not a form.`, 'text/plain');\n    return 'pending';\n  }\n  const source = this.getRenderedText();\n  // CreateEventScreen.tsx: Required fields have \" *\" after label: >Label *<\n  const escapedName = fieldName.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&');\n  const pattern = new RegExp(`>${escapedName}\\\\s*\\\\*<`);\n  expect(pattern.test(source), `Field \"${fieldName}\" should be marked as required (with *) in create-event screen`).to.be.true;\n});",
-    "lineNumber": 34
+    "sourceCode": "Then('le formulaire contient le champ obligatoire {string}', async function (this: FestipodWorld, fieldName: string) {\n  // This step is for form screens only (create-event)\n  expect(this.currentScreenId, 'This step is for form screens only').to.equal('create-event');\n  const source = this.getRenderedText();\n  // CreateEventScreen.tsx: Required fields have \" *\" after label: >Label *<\n  const escapedName = fieldName.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&');\n  const pattern = new RegExp(`>${escapedName}\\\\s*\\\\*<`);\n  expect(pattern.test(source), `Field \"${fieldName}\" should be marked as required (with *) in create-event screen`).to.be.true;\n});",
+    "lineNumber": 19
   },
   {
     "pattern": "le formulaire contient les champs obligatoires suivants:",
     "keyword": "Then",
     "file": "form.steps.ts",
-    "sourceCode": "Then('le formulaire contient les champs obligatoires suivants:', async function (this: FestipodWorld, dataTable) {\n  // This step is for form screens only (create-event)\n  // For display screens, use different steps\n  if (this.currentScreenId !== 'create-event') {\n    this.attach(`WRONG STEP: \"le formulaire contient les champs obligatoires\" is for forms. Screen \"${this.currentScreenId}\" is not a form.`, 'text/plain');\n    return 'pending';\n  }\n  const source = this.getRenderedText();\n  const expectedFields = dataTable.raw().flat();\n  expectedFields.forEach((fieldName: string) => {\n    // CreateEventScreen.tsx: Required fields have \" *\" after label: >Label *<\n    const escapedName = fieldName.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&');\n    const pattern = new RegExp(`>${escapedName}\\\\s*\\\\*<`);\n    expect(pattern.test(source), `Field \"${fieldName}\" should be marked as required (with *) in create-event screen`).to.be.true;\n  });",
-    "lineNumber": 48
+    "sourceCode": "Then('le formulaire contient les champs obligatoires suivants:', async function (this: FestipodWorld, dataTable) {\n  // This step is for form screens only (create-event)\n  expect(this.currentScreenId, 'This step is for form screens only').to.equal('create-event');\n  const source = this.getRenderedText();\n  const expectedFields = dataTable.raw().flat();\n  expectedFields.forEach((fieldName: string) => {\n    // CreateEventScreen.tsx: Required fields have \" *\" after label: >Label *<\n    const escapedName = fieldName.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&');\n    const pattern = new RegExp(`>${escapedName}\\\\s*\\\\*<`);\n    expect(pattern.test(source), `Field \"${fieldName}\" should be marked as required (with *) in create-event screen`).to.be.true;\n  });",
+    "lineNumber": 29
   },
   {
     "pattern": "le champ {string} est facultatif",
     "keyword": "Then",
     "file": "form.steps.ts",
     "sourceCode": "Then('le champ {string} est facultatif', async function (this: FestipodWorld, fieldName: string) {\n  const source = this.getRenderedText();\n  // Optional fields have label without \" *\": >Label< followed by Input\n  const escapedName = fieldName.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&');\n  // Check field exists but NOT marked as required\n  const existsPattern = new RegExp(`>${escapedName}<`);\n  const requiredPattern = new RegExp(`>${escapedName}\\\\s*\\\\*<`);\n  expect(existsPattern.test(source), `Field \"${fieldName}\" should exist in screen`).to.be.true;\n  expect(requiredPattern.test(source), `Field \"${fieldName}\" should NOT be marked as required`).to.be.false;\n});",
-    "lineNumber": 65
-  },
-  {
-    "pattern": "le champ {string} affiche {string}",
-    "keyword": "Then",
-    "file": "form.steps.ts",
-    "sourceCode": "Then('le champ {string} affiche {string}', async function (this: FestipodWorld, fieldName: string, expectedValue: string) {\n  // Cannot verify displayed field values without browser automation\n  this.attach(`CANNOT TEST: Verifying field \"${fieldName}\" displays \"${expectedValue}\" requires browser automation`, 'text/plain');\n  return 'pending';\n});",
-    "lineNumber": 76
+    "lineNumber": 42
   },
   {
     "pattern": "le champ {string} est présent",
     "keyword": "Then",
     "file": "form.steps.ts",
-    "sourceCode": "Then('le champ {string} est présent', async function (this: FestipodWorld, fieldName: string) {\n  const source = this.getRenderedText();\n  // Check that field label exists in screen source\n  const escapedName = fieldName.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&');\n  const pattern = new RegExp(`>${escapedName}[^<]*<`);\n  const found = pattern.test(source);\n  if (!found) {\n    this.attach(`NOT FOUND: Field \"${fieldName}\" not present in screen \"${this.currentScreenId}\"`, 'text/plain');\n    return 'pending';\n  }\n});",
-    "lineNumber": 82
-  },
-  {
-    "pattern": "une erreur de validation est affichée pour {string}",
-    "keyword": "Then",
-    "file": "form.steps.ts",
-    "sourceCode": "Then('une erreur de validation est affichée pour {string}', async function (this: FestipodWorld, fieldName: string) {\n  // Cannot verify validation errors without browser automation\n  this.attach(`CANNOT TEST: Validation error for \"${fieldName}\" requires browser automation`, 'text/plain');\n  return 'pending';\n});",
-    "lineNumber": 94
-  },
-  {
-    "pattern": "le formulaire affiche {int} champs",
-    "keyword": "Then",
-    "file": "form.steps.ts",
-    "sourceCode": "Then('le formulaire affiche {int} champs', async function (this: FestipodWorld, count: number) {\n  // Cannot count form fields without specific analysis\n  this.attach(`CANNOT TEST: Counting ${count} form fields requires more specific screen analysis`, 'text/plain');\n  return 'pending';\n});",
-    "lineNumber": 100
+    "sourceCode": "Then('le champ {string} est présent', async function (this: FestipodWorld, fieldName: string) {\n  const source = this.getRenderedText();\n  // Check that field label exists in screen source\n  const escapedName = fieldName.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&');\n  const pattern = new RegExp(`>${escapedName}[^<]*<`);\n  expect(pattern.test(source), `Field \"${fieldName}\" should be present in screen`).to.be.true;\n});",
+    "lineNumber": 53
   },
   {
     "pattern": "je peux voir la liste des participants",
@@ -242,172 +228,102 @@ export const stepDefinitions: StepDefinitionInfo[] = [
     "lineNumber": 26
   },
   {
-    "pattern": "la page affiche {int} éléments",
-    "keyword": "Then",
-    "file": "screen.steps.ts",
-    "sourceCode": "Then('la page affiche {int} éléments', async function (this: FestipodWorld, count: number) {\n  // Cannot count rendered elements without browser automation\n  this.attach(`CANNOT TEST: Counting ${count} elements requires browser automation`, 'text/plain');\n  return 'pending';\n});",
-    "lineNumber": 37
-  },
-  {
     "pattern": "je peux voir mon profil",
     "keyword": "Then",
     "file": "screen.steps.ts",
     "sourceCode": "Then('je peux voir mon profil', async function (this: FestipodWorld) {\n  expect(this.currentScreenId).to.equal('profile');\n  const source = this.getRenderedText();\n  // ProfileScreen.tsx has: <Avatar initials=\"MD\" size=\"lg\" />, <Title>Marie Dupont</Title>, @mariedupont\n  expect(/<Avatar[^>]*initials=\"MD\"[^>]*size=\"lg\"/.test(source), 'Profile should have Avatar with initials=\"MD\" and size=\"lg\"').to.be.true;\n  expect(/<Title[^>]*>Marie Dupont<\\/Title>/.test(source), 'Profile should have Title \"Marie Dupont\"').to.be.true;\n  expect(/@mariedupont/.test(source), 'Profile should have username @mariedupont').to.be.true;\n});",
-    "lineNumber": 43
+    "lineNumber": 40
   },
   {
     "pattern": "je peux voir le profil de l'utilisateur",
     "keyword": "Then",
     "file": "screen.steps.ts",
     "sourceCode": "Then('je peux voir le profil de l\\'utilisateur', async function (this: FestipodWorld) {\n  expect(this.currentScreenId).to.equal('user-profile');\n  const source = this.getRenderedText();\n  // UserProfileScreen.tsx has: <Avatar initials=\"JD\" size=\"lg\" />, <Title>Jean Durand</Title>, @jeandurand\n  expect(/<Avatar[^>]*initials=\"JD\"[^>]*size=\"lg\"/.test(source), 'User profile should have Avatar with initials=\"JD\" and size=\"lg\"').to.be.true;\n  expect(/<Title[^>]*>Jean Durand<\\/Title>/.test(source), 'User profile should have Title \"Jean Durand\"').to.be.true;\n  expect(/@jeandurand/.test(source), 'User profile should have username @jeandurand').to.be.true;\n});",
-    "lineNumber": 52
+    "lineNumber": 49
   },
   {
     "pattern": "je peux voir la liste des événements",
     "keyword": "Then",
     "file": "screen.steps.ts",
-    "sourceCode": "Then('je peux voir la liste des événements', async function (this: FestipodWorld) {\n  const source = this.getRenderedText();\n  if (this.currentScreenId === 'home') {\n    // HomeScreen.tsx has: \"Événements à venir\" text and EventCard components\n    expect(/Événements à venir/.test(source), 'Home screen should have \"Événements à venir\" text').to.be.true;\n  } else if (this.currentScreenId === 'events') {\n    // EventsScreen.tsx has: EventCard components with event data\n    expect(/<Card[^>]*onClick/.test(source), 'Events screen should have clickable Card components').to.be.true;\n  } else {\n    this.attach(`UNEXPECTED SCREEN: \"${this.currentScreenId}\" is not expected to show events list`, 'text/plain');\n    return 'pending';\n  }\n});",
-    "lineNumber": 61
+    "sourceCode": "Then('je peux voir la liste des événements', async function (this: FestipodWorld) {\n  const source = this.getRenderedText();\n  if (this.currentScreenId === 'home') {\n    // HomeScreen.tsx has: \"Événements à venir\" text and EventCard components\n    expect(/Événements à venir/.test(source), 'Home screen should have \"Événements à venir\" text').to.be.true;\n  } else if (this.currentScreenId === 'events') {\n    // EventsScreen.tsx has: EventCard components with event data\n    expect(/<Card[^>]*onClick/.test(source), 'Events screen should have clickable Card components').to.be.true;\n  } else {\n    expect.fail(`Unexpected screen \"${this.currentScreenId}\" - events list should be on home or events screen`);\n  }\n});",
+    "lineNumber": 58
   },
   {
     "pattern": "je peux voir le QR code",
     "keyword": "Then",
     "file": "screen.steps.ts",
-    "sourceCode": "Then('je peux voir le QR code', async function (this: FestipodWorld) {\n  const source = this.getRenderedText();\n  if (this.currentScreenId === 'share-profile') {\n    // ShareProfileScreen.tsx has: \"QR Code\" comment and \"Scannez pour me retrouver\" text\n    expect(/QR Code/.test(source), 'Share profile should have \"QR Code\" text').to.be.true;\n    expect(/Scannez pour me retrouver/.test(source), 'Share profile should have \"Scannez pour me retrouver\" text').to.be.true;\n  } else if (this.currentScreenId === 'meeting-points') {\n    // MeetingPointsScreen.tsx has: \"Mon QR Code\" text and \"Scannez pour m'ajouter\"\n    expect(/Mon QR Code/.test(source), 'Meeting points should have \"Mon QR Code\" text').to.be.true;\n    expect(/Scannez pour m'ajouter/.test(source), 'Meeting points should have \"Scannez pour m\\'ajouter\" text').to.be.true;\n  } else {\n    // QR code is NOT on this screen\n    this.attach(`NOT ON THIS SCREEN: QR code is on share-profile or meeting-points, not \"${this.currentScreenId}\"`, 'text/plain');\n    return 'pending';\n  }\n});",
-    "lineNumber": 75
+    "sourceCode": "Then('je peux voir le QR code', async function (this: FestipodWorld) {\n  const source = this.getRenderedText();\n  if (this.currentScreenId === 'share-profile') {\n    // ShareProfileScreen.tsx has: \"QR Code\" comment and \"Scannez pour me retrouver\" text\n    expect(/QR Code/.test(source), 'Share profile should have \"QR Code\" text').to.be.true;\n    expect(/Scannez pour me retrouver/.test(source), 'Share profile should have \"Scannez pour me retrouver\" text').to.be.true;\n  } else if (this.currentScreenId === 'meeting-points') {\n    // MeetingPointsScreen.tsx has: \"Mon QR Code\" text and \"Scannez pour m'ajouter\"\n    expect(/Mon QR Code/.test(source), 'Meeting points should have \"Mon QR Code\" text').to.be.true;\n    expect(/Scannez pour m'ajouter/.test(source), 'Meeting points should have \"Scannez pour m\\'ajouter\" text').to.be.true;\n  } else {\n    expect.fail(`QR code should be on share-profile or meeting-points, not \"${this.currentScreenId}\"`);\n  }\n});",
+    "lineNumber": 71
   },
   {
     "pattern": "je peux voir le lien de partage",
     "keyword": "Then",
     "file": "screen.steps.ts",
-    "sourceCode": "Then('je peux voir le lien de partage', async function (this: FestipodWorld) {\n  const source = this.getRenderedText();\n  if (this.currentScreenId === 'share-profile') {\n    // ShareProfileScreen.tsx has: \"Mon lien de profil\" text and profileLink variable\n    expect(/Mon lien de profil/.test(source), 'Share profile should have \"Mon lien de profil\" text').to.be.true;\n    expect(/festipod\\.app\\/u\\//.test(source), 'Share profile should have profile link URL').to.be.true;\n  } else {\n    // Share link is NOT on this screen\n    this.attach(`NOT ON THIS SCREEN: Share link is on share-profile, not \"${this.currentScreenId}\"`, 'text/plain');\n    return 'pending';\n  }\n});",
-    "lineNumber": 92
-  },
-  {
-    "pattern": "un événement existe avec les données:",
-    "keyword": "Given",
-    "file": "screen.steps.ts",
-    "sourceCode": "Given('un événement existe avec les données:', async function (this: FestipodWorld, dataTable) {\n  // Cannot set up test data without backend/database\n  const eventData = dataTable.rowsHash();\n  this.attach(`CANNOT TEST: Setting up event data requires backend: ${JSON.stringify(eventData)}`, 'text/plain');\n  return 'pending';\n});",
-    "lineNumber": 105
-  },
-  {
-    "pattern": "un utilisateur existe avec les données:",
-    "keyword": "Given",
-    "file": "screen.steps.ts",
-    "sourceCode": "Given('un utilisateur existe avec les données:', async function (this: FestipodWorld, dataTable) {\n  // Cannot set up test data without backend/database\n  const userData = dataTable.rowsHash();\n  this.attach(`CANNOT TEST: Setting up user data requires backend: ${JSON.stringify(userData)}`, 'text/plain');\n  return 'pending';\n});",
-    "lineNumber": 112
+    "sourceCode": "Then('je peux voir le lien de partage', async function (this: FestipodWorld) {\n  expect(this.currentScreenId, 'Share link should be on share-profile screen').to.equal('share-profile');\n  const source = this.getRenderedText();\n  // ShareProfileScreen.tsx has: \"Mon lien de profil\" text and profileLink variable\n  expect(/Mon lien de profil/.test(source), 'Share profile should have \"Mon lien de profil\" text').to.be.true;\n  expect(/festipod\\.app\\/u\\//.test(source), 'Share profile should have profile link URL').to.be.true;\n});",
+    "lineNumber": 86
   },
   {
     "pattern": "je visualise l'événement {string}",
     "keyword": "Given",
     "file": "screen.steps.ts",
     "sourceCode": "Given('je visualise l\\'événement {string}', async function (this: FestipodWorld, eventName: string) {\n  this.navigateTo('#/demo/event-detail');\n  expect(this.currentScreen, 'Event detail screen should be loaded').to.not.be.null;\n  this.attach(`Viewing event: ${eventName}`, 'text/plain');\n});",
-    "lineNumber": 119
+    "lineNumber": 97
   },
   {
     "pattern": "je visualise le profil de {string}",
     "keyword": "Given",
     "file": "screen.steps.ts",
     "sourceCode": "Given('je visualise le profil de {string}', async function (this: FestipodWorld, userName: string) {\n  this.navigateTo('#/demo/user-profile');\n  expect(this.currentScreen, 'User profile screen should be loaded').to.not.be.null;\n  this.attach(`Viewing profile: ${userName}`, 'text/plain');\n});",
-    "lineNumber": 125
+    "lineNumber": 103
   },
   {
     "pattern": "l'écran affiche les informations de l'événement",
     "keyword": "Then",
     "file": "screen.steps.ts",
     "sourceCode": "Then('l\\'écran affiche les informations de l\\'événement', async function (this: FestipodWorld) {\n  expect(this.currentScreenId).to.equal('event-detail');\n  const source = this.getRenderedText();\n  // EventDetailScreen.tsx has: <Title>, 📅, 🕓, 📍 emojis, and \"À propos\" section\n  expect(/<Title[^>]*>[^<]+<\\/Title>/.test(source), 'Event detail should have a Title').to.be.true;\n  expect(/📅/.test(source), 'Event detail should have date emoji 📅').to.be.true;\n  expect(/🕓/.test(source), 'Event detail should have time emoji 🕓').to.be.true;\n  expect(/📍/.test(source), 'Event detail should have location emoji 📍').to.be.true;\n  expect(/À propos/.test(source), 'Event detail should have \"À propos\" section').to.be.true;\n});",
-    "lineNumber": 131
+    "lineNumber": 109
   },
   {
     "pattern": "l'écran affiche les informations du profil",
     "keyword": "Then",
     "file": "screen.steps.ts",
     "sourceCode": "Then('l\\'écran affiche les informations du profil', async function (this: FestipodWorld) {\n  const source = this.getRenderedText();\n  if (this.currentScreenId === 'profile') {\n    // ProfileScreen.tsx has: <Avatar initials=\"MD\" size=\"lg\" />, <Title>Marie Dupont</Title>, @mariedupont\n    expect(/<Avatar[^>]*initials=\"MD\"/.test(source), 'Profile should have Avatar with initials=\"MD\"').to.be.true;\n    expect(/<Title[^>]*>Marie Dupont<\\/Title>/.test(source), 'Profile should have Title \"Marie Dupont\"').to.be.true;\n    expect(/@mariedupont/.test(source), 'Profile should have username @mariedupont').to.be.true;\n  } else if (this.currentScreenId === 'user-profile') {\n    // UserProfileScreen.tsx has: <Avatar initials=\"JD\" size=\"lg\" />, <Title>Jean Durand</Title>, @jeandurand\n    expect(/<Avatar[^>]*initials=\"JD\"/.test(source), 'User profile should have Avatar with initials=\"JD\"').to.be.true;\n    expect(/<Title[^>]*>Jean Durand<\\/Title>/.test(source), 'User profile should have Title \"Jean Durand\"').to.be.true;\n    expect(/@jeandurand/.test(source), 'User profile should have username @jeandurand').to.be.true;\n  } else {\n    expect.fail(`Unexpected screen \"${this.currentScreenId}\" for profile info check`);\n  }\n});",
-    "lineNumber": 142
-  },
-  {
-    "pattern": "je peux ajouter un commentaire",
-    "keyword": "Then",
-    "file": "screen.steps.ts",
-    "sourceCode": "Then('je peux ajouter un commentaire', async function (this: FestipodWorld) {\n  // EventDetailScreen.tsx does NOT have comment functionality (no textarea, no \"commentaire\" text)\n  // This feature is NOT implemented in the UI\n  this.attach('NOT IMPLEMENTED: Comment functionality not in EventDetailScreen.tsx', 'text/plain');\n  return 'pending';\n});",
-    "lineNumber": 159
-  },
-  {
-    "pattern": "je peux ajouter une note",
-    "keyword": "Then",
-    "file": "screen.steps.ts",
-    "sourceCode": "Then('je peux ajouter une note', async function (this: FestipodWorld) {\n  // No screen has note functionality implemented\n  // This feature is NOT implemented in the UI\n  this.attach('NOT IMPLEMENTED: Note functionality not implemented in any screen', 'text/plain');\n  return 'pending';\n});",
-    "lineNumber": 166
-  },
-  {
-    "pattern": "je peux filtrer les événements par période",
-    "keyword": "Then",
-    "file": "screen.steps.ts",
-    "sourceCode": "Then('je peux filtrer les événements par période', async function (this: FestipodWorld) {\n  // EventsScreen.tsx has filter badges (Tous, Cette semaine, Proches, Amis) but NOT period filter (mois/trimestre/année)\n  // This feature is NOT implemented in the UI\n  this.attach('NOT IMPLEMENTED: Period filter (mois/trimestre/année) not in EventsScreen.tsx', 'text/plain');\n  return 'pending';\n});",
-    "lineNumber": 173
-  },
-  {
-    "pattern": "je peux modifier un commentaire",
-    "keyword": "Then",
-    "file": "screen.steps.ts",
-    "sourceCode": "Then('je peux modifier un commentaire', async function (this: FestipodWorld) {\n  // No comment edit functionality exists in any screen\n  // This feature is NOT implemented in the UI\n  this.attach('NOT IMPLEMENTED: Comment edit functionality not implemented', 'text/plain');\n  return 'pending';\n});",
-    "lineNumber": 180
-  },
-  {
-    "pattern": "je peux supprimer un commentaire",
-    "keyword": "Then",
-    "file": "screen.steps.ts",
-    "sourceCode": "Then('je peux supprimer un commentaire', async function (this: FestipodWorld) {\n  // No comment delete functionality exists in any screen\n  // This feature is NOT implemented in the UI\n  this.attach('NOT IMPLEMENTED: Comment delete functionality not implemented', 'text/plain');\n  return 'pending';\n});",
-    "lineNumber": 187
+    "lineNumber": 120
   },
   {
     "pattern": "je peux m'inscrire à l'événement",
     "keyword": "Then",
     "file": "screen.steps.ts",
     "sourceCode": "Then('je peux m\\'inscrire à l\\'événement', async function (this: FestipodWorld) {\n  expect(this.currentScreenId).to.equal('event-detail');\n  const source = this.getRenderedText();\n  // EventDetailScreen.tsx line 49: {isJoined ? '✓ Inscrit' : 'Participer'}\n  // The button shows \"Participer\" when not joined\n  const hasParticiperButton = /isJoined \\? '✓ Inscrit' : 'Participer'/.test(source);\n  expect(hasParticiperButton, 'Event detail should have Participer/Inscrit toggle button').to.be.true;\n});",
-    "lineNumber": 194
+    "lineNumber": 140
   },
   {
     "pattern": "je peux me désinscrire de l'événement",
     "keyword": "Then",
     "file": "screen.steps.ts",
     "sourceCode": "Then('je peux me désinscrire de l\\'événement', async function (this: FestipodWorld) {\n  expect(this.currentScreenId).to.equal('event-detail');\n  const source = this.getRenderedText();\n  // EventDetailScreen.tsx line 49: {isJoined ? '✓ Inscrit' : 'Participer'}\n  // Same button toggles - clicking \"✓ Inscrit\" will unregister\n  const hasInscritButton = /isJoined \\? '✓ Inscrit' : 'Participer'/.test(source);\n  expect(hasInscritButton, 'Event detail should have Participer/Inscrit toggle button (click to unregister)').to.be.true;\n});",
-    "lineNumber": 203
+    "lineNumber": 149
   },
   {
     "pattern": "je peux contacter l'utilisateur",
     "keyword": "Then",
     "file": "screen.steps.ts",
     "sourceCode": "Then('je peux contacter l\\'utilisateur', async function (this: FestipodWorld) {\n  expect(this.currentScreenId).to.equal('user-profile');\n  const source = this.getRenderedText();\n  // UserProfileScreen.tsx line 44: <Button>Contacter</Button>\n  const hasContactButton = /<Button>Contacter<\\/Button>/.test(source);\n  expect(hasContactButton, 'User profile should have \"Contacter\" button').to.be.true;\n});",
-    "lineNumber": 212
+    "lineNumber": 158
   },
   {
     "pattern": "je peux voir les événements auxquels l'utilisateur a participé",
     "keyword": "Then",
     "file": "screen.steps.ts",
     "sourceCode": "Then('je peux voir les événements auxquels l\\'utilisateur a participé', async function (this: FestipodWorld) {\n  expect(this.currentScreenId).to.equal('user-profile');\n  const source = this.getRenderedText();\n  // UserProfileScreen.tsx line 52: \"Événements en commun\" section with pastEvents\n  expect(/Événements en commun/.test(source), 'User profile should have \"Événements en commun\" section').to.be.true;\n  expect(/pastEvents/.test(source), 'User profile should display pastEvents data').to.be.true;\n});",
-    "lineNumber": 220
+    "lineNumber": 166
   },
   {
     "pattern": "je peux configurer mes notifications",
     "keyword": "Then",
     "file": "screen.steps.ts",
     "sourceCode": "Then('je peux configurer mes notifications', async function (this: FestipodWorld) {\n  expect(this.currentScreenId).to.equal('settings');\n  const source = this.getRenderedText();\n  // SettingsScreen.tsx line 25: <Text>Notifications</Text> with Toggle\n  expect(/>Notifications</.test(source), 'Settings should have \"Notifications\" text').to.be.true;\n  expect(/<Toggle[^>]*checked=\\{notifications\\}/.test(source), 'Settings should have Toggle for notifications').to.be.true;\n});",
-    "lineNumber": 228
-  },
-  {
-    "pattern": "je peux définir mon rayon de notification",
-    "keyword": "Then",
-    "file": "screen.steps.ts",
-    "sourceCode": "Then('je peux définir mon rayon de notification', async function (this: FestipodWorld) {\n  // SettingsScreen.tsx has \"Localisation\" toggle but NOT \"rayon\" or \"km\" setting\n  // This feature is NOT implemented in the UI\n  this.attach('NOT IMPLEMENTED: Radius setting (rayon/km) is not in SettingsScreen.tsx', 'text/plain');\n  return 'pending';\n});",
-    "lineNumber": 236
-  },
-  {
-    "pattern": "je peux définir mes thématiques d'intérêt",
-    "keyword": "Then",
-    "file": "screen.steps.ts",
-    "sourceCode": "Then('je peux définir mes thématiques d\\'intérêt', async function (this: FestipodWorld) {\n  // SettingsScreen.tsx does NOT have thematic/interest settings\n  // This feature is NOT implemented in the UI\n  this.attach('NOT IMPLEMENTED: Thematic/interest settings not in SettingsScreen.tsx', 'text/plain');\n  return 'pending';\n});",
-    "lineNumber": 243
+    "lineNumber": 174
   }
 ];
 

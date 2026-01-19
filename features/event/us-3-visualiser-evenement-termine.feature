@@ -20,6 +20,3 @@ Fonctionnalité: US-3 Visualiser un événement terminé
   Scénario: Voir la liste des participants
     Étant donné que je suis sur la page "détail événement"
     Alors je peux voir la liste des participants
-
-  Scénario: Vérifier les données affichées
-    * Scénario non implémenté

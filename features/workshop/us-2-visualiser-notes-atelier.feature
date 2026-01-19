@@ -19,3 +19,6 @@ Fonctionnalité: US-2 Visualiser un événement terminé (notes)
 
   Scénario: Ajouter un lien/ressource
     * Scénario non implémenté
+
+  Scénario: Consulter le programme détaillé des ateliers par journée/heure
+    * Scénario non implémenté

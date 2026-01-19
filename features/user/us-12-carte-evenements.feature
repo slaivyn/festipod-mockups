@@ -28,3 +28,6 @@ Fonctionnalité: US-12 Consulter la carte/tableau des événements
 
   Scénario: Vérifier les données de l'écran profil
     * Scénario non implémenté
+
+  Scénario: Voir la vue carte des événements
+    * Scénario non implémenté

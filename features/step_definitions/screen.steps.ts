@@ -34,11 +34,8 @@ Then('je peux voir la section {string}', async function (this: FestipodWorld, se
   expect(found, `Section "${sectionName}" should be visible on screen`).to.be.true;
 });
 
-Then('la page affiche {int} éléments', async function (this: FestipodWorld, count: number) {
-  // Cannot count rendered elements without browser automation
-  this.attach(`CANNOT TEST: Counting ${count} elements requires browser automation`, 'text/plain');
-  return 'pending';
-});
+// Step removed: "la page affiche N éléments" requires browser automation.
+// Scenarios needing this use "* Scénario non implémenté" placeholder.
 
 Then('je peux voir mon profil', async function (this: FestipodWorld) {
   expect(this.currentScreenId).to.equal('profile');
@@ -67,8 +64,7 @@ Then('je peux voir la liste des événements', async function (this: FestipodWor
     // EventsScreen.tsx has: EventCard components with event data
     expect(/<Card[^>]*onClick/.test(source), 'Events screen should have clickable Card components').to.be.true;
   } else {
-    this.attach(`UNEXPECTED SCREEN: "${this.currentScreenId}" is not expected to show events list`, 'text/plain');
-    return 'pending';
+    expect.fail(`Unexpected screen "${this.currentScreenId}" - events list should be on home or events screen`);
   }
 });
 
@@ -83,38 +79,20 @@ Then('je peux voir le QR code', async function (this: FestipodWorld) {
     expect(/Mon QR Code/.test(source), 'Meeting points should have "Mon QR Code" text').to.be.true;
     expect(/Scannez pour m'ajouter/.test(source), 'Meeting points should have "Scannez pour m\'ajouter" text').to.be.true;
   } else {
-    // QR code is NOT on this screen
-    this.attach(`NOT ON THIS SCREEN: QR code is on share-profile or meeting-points, not "${this.currentScreenId}"`, 'text/plain');
-    return 'pending';
+    expect.fail(`QR code should be on share-profile or meeting-points, not "${this.currentScreenId}"`);
   }
 });
 
 Then('je peux voir le lien de partage', async function (this: FestipodWorld) {
+  expect(this.currentScreenId, 'Share link should be on share-profile screen').to.equal('share-profile');
   const source = this.getRenderedText();
-  if (this.currentScreenId === 'share-profile') {
-    // ShareProfileScreen.tsx has: "Mon lien de profil" text and profileLink variable
-    expect(/Mon lien de profil/.test(source), 'Share profile should have "Mon lien de profil" text').to.be.true;
-    expect(/festipod\.app\/u\//.test(source), 'Share profile should have profile link URL').to.be.true;
-  } else {
-    // Share link is NOT on this screen
-    this.attach(`NOT ON THIS SCREEN: Share link is on share-profile, not "${this.currentScreenId}"`, 'text/plain');
-    return 'pending';
-  }
+  // ShareProfileScreen.tsx has: "Mon lien de profil" text and profileLink variable
+  expect(/Mon lien de profil/.test(source), 'Share profile should have "Mon lien de profil" text').to.be.true;
+  expect(/festipod\.app\/u\//.test(source), 'Share profile should have profile link URL').to.be.true;
 });
 
-Given('un événement existe avec les données:', async function (this: FestipodWorld, dataTable) {
-  // Cannot set up test data without backend/database
-  const eventData = dataTable.rowsHash();
-  this.attach(`CANNOT TEST: Setting up event data requires backend: ${JSON.stringify(eventData)}`, 'text/plain');
-  return 'pending';
-});
-
-Given('un utilisateur existe avec les données:', async function (this: FestipodWorld, dataTable) {
-  // Cannot set up test data without backend/database
-  const userData = dataTable.rowsHash();
-  this.attach(`CANNOT TEST: Setting up user data requires backend: ${JSON.stringify(userData)}`, 'text/plain');
-  return 'pending';
-});
+// Steps removed: Data setup steps (un événement existe avec les données, un utilisateur existe avec les données)
+// require backend/database. Scenarios needing these use "* Scénario non implémenté" placeholder.
 
 Given('je visualise l\'événement {string}', async function (this: FestipodWorld, eventName: string) {
   this.navigateTo('#/demo/event-detail');
@@ -156,40 +134,8 @@ Then('l\'écran affiche les informations du profil', async function (this: Festi
   }
 });
 
-Then('je peux ajouter un commentaire', async function (this: FestipodWorld) {
-  // EventDetailScreen.tsx does NOT have comment functionality (no textarea, no "commentaire" text)
-  // This feature is NOT implemented in the UI
-  this.attach('NOT IMPLEMENTED: Comment functionality not in EventDetailScreen.tsx', 'text/plain');
-  return 'pending';
-});
-
-Then('je peux ajouter une note', async function (this: FestipodWorld) {
-  // No screen has note functionality implemented
-  // This feature is NOT implemented in the UI
-  this.attach('NOT IMPLEMENTED: Note functionality not implemented in any screen', 'text/plain');
-  return 'pending';
-});
-
-Then('je peux filtrer les événements par période', async function (this: FestipodWorld) {
-  // EventsScreen.tsx has filter badges (Tous, Cette semaine, Proches, Amis) but NOT period filter (mois/trimestre/année)
-  // This feature is NOT implemented in the UI
-  this.attach('NOT IMPLEMENTED: Period filter (mois/trimestre/année) not in EventsScreen.tsx', 'text/plain');
-  return 'pending';
-});
-
-Then('je peux modifier un commentaire', async function (this: FestipodWorld) {
-  // No comment edit functionality exists in any screen
-  // This feature is NOT implemented in the UI
-  this.attach('NOT IMPLEMENTED: Comment edit functionality not implemented', 'text/plain');
-  return 'pending';
-});
-
-Then('je peux supprimer un commentaire', async function (this: FestipodWorld) {
-  // No comment delete functionality exists in any screen
-  // This feature is NOT implemented in the UI
-  this.attach('NOT IMPLEMENTED: Comment delete functionality not implemented', 'text/plain');
-  return 'pending';
-});
+// Steps removed: Feature steps not implemented in UI (commentaire, note, filtrer par période, modifier/supprimer commentaire)
+// Scenarios needing these use "* Scénario non implémenté" placeholder.
 
 Then('je peux m\'inscrire à l\'événement', async function (this: FestipodWorld) {
   expect(this.currentScreenId).to.equal('event-detail');
@@ -233,16 +179,5 @@ Then('je peux configurer mes notifications', async function (this: FestipodWorld
   expect(/<Toggle[^>]*checked=\{notifications\}/.test(source), 'Settings should have Toggle for notifications').to.be.true;
 });
 
-Then('je peux définir mon rayon de notification', async function (this: FestipodWorld) {
-  // SettingsScreen.tsx has "Localisation" toggle but NOT "rayon" or "km" setting
-  // This feature is NOT implemented in the UI
-  this.attach('NOT IMPLEMENTED: Radius setting (rayon/km) is not in SettingsScreen.tsx', 'text/plain');
-  return 'pending';
-});
-
-Then('je peux définir mes thématiques d\'intérêt', async function (this: FestipodWorld) {
-  // SettingsScreen.tsx does NOT have thematic/interest settings
-  // This feature is NOT implemented in the UI
-  this.attach('NOT IMPLEMENTED: Thematic/interest settings not in SettingsScreen.tsx', 'text/plain');
-  return 'pending';
-});
+// Steps removed: Settings features not implemented in UI (rayon de notification, thématiques d'intérêt)
+// Scenarios needing these use "* Scénario non implémenté" placeholder.

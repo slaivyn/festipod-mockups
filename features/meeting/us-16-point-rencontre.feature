@@ -15,13 +15,23 @@ Fonctionnalité: US-16 Indiquer un ou plusieurs points de rencontre
     Alors je vois l'écran "meeting-points"
 
   Scénario: Créer un point de rencontre
-    * Scénario non implémenté
+    Étant donné que je suis sur la page "points de rencontre"
+    Alors l'écran contient un bouton "Créer le point de rencontre"
 
   Scénario: Définir le lieu de rencontre
-    * Scénario non implémenté
+    Étant donné que je suis sur la page "points de rencontre"
+    Alors l'écran contient une section "Proposer un point de rencontre"
+    Et l'écran contient un champ "Lieu"
 
   Scénario: Définir l'heure de rencontre
-    * Scénario non implémenté
+    Étant donné que je suis sur la page "points de rencontre"
+    Alors l'écran contient un bouton "30 min avant"
+    Et l'écran contient un bouton "1h avant"
+    Et l'écran contient un bouton "Personnalisé"
 
   Scénario: Échanger des liens de contact
-    * Scénario non implémenté
+    Étant donné que je suis sur la page "points de rencontre"
+    Alors l'écran contient une section "Échanger vos contacts"
+    Et l'écran contient un texte "Mon QR Code"
+    Et l'écran contient un bouton "Scanner un QR"
+    Et l'écran contient un bouton "Partager mon lien"

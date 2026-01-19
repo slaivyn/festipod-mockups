@@ -240,10 +240,6 @@ Alors une erreur de validation est affichée pour "Date"
 # Content verification
 Alors je peux voir la liste des participants
 Alors l'écran affiche les informations de l'événement
-
-# Feature detection (may return 'pending' - see Test Outcomes section below)
-Alors je peux ajouter un commentaire
-Alors je peux ajouter une note
 Alors je peux m'inscrire à l'événement
 Alors je peux voir le QR code
 ```

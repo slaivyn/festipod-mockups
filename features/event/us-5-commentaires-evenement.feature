@@ -20,3 +20,6 @@ Fonctionnalité: US-5 Ajouter/modifier/supprimer un commentaire à un événemen
 
   Scénario: Supprimer un commentaire
     * Scénario non implémenté
+
+  Scénario: Enregistrer les interactions avec des individus (Date/Heure/Lieu)
+    * Scénario non implémenté

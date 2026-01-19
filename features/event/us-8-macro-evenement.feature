@@ -20,3 +20,15 @@ Fonctionnalité: US-8 Consulter et m'inscrire à un macro-événement
 
   Scénario: Voir la consolidation des participants
     * Scénario non implémenté
+
+  Scénario: Créer un macro-événement
+    * Scénario non implémenté
+
+  Scénario: Voir la consolidation des commentaires/liens/ressources
+    * Scénario non implémenté
+
+  Scénario: Rattacher à une thématique particulière
+    * Scénario non implémenté
+
+  Scénario: Gérer un événement répété sur plusieurs périodes
+    * Scénario non implémenté

@@ -23,7 +23,16 @@ export const parsedFeatures: ParsedFeature[] = [
       {
         "name": "Accéder au profil pour voir la photo",
         "tags": [],
-        "steps": []
+        "steps": [
+          {
+            "keyword": "Étant donné que ",
+            "text": "je suis sur la page \"mon profil\""
+          },
+          {
+            "keyword": "Alors",
+            "text": "l'écran contient un avatar"
+          }
+        ]
       },
       {
         "name": "Naviguer vers le profil depuis la liste des participants",
@@ -64,13 +73,32 @@ export const parsedFeatures: ParsedFeature[] = [
       {
         "name": "Vérifier les champs de données du profil",
         "tags": [],
+        "steps": [
+          {
+            "keyword": "Étant donné que ",
+            "text": "je suis sur la page \"mon profil\""
+          },
+          {
+            "keyword": "Alors",
+            "text": "l'écran contient un texte \"Marie Dupont\""
+          },
+          {
+            "keyword": "Et",
+            "text": "l'écran contient un texte \"@mariedupont\""
+          }
+        ]
+      },
+      {
+        "name": "Ajouter une photo personnelle sur une fiche existante",
+        "tags": [],
         "steps": []
       }
     ],
     "filePath": "features/user/us-9-visualiser-photo.feature",
-    "rawContent": "# language: fr\n@USER @priority-0\nFonctionnalité: US-9 Visualiser la photo d'un individu\n  En tant qu'utilisateur\n  Je peux visualiser la photo d'un individu ou ajouter une photo personnelle sur une fiche existante\n  Et consulter la liste des inscrits à un atelier\n  Afin d'identifier les personnes que j'ai rencontrées dont je n'ai pas noté leur nom\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Accéder au profil pour voir la photo\n    * Scénario non implémenté\n\n  Scénario: Naviguer vers le profil depuis la liste des participants\n    Étant donné que je suis sur la page \"détail événement\"\n    Quand je clique sur un participant\n    Alors je suis redirigé vers \"profil utilisateur\"\n    Et l'écran affiche les informations du profil\n\n  Scénario: Consulter la liste des inscrits à un atelier\n    Étant donné que je suis sur la page \"détail événement\"\n    Alors je peux voir la liste des participants\n\n  Scénario: Vérifier les champs de données du profil\n    * Scénario non implémenté\n",
+    "rawContent": "# language: fr\n@USER @priority-0\nFonctionnalité: US-9 Visualiser la photo d'un individu\n  En tant qu'utilisateur\n  Je peux visualiser la photo d'un individu ou ajouter une photo personnelle sur une fiche existante\n  Et consulter la liste des inscrits à un atelier\n  Afin d'identifier les personnes que j'ai rencontrées dont je n'ai pas noté leur nom\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Accéder au profil pour voir la photo\n    Étant donné que je suis sur la page \"mon profil\"\n    Alors l'écran contient un avatar\n\n  Scénario: Naviguer vers le profil depuis la liste des participants\n    Étant donné que je suis sur la page \"détail événement\"\n    Quand je clique sur un participant\n    Alors je suis redirigé vers \"profil utilisateur\"\n    Et l'écran affiche les informations du profil\n\n  Scénario: Consulter la liste des inscrits à un atelier\n    Étant donné que je suis sur la page \"détail événement\"\n    Alors je peux voir la liste des participants\n\n  Scénario: Vérifier les champs de données du profil\n    Étant donné que je suis sur la page \"mon profil\"\n    Alors l'écran contient un texte \"Marie Dupont\"\n    Et l'écran contient un texte \"@mariedupont\"\n\n  Scénario: Ajouter une photo personnelle sur une fiche existante\n    * Scénario non implémenté\n",
     "screenIds": [
       "event-detail",
+      "profile",
       "user-profile"
     ]
   },
@@ -124,11 +152,6 @@ export const parsedFeatures: ParsedFeature[] = [
         ]
       },
       {
-        "name": "Remplir le formulaire de création d'événement",
-        "tags": [],
-        "steps": []
-      },
-      {
         "name": "Vérifier la présence du bouton de création",
         "tags": [],
         "steps": [
@@ -155,10 +178,25 @@ export const parsedFeatures: ParsedFeature[] = [
             "text": "je peux annuler et revenir à l'écran précédent"
           }
         ]
+      },
+      {
+        "name": "Modifier un événement",
+        "tags": [],
+        "steps": []
+      },
+      {
+        "name": "Supprimer un événement",
+        "tags": [],
+        "steps": []
+      },
+      {
+        "name": "Retirer une organisation (personne ou structure)",
+        "tags": [],
+        "steps": []
       }
     ],
     "filePath": "features/event/us-13-creer-evenement.feature",
-    "rawContent": "# language: fr\n@EVENT @priority-1\nFonctionnalité: US-13 Créer/Modifier/Supprimer un événement\n  En tant qu'utilisateur\n  Je peux créer/modifier/supprimer un événement\n  En choisissant les dates, horaires, lieu et thématique\n  Afin de créer/présenter le contenu de cet événement et le catégoriser\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Accéder à la création d'événement\n    Étant donné que je suis sur la page \"accueil\"\n    Quand je navigue vers \"créer un événement\"\n    Alors je vois l'écran \"create-event\"\n\n  Scénario: Vérifier les champs obligatoires du formulaire\n    Étant donné que l'écran \"create-event\" est affiché\n    Alors le formulaire contient les champs obligatoires suivants:\n      | Nom de l'événement |\n      | Date               |\n      | Heure de début     |\n      | Lieu               |\n      | Thématique         |\n\n  Scénario: Remplir le formulaire de création d'événement\n    * Scénario non implémenté\n\n  Scénario: Vérifier la présence du bouton de création\n    Étant donné que je suis sur la page \"créer un événement\"\n    Alors l'écran contient une section \"Créer l'événement\"\n\n  Scénario: Pouvoir annuler la création d'événement\n    Étant donné que je suis sur la page \"créer un événement\"\n    Alors je peux annuler et revenir à l'écran précédent\n",
+    "rawContent": "# language: fr\n@EVENT @priority-1\nFonctionnalité: US-13 Créer/Modifier/Supprimer un événement\n  En tant qu'utilisateur\n  Je peux créer/modifier/supprimer un événement\n  En choisissant les dates, horaires, lieu et thématique\n  Afin de créer/présenter le contenu de cet événement et le catégoriser\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Accéder à la création d'événement\n    Étant donné que je suis sur la page \"accueil\"\n    Quand je navigue vers \"créer un événement\"\n    Alors je vois l'écran \"create-event\"\n\n  Scénario: Vérifier les champs obligatoires du formulaire\n    Étant donné que l'écran \"create-event\" est affiché\n    Alors le formulaire contient les champs obligatoires suivants:\n      | Nom de l'événement |\n      | Date               |\n      | Heure de début     |\n      | Lieu               |\n      | Thématique         |\n\n  Scénario: Vérifier la présence du bouton de création\n    Étant donné que je suis sur la page \"créer un événement\"\n    Alors l'écran contient une section \"Créer l'événement\"\n\n  Scénario: Pouvoir annuler la création d'événement\n    Étant donné que je suis sur la page \"créer un événement\"\n    Alors je peux annuler et revenir à l'écran précédent\n\n  Scénario: Modifier un événement\n    * Scénario non implémenté\n\n  Scénario: Supprimer un événement\n    * Scénario non implémenté\n\n  Scénario: Retirer une organisation (personne ou structure)\n    * Scénario non implémenté\n",
     "screenIds": [
       "create-event",
       "home"
@@ -226,15 +264,10 @@ export const parsedFeatures: ParsedFeature[] = [
             "text": "je peux voir la liste des participants"
           }
         ]
-      },
-      {
-        "name": "Vérifier les données affichées",
-        "tags": [],
-        "steps": []
       }
     ],
     "filePath": "features/event/us-3-visualiser-evenement-termine.feature",
-    "rawContent": "# language: fr\n@EVENT @priority-1\nFonctionnalité: US-3 Visualiser un événement terminé\n  En tant qu'utilisateur\n  Je peux visualiser un événement terminé et consulter la description de l'événement\n  Afin de voir les personnes qui ont participé à cet événement\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Accéder aux détails d'un événement terminé\n    Étant donné que je suis sur la page \"accueil\"\n    Quand je clique sur un événement\n    Alors je vois l'écran \"event-detail\"\n\n  Scénario: Voir la description de l'événement\n    Étant donné que je suis sur la page \"détail événement\"\n    Alors l'écran affiche les informations de l'événement\n\n  Scénario: Voir la liste des participants\n    Étant donné que je suis sur la page \"détail événement\"\n    Alors je peux voir la liste des participants\n\n  Scénario: Vérifier les données affichées\n    * Scénario non implémenté\n",
+    "rawContent": "# language: fr\n@EVENT @priority-1\nFonctionnalité: US-3 Visualiser un événement terminé\n  En tant qu'utilisateur\n  Je peux visualiser un événement terminé et consulter la description de l'événement\n  Afin de voir les personnes qui ont participé à cet événement\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Accéder aux détails d'un événement terminé\n    Étant donné que je suis sur la page \"accueil\"\n    Quand je clique sur un événement\n    Alors je vois l'écran \"event-detail\"\n\n  Scénario: Voir la description de l'événement\n    Étant donné que je suis sur la page \"détail événement\"\n    Alors l'écran affiche les informations de l'événement\n\n  Scénario: Voir la liste des participants\n    Étant donné que je suis sur la page \"détail événement\"\n    Alors je peux voir la liste des participants\n",
     "screenIds": [
       "event-detail",
       "home"
@@ -299,10 +332,15 @@ export const parsedFeatures: ParsedFeature[] = [
         "name": "Vérifier les données de l'écran",
         "tags": [],
         "steps": []
+      },
+      {
+        "name": "Rechercher dans une base existante (Mobilizon)",
+        "tags": [],
+        "steps": []
       }
     ],
     "filePath": "features/event/us-7-inscription-evenement.feature",
-    "rawContent": "# language: fr\n@EVENT @priority-1\nFonctionnalité: US-7 M'inscrire/me désinscrire à un événement\n  En tant qu'utilisateur\n  Je peux m'inscrire/me désinscrire à un événement\n  Après avoir consulté la description de l'événement, les dates et le lieu\n  S'il existe déjà dans le système ou en le retrouvant dans une base existante\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Consulter un événement avant inscription\n    Étant donné que je suis sur la page \"détail événement\"\n    Alors l'écran affiche les informations de l'événement\n\n  Scénario: S'inscrire à un événement\n    * Scénario non implémenté\n\n  Scénario: Se désinscrire d'un événement\n    * Scénario non implémenté\n\n  Scénario: Rechercher un événement existant\n    Étant donné que je suis sur la page \"découvrir\"\n    Alors je peux voir la liste des événements\n\n  Scénario: Vérifier les données de l'écran\n    * Scénario non implémenté\n",
+    "rawContent": "# language: fr\n@EVENT @priority-1\nFonctionnalité: US-7 M'inscrire/me désinscrire à un événement\n  En tant qu'utilisateur\n  Je peux m'inscrire/me désinscrire à un événement\n  Après avoir consulté la description de l'événement, les dates et le lieu\n  S'il existe déjà dans le système ou en le retrouvant dans une base existante\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Consulter un événement avant inscription\n    Étant donné que je suis sur la page \"détail événement\"\n    Alors l'écran affiche les informations de l'événement\n\n  Scénario: S'inscrire à un événement\n    * Scénario non implémenté\n\n  Scénario: Se désinscrire d'un événement\n    * Scénario non implémenté\n\n  Scénario: Rechercher un événement existant\n    Étant donné que je suis sur la page \"découvrir\"\n    Alors je peux voir la liste des événements\n\n  Scénario: Vérifier les données de l'écran\n    * Scénario non implémenté\n\n  Scénario: Rechercher dans une base existante (Mobilizon)\n    * Scénario non implémenté\n",
     "screenIds": [
       "event-detail",
       "events"
@@ -346,26 +384,86 @@ export const parsedFeatures: ParsedFeature[] = [
       {
         "name": "Créer un point de rencontre",
         "tags": [],
-        "steps": []
+        "steps": [
+          {
+            "keyword": "Étant donné que ",
+            "text": "je suis sur la page \"points de rencontre\""
+          },
+          {
+            "keyword": "Alors",
+            "text": "l'écran contient un bouton \"Créer le point de rencontre\""
+          }
+        ]
       },
       {
         "name": "Définir le lieu de rencontre",
         "tags": [],
-        "steps": []
+        "steps": [
+          {
+            "keyword": "Étant donné que ",
+            "text": "je suis sur la page \"points de rencontre\""
+          },
+          {
+            "keyword": "Alors",
+            "text": "l'écran contient une section \"Proposer un point de rencontre\""
+          },
+          {
+            "keyword": "Et",
+            "text": "l'écran contient un champ \"Lieu\""
+          }
+        ]
       },
       {
         "name": "Définir l'heure de rencontre",
         "tags": [],
-        "steps": []
+        "steps": [
+          {
+            "keyword": "Étant donné que ",
+            "text": "je suis sur la page \"points de rencontre\""
+          },
+          {
+            "keyword": "Alors",
+            "text": "l'écran contient un bouton \"30 min avant\""
+          },
+          {
+            "keyword": "Et",
+            "text": "l'écran contient un bouton \"1h avant\""
+          },
+          {
+            "keyword": "Et",
+            "text": "l'écran contient un bouton \"Personnalisé\""
+          }
+        ]
       },
       {
         "name": "Échanger des liens de contact",
         "tags": [],
-        "steps": []
+        "steps": [
+          {
+            "keyword": "Étant donné que ",
+            "text": "je suis sur la page \"points de rencontre\""
+          },
+          {
+            "keyword": "Alors",
+            "text": "l'écran contient une section \"Échanger vos contacts\""
+          },
+          {
+            "keyword": "Et",
+            "text": "l'écran contient un texte \"Mon QR Code\""
+          },
+          {
+            "keyword": "Et",
+            "text": "l'écran contient un bouton \"Scanner un QR\""
+          },
+          {
+            "keyword": "Et",
+            "text": "l'écran contient un bouton \"Partager mon lien\""
+          }
+        ]
       }
     ],
     "filePath": "features/meeting/us-16-point-rencontre.feature",
-    "rawContent": "# language: fr\n@MEETING @priority-1\nFonctionnalité: US-16 Indiquer un ou plusieurs points de rencontre\n  En tant qu'utilisateur\n  Je peux indiquer un ou plusieurs points de rencontre\n  En précisant le lieu et l'heure de cette rencontre\n  Afin de croiser et faire connaissance d'autres participants\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Accéder aux points de rencontre\n    Étant donné que je suis sur la page \"détail événement\"\n    Quand je navigue vers \"points de rencontre\"\n    Alors je vois l'écran \"meeting-points\"\n\n  Scénario: Créer un point de rencontre\n    * Scénario non implémenté\n\n  Scénario: Définir le lieu de rencontre\n    * Scénario non implémenté\n\n  Scénario: Définir l'heure de rencontre\n    * Scénario non implémenté\n\n  Scénario: Échanger des liens de contact\n    * Scénario non implémenté\n",
+    "rawContent": "# language: fr\n@MEETING @priority-1\nFonctionnalité: US-16 Indiquer un ou plusieurs points de rencontre\n  En tant qu'utilisateur\n  Je peux indiquer un ou plusieurs points de rencontre\n  En précisant le lieu et l'heure de cette rencontre\n  Afin de croiser et faire connaissance d'autres participants\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Accéder aux points de rencontre\n    Étant donné que je suis sur la page \"détail événement\"\n    Quand je navigue vers \"points de rencontre\"\n    Alors je vois l'écran \"meeting-points\"\n\n  Scénario: Créer un point de rencontre\n    Étant donné que je suis sur la page \"points de rencontre\"\n    Alors l'écran contient un bouton \"Créer le point de rencontre\"\n\n  Scénario: Définir le lieu de rencontre\n    Étant donné que je suis sur la page \"points de rencontre\"\n    Alors l'écran contient une section \"Proposer un point de rencontre\"\n    Et l'écran contient un champ \"Lieu\"\n\n  Scénario: Définir l'heure de rencontre\n    Étant donné que je suis sur la page \"points de rencontre\"\n    Alors l'écran contient un bouton \"30 min avant\"\n    Et l'écran contient un bouton \"1h avant\"\n    Et l'écran contient un bouton \"Personnalisé\"\n\n  Scénario: Échanger des liens de contact\n    Étant donné que je suis sur la page \"points de rencontre\"\n    Alors l'écran contient une section \"Échanger vos contacts\"\n    Et l'écran contient un texte \"Mon QR Code\"\n    Et l'écran contient un bouton \"Scanner un QR\"\n    Et l'écran contient un bouton \"Partager mon lien\"\n",
     "screenIds": [
       "event-detail",
       "meeting-points"
@@ -479,7 +577,7 @@ export const parsedFeatures: ParsedFeature[] = [
     ],
     "scenarios": [
       {
-        "name": "Accéder à la liste des inscrits",
+        "name": "Accéder à la liste des inscrits d'un événement",
         "tags": [],
         "steps": [
           {
@@ -493,7 +591,12 @@ export const parsedFeatures: ParsedFeature[] = [
         ]
       },
       {
-        "name": "Voir la liste triée",
+        "name": "Accéder à la liste des inscrits d'un atelier",
+        "tags": [],
+        "steps": []
+      },
+      {
+        "name": "Voir la liste des participants d'un événement",
         "tags": [],
         "steps": [
           {
@@ -505,6 +608,11 @@ export const parsedFeatures: ParsedFeature[] = [
             "text": "l'écran contient une section \"Participants\""
           }
         ]
+      },
+      {
+        "name": "Voir la liste des participants d'un atelier",
+        "tags": [],
+        "steps": []
       },
       {
         "name": "Cliquer sur un inscrit pour voir son profil",
@@ -523,15 +631,10 @@ export const parsedFeatures: ParsedFeature[] = [
             "text": "je vois l'écran \"user-profile\""
           }
         ]
-      },
-      {
-        "name": "Vérifier les données de l'écran",
-        "tags": [],
-        "steps": []
       }
     ],
     "filePath": "features/user/us-15-visualiser-inscrits.feature",
-    "rawContent": "# language: fr\n@USER @priority-1\nFonctionnalité: US-15 Visualiser les inscrits à un atelier/événement\n  En tant qu'utilisateur\n  Je peux visualiser les inscrits à un atelier/événement\n  En sélectionnant l'atelier/l'événement désiré dans la liste\n  Afin de consulter la liste des inscrits triée par ordre alphabétique\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Accéder à la liste des inscrits\n    Étant donné que je suis sur la page \"détail événement\"\n    Alors je peux voir la liste des participants\n\n  Scénario: Voir la liste triée\n    Étant donné que je suis sur la page \"détail événement\"\n    Alors l'écran contient une section \"Participants\"\n\n  Scénario: Cliquer sur un inscrit pour voir son profil\n    Étant donné que je suis sur la page \"détail événement\"\n    Quand je clique sur un participant\n    Alors je vois l'écran \"user-profile\"\n\n  Scénario: Vérifier les données de l'écran\n    * Scénario non implémenté\n",
+    "rawContent": "# language: fr\n@USER @priority-1\nFonctionnalité: US-15 Visualiser les inscrits à un atelier/événement\n  En tant qu'utilisateur\n  Je peux visualiser les inscrits à un atelier/événement\n  En sélectionnant l'atelier/l'événement désiré dans la liste\n  Afin de consulter la liste des inscrits triée par ordre alphabétique\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Accéder à la liste des inscrits d'un événement\n    Étant donné que je suis sur la page \"détail événement\"\n    Alors je peux voir la liste des participants\n\n  Scénario: Accéder à la liste des inscrits d'un atelier\n    * Scénario non implémenté\n\n  Scénario: Voir la liste des participants d'un événement\n    Étant donné que je suis sur la page \"détail événement\"\n    Alors l'écran contient une section \"Participants\"\n\n  Scénario: Voir la liste des participants d'un atelier\n    * Scénario non implémenté\n\n  Scénario: Cliquer sur un inscrit pour voir son profil\n    Étant donné que je suis sur la page \"détail événement\"\n    Quand je clique sur un participant\n    Alors je vois l'écran \"user-profile\"\n",
     "screenIds": [
       "event-detail",
       "user-profile"
@@ -571,12 +674,30 @@ export const parsedFeatures: ParsedFeature[] = [
       {
         "name": "Voir le QR code",
         "tags": [],
-        "steps": []
+        "steps": [
+          {
+            "keyword": "Étant donné que ",
+            "text": "je suis sur la page \"partage profil\""
+          },
+          {
+            "keyword": "Alors",
+            "text": "l'écran contient un texte \"Scannez pour me retrouver sur Festipod\""
+          }
+        ]
       },
       {
         "name": "Voir le lien de partage",
         "tags": [],
-        "steps": []
+        "steps": [
+          {
+            "keyword": "Étant donné que ",
+            "text": "je suis sur la page \"partage profil\""
+          },
+          {
+            "keyword": "Alors",
+            "text": "l'écran contient une section \"Mon lien de profil\""
+          }
+        ]
       },
       {
         "name": "Accéder à l'écran de partage dédié",
@@ -599,11 +720,20 @@ export const parsedFeatures: ParsedFeature[] = [
       {
         "name": "Vérifier les données du profil",
         "tags": [],
-        "steps": []
+        "steps": [
+          {
+            "keyword": "Étant donné que ",
+            "text": "je suis sur la page \"partage profil\""
+          },
+          {
+            "keyword": "Alors",
+            "text": "l'écran contient un texte \"Marie Dupont\""
+          }
+        ]
       }
     ],
     "filePath": "features/user/us-23-connexion-utilisateurs.feature",
-    "rawContent": "# language: fr\n@USER @priority-1\nFonctionnalité: US-23 Me connecter avec d'autres utilisateurs\n  En tant qu'utilisateur\n  Je peux me connecter avec d'autres utilisateurs\n  En partageant mon QR code ou mon lien de contact\n  Afin d'étendre mon réseau\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Accéder au partage depuis le profil\n    Étant donné que je suis sur la page \"mon profil\"\n    Alors l'écran contient une section \"Partager\"\n\n  Scénario: Voir le QR code\n    * Scénario non implémenté\n\n  Scénario: Voir le lien de partage\n    * Scénario non implémenté\n\n  Scénario: Accéder à l'écran de partage dédié\n    Étant donné que je suis sur la page \"mon profil\"\n    Quand je navigue vers \"partage de profil\"\n    Alors je vois l'écran \"share-profile\"\n\n  Scénario: Vérifier les données du profil\n    * Scénario non implémenté\n",
+    "rawContent": "# language: fr\n@USER @priority-1\nFonctionnalité: US-23 Me connecter avec d'autres utilisateurs\n  En tant qu'utilisateur\n  Je peux me connecter avec d'autres utilisateurs\n  En partageant mon QR code ou mon lien de contact\n  Afin d'étendre mon réseau\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Accéder au partage depuis le profil\n    Étant donné que je suis sur la page \"mon profil\"\n    Alors l'écran contient une section \"Partager\"\n\n  Scénario: Voir le QR code\n    Étant donné que je suis sur la page \"partage profil\"\n    Alors l'écran contient un texte \"Scannez pour me retrouver sur Festipod\"\n\n  Scénario: Voir le lien de partage\n    Étant donné que je suis sur la page \"partage profil\"\n    Alors l'écran contient une section \"Mon lien de profil\"\n\n  Scénario: Accéder à l'écran de partage dédié\n    Étant donné que je suis sur la page \"mon profil\"\n    Quand je navigue vers \"partage de profil\"\n    Alors je vois l'écran \"share-profile\"\n\n  Scénario: Vérifier les données du profil\n    Étant donné que je suis sur la page \"partage profil\"\n    Alors l'écran contient un texte \"Marie Dupont\"\n",
     "screenIds": [
       "profile",
       "share-profile"
@@ -647,7 +777,20 @@ export const parsedFeatures: ParsedFeature[] = [
       {
         "name": "Voir mon réseau",
         "tags": [],
-        "steps": []
+        "steps": [
+          {
+            "keyword": "Étant donné que ",
+            "text": "je suis sur la page \"mon profil\""
+          },
+          {
+            "keyword": "Alors",
+            "text": "l'écran contient un texte \"Amis\""
+          },
+          {
+            "keyword": "Et",
+            "text": "l'écran contient un texte \"Mes amis\""
+          }
+        ]
       },
       {
         "name": "Voir un profil de mon réseau",
@@ -688,11 +831,29 @@ export const parsedFeatures: ParsedFeature[] = [
       {
         "name": "Vérifier les données du profil",
         "tags": [],
+        "steps": [
+          {
+            "keyword": "Étant donné que ",
+            "text": "je suis sur la page \"mon profil\""
+          },
+          {
+            "keyword": "Alors",
+            "text": "l'écran contient un texte \"Événements\""
+          },
+          {
+            "keyword": "Et",
+            "text": "l'écran contient un texte \"Participations\""
+          }
+        ]
+      },
+      {
+        "name": "Voir les profils publiques",
+        "tags": [],
         "steps": []
       }
     ],
     "filePath": "features/user/us-20-profil-reseau.feature",
-    "rawContent": "# language: fr\n@USER @priority-1\nFonctionnalité: US-20 Voir le profil des personnes faisant partie de mon réseau\n  En tant qu'utilisateur\n  Je peux voir le profil des personnes faisant partie de mon réseau\n  Ainsi que le profil des personnes publiques\n  Et consulter la description de l'événement afin de savoir si je veux participer\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Accéder à mon profil\n    Étant donné que je suis sur la page \"accueil\"\n    Quand je navigue vers \"mon profil\"\n    Alors je vois l'écran \"profile\"\n\n  Scénario: Voir mon réseau\n    * Scénario non implémenté\n\n  Scénario: Voir un profil de mon réseau\n    Étant donné que je suis sur la page \"mon profil\"\n    Quand je clique sur un participant\n    Alors je vois l'écran \"user-profile\"\n\n  Scénario: Consulter un événement depuis un profil\n    Étant donné que je suis sur la page \"profil utilisateur\"\n    Quand je clique sur un événement\n    Alors je vois l'écran \"event-detail\"\n\n  Scénario: Vérifier les données du profil\n    * Scénario non implémenté\n",
+    "rawContent": "# language: fr\n@USER @priority-1\nFonctionnalité: US-20 Voir le profil des personnes faisant partie de mon réseau\n  En tant qu'utilisateur\n  Je peux voir le profil des personnes faisant partie de mon réseau\n  Ainsi que le profil des personnes publiques\n  Et consulter la description de l'événement afin de savoir si je veux participer\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Accéder à mon profil\n    Étant donné que je suis sur la page \"accueil\"\n    Quand je navigue vers \"mon profil\"\n    Alors je vois l'écran \"profile\"\n\n  Scénario: Voir mon réseau\n    Étant donné que je suis sur la page \"mon profil\"\n    Alors l'écran contient un texte \"Amis\"\n    Et l'écran contient un texte \"Mes amis\"\n\n  Scénario: Voir un profil de mon réseau\n    Étant donné que je suis sur la page \"mon profil\"\n    Quand je clique sur un participant\n    Alors je vois l'écran \"user-profile\"\n\n  Scénario: Consulter un événement depuis un profil\n    Étant donné que je suis sur la page \"profil utilisateur\"\n    Quand je clique sur un événement\n    Alors je vois l'écran \"event-detail\"\n\n  Scénario: Vérifier les données du profil\n    Étant donné que je suis sur la page \"mon profil\"\n    Alors l'écran contient un texte \"Événements\"\n    Et l'écran contient un texte \"Participations\"\n\n  Scénario: Voir les profils publiques\n    * Scénario non implémenté\n",
     "screenIds": [
       "event-detail",
       "home",
@@ -744,18 +905,41 @@ export const parsedFeatures: ParsedFeature[] = [
       {
         "name": "Voir mes inscriptions",
         "tags": [],
-        "steps": []
+        "steps": [
+          {
+            "keyword": "Étant donné que ",
+            "text": "je suis sur la page \"mon profil\""
+          },
+          {
+            "keyword": "Alors",
+            "text": "l'écran contient une section \"Mes événements à venir\""
+          }
+        ]
       },
       {
         "name": "Vérifier les données de l'accueil",
         "tags": [],
-        "steps": []
+        "steps": [
+          {
+            "keyword": "Étant donné que ",
+            "text": "je suis sur la page \"accueil\""
+          },
+          {
+            "keyword": "Alors",
+            "text": "l'écran contient un texte \"Barbecue d'été\""
+          },
+          {
+            "keyword": "Et",
+            "text": "l'écran contient un texte \"Soirée jeux de société\""
+          }
+        ]
       }
     ],
     "filePath": "features/notif/us-19-recapitulatif.feature",
-    "rawContent": "# language: fr\n# Note: US-19 concerne les récapitulatifs par email - non testable via écrans\n# Les scénarios ci-dessous testent l'affichage sur l'écran d'accueil (aspect UI)\n@NOTIF @priority-2\nFonctionnalité: US-19 Recevoir un récapitulatif des prochaines rencontres\n  En tant qu'utilisateur\n  Je peux recevoir un récapitulatif des prochaines rencontres\n  En réceptionnant une liste des événements auxquels je suis inscrit ou qui sont proches de chez moi\n  Afin d'établir un programme des événements auxquels je participe par période\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Voir les événements à venir sur l'accueil\n    Étant donné que je suis sur la page \"accueil\"\n    Alors l'écran contient une section \"Événements à venir\"\n\n  Scénario: Voir le récapitulatif par période\n    * Scénario non implémenté\n\n  Scénario: Voir les événements proches géographiquement\n    * Scénario non implémenté\n\n  Scénario: Voir mes inscriptions\n    * Scénario non implémenté\n\n  Scénario: Vérifier les données de l'accueil\n    * Scénario non implémenté\n",
+    "rawContent": "# language: fr\n# Note: US-19 concerne les récapitulatifs par email - non testable via écrans\n# Les scénarios ci-dessous testent l'affichage sur l'écran d'accueil (aspect UI)\n@NOTIF @priority-2\nFonctionnalité: US-19 Recevoir un récapitulatif des prochaines rencontres\n  En tant qu'utilisateur\n  Je peux recevoir un récapitulatif des prochaines rencontres\n  En réceptionnant une liste des événements auxquels je suis inscrit ou qui sont proches de chez moi\n  Afin d'établir un programme des événements auxquels je participe par période\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Voir les événements à venir sur l'accueil\n    Étant donné que je suis sur la page \"accueil\"\n    Alors l'écran contient une section \"Événements à venir\"\n\n  Scénario: Voir le récapitulatif par période\n    * Scénario non implémenté\n\n  Scénario: Voir les événements proches géographiquement\n    * Scénario non implémenté\n\n  Scénario: Voir mes inscriptions\n    Étant donné que je suis sur la page \"mon profil\"\n    Alors l'écran contient une section \"Mes événements à venir\"\n\n  Scénario: Vérifier les données de l'accueil\n    Étant donné que je suis sur la page \"accueil\"\n    Alors l'écran contient un texte \"Barbecue d'été\"\n    Et l'écran contient un texte \"Soirée jeux de société\"\n",
     "screenIds": [
-      "home"
+      "home",
+      "profile"
     ]
   },
   {
@@ -922,10 +1106,15 @@ export const parsedFeatures: ParsedFeature[] = [
         "name": "Vérifier les données de l'écran profil",
         "tags": [],
         "steps": []
+      },
+      {
+        "name": "Voir la vue carte des événements",
+        "tags": [],
+        "steps": []
       }
     ],
     "filePath": "features/user/us-12-carte-evenements.feature",
-    "rawContent": "# language: fr\n@USER @priority-2\nFonctionnalité: US-12 Consulter la carte/tableau des événements\n  En tant qu'utilisateur\n  Je peux consulter la carte/tableau des événements auxquels j'ai participé\n  En filtrant les événements par dates ou par personne\n  Afin d'avoir une vue consolidée des événements et lieux de rencontre\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Accéder à la liste des événements depuis le profil\n    * Scénario non implémenté\n\n  Scénario: Accéder à la liste des événements depuis découvrir\n    Étant donné que je suis sur la page \"découvrir\"\n    Alors je peux voir la liste des événements\n\n  Scénario: Filtrer par date\n    * Scénario non implémenté\n\n  Scénario: Filtrer par personne\n    Étant donné que je suis sur la page \"profil utilisateur\"\n    Alors je peux voir les événements auxquels l'utilisateur a participé\n\n  Scénario: Vérifier les données de l'écran événements\n    * Scénario non implémenté\n\n  Scénario: Vérifier les données de l'écran profil\n    * Scénario non implémenté\n",
+    "rawContent": "# language: fr\n@USER @priority-2\nFonctionnalité: US-12 Consulter la carte/tableau des événements\n  En tant qu'utilisateur\n  Je peux consulter la carte/tableau des événements auxquels j'ai participé\n  En filtrant les événements par dates ou par personne\n  Afin d'avoir une vue consolidée des événements et lieux de rencontre\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Accéder à la liste des événements depuis le profil\n    * Scénario non implémenté\n\n  Scénario: Accéder à la liste des événements depuis découvrir\n    Étant donné que je suis sur la page \"découvrir\"\n    Alors je peux voir la liste des événements\n\n  Scénario: Filtrer par date\n    * Scénario non implémenté\n\n  Scénario: Filtrer par personne\n    Étant donné que je suis sur la page \"profil utilisateur\"\n    Alors je peux voir les événements auxquels l'utilisateur a participé\n\n  Scénario: Vérifier les données de l'écran événements\n    * Scénario non implémenté\n\n  Scénario: Vérifier les données de l'écran profil\n    * Scénario non implémenté\n\n  Scénario: Voir la vue carte des événements\n    * Scénario non implémenté\n",
     "screenIds": [
       "events",
       "user-profile"
@@ -999,7 +1188,20 @@ export const parsedFeatures: ParsedFeature[] = [
       {
         "name": "Accéder à la création d'événement",
         "tags": [],
-        "steps": []
+        "steps": [
+          {
+            "keyword": "Étant donné que ",
+            "text": "je suis sur la page \"accueil\""
+          },
+          {
+            "keyword": "Quand",
+            "text": "je navigue vers \"créer un événement\""
+          },
+          {
+            "keyword": "Alors",
+            "text": "je vois l'écran \"create-event\""
+          }
+        ]
       },
       {
         "name": "Définir le rayon d'intérêt",
@@ -1036,9 +1238,10 @@ export const parsedFeatures: ParsedFeature[] = [
       }
     ],
     "filePath": "features/user/us-26-portee-evenement.feature",
-    "rawContent": "# language: fr\n@USER @priority-2\nFonctionnalité: US-26 Définir la portée d'un événement\n  En tant qu'utilisateur\n  Je peux créer/présenter le contenu d'un événement et le catégoriser par type/thématique\n  En indiquant son rayon d'intérêt en kilomètres\n  Afin de m'assurer que les utilisateurs qui habitent trop loin ne reçoivent pas de notification\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Accéder à la création d'événement\n    * Scénario non implémenté\n\n  Scénario: Définir le rayon d'intérêt\n    * Scénario non implémenté\n\n  Scénario: Choisir une thématique\n    Étant donné que je suis sur la page \"créer un événement\"\n    Alors l'écran contient une section \"Thématique\"\n\n  Scénario: Vérifier les champs obligatoires\n    Étant donné que l'écran \"create-event\" est affiché\n    Alors le formulaire contient les champs obligatoires suivants:\n      | Nom de l'événement |\n      | Date               |\n      | Heure de début     |\n      | Lieu               |\n      | Thématique         |\n",
+    "rawContent": "# language: fr\n@USER @priority-2\nFonctionnalité: US-26 Définir la portée d'un événement\n  En tant qu'utilisateur\n  Je peux créer/présenter le contenu d'un événement et le catégoriser par type/thématique\n  En indiquant son rayon d'intérêt en kilomètres\n  Afin de m'assurer que les utilisateurs qui habitent trop loin ne reçoivent pas de notification\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Accéder à la création d'événement\n    Étant donné que je suis sur la page \"accueil\"\n    Quand je navigue vers \"créer un événement\"\n    Alors je vois l'écran \"create-event\"\n\n  Scénario: Définir le rayon d'intérêt\n    * Scénario non implémenté\n\n  Scénario: Choisir une thématique\n    Étant donné que je suis sur la page \"créer un événement\"\n    Alors l'écran contient une section \"Thématique\"\n\n  Scénario: Vérifier les champs obligatoires\n    Étant donné que l'écran \"create-event\" est affiché\n    Alors le formulaire contient les champs obligatoires suivants:\n      | Nom de l'événement |\n      | Date               |\n      | Heure de début     |\n      | Lieu               |\n      | Thématique         |\n",
     "screenIds": [
-      "create-event"
+      "create-event",
+      "home"
     ]
   },
   {
@@ -1118,27 +1321,96 @@ export const parsedFeatures: ParsedFeature[] = [
       {
         "name": "Accéder au partage de profil",
         "tags": [],
-        "steps": []
+        "steps": [
+          {
+            "keyword": "Étant donné que ",
+            "text": "je suis sur la page \"profil\""
+          },
+          {
+            "keyword": "Alors",
+            "text": "l'écran contient un bouton \"Partager\""
+          }
+        ]
+      },
+      {
+        "name": "Naviguer vers le partage de profil",
+        "tags": [],
+        "steps": [
+          {
+            "keyword": "Étant donné que ",
+            "text": "je suis sur la page \"profil\""
+          },
+          {
+            "keyword": "Quand",
+            "text": "je navigue vers \"partage de profil\""
+          },
+          {
+            "keyword": "Alors",
+            "text": "je vois l'écran \"share-profile\""
+          }
+        ]
       },
       {
         "name": "Voir le QR code de parrainage",
         "tags": [],
-        "steps": []
+        "steps": [
+          {
+            "keyword": "Étant donné que ",
+            "text": "je suis sur la page \"partage profil\""
+          },
+          {
+            "keyword": "Alors",
+            "text": "l'écran contient un texte \"Scannez pour me retrouver sur Festipod\""
+          }
+        ]
       },
       {
         "name": "Voir le lien de parrainage",
         "tags": [],
-        "steps": []
+        "steps": [
+          {
+            "keyword": "Étant donné que ",
+            "text": "je suis sur la page \"partage profil\""
+          },
+          {
+            "keyword": "Alors",
+            "text": "l'écran contient une section \"Mon lien de profil\""
+          },
+          {
+            "keyword": "Et",
+            "text": "l'écran contient un bouton \"Copier\""
+          }
+        ]
       },
       {
         "name": "Voir les statistiques de parrainage",
         "tags": [],
-        "steps": []
+        "steps": [
+          {
+            "keyword": "Étant donné que ",
+            "text": "je suis sur la page \"partage profil\""
+          },
+          {
+            "keyword": "Alors",
+            "text": "l'écran contient une section \"Statistiques de parrainage\""
+          },
+          {
+            "keyword": "Et",
+            "text": "l'écran contient un texte \"Personnes parrainées\""
+          },
+          {
+            "keyword": "Et",
+            "text": "l'écran contient un texte \"Scans du QR code\""
+          }
+        ]
       }
     ],
     "filePath": "features/user/us-22-parrainer.feature",
-    "rawContent": "# language: fr\n@USER @priority-2\nFonctionnalité: US-22 Parrainer un nouvel utilisateur\n  En tant qu'utilisateur\n  Je peux parrainer un nouvel utilisateur\n  En lui partageant mon QR code ou lien de contact\n  Afin de savoir combien de personnes ont rejoint le réseau grâce à moi\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Accéder au partage de profil\n    * Scénario non implémenté\n\n  Scénario: Voir le QR code de parrainage\n    * Scénario non implémenté\n\n  Scénario: Voir le lien de parrainage\n    * Scénario non implémenté\n\n  Scénario: Voir les statistiques de parrainage\n    * Scénario non implémenté\n",
-    "screenIds": []
+    "rawContent": "# language: fr\n@USER @priority-2\nFonctionnalité: US-22 Parrainer un nouvel utilisateur\n  En tant qu'utilisateur\n  Je peux parrainer un nouvel utilisateur\n  En lui partageant mon QR code ou lien de contact\n  Afin de savoir combien de personnes ont rejoint le réseau grâce à moi\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Accéder au partage de profil\n    Étant donné que je suis sur la page \"profil\"\n    Alors l'écran contient un bouton \"Partager\"\n\n  Scénario: Naviguer vers le partage de profil\n    Étant donné que je suis sur la page \"profil\"\n    Quand je navigue vers \"partage de profil\"\n    Alors je vois l'écran \"share-profile\"\n\n  Scénario: Voir le QR code de parrainage\n    Étant donné que je suis sur la page \"partage profil\"\n    Alors l'écran contient un texte \"Scannez pour me retrouver sur Festipod\"\n\n  Scénario: Voir le lien de parrainage\n    Étant donné que je suis sur la page \"partage profil\"\n    Alors l'écran contient une section \"Mon lien de profil\"\n    Et l'écran contient un bouton \"Copier\"\n\n  Scénario: Voir les statistiques de parrainage\n    Étant donné que je suis sur la page \"partage profil\"\n    Alors l'écran contient une section \"Statistiques de parrainage\"\n    Et l'écran contient un texte \"Personnes parrainées\"\n    Et l'écran contient un texte \"Scans du QR code\"\n",
+    "screenIds": [
+      "profile",
+      "share-profile"
+    ]
   },
   {
     "id": "us-21",
@@ -1248,10 +1520,15 @@ export const parsedFeatures: ParsedFeature[] = [
         "name": "Supprimer un commentaire",
         "tags": [],
         "steps": []
+      },
+      {
+        "name": "Enregistrer les interactions avec des individus (Date/Heure/Lieu)",
+        "tags": [],
+        "steps": []
       }
     ],
     "filePath": "features/event/us-5-commentaires-evenement.feature",
-    "rawContent": "# language: fr\n@EVENT @priority-3\nFonctionnalité: US-5 Ajouter/modifier/supprimer un commentaire à un événement\n  En tant qu'utilisateur\n  Je peux consulter et ajouter/modifier/supprimer un commentaire à un événement\n  En sélectionnant l'icône \"ajouter un commentaire\" en dessous du titre\n  Afin de voir les commentaires précédents et ajouter mes notes personnelles\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Voir les commentaires existants\n    * Scénario non implémenté\n\n  Scénario: Ajouter un commentaire\n    * Scénario non implémenté\n\n  Scénario: Modifier un commentaire\n    * Scénario non implémenté\n\n  Scénario: Supprimer un commentaire\n    * Scénario non implémenté\n",
+    "rawContent": "# language: fr\n@EVENT @priority-3\nFonctionnalité: US-5 Ajouter/modifier/supprimer un commentaire à un événement\n  En tant qu'utilisateur\n  Je peux consulter et ajouter/modifier/supprimer un commentaire à un événement\n  En sélectionnant l'icône \"ajouter un commentaire\" en dessous du titre\n  Afin de voir les commentaires précédents et ajouter mes notes personnelles\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Voir les commentaires existants\n    * Scénario non implémenté\n\n  Scénario: Ajouter un commentaire\n    * Scénario non implémenté\n\n  Scénario: Modifier un commentaire\n    * Scénario non implémenté\n\n  Scénario: Supprimer un commentaire\n    * Scénario non implémenté\n\n  Scénario: Enregistrer les interactions avec des individus (Date/Heure/Lieu)\n    * Scénario non implémenté\n",
     "screenIds": []
   },
   {
@@ -1290,10 +1567,30 @@ export const parsedFeatures: ParsedFeature[] = [
         "name": "Voir la consolidation des participants",
         "tags": [],
         "steps": []
+      },
+      {
+        "name": "Créer un macro-événement",
+        "tags": [],
+        "steps": []
+      },
+      {
+        "name": "Voir la consolidation des commentaires/liens/ressources",
+        "tags": [],
+        "steps": []
+      },
+      {
+        "name": "Rattacher à une thématique particulière",
+        "tags": [],
+        "steps": []
+      },
+      {
+        "name": "Gérer un événement répété sur plusieurs périodes",
+        "tags": [],
+        "steps": []
       }
     ],
     "filePath": "features/event/us-8-macro-evenement.feature",
-    "rawContent": "# language: fr\n@EVENT @priority-3\nFonctionnalité: US-8 Consulter et m'inscrire à un macro-événement\n  En tant qu'utilisateur\n  Je peux consulter et m'inscrire à un événement de type \"Macro-événement\"\n  En créant ou en rattachant des événements existants à ce macro-événement\n  Afin de voir une consolidation des commentaires/liens/ressources/participants\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Consulter un macro-événement\n    * Scénario non implémenté\n\n  Scénario: Voir les événements rattachés\n    * Scénario non implémenté\n\n  Scénario: Rattacher un événement existant\n    * Scénario non implémenté\n\n  Scénario: Voir la consolidation des participants\n    * Scénario non implémenté\n",
+    "rawContent": "# language: fr\n@EVENT @priority-3\nFonctionnalité: US-8 Consulter et m'inscrire à un macro-événement\n  En tant qu'utilisateur\n  Je peux consulter et m'inscrire à un événement de type \"Macro-événement\"\n  En créant ou en rattachant des événements existants à ce macro-événement\n  Afin de voir une consolidation des commentaires/liens/ressources/participants\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Consulter un macro-événement\n    * Scénario non implémenté\n\n  Scénario: Voir les événements rattachés\n    * Scénario non implémenté\n\n  Scénario: Rattacher un événement existant\n    * Scénario non implémenté\n\n  Scénario: Voir la consolidation des participants\n    * Scénario non implémenté\n\n  Scénario: Créer un macro-événement\n    * Scénario non implémenté\n\n  Scénario: Voir la consolidation des commentaires/liens/ressources\n    * Scénario non implémenté\n\n  Scénario: Rattacher à une thématique particulière\n    * Scénario non implémenté\n\n  Scénario: Gérer un événement répété sur plusieurs périodes\n    * Scénario non implémenté\n",
     "screenIds": []
   },
   {
@@ -1327,10 +1624,20 @@ export const parsedFeatures: ParsedFeature[] = [
         "name": "Consulter les ressources d'un atelier",
         "tags": [],
         "steps": []
+      },
+      {
+        "name": "Consulter le programme détaillé par journée/heure",
+        "tags": [],
+        "steps": []
+      },
+      {
+        "name": "Accéder à la zone de partage collective",
+        "tags": [],
+        "steps": []
       }
     ],
     "filePath": "features/workshop/us-1-visualiser-atelier-termine.feature",
-    "rawContent": "# language: fr\n@WORKSHOP @priority-3\nFonctionnalité: US-1 Visualiser un événement terminé (ateliers)\n  En tant qu'utilisateur\n  Je peux visualiser un événement terminé et consulter le programme détaillé des ateliers par journée/heure\n  Afin de voir les personnes qui ont participé à chaque atelier et consulter les notes/liens/commentaires\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Accéder aux détails d'un événement terminé\n    * Scénario non implémenté\n\n  Scénario: Consulter la liste des participants d'un atelier\n    * Scénario non implémenté\n\n  Scénario: Consulter les ressources d'un atelier\n    * Scénario non implémenté\n",
+    "rawContent": "# language: fr\n@WORKSHOP @priority-3\nFonctionnalité: US-1 Visualiser un événement terminé (ateliers)\n  En tant qu'utilisateur\n  Je peux visualiser un événement terminé et consulter le programme détaillé des ateliers par journée/heure\n  Afin de voir les personnes qui ont participé à chaque atelier et consulter les notes/liens/commentaires\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Accéder aux détails d'un événement terminé\n    * Scénario non implémenté\n\n  Scénario: Consulter la liste des participants d'un atelier\n    * Scénario non implémenté\n\n  Scénario: Consulter les ressources d'un atelier\n    * Scénario non implémenté\n\n  Scénario: Consulter le programme détaillé par journée/heure\n    * Scénario non implémenté\n\n  Scénario: Accéder à la zone de partage collective\n    * Scénario non implémenté\n",
     "screenIds": []
   },
   {
@@ -1369,10 +1676,15 @@ export const parsedFeatures: ParsedFeature[] = [
         "name": "Ajouter un lien/ressource",
         "tags": [],
         "steps": []
+      },
+      {
+        "name": "Consulter le programme détaillé des ateliers par journée/heure",
+        "tags": [],
+        "steps": []
       }
     ],
     "filePath": "features/workshop/us-2-visualiser-notes-atelier.feature",
-    "rawContent": "# language: fr\n@WORKSHOP @priority-3\nFonctionnalité: US-2 Visualiser un événement terminé (notes)\n  En tant qu'utilisateur\n  Je peux visualiser un événement terminé et consulter le programme détaillé des ateliers\n  Afin d'ajouter d'éventuelles prises de notes/liens ou des commentaires associés à l'atelier\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Accéder à la zone de notes personnelles\n    * Scénario non implémenté\n\n  Scénario: Accéder à la zone de partage publique\n    * Scénario non implémenté\n\n  Scénario: Ajouter une note personnelle\n    * Scénario non implémenté\n\n  Scénario: Ajouter un lien/ressource\n    * Scénario non implémenté\n",
+    "rawContent": "# language: fr\n@WORKSHOP @priority-3\nFonctionnalité: US-2 Visualiser un événement terminé (notes)\n  En tant qu'utilisateur\n  Je peux visualiser un événement terminé et consulter le programme détaillé des ateliers\n  Afin d'ajouter d'éventuelles prises de notes/liens ou des commentaires associés à l'atelier\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Accéder à la zone de notes personnelles\n    * Scénario non implémenté\n\n  Scénario: Accéder à la zone de partage publique\n    * Scénario non implémenté\n\n  Scénario: Ajouter une note personnelle\n    * Scénario non implémenté\n\n  Scénario: Ajouter un lien/ressource\n    * Scénario non implémenté\n\n  Scénario: Consulter le programme détaillé des ateliers par journée/heure\n    * Scénario non implémenté\n",
     "screenIds": []
   },
   {
@@ -1400,16 +1712,7 @@ export const parsedFeatures: ParsedFeature[] = [
       {
         "name": "Vérifier les champs obligatoires pour créer un atelier",
         "tags": [],
-        "steps": [
-          {
-            "keyword": "Étant donné que ",
-            "text": "l'écran \"create-event\" est affiché"
-          },
-          {
-            "keyword": "Alors",
-            "text": "le formulaire contient les champs obligatoires suivants:"
-          }
-        ]
+        "steps": []
       },
       {
         "name": "Créer un atelier",
@@ -1425,13 +1728,21 @@ export const parsedFeatures: ParsedFeature[] = [
         "name": "Supprimer un atelier",
         "tags": [],
         "steps": []
+      },
+      {
+        "name": "Sélectionner mon événement parent",
+        "tags": [],
+        "steps": []
+      },
+      {
+        "name": "Définir les horaires de fin de l'atelier",
+        "tags": [],
+        "steps": []
       }
     ],
     "filePath": "features/workshop/us-14-creer-atelier.feature",
-    "rawContent": "# language: fr\n@WORKSHOP @priority-3\nFonctionnalité: US-14 Créer/Modifier/Supprimer un atelier\n  En tant qu'utilisateur\n  Je peux créer/modifier/supprimer un atelier\n  En sélectionnant mon événement et en saisissant les dates et horaires de l'atelier\n  Afin de définir le programme de mon événement et ajouter une description\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Accéder à la création d'atelier\n    * Scénario non implémenté\n\n  Scénario: Vérifier les champs obligatoires pour créer un atelier\n    Étant donné que l'écran \"create-event\" est affiché\n    Alors le formulaire contient les champs obligatoires suivants:\n      | Nom de l'événement |\n      | Date               |\n      | Heure de début     |\n      | Lieu               |\n      | Thématique         |\n\n  Scénario: Créer un atelier\n    * Scénario non implémenté\n\n  Scénario: Modifier un atelier existant\n    * Scénario non implémenté\n\n  Scénario: Supprimer un atelier\n    * Scénario non implémenté\n",
-    "screenIds": [
-      "create-event"
-    ]
+    "rawContent": "# language: fr\n@WORKSHOP @priority-3\nFonctionnalité: US-14 Créer/Modifier/Supprimer un atelier\n  En tant qu'utilisateur\n  Je peux créer/modifier/supprimer un atelier\n  En sélectionnant mon événement et en saisissant les dates et horaires de l'atelier\n  Afin de définir le programme de mon événement et ajouter une description\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Accéder à la création d'atelier\n    * Scénario non implémenté\n\n  Scénario: Vérifier les champs obligatoires pour créer un atelier\n    * Scénario non implémenté\n\n  Scénario: Créer un atelier\n    * Scénario non implémenté\n\n  Scénario: Modifier un atelier existant\n    * Scénario non implémenté\n\n  Scénario: Supprimer un atelier\n    * Scénario non implémenté\n\n  Scénario: Sélectionner mon événement parent\n    * Scénario non implémenté\n\n  Scénario: Définir les horaires de fin de l'atelier\n    * Scénario non implémenté\n",
+    "screenIds": []
   },
   {
     "id": "us-11",
@@ -1506,16 +1817,21 @@ export const parsedFeatures: ParsedFeature[] = [
         "name": "Supprimer un commentaire",
         "tags": [],
         "steps": []
+      },
+      {
+        "name": "Accéder à l'icône ajouter un commentaire",
+        "tags": [],
+        "steps": []
       }
     ],
     "filePath": "features/workshop/us-4-commentaires-atelier.feature",
-    "rawContent": "# language: fr\n@WORKSHOP @priority-3\nFonctionnalité: US-4 Ajouter/modifier/supprimer un commentaire à un atelier\n  En tant qu'utilisateur\n  Je peux consulter et ajouter/modifier/supprimer un commentaire à un atelier\n  En sélectionnant l'icône \"ajouter un commentaire\" en dessous du titre de l'atelier\n  Afin de voir les commentaires précédents et ajouter mes commentaires\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Voir les commentaires existants d'un atelier\n    * Scénario non implémenté\n\n  Scénario: Ajouter un commentaire à un atelier\n    * Scénario non implémenté\n\n  Scénario: Modifier un commentaire existant\n    * Scénario non implémenté\n\n  Scénario: Supprimer un commentaire\n    * Scénario non implémenté\n",
+    "rawContent": "# language: fr\n@WORKSHOP @priority-3\nFonctionnalité: US-4 Ajouter/modifier/supprimer un commentaire à un atelier\n  En tant qu'utilisateur\n  Je peux consulter et ajouter/modifier/supprimer un commentaire à un atelier\n  En sélectionnant l'icône \"ajouter un commentaire\" en dessous du titre de l'atelier\n  Afin de voir les commentaires précédents et ajouter mes commentaires\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Voir les commentaires existants d'un atelier\n    * Scénario non implémenté\n\n  Scénario: Ajouter un commentaire à un atelier\n    * Scénario non implémenté\n\n  Scénario: Modifier un commentaire existant\n    * Scénario non implémenté\n\n  Scénario: Supprimer un commentaire\n    * Scénario non implémenté\n\n  Scénario: Accéder à l'icône ajouter un commentaire\n    * Scénario non implémenté\n",
     "screenIds": []
   },
   {
     "id": "us-6",
-    "name": "US-6 M'inscrire/me désinscrire à un événement (atelier)",
-    "description": "En tant qu'utilisateur Je peux m'inscrire/me désinscrire à un événement En regardant si l'événement public existe déjà et en m'enregistrant sur les différents ateliers Afin de m'inscrire à l'atelier tout en visualisant les personnes qui sont déjà pré-inscrites",
+    "name": "US-6 M'inscrire/me désinscrire à un atelier",
+    "description": "En tant qu'utilisateur Je peux m'inscrire/me désinscrire à un atelier En regardant si l'événement public existe déjà et en m'enregistrant sur les différents ateliers Afin de m'inscrire à l'atelier tout en visualisant les personnes qui sont déjà pré-inscrites",
     "tags": [
       "@WORKSHOP",
       "@priority-3"
@@ -1530,32 +1846,14 @@ export const parsedFeatures: ParsedFeature[] = [
     ],
     "scenarios": [
       {
-        "name": "Rechercher un événement public existant",
+        "name": "Voir les ateliers d'un événement",
         "tags": [],
-        "steps": [
-          {
-            "keyword": "Étant donné que ",
-            "text": "je suis sur la page \"découvrir\""
-          },
-          {
-            "keyword": "Alors",
-            "text": "je peux voir la liste des événements"
-          }
-        ]
+        "steps": []
       },
       {
         "name": "Voir les personnes pré-inscrites à un atelier",
         "tags": [],
-        "steps": [
-          {
-            "keyword": "Étant donné que ",
-            "text": "je suis sur la page \"détail événement\""
-          },
-          {
-            "keyword": "Alors",
-            "text": "je peux voir la liste des participants"
-          }
-        ]
+        "steps": []
       },
       {
         "name": "S'inscrire à un atelier",
@@ -1569,11 +1867,8 @@ export const parsedFeatures: ParsedFeature[] = [
       }
     ],
     "filePath": "features/workshop/us-6-inscription-atelier.feature",
-    "rawContent": "# language: fr\n@WORKSHOP @priority-3\nFonctionnalité: US-6 M'inscrire/me désinscrire à un événement (atelier)\n  En tant qu'utilisateur\n  Je peux m'inscrire/me désinscrire à un événement\n  En regardant si l'événement public existe déjà et en m'enregistrant sur les différents ateliers\n  Afin de m'inscrire à l'atelier tout en visualisant les personnes qui sont déjà pré-inscrites\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Rechercher un événement public existant\n    Étant donné que je suis sur la page \"découvrir\"\n    Alors je peux voir la liste des événements\n\n  Scénario: Voir les personnes pré-inscrites à un atelier\n    Étant donné que je suis sur la page \"détail événement\"\n    Alors je peux voir la liste des participants\n\n  Scénario: S'inscrire à un atelier\n    * Scénario non implémenté\n\n  Scénario: Se désinscrire d'un atelier\n    * Scénario non implémenté\n",
-    "screenIds": [
-      "event-detail",
-      "events"
-    ]
+    "rawContent": "# language: fr\n@WORKSHOP @priority-3\nFonctionnalité: US-6 M'inscrire/me désinscrire à un atelier\n  En tant qu'utilisateur\n  Je peux m'inscrire/me désinscrire à un atelier\n  En regardant si l'événement public existe déjà et en m'enregistrant sur les différents ateliers\n  Afin de m'inscrire à l'atelier tout en visualisant les personnes qui sont déjà pré-inscrites\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Voir les ateliers d'un événement\n    * Scénario non implémenté\n\n  Scénario: Voir les personnes pré-inscrites à un atelier\n    * Scénario non implémenté\n\n  Scénario: S'inscrire à un atelier\n    * Scénario non implémenté\n\n  Scénario: Se désinscrire d'un atelier\n    * Scénario non implémenté\n",
+    "screenIds": []
   }
 ];
 

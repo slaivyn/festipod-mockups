@@ -23,9 +23,6 @@ Fonctionnalité: US-13 Créer/Modifier/Supprimer un événement
       | Lieu               |
       | Thématique         |
 
-  Scénario: Remplir le formulaire de création d'événement
-    * Scénario non implémenté
-
   Scénario: Vérifier la présence du bouton de création
     Étant donné que je suis sur la page "créer un événement"
     Alors l'écran contient une section "Créer l'événement"
@@ -33,3 +30,12 @@ Fonctionnalité: US-13 Créer/Modifier/Supprimer un événement
   Scénario: Pouvoir annuler la création d'événement
     Étant donné que je suis sur la page "créer un événement"
     Alors je peux annuler et revenir à l'écran précédent
+
+  Scénario: Modifier un événement
+    * Scénario non implémenté
+
+  Scénario: Supprimer un événement
+    * Scénario non implémenté
+
+  Scénario: Retirer une organisation (personne ou structure)
+    * Scénario non implémenté
