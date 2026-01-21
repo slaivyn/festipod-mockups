@@ -123,7 +123,8 @@ export function MeetingPointsScreen({ navigate }: ScreenProps) {
 
         <div style={{ display: 'flex', gap: 8, marginTop: 12 }}>
           <Button style={{ flex: 1 }}>Scanner un QR</Button>
-          <Button style={{ flex: 1 }}>Partager mon lien</Button>
+          <Button variant="primary" style={{ flex: 1 }}>Partager</Button>
+          <Button style={{ flex: 1 }}>Copier le lien</Button>
         </div>
       </div>
     </div>

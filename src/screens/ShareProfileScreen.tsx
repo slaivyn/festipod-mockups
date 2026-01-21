@@ -74,22 +74,10 @@ export function ShareProfileScreen({ navigate }: ScreenProps) {
 
         <Divider />
 
-        {/* Share options */}
-        <Text style={{ fontWeight: 'bold', marginBottom: 12 }}>Partager via</Text>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-          <Button style={{ width: '100%', justifyContent: 'flex-start', textAlign: 'left' }}>
-            <span style={{ marginRight: 12 }}>📱</span>
-            Message / SMS
-          </Button>
-          <Button style={{ width: '100%', justifyContent: 'flex-start', textAlign: 'left' }}>
-            <span style={{ marginRight: 12 }}>✉️</span>
-            E-mail
-          </Button>
-          <Button style={{ width: '100%', justifyContent: 'flex-start', textAlign: 'left' }}>
-            <span style={{ marginRight: 12 }}>📋</span>
-            Copier le lien
-          </Button>
-        </div>
+        {/* Share action */}
+        <Button variant="primary" style={{ width: '100%' }}>
+          Partager
+        </Button>
 
         <Divider />
 
