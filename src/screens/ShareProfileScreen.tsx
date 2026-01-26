@@ -60,24 +60,20 @@ export function ShareProfileScreen({ navigate }: ScreenProps) {
 
         {/* Link section */}
         <Text style={{ fontWeight: 'bold', marginBottom: 12 }}>Mon lien de profil</Text>
-        <Card style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+        <Card style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           <Text style={{
             margin: 0,
             flex: 1,
             fontSize: 14,
-            wordBreak: 'break-all',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            whiteSpace: 'nowrap',
           }}>
             {profileLink}
           </Text>
-          <Button style={{ flexShrink: 0 }}>Copier</Button>
+          <Button style={{ flexShrink: 0, padding: '8px 10px' }} title="Copier le lien">📋</Button>
+          <Button variant="primary" style={{ flexShrink: 0, padding: '8px 10px' }} title="Partager">↗</Button>
         </Card>
-
-        <Divider />
-
-        {/* Share action */}
-        <Button variant="primary" style={{ width: '100%' }}>
-          Partager
-        </Button>
 
         <Divider />
 
