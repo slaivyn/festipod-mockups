@@ -7,6 +7,7 @@ import { UserProfileScreen } from './UserProfileScreen';
 import { EventsScreen } from './EventsScreen';
 import { EventDetailScreen } from './EventDetailScreen';
 import { CreateEventScreen } from './CreateEventScreen';
+import { UpdateEventScreen } from './UpdateEventScreen';
 import { InviteScreen } from './InviteScreen';
 import { ParticipantsListScreen } from './ParticipantsListScreen';
 import { MeetingPointsScreen } from './MeetingPointsScreen';
@@ -45,7 +46,8 @@ export const screenGroups: ScreenGroup[] = [
     screens: [
       { id: 'events', name: 'Découvrir', component: EventsScreen },
       { id: 'event-detail', name: 'Détail événement', component: EventDetailScreen },
-      { id: 'create-event', name: 'Créer événement', component: CreateEventScreen },
+      { id: 'create-event', name: 'Relayer événement', component: CreateEventScreen },
+      { id: 'update-event', name: 'Modifier événement', component: UpdateEventScreen },
       { id: 'invite', name: 'Inviter des amis', component: InviteScreen },
       { id: 'participants-list', name: 'Liste des participants', component: ParticipantsListScreen },
       { id: 'meeting-points', name: 'Points de rencontre', component: MeetingPointsScreen },

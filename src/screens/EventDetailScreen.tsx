@@ -5,6 +5,9 @@ import type { ScreenProps } from './index';
 export function EventDetailScreen({ navigate }: ScreenProps) {
   const [isJoined, setIsJoined] = useState(false);
 
+  // In a real app, this would come from comparing current user with event creator
+  const isOwner = true;
+
   const knownAttendees = [
     { initials: 'MD', name: 'Marie' },
     { initials: 'TM', name: 'Thomas' },
@@ -16,7 +19,7 @@ export function EventDetailScreen({ navigate }: ScreenProps) {
       <Header
         title="Événement"
         left={<span onClick={() => navigate('events')} style={{ cursor: 'pointer' }}>←</span>}
-        right={<span style={{ cursor: 'pointer' }}>⋯</span>}
+        right={isOwner && <span onClick={() => navigate('create-event')} style={{ cursor: 'pointer' }}>✎</span>}
       />
 
       {/* Content */}

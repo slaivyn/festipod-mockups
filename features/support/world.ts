@@ -38,6 +38,7 @@ const screenFileMap: Record<string, string> = {
   'events': 'EventsScreen.tsx',
   'event-detail': 'EventDetailScreen.tsx',
   'create-event': 'CreateEventScreen.tsx',
+  'update-event': 'UpdateEventScreen.tsx',
   'invite': 'InviteScreen.tsx',
   'participants-list': 'ParticipantsListScreen.tsx',
   'meeting-points': 'MeetingPointsScreen.tsx',
