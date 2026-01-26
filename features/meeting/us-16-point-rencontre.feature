@@ -28,10 +28,3 @@ Fonctionnalité: US-16 Indiquer un ou plusieurs points de rencontre
     Alors l'écran contient un bouton "30 min avant"
     Et l'écran contient un bouton "1h avant"
     Et l'écran contient un bouton "Personnalisé"
-
-  Scénario: Échanger des liens de contact
-    Étant donné que je suis sur la page "points de rencontre"
-    Alors l'écran contient une section "Échanger vos contacts"
-    Et l'écran contient un texte "Mon QR Code"
-    Et l'écran contient un bouton "Scanner un QR"
-    Et l'écran contient un bouton "Partager mon lien"

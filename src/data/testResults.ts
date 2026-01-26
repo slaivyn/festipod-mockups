@@ -19,7 +19,7 @@ const rawResults: RawFeatureTestStatus[] = [
     "passed": 4,
     "failed": 0,
     "skipped": 3,
-    "lastRun": "2026-01-19T11:47:58.183Z",
+    "lastRun": "2026-01-26T13:37:41.702Z",
     "scenarios": [
       {
         "name": "Accéder à la création d'événement",
@@ -57,7 +57,7 @@ const rawResults: RawFeatureTestStatus[] = [
     "passed": 3,
     "failed": 0,
     "skipped": 0,
-    "lastRun": "2026-01-19T11:47:58.183Z",
+    "lastRun": "2026-01-26T13:37:41.702Z",
     "scenarios": [
       {
         "name": "Accéder aux détails d'un événement terminé",
@@ -79,7 +79,7 @@ const rawResults: RawFeatureTestStatus[] = [
     "passed": 0,
     "failed": 0,
     "skipped": 5,
-    "lastRun": "2026-01-19T11:47:58.183Z",
+    "lastRun": "2026-01-26T13:37:41.702Z",
     "scenarios": [
       {
         "name": "Voir les commentaires existants",
@@ -109,7 +109,7 @@ const rawResults: RawFeatureTestStatus[] = [
     "passed": 2,
     "failed": 0,
     "skipped": 4,
-    "lastRun": "2026-01-19T11:47:58.183Z",
+    "lastRun": "2026-01-26T13:37:41.702Z",
     "scenarios": [
       {
         "name": "Consulter un événement avant inscription",
@@ -143,7 +143,7 @@ const rawResults: RawFeatureTestStatus[] = [
     "passed": 0,
     "failed": 0,
     "skipped": 8,
-    "lastRun": "2026-01-19T11:47:58.183Z",
+    "lastRun": "2026-01-26T13:37:41.702Z",
     "scenarios": [
       {
         "name": "Consulter un macro-événement",
@@ -181,11 +181,11 @@ const rawResults: RawFeatureTestStatus[] = [
   },
   {
     "featureId": "us-16",
-    "totalScenarios": 5,
-    "passed": 5,
+    "totalScenarios": 4,
+    "passed": 4,
     "failed": 0,
     "skipped": 0,
-    "lastRun": "2026-01-19T11:47:58.183Z",
+    "lastRun": "2026-01-26T13:37:41.702Z",
     "scenarios": [
       {
         "name": "Accéder aux points de rencontre",
@@ -202,10 +202,6 @@ const rawResults: RawFeatureTestStatus[] = [
       {
         "name": "Définir l'heure de rencontre",
         "status": "passed"
-      },
-      {
-        "name": "Échanger des liens de contact",
-        "status": "passed"
       }
     ]
   },
@@ -215,7 +211,7 @@ const rawResults: RawFeatureTestStatus[] = [
     "passed": 0,
     "failed": 0,
     "skipped": 5,
-    "lastRun": "2026-01-19T11:47:58.183Z",
+    "lastRun": "2026-01-26T13:37:41.703Z",
     "scenarios": [
       {
         "name": "Partager un événement auquel je participe",
@@ -245,7 +241,7 @@ const rawResults: RawFeatureTestStatus[] = [
     "passed": 1,
     "failed": 0,
     "skipped": 3,
-    "lastRun": "2026-01-19T11:47:58.183Z",
+    "lastRun": "2026-01-26T13:37:41.703Z",
     "scenarios": [
       {
         "name": "Configurer les notifications de nouveaux participants",
@@ -271,7 +267,7 @@ const rawResults: RawFeatureTestStatus[] = [
     "passed": 3,
     "failed": 0,
     "skipped": 2,
-    "lastRun": "2026-01-19T11:47:58.183Z",
+    "lastRun": "2026-01-26T13:37:41.703Z",
     "scenarios": [
       {
         "name": "Voir les événements à venir sur l'accueil",
@@ -301,7 +297,7 @@ const rawResults: RawFeatureTestStatus[] = [
     "passed": 4,
     "failed": 0,
     "skipped": 1,
-    "lastRun": "2026-01-19T11:47:58.183Z",
+    "lastRun": "2026-01-26T13:37:41.703Z",
     "scenarios": [
       {
         "name": "Accéder au profil d'un participant",
@@ -331,7 +327,7 @@ const rawResults: RawFeatureTestStatus[] = [
     "passed": 2,
     "failed": 0,
     "skipped": 5,
-    "lastRun": "2026-01-19T11:47:58.183Z",
+    "lastRun": "2026-01-26T13:37:41.703Z",
     "scenarios": [
       {
         "name": "Accéder à la liste des événements depuis le profil",
@@ -369,7 +365,7 @@ const rawResults: RawFeatureTestStatus[] = [
     "passed": 3,
     "failed": 0,
     "skipped": 2,
-    "lastRun": "2026-01-19T11:47:58.183Z",
+    "lastRun": "2026-01-26T13:37:41.703Z",
     "scenarios": [
       {
         "name": "Accéder à la liste des inscrits d'un événement",
@@ -399,7 +395,7 @@ const rawResults: RawFeatureTestStatus[] = [
     "passed": 5,
     "failed": 0,
     "skipped": 1,
-    "lastRun": "2026-01-19T11:47:58.184Z",
+    "lastRun": "2026-01-26T13:37:41.703Z",
     "scenarios": [
       {
         "name": "Accéder à mon profil",
@@ -433,7 +429,7 @@ const rawResults: RawFeatureTestStatus[] = [
     "passed": 2,
     "failed": 0,
     "skipped": 3,
-    "lastRun": "2026-01-19T11:47:58.184Z",
+    "lastRun": "2026-01-26T13:37:41.703Z",
     "scenarios": [
       {
         "name": "Accéder aux paramètres de profil",
@@ -463,7 +459,7 @@ const rawResults: RawFeatureTestStatus[] = [
     "passed": 5,
     "failed": 0,
     "skipped": 0,
-    "lastRun": "2026-01-19T11:47:58.184Z",
+    "lastRun": "2026-01-26T13:37:41.703Z",
     "scenarios": [
       {
         "name": "Accéder au partage de profil",
@@ -493,7 +489,7 @@ const rawResults: RawFeatureTestStatus[] = [
     "passed": 5,
     "failed": 0,
     "skipped": 0,
-    "lastRun": "2026-01-19T11:47:58.184Z",
+    "lastRun": "2026-01-26T13:37:41.703Z",
     "scenarios": [
       {
         "name": "Accéder au partage depuis le profil",
@@ -523,7 +519,7 @@ const rawResults: RawFeatureTestStatus[] = [
     "passed": 2,
     "failed": 0,
     "skipped": 1,
-    "lastRun": "2026-01-19T11:47:58.184Z",
+    "lastRun": "2026-01-26T13:37:41.703Z",
     "scenarios": [
       {
         "name": "Accéder aux paramètres de notification",
@@ -545,7 +541,7 @@ const rawResults: RawFeatureTestStatus[] = [
     "passed": 1,
     "failed": 0,
     "skipped": 2,
-    "lastRun": "2026-01-19T11:47:58.184Z",
+    "lastRun": "2026-01-26T13:37:41.703Z",
     "scenarios": [
       {
         "name": "Accéder aux paramètres de notification",
@@ -567,7 +563,7 @@ const rawResults: RawFeatureTestStatus[] = [
     "passed": 3,
     "failed": 0,
     "skipped": 1,
-    "lastRun": "2026-01-19T11:47:58.184Z",
+    "lastRun": "2026-01-26T13:37:41.703Z",
     "scenarios": [
       {
         "name": "Accéder à la création d'événement",
@@ -593,7 +589,7 @@ const rawResults: RawFeatureTestStatus[] = [
     "passed": 4,
     "failed": 0,
     "skipped": 1,
-    "lastRun": "2026-01-19T11:47:58.184Z",
+    "lastRun": "2026-01-26T13:37:41.703Z",
     "scenarios": [
       {
         "name": "Accéder au profil pour voir la photo",
@@ -623,7 +619,7 @@ const rawResults: RawFeatureTestStatus[] = [
     "passed": 0,
     "failed": 0,
     "skipped": 5,
-    "lastRun": "2026-01-19T11:47:58.184Z",
+    "lastRun": "2026-01-26T13:37:41.703Z",
     "scenarios": [
       {
         "name": "Accéder aux détails d'un événement terminé",
@@ -653,7 +649,7 @@ const rawResults: RawFeatureTestStatus[] = [
     "passed": 0,
     "failed": 0,
     "skipped": 3,
-    "lastRun": "2026-01-19T11:47:58.184Z",
+    "lastRun": "2026-01-26T13:37:41.703Z",
     "scenarios": [
       {
         "name": "Accéder au bilan consolidé",
@@ -675,7 +671,7 @@ const rawResults: RawFeatureTestStatus[] = [
     "passed": 0,
     "failed": 0,
     "skipped": 7,
-    "lastRun": "2026-01-19T11:47:58.184Z",
+    "lastRun": "2026-01-26T13:37:41.703Z",
     "scenarios": [
       {
         "name": "Accéder à la création d'atelier",
@@ -713,7 +709,7 @@ const rawResults: RawFeatureTestStatus[] = [
     "passed": 0,
     "failed": 0,
     "skipped": 5,
-    "lastRun": "2026-01-19T11:47:58.184Z",
+    "lastRun": "2026-01-26T13:37:41.703Z",
     "scenarios": [
       {
         "name": "Accéder à la zone de notes personnelles",
@@ -743,7 +739,7 @@ const rawResults: RawFeatureTestStatus[] = [
     "passed": 0,
     "failed": 0,
     "skipped": 5,
-    "lastRun": "2026-01-19T11:47:58.184Z",
+    "lastRun": "2026-01-26T13:37:41.703Z",
     "scenarios": [
       {
         "name": "Voir les commentaires existants d'un atelier",
@@ -773,7 +769,7 @@ const rawResults: RawFeatureTestStatus[] = [
     "passed": 0,
     "failed": 0,
     "skipped": 4,
-    "lastRun": "2026-01-19T11:47:58.184Z",
+    "lastRun": "2026-01-26T13:37:41.703Z",
     "scenarios": [
       {
         "name": "Voir les ateliers d'un événement",

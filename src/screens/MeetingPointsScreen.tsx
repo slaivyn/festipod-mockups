@@ -80,52 +80,6 @@ export function MeetingPointsScreen({ navigate }: ScreenProps) {
           </Button>
         </div>
 
-        <Divider />
-
-        {/* QR Code exchange section */}
-        <Text style={{ fontWeight: 'bold', marginBottom: 12 }}>Échanger vos contacts</Text>
-        <Text style={{ color: 'var(--sketch-gray)', marginBottom: 12, fontSize: 14 }}>
-          Partagez votre QR code avec les autres participants pour rester en contact.
-        </Text>
-
-        <Card style={{ textAlign: 'center', padding: 20 }}>
-          <div style={{
-            width: 120,
-            height: 120,
-            margin: '0 auto 12px',
-            border: '2px solid var(--sketch-black)',
-            borderRadius: 8,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            background: 'var(--sketch-white)',
-          }}>
-            <div style={{
-              width: 100,
-              height: 100,
-              background: `
-                repeating-linear-gradient(
-                  0deg,
-                  var(--sketch-black) 0px,
-                  var(--sketch-black) 8px,
-                  var(--sketch-white) 8px,
-                  var(--sketch-white) 16px
-                )
-              `,
-              opacity: 0.3,
-            }} />
-          </div>
-          <Text style={{ margin: 0, fontWeight: 'bold' }}>Mon QR Code</Text>
-          <Text style={{ margin: '4px 0 0 0', fontSize: 13, color: 'var(--sketch-gray)' }}>
-            Scannez pour m'ajouter
-          </Text>
-        </Card>
-
-        <div style={{ display: 'flex', gap: 8, marginTop: 12 }}>
-          <Button style={{ flex: 1 }}>Scanner un QR</Button>
-          <Button variant="primary" style={{ flex: 1 }}>Partager</Button>
-          <Button style={{ flex: 1 }}>Copier le lien</Button>
-        </div>
       </div>
     </div>
   );

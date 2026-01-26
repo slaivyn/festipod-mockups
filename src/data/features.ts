@@ -434,36 +434,10 @@ export const parsedFeatures: ParsedFeature[] = [
             "text": "l'écran contient un bouton \"Personnalisé\""
           }
         ]
-      },
-      {
-        "name": "Échanger des liens de contact",
-        "tags": [],
-        "steps": [
-          {
-            "keyword": "Étant donné que ",
-            "text": "je suis sur la page \"points de rencontre\""
-          },
-          {
-            "keyword": "Alors",
-            "text": "l'écran contient une section \"Échanger vos contacts\""
-          },
-          {
-            "keyword": "Et",
-            "text": "l'écran contient un texte \"Mon QR Code\""
-          },
-          {
-            "keyword": "Et",
-            "text": "l'écran contient un bouton \"Scanner un QR\""
-          },
-          {
-            "keyword": "Et",
-            "text": "l'écran contient un bouton \"Partager mon lien\""
-          }
-        ]
       }
     ],
     "filePath": "features/meeting/us-16-point-rencontre.feature",
-    "rawContent": "# language: fr\n@MEETING @priority-1\nFonctionnalité: US-16 Indiquer un ou plusieurs points de rencontre\n  En tant qu'utilisateur\n  Je peux indiquer un ou plusieurs points de rencontre\n  En précisant le lieu et l'heure de cette rencontre\n  Afin de croiser et faire connaissance d'autres participants\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Accéder aux points de rencontre\n    Étant donné que je suis sur la page \"détail événement\"\n    Quand je navigue vers \"points de rencontre\"\n    Alors je vois l'écran \"meeting-points\"\n\n  Scénario: Créer un point de rencontre\n    Étant donné que je suis sur la page \"points de rencontre\"\n    Alors l'écran contient un bouton \"Créer le point de rencontre\"\n\n  Scénario: Définir le lieu de rencontre\n    Étant donné que je suis sur la page \"points de rencontre\"\n    Alors l'écran contient une section \"Proposer un point de rencontre\"\n    Et l'écran contient un champ \"Lieu\"\n\n  Scénario: Définir l'heure de rencontre\n    Étant donné que je suis sur la page \"points de rencontre\"\n    Alors l'écran contient un bouton \"30 min avant\"\n    Et l'écran contient un bouton \"1h avant\"\n    Et l'écran contient un bouton \"Personnalisé\"\n\n  Scénario: Échanger des liens de contact\n    Étant donné que je suis sur la page \"points de rencontre\"\n    Alors l'écran contient une section \"Échanger vos contacts\"\n    Et l'écran contient un texte \"Mon QR Code\"\n    Et l'écran contient un bouton \"Scanner un QR\"\n    Et l'écran contient un bouton \"Partager mon lien\"\n",
+    "rawContent": "# language: fr\n@MEETING @priority-1\nFonctionnalité: US-16 Indiquer un ou plusieurs points de rencontre\n  En tant qu'utilisateur\n  Je peux indiquer un ou plusieurs points de rencontre\n  En précisant le lieu et l'heure de cette rencontre\n  Afin de croiser et faire connaissance d'autres participants\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Accéder aux points de rencontre\n    Étant donné que je suis sur la page \"détail événement\"\n    Quand je navigue vers \"points de rencontre\"\n    Alors je vois l'écran \"meeting-points\"\n\n  Scénario: Créer un point de rencontre\n    Étant donné que je suis sur la page \"points de rencontre\"\n    Alors l'écran contient un bouton \"Créer le point de rencontre\"\n\n  Scénario: Définir le lieu de rencontre\n    Étant donné que je suis sur la page \"points de rencontre\"\n    Alors l'écran contient une section \"Proposer un point de rencontre\"\n    Et l'écran contient un champ \"Lieu\"\n\n  Scénario: Définir l'heure de rencontre\n    Étant donné que je suis sur la page \"points de rencontre\"\n    Alors l'écran contient un bouton \"30 min avant\"\n    Et l'écran contient un bouton \"1h avant\"\n    Et l'écran contient un bouton \"Personnalisé\"\n",
     "screenIds": [
       "event-detail",
       "meeting-points"
