@@ -24,7 +24,7 @@ export function SettingsScreen({ navigate }: ScreenProps) {
           <div style={{ flex: 1 }}>
             <Text style={{ margin: 0 }}>Notifications</Text>
             <Text style={{ margin: 0, fontSize: 12, color: 'var(--sketch-gray)' }}>
-              Recevoir les notifications push
+              Recevoir les invitations par e-mail
             </Text>
           </div>
           <Toggle checked={notifications} onChange={setNotifications} />
