@@ -382,7 +382,7 @@ export const parsedFeatures: ParsedFeature[] = [
         ]
       },
       {
-        "name": "Créer un point de rencontre",
+        "name": "Voir le bouton pour proposer un point de rencontre",
         "tags": [],
         "steps": [
           {
@@ -391,12 +391,12 @@ export const parsedFeatures: ParsedFeature[] = [
           },
           {
             "keyword": "Alors",
-            "text": "l'écran contient un bouton \"Créer le point de rencontre\""
+            "text": "l'écran contient un bouton \"Proposer un point de rencontre\""
           }
         ]
       },
       {
-        "name": "Définir le lieu de rencontre",
+        "name": "Ouvrir le formulaire de proposition",
         "tags": [],
         "steps": [
           {
@@ -404,8 +404,12 @@ export const parsedFeatures: ParsedFeature[] = [
             "text": "je suis sur la page \"points de rencontre\""
           },
           {
+            "keyword": "Quand",
+            "text": "je clique sur \"Proposer un point de rencontre\""
+          },
+          {
             "keyword": "Alors",
-            "text": "l'écran contient une section \"Proposer un point de rencontre\""
+            "text": "l'écran contient un bouton \"Créer le point de rencontre\""
           },
           {
             "keyword": "Et",
@@ -420,6 +424,10 @@ export const parsedFeatures: ParsedFeature[] = [
           {
             "keyword": "Étant donné que ",
             "text": "je suis sur la page \"points de rencontre\""
+          },
+          {
+            "keyword": "Quand",
+            "text": "je clique sur \"Proposer un point de rencontre\""
           },
           {
             "keyword": "Alors",
@@ -437,7 +445,7 @@ export const parsedFeatures: ParsedFeature[] = [
       }
     ],
     "filePath": "features/meeting/us-16-point-rencontre.feature",
-    "rawContent": "# language: fr\n@MEETING @priority-1\nFonctionnalité: US-16 Indiquer un ou plusieurs points de rencontre\n  En tant qu'utilisateur\n  Je peux indiquer un ou plusieurs points de rencontre\n  En précisant le lieu et l'heure de cette rencontre\n  Afin de croiser et faire connaissance d'autres participants\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Accéder aux points de rencontre\n    Étant donné que je suis sur la page \"détail événement\"\n    Quand je navigue vers \"points de rencontre\"\n    Alors je vois l'écran \"meeting-points\"\n\n  Scénario: Créer un point de rencontre\n    Étant donné que je suis sur la page \"points de rencontre\"\n    Alors l'écran contient un bouton \"Créer le point de rencontre\"\n\n  Scénario: Définir le lieu de rencontre\n    Étant donné que je suis sur la page \"points de rencontre\"\n    Alors l'écran contient une section \"Proposer un point de rencontre\"\n    Et l'écran contient un champ \"Lieu\"\n\n  Scénario: Définir l'heure de rencontre\n    Étant donné que je suis sur la page \"points de rencontre\"\n    Alors l'écran contient un bouton \"30 min avant\"\n    Et l'écran contient un bouton \"1h avant\"\n    Et l'écran contient un bouton \"Personnalisé\"\n",
+    "rawContent": "# language: fr\n@MEETING @priority-1\nFonctionnalité: US-16 Indiquer un ou plusieurs points de rencontre\n  En tant qu'utilisateur\n  Je peux indiquer un ou plusieurs points de rencontre\n  En précisant le lieu et l'heure de cette rencontre\n  Afin de croiser et faire connaissance d'autres participants\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Accéder aux points de rencontre\n    Étant donné que je suis sur la page \"détail événement\"\n    Quand je navigue vers \"points de rencontre\"\n    Alors je vois l'écran \"meeting-points\"\n\n  Scénario: Voir le bouton pour proposer un point de rencontre\n    Étant donné que je suis sur la page \"points de rencontre\"\n    Alors l'écran contient un bouton \"Proposer un point de rencontre\"\n\n  Scénario: Ouvrir le formulaire de proposition\n    Étant donné que je suis sur la page \"points de rencontre\"\n    Quand je clique sur \"Proposer un point de rencontre\"\n    Alors l'écran contient un bouton \"Créer le point de rencontre\"\n    Et l'écran contient un champ \"Lieu\"\n\n  Scénario: Définir l'heure de rencontre\n    Étant donné que je suis sur la page \"points de rencontre\"\n    Quand je clique sur \"Proposer un point de rencontre\"\n    Alors l'écran contient un bouton \"30 min avant\"\n    Et l'écran contient un bouton \"1h avant\"\n    Et l'écran contient un bouton \"Personnalisé\"\n",
     "screenIds": [
       "event-detail",
       "meeting-points"
