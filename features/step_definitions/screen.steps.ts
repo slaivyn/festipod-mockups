@@ -59,7 +59,7 @@ Then('je peux voir la liste des événements', async function (this: FestipodWor
   const source = this.getRenderedText();
   if (this.currentScreenId === 'home') {
     // HomeScreen.tsx has: "Événements à venir" text and EventCard components
-    expect(/Événements à venir/.test(source), 'Home screen should have "Événements à venir" text').to.be.true;
+    expect(/Mes événements à venir/.test(source), 'Home screen should have "Événements à venir" text').to.be.true;
   } else if (this.currentScreenId === 'events') {
     // EventsScreen.tsx has: EventCard components with event data
     expect(/<Card[^>]*onClick/.test(source), 'Events screen should have clickable Card components').to.be.true;

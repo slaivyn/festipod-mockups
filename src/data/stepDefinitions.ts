@@ -245,7 +245,7 @@ export const stepDefinitions: StepDefinitionInfo[] = [
     "pattern": "je peux voir la liste des événements",
     "keyword": "Then",
     "file": "screen.steps.ts",
-    "sourceCode": "Then('je peux voir la liste des événements', async function (this: FestipodWorld) {\n  const source = this.getRenderedText();\n  if (this.currentScreenId === 'home') {\n    // HomeScreen.tsx has: \"Événements à venir\" text and EventCard components\n    expect(/Événements à venir/.test(source), 'Home screen should have \"Événements à venir\" text').to.be.true;\n  } else if (this.currentScreenId === 'events') {\n    // EventsScreen.tsx has: EventCard components with event data\n    expect(/<Card[^>]*onClick/.test(source), 'Events screen should have clickable Card components').to.be.true;\n  } else {\n    expect.fail(`Unexpected screen \"${this.currentScreenId}\" - events list should be on home or events screen`);\n  }\n});",
+    "sourceCode": "Then('je peux voir la liste des événements', async function (this: FestipodWorld) {\n  const source = this.getRenderedText();\n  if (this.currentScreenId === 'home') {\n    // HomeScreen.tsx has: \"Événements à venir\" text and EventCard components\n    expect(/Mes événements à venir/.test(source), 'Home screen should have \"Événements à venir\" text').to.be.true;\n  } else if (this.currentScreenId === 'events') {\n    // EventsScreen.tsx has: EventCard components with event data\n    expect(/<Card[^>]*onClick/.test(source), 'Events screen should have clickable Card components').to.be.true;\n  } else {\n    expect.fail(`Unexpected screen \"${this.currentScreenId}\" - events list should be on home or events screen`);\n  }\n});",
     "lineNumber": 58
   },
   {

@@ -132,7 +132,7 @@ export const screenExpectedContent: Record<string, string[]> = {
     'Rechercher',
   ],
   'home': [
-    'Événements à venir',
+    'Mes événements à venir',
     'Créer un événement',
   ],
   'invite': [
@@ -194,7 +194,7 @@ export const screenRequiredFields: Record<string, string[]> = {
     'Filtre par date',
   ],
   'home': [
-    'Événements à venir',
+    'Mes événements à venir',
     'Navigation',
   ],
   'invite': [

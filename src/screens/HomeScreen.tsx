@@ -30,7 +30,7 @@ export function HomeScreen({ navigate }: ScreenProps) {
       {/* Content */}
       <div style={{ flex: 1, padding: 16, overflow: 'auto' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
-          <Text style={{ margin: 0, fontWeight: 'bold' }}>Événements à venir</Text>
+          <Text style={{ margin: 0, fontWeight: 'bold' }}>Mes événements à venir</Text>
           <Text
             style={{ margin: 0, fontSize: 14, cursor: 'pointer' }}
             onClick={() => navigate('events')}

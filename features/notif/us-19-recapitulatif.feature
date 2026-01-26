@@ -13,7 +13,7 @@ Fonctionnalité: US-19 Recevoir un récapitulatif des prochaines rencontres
 
   Scénario: Voir les événements à venir sur l'accueil
     Étant donné que je suis sur la page "accueil"
-    Alors l'écran contient une section "Événements à venir"
+    Alors l'écran contient une section "Mes événements à venir"
 
   Scénario: Voir le récapitulatif par période
     * Scénario non implémenté

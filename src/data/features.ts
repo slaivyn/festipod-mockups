@@ -862,7 +862,7 @@ export const parsedFeatures: ParsedFeature[] = [
           },
           {
             "keyword": "Alors",
-            "text": "l'écran contient une section \"Événements à venir\""
+            "text": "l'écran contient une section \"Mes événements à venir\""
           }
         ]
       },
@@ -910,7 +910,7 @@ export const parsedFeatures: ParsedFeature[] = [
       }
     ],
     "filePath": "features/notif/us-19-recapitulatif.feature",
-    "rawContent": "# language: fr\n# Note: US-19 concerne les récapitulatifs par email - non testable via écrans\n# Les scénarios ci-dessous testent l'affichage sur l'écran d'accueil (aspect UI)\n@NOTIF @priority-2\nFonctionnalité: US-19 Recevoir un récapitulatif des prochaines rencontres\n  En tant qu'utilisateur\n  Je peux recevoir un récapitulatif des prochaines rencontres\n  En réceptionnant une liste des événements auxquels je suis inscrit ou qui sont proches de chez moi\n  Afin d'établir un programme des événements auxquels je participe par période\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Voir les événements à venir sur l'accueil\n    Étant donné que je suis sur la page \"accueil\"\n    Alors l'écran contient une section \"Événements à venir\"\n\n  Scénario: Voir le récapitulatif par période\n    * Scénario non implémenté\n\n  Scénario: Voir les événements proches géographiquement\n    * Scénario non implémenté\n\n  Scénario: Voir mes inscriptions\n    Étant donné que je suis sur la page \"mon profil\"\n    Alors l'écran contient une section \"Mes événements à venir\"\n\n  Scénario: Vérifier les données de l'accueil\n    Étant donné que je suis sur la page \"accueil\"\n    Alors l'écran contient un texte \"Barbecue d'été\"\n    Et l'écran contient un texte \"Soirée jeux de société\"\n",
+    "rawContent": "# language: fr\n# Note: US-19 concerne les récapitulatifs par email - non testable via écrans\n# Les scénarios ci-dessous testent l'affichage sur l'écran d'accueil (aspect UI)\n@NOTIF @priority-2\nFonctionnalité: US-19 Recevoir un récapitulatif des prochaines rencontres\n  En tant qu'utilisateur\n  Je peux recevoir un récapitulatif des prochaines rencontres\n  En réceptionnant une liste des événements auxquels je suis inscrit ou qui sont proches de chez moi\n  Afin d'établir un programme des événements auxquels je participe par période\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Voir les événements à venir sur l'accueil\n    Étant donné que je suis sur la page \"accueil\"\n    Alors l'écran contient une section \"Mes événements à venir\"\n\n  Scénario: Voir le récapitulatif par période\n    * Scénario non implémenté\n\n  Scénario: Voir les événements proches géographiquement\n    * Scénario non implémenté\n\n  Scénario: Voir mes inscriptions\n    Étant donné que je suis sur la page \"mon profil\"\n    Alors l'écran contient une section \"Mes événements à venir\"\n\n  Scénario: Vérifier les données de l'accueil\n    Étant donné que je suis sur la page \"accueil\"\n    Alors l'écran contient un texte \"Barbecue d'été\"\n    Et l'écran contient un texte \"Soirée jeux de société\"\n",
     "screenIds": [
       "home",
       "profile"
