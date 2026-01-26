@@ -19,7 +19,7 @@ export function EventDetailScreen({ navigate }: ScreenProps) {
       <Header
         title="Événement"
         left={<span onClick={() => navigate('events')} style={{ cursor: 'pointer' }}>←</span>}
-        right={isOwner && <span onClick={() => navigate('create-event')} style={{ cursor: 'pointer' }}>✎</span>}
+        right={isOwner && <span onClick={() => navigate('update-event')} style={{ cursor: 'pointer' }}>✎</span>}
       />
 
       {/* Content */}

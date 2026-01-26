@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Header, Text, Input, Button, Placeholder } from '../components/sketchy';
 import type { ScreenProps } from './index';
 
 export function CreateEventScreen({ navigate }: ScreenProps) {
+  const [name, setName] = useState('');
+  const [startDate, setStartDate] = useState('');
+  const [location, setLocation] = useState('');
+  const [description, setDescription] = useState('');
+
+  // Show warning only when key fields are filled
+  const showDuplicateWarning = name.length > 3 && startDate && location.length > 3;
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       <Header
@@ -19,16 +27,50 @@ export function CreateEventScreen({ navigate }: ScreenProps) {
           style={{ marginBottom: 20, cursor: 'pointer' }}
         />
 
+        {/* Duplicate warning - shown when key fields are filled */}
+        {showDuplicateWarning && (
+          <div style={{
+            background: '#FEF3C7',
+            border: '2px solid #F59E0B',
+            borderRadius: 8,
+            padding: 12,
+            marginBottom: 16,
+          }}>
+            <Text style={{ margin: 0, fontWeight: 'bold', fontSize: 14, marginBottom: 4 }}>
+              Événement similaire détecté
+            </Text>
+            <Text style={{ margin: 0, fontSize: 13, lineHeight: 1.5 }}>
+              Un événement similaire a déjà été relayé par <strong>Thomas Martin</strong>.
+              Vous pouvez continuer si vous pensez qu'il s'agit d'un événement différent.
+            </Text>
+            <Text
+              style={{ margin: '8px 0 0 0', fontSize: 13, cursor: 'pointer', textDecoration: 'underline' }}
+              onClick={() => navigate('event-detail')}
+            >
+              Voir l'événement existant →
+            </Text>
+          </div>
+        )}
+
         <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
           <div>
             <Text style={{ marginBottom: 6, fontSize: 14 }}>Nom de l'événement *</Text>
-            <Input placeholder="Donnez un nom à votre événement" />
+            <Input
+              placeholder="Donnez un nom à votre événement"
+              value={name}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
+            />
           </div>
 
           <div style={{ display: 'flex', gap: 12 }}>
             <div style={{ flex: 1 }}>
               <Text style={{ marginBottom: 6, fontSize: 14 }}>Date de début *</Text>
-              <Input type="date" placeholder="Début" />
+              <Input
+                type="date"
+                placeholder="Début"
+                value={startDate}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setStartDate(e.target.value)}
+              />
             </div>
             <div style={{ flex: 1 }}>
               <Text style={{ marginBottom: 6, fontSize: 14 }}>Date de fin</Text>
@@ -49,7 +91,11 @@ export function CreateEventScreen({ navigate }: ScreenProps) {
 
           <div>
             <Text style={{ marginBottom: 6, fontSize: 14 }}>Lieu *</Text>
-            <Input placeholder="Ajouter un lieu" />
+            <Input
+              placeholder="Ajouter un lieu"
+              value={location}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLocation(e.target.value)}
+            />
           </div>
 
           <div>
@@ -59,6 +105,8 @@ export function CreateEventScreen({ navigate }: ScreenProps) {
               placeholder="Décrivez votre événement..."
               rows={4}
               style={{ resize: 'none' }}
+              value={description}
+              onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setDescription(e.target.value)}
             />
           </div>
 
@@ -91,6 +139,25 @@ export function CreateEventScreen({ navigate }: ScreenProps) {
 
       {/* Footer */}
       <div style={{ padding: 16, borderTop: '2px solid var(--sketch-black)' }}>
+        {showDuplicateWarning && (
+          <div style={{
+            background: '#FEF3C7',
+            border: '2px solid #F59E0B',
+            borderRadius: 8,
+            padding: 12,
+            marginBottom: 12,
+          }}>
+            <Text style={{ margin: 0, fontSize: 13, lineHeight: 1.5 }}>
+              Un événement similaire a déjà été relayé par <strong>Thomas Martin</strong>.{' '}
+              <span
+                style={{ cursor: 'pointer', textDecoration: 'underline' }}
+                onClick={() => navigate('event-detail')}
+              >
+                Voir →
+              </span>
+            </Text>
+          </div>
+        )}
         <Button
           variant="primary"
           style={{ width: '100%' }}

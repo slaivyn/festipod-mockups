@@ -40,7 +40,7 @@ export function ProfileScreen({ navigate }: ScreenProps) {
           </div>
 
           <div style={{ display: 'flex', gap: 8, marginTop: 20, justifyContent: 'center' }}>
-            <Button variant="primary">Modifier le profil</Button>
+            <Button variant="primary" onClick={() => navigate('update-profile')}>Modifier le profil</Button>
             <Button onClick={() => navigate('share-profile')}>Partager</Button>
           </div>
         </div>

@@ -33,6 +33,7 @@ const screenFileMap: Record<string, string> = {
   'home': 'HomeScreen.tsx',
   'login': 'LoginScreen.tsx',
   'profile': 'ProfileScreen.tsx',
+  'update-profile': 'UpdateProfileScreen.tsx',
   'user-profile': 'UserProfileScreen.tsx',
   'settings': 'SettingsScreen.tsx',
   'events': 'EventsScreen.tsx',
