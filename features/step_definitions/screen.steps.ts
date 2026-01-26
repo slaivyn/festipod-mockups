@@ -175,9 +175,9 @@ Then('je peux contacter l\'utilisateur', async function (this: FestipodWorld) {
 Then('je peux voir les événements auxquels l\'utilisateur a participé', async function (this: FestipodWorld) {
   expect(this.currentScreenId).to.equal('user-profile');
   const source = this.getRenderedText();
-  // UserProfileScreen.tsx line 52: "Événements en commun" section with pastEvents
-  expect(/Événements en commun/.test(source), 'User profile should have "Événements en commun" section').to.be.true;
-  expect(/pastEvents/.test(source), 'User profile should display pastEvents data').to.be.true;
+  // UserProfileScreen.tsx: "Événements à venir" and "Événements passés" sections
+  expect(/Événements à venir/.test(source), 'User profile should have "Événements à venir" section').to.be.true;
+  expect(/Événements passés/.test(source), 'User profile should have "Événements passés" section').to.be.true;
 });
 
 Then('je peux configurer mes notifications', async function (this: FestipodWorld) {

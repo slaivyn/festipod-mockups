@@ -322,7 +322,7 @@ export const stepDefinitions: StepDefinitionInfo[] = [
     "pattern": "je peux voir les événements auxquels l'utilisateur a participé",
     "keyword": "Then",
     "file": "screen.steps.ts",
-    "sourceCode": "Then('je peux voir les événements auxquels l\\'utilisateur a participé', async function (this: FestipodWorld) {\n  expect(this.currentScreenId).to.equal('user-profile');\n  const source = this.getRenderedText();\n  // UserProfileScreen.tsx line 52: \"Événements en commun\" section with pastEvents\n  expect(/Événements en commun/.test(source), 'User profile should have \"Événements en commun\" section').to.be.true;\n  expect(/pastEvents/.test(source), 'User profile should display pastEvents data').to.be.true;\n});",
+    "sourceCode": "Then('je peux voir les événements auxquels l\\'utilisateur a participé', async function (this: FestipodWorld) {\n  expect(this.currentScreenId).to.equal('user-profile');\n  const source = this.getRenderedText();\n  // UserProfileScreen.tsx: \"Événements à venir\" and \"Événements passés\" sections\n  expect(/Événements à venir/.test(source), 'User profile should have \"Événements à venir\" section').to.be.true;\n  expect(/Événements passés/.test(source), 'User profile should have \"Événements passés\" section').to.be.true;\n});",
     "lineNumber": 175
   },
   {

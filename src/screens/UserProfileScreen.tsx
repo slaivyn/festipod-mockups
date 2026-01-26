@@ -3,10 +3,16 @@ import { Header, Avatar, Title, Text, Button, Card, Badge, Divider } from '../co
 import type { ScreenProps } from './index';
 
 export function UserProfileScreen({ navigate }: ScreenProps) {
+  const upcomingEvents = [
+    { title: 'Résidence Reconnexion', date: '16-20 fév.', common: true },
+    { title: 'Atelier permaculture', date: '28 fév.', common: false },
+  ];
+
   const pastEvents = [
-    { title: 'Forum Ouvert Transition', date: '22 fév.' },
-    { title: 'Rencontre des Colibris', date: '12 fév.' },
-    { title: 'Formation CNV', date: '1 mars' },
+    { title: 'Forum Ouvert Transition', date: '22 jan.', common: true },
+    { title: 'Rencontre des Colibris', date: '12 jan.', common: true },
+    { title: 'Formation CNV', date: '8 jan.', common: false },
+    { title: 'Café des possibles', date: '15 déc.', common: false },
   ];
 
   return (
@@ -47,19 +53,42 @@ export function UserProfileScreen({ navigate }: ScreenProps) {
 
         <Divider />
 
-        {/* Common events */}
+        {/* Upcoming events */}
         <div style={{ padding: 16 }}>
-          <Text style={{ fontWeight: 'bold', marginBottom: 4 }}>Événements en commun</Text>
-          <Text style={{ fontSize: 13, color: 'var(--sketch-gray)', marginBottom: 12 }}>
-            Vous avez participé à 3 événements ensemble
-          </Text>
+          <Text style={{ fontWeight: 'bold', marginBottom: 12 }}>Événements à venir</Text>
+
+          {upcomingEvents.map((event, i) => (
+            <Card key={i} onClick={() => navigate('event-detail')} style={{ marginBottom: 12 }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                <div>
+                  <Text className="user-content" style={{ margin: 0, fontWeight: 'bold' }}>{event.title}</Text>
+                  <Text className="user-content" style={{ margin: '4px 0 0 0', fontSize: 14 }}>
+                    {event.date}
+                  </Text>
+                </div>
+                {event.common && <Badge>moi aussi</Badge>}
+              </div>
+            </Card>
+          ))}
+        </div>
+
+        <Divider />
+
+        {/* Past events */}
+        <div style={{ padding: 16 }}>
+          <Text style={{ fontWeight: 'bold', marginBottom: 12 }}>Événements passés</Text>
 
           {pastEvents.map((event, i) => (
             <Card key={i} onClick={() => navigate('event-detail')} style={{ marginBottom: 12 }}>
-              <Text className="user-content" style={{ margin: 0, fontWeight: 'bold' }}>{event.title}</Text>
-              <Text className="user-content" style={{ margin: '4px 0 0 0', fontSize: 14 }}>
-                {event.date}
-              </Text>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                <div>
+                  <Text className="user-content" style={{ margin: 0, fontWeight: 'bold' }}>{event.title}</Text>
+                  <Text className="user-content" style={{ margin: '4px 0 0 0', fontSize: 14 }}>
+                    {event.date}
+                  </Text>
+                </div>
+                {event.common && <Badge>moi aussi</Badge>}
+              </div>
             </Card>
           ))}
         </div>
