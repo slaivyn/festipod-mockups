@@ -39,6 +39,7 @@ export function EventDetailScreen({ navigate }: ScreenProps) {
             </Text>
             <Text style={{ margin: 0, fontSize: 15 }}>
               📍 <span className="user-content">Le Revel, Rogues (30)</span>
+              <span style={{ color: 'var(--sketch-gray)' }}> · 142 km</span>
             </Text>
           </div>
 

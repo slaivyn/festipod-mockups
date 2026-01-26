@@ -2,14 +2,17 @@ import React from 'react';
 import { Button, Title, Text, Card, NavBar, Badge } from '../components/sketchy';
 import type { ScreenProps } from './index';
 
-function EventCard({ title, date, location, attendees, onClick }: { title: string; date: string; location: string; attendees: number; onClick: () => void }) {
+function EventCard({ title, date, location, distance, attendees, onClick }: { title: string; date: string; location: string; distance: number; attendees: number; onClick: () => void }) {
   return (
     <Card onClick={onClick} style={{ marginBottom: 12 }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
         <div>
           <Text className="user-content" style={{ margin: 0, fontWeight: 'bold' }}>{title}</Text>
           <Text className="user-content" style={{ margin: '4px 0 0 0', fontSize: 14 }}>{date}</Text>
-          <Text style={{ margin: '2px 0 0 0', fontSize: 14 }}>📍 <span className="user-content">{location}</span></Text>
+          <Text style={{ margin: '2px 0 0 0', fontSize: 14 }}>
+            📍 <span className="user-content">{location}</span>
+            <span style={{ color: 'var(--sketch-gray)' }}> · {distance} km</span>
+          </Text>
         </div>
         <Badge>{attendees} inscrits</Badge>
       </div>
@@ -57,6 +60,7 @@ export function HomeScreen({ navigate }: ScreenProps) {
           title="Résidence Reconnexion"
           date="Lun. 16 - Ven. 20 fév."
           location="Le Revel, Rogues (30)"
+          distance={142}
           attendees={24}
           onClick={() => navigate('event-detail')}
         />
@@ -64,6 +68,7 @@ export function HomeScreen({ navigate }: ScreenProps) {
           title="Atelier low-tech"
           date="Sam. 8 fév. · 14h00"
           location="La Maison du Vélo, Lyon"
+          distance={3}
           attendees={12}
           onClick={() => navigate('event-detail')}
         />
@@ -71,6 +76,7 @@ export function HomeScreen({ navigate }: ScreenProps) {
           title="Forum Ouvert Transition"
           date="Sam. 22 fév. · 9h00"
           location="Tiers-lieu L'Hermitage"
+          distance={89}
           attendees={45}
           onClick={() => navigate('event-detail')}
         />

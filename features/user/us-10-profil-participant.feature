@@ -17,6 +17,10 @@ Fonctionnalité: US-10 Visualiser la fiche/le profil d'un participant
     Étant donné que je suis sur la page "profil utilisateur"
     Alors je peux voir les événements auxquels l'utilisateur a participé
 
+  Scénario: Voir la localisation des événements
+    Étant donné que je suis sur la page "profil utilisateur"
+    Alors les événements affichent leur localisation et distance
+
   Scénario: Voir le formulaire de contact
     Étant donné que je suis sur la page "profil utilisateur"
     Alors je peux contacter l'utilisateur

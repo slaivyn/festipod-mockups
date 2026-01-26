@@ -4,15 +4,15 @@ import type { ScreenProps } from './index';
 
 export function UserProfileScreen({ navigate }: ScreenProps) {
   const upcomingEvents = [
-    { title: 'Résidence Reconnexion', date: '16-20 fév.', common: true },
-    { title: 'Atelier permaculture', date: '28 fév.', common: false },
+    { title: 'Résidence Reconnexion', date: '16-20 fév.', location: 'Le Revel, Rogues (30)', distance: 142, common: true },
+    { title: 'Atelier permaculture', date: '28 fév.', location: 'Ferme des Music, Vénissieux', distance: 12, common: false },
   ];
 
   const pastEvents = [
-    { title: 'Forum Ouvert Transition', date: '22 jan.', common: true },
-    { title: 'Rencontre des Colibris', date: '12 jan.', common: true },
-    { title: 'Formation CNV', date: '8 jan.', common: false },
-    { title: 'Café des possibles', date: '15 déc.', common: false },
+    { title: 'Forum Ouvert Transition', date: '22 jan.', location: 'Tiers-lieu L\'Hermitage', distance: 89, common: true },
+    { title: 'Rencontre des Colibris', date: '12 jan.', location: 'La Maison de l\'Environnement', distance: 7, common: true },
+    { title: 'Formation CNV', date: '8 jan.', location: 'MJC Montplaisir, Lyon', distance: 5, common: false },
+    { title: 'Café des possibles', date: '15 déc.', location: 'Café de la Mairie, Lyon 3', distance: 2, common: false },
   ];
 
   return (
@@ -65,6 +65,10 @@ export function UserProfileScreen({ navigate }: ScreenProps) {
                   <Text className="user-content" style={{ margin: '4px 0 0 0', fontSize: 14 }}>
                     {event.date}
                   </Text>
+                  <Text style={{ margin: '2px 0 0 0', fontSize: 14 }}>
+                    📍 <span className="user-content">{event.location}</span>
+                    <span style={{ color: 'var(--sketch-gray)' }}> · {event.distance} km</span>
+                  </Text>
                 </div>
                 {event.common && <Badge>moi aussi</Badge>}
               </div>
@@ -85,6 +89,10 @@ export function UserProfileScreen({ navigate }: ScreenProps) {
                   <Text className="user-content" style={{ margin: 0, fontWeight: 'bold' }}>{event.title}</Text>
                   <Text className="user-content" style={{ margin: '4px 0 0 0', fontSize: 14 }}>
                     {event.date}
+                  </Text>
+                  <Text style={{ margin: '2px 0 0 0', fontSize: 14 }}>
+                    📍 <span className="user-content">{event.location}</span>
+                    <span style={{ color: 'var(--sketch-gray)' }}> · {event.distance} km</span>
                   </Text>
                 </div>
                 {event.common && <Badge>moi aussi</Badge>}

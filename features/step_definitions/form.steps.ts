@@ -60,3 +60,29 @@ Then('le champ {string} est présent', async function (this: FestipodWorld, fiel
 
 // Steps removed: Form display/validation steps (le champ affiche, erreur de validation, formulaire affiche N champs)
 // require browser automation. Scenarios needing these use "* Scénario non implémenté" placeholder.
+
+Then('le formulaire permet de détecter les doublons', async function (this: FestipodWorld) {
+  expect(this.currentScreenId).to.equal('create-event');
+  const source = this.getRenderedText();
+  // CreateEventScreen.tsx has: showDuplicateWarning logic and "Événement similaire détecté" warning
+  expect(/showDuplicateWarning/.test(source), 'Form should have duplicate detection logic').to.be.true;
+  expect(/Événement similaire détecté/.test(source), 'Form should have duplicate warning message').to.be.true;
+});
+
+Then('le formulaire permet d\'importer depuis Mobilizon ou Transiscope', async function (this: FestipodWorld) {
+  expect(this.currentScreenId).to.equal('create-event');
+  const source = this.getRenderedText();
+  // CreateEventScreen.tsx has: importableEvents with Mobilizon and Transiscope sources
+  expect(/importableEvents/.test(source), 'Form should have importable events data').to.be.true;
+  expect(/Mobilizon/.test(source), 'Form should support Mobilizon import').to.be.true;
+  expect(/Transiscope/.test(source), 'Form should support Transiscope import').to.be.true;
+  expect(/Importer depuis une source externe/.test(source), 'Form should have import section').to.be.true;
+});
+
+Then('l\'import externe ne déclenche pas d\'alerte doublon', async function (this: FestipodWorld) {
+  expect(this.currentScreenId).to.equal('create-event');
+  const source = this.getRenderedText();
+  // CreateEventScreen.tsx has: importedFrom state and !importedFrom in showDuplicateWarning condition
+  expect(/importedFrom/.test(source), 'Form should track import source').to.be.true;
+  expect(/&& !importedFrom/.test(source), 'Duplicate warning should be disabled for imports').to.be.true;
+});

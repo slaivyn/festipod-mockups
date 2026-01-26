@@ -2,10 +2,11 @@ import React from 'react';
 import { Header, Input, Card, Text, Badge, NavBar } from '../components/sketchy';
 import type { ScreenProps } from './index';
 
-function EventCard({ title, date, location, attendees, onClick }: {
+function EventCard({ title, date, location, distance, attendees, onClick }: {
   title: string;
   date: string;
   location: string;
+  distance: number;
   attendees: number;
   onClick: () => void;
 }) {
@@ -17,6 +18,7 @@ function EventCard({ title, date, location, attendees, onClick }: {
       </Text>
       <Text style={{ margin: '0 0 8px 0', fontSize: 14 }}>
         📍 <span className="user-content">{location}</span>
+        <span style={{ color: 'var(--sketch-gray)' }}> · {distance} km</span>
       </Text>
       <Badge>{attendees} inscrits</Badge>
     </Card>
@@ -68,6 +70,7 @@ export function EventsScreen({ navigate }: ScreenProps) {
           title="Résidence Reconnexion"
           date="Lun. 16 - Ven. 20 fév."
           location="Le Revel, Rogues (30)"
+          distance={142}
           attendees={24}
           onClick={() => navigate('event-detail')}
         />
@@ -75,6 +78,7 @@ export function EventsScreen({ navigate }: ScreenProps) {
           title="Atelier low-tech"
           date="Sam. 8 fév. · 14h00"
           location="La Maison du Vélo, Lyon"
+          distance={3}
           attendees={12}
           onClick={() => navigate('event-detail')}
         />
@@ -82,6 +86,7 @@ export function EventsScreen({ navigate }: ScreenProps) {
           title="Forum Ouvert Transition"
           date="Sam. 22 fév. · 9h00"
           location="Tiers-lieu L'Hermitage"
+          distance={89}
           attendees={45}
           onClick={() => navigate('event-detail')}
         />
@@ -89,6 +94,7 @@ export function EventsScreen({ navigate }: ScreenProps) {
           title="Formation CNV"
           date="Sam. 1 mars · 9h30"
           location="MJC Montplaisir, Lyon"
+          distance={5}
           attendees={16}
           onClick={() => navigate('event-detail')}
         />
@@ -96,6 +102,7 @@ export function EventsScreen({ navigate }: ScreenProps) {
           title="Rencontre des Colibris"
           date="Mer. 12 fév. · 19h00"
           location="La Maison de l'Environnement"
+          distance={7}
           attendees={30}
           onClick={() => navigate('event-detail')}
         />

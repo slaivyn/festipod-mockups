@@ -2,14 +2,38 @@ import React, { useState } from 'react';
 import { Header, Text, Input, Button, Placeholder } from '../components/sketchy';
 import type { ScreenProps } from './index';
 
+// Demo data for suggestions
+const existingEvents = [
+  { name: 'Résidence Reconnexion', relayedBy: 'Thomas Martin' },
+];
+
+const importableEvents = [
+  {
+    name: 'Festival des Utopies Concrètes',
+    source: 'Mobilizon',
+    date: '2026-03-15',
+    location: 'Paris, Parc de la Villette',
+    description: 'Festival annuel présentant des alternatives concrètes pour un monde durable.',
+  },
+  {
+    name: 'Rencontres de l\'Écologie',
+    source: 'Transiscope',
+    date: '2026-04-20',
+    location: 'Lyon, Halle Tony Garnier',
+    description: 'Deux jours de conférences et ateliers sur la transition écologique.',
+  },
+];
+
 export function CreateEventScreen({ navigate }: ScreenProps) {
   const [name, setName] = useState('');
   const [startDate, setStartDate] = useState('');
   const [location, setLocation] = useState('');
   const [description, setDescription] = useState('');
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [importedFrom, setImportedFrom] = useState<string | null>(null);
 
-  // Show warning only when key fields are filled
-  const showDuplicateWarning = name.length > 3 && startDate && location.length > 3;
+  // Show warning only when key fields are filled AND not imported from external source
+  const showDuplicateWarning = name.length > 3 && startDate && location.length > 3 && !importedFrom;
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
@@ -53,13 +77,93 @@ export function CreateEventScreen({ navigate }: ScreenProps) {
         )}
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-          <div>
+          <div style={{ position: 'relative' }}>
             <Text style={{ marginBottom: 6, fontSize: 14 }}>Nom de l'événement *</Text>
             <Input
               placeholder="Donnez un nom à votre événement"
               value={name}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                setName(e.target.value);
+                setShowSuggestions(e.target.value.length > 0);
+                setImportedFrom(null); // Reset import flag when user types manually
+              }}
+              onFocus={() => name.length > 0 && setShowSuggestions(true)}
+              onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
             />
+
+            {/* Suggestions dropdown */}
+            {showSuggestions && (
+              <div style={{
+                position: 'absolute',
+                top: '100%',
+                left: 0,
+                right: 0,
+                background: 'white',
+                border: '2px solid var(--sketch-black)',
+                borderRadius: 8,
+                marginTop: 4,
+                zIndex: 10,
+                maxHeight: 250,
+                overflow: 'auto',
+              }}>
+                {/* Existing events - not selectable */}
+                {existingEvents.length > 0 && (
+                  <>
+                    <div style={{ padding: '8px 12px', background: 'var(--sketch-light-gray)', fontSize: 12, fontWeight: 'bold' }}>
+                      Déjà relayé sur Festipod
+                    </div>
+                    {existingEvents.map((event, i) => (
+                      <div
+                        key={`existing-${i}`}
+                        style={{
+                          padding: '10px 12px',
+                          borderBottom: '1px solid var(--sketch-light-gray)',
+                          opacity: 0.6,
+                          cursor: 'not-allowed',
+                        }}
+                      >
+                        <Text style={{ margin: 0, fontSize: 14 }}>{event.name}</Text>
+                        <Text style={{ margin: '2px 0 0 0', fontSize: 12, color: 'var(--sketch-gray)' }}>
+                          Relayé par {event.relayedBy}
+                        </Text>
+                      </div>
+                    ))}
+                  </>
+                )}
+
+                {/* Importable events */}
+                {importableEvents.length > 0 && (
+                  <>
+                    <div style={{ padding: '8px 12px', background: 'var(--sketch-light-gray)', fontSize: 12, fontWeight: 'bold' }}>
+                      Importer depuis une source externe
+                    </div>
+                    {importableEvents.map((event, i) => (
+                      <div
+                        key={`import-${i}`}
+                        style={{
+                          padding: '10px 12px',
+                          borderBottom: '1px solid var(--sketch-light-gray)',
+                          cursor: 'pointer',
+                        }}
+                        onClick={() => {
+                          setName(event.name);
+                          setStartDate(event.date);
+                          setLocation(event.location);
+                          setDescription(event.description);
+                          setImportedFrom(event.source);
+                          setShowSuggestions(false);
+                        }}
+                      >
+                        <Text style={{ margin: 0, fontSize: 14 }}>{event.name}</Text>
+                        <Text style={{ margin: '2px 0 0 0', fontSize: 12, color: 'var(--sketch-gray)' }}>
+                          via {event.source} · {event.location}
+                        </Text>
+                      </div>
+                    ))}
+                  </>
+                )}
+              </div>
+            )}
           </div>
 
           <div style={{ display: 'flex', gap: 12 }}>

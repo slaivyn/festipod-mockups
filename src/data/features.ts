@@ -180,6 +180,48 @@ export const parsedFeatures: ParsedFeature[] = [
         ]
       },
       {
+        "name": "Détecter un événement similaire déjà relayé",
+        "tags": [],
+        "steps": [
+          {
+            "keyword": "Étant donné que ",
+            "text": "l'écran \"create-event\" est affiché"
+          },
+          {
+            "keyword": "Alors",
+            "text": "le formulaire permet de détecter les doublons"
+          }
+        ]
+      },
+      {
+        "name": "Importer un événement depuis une source externe",
+        "tags": [],
+        "steps": [
+          {
+            "keyword": "Étant donné que ",
+            "text": "l'écran \"create-event\" est affiché"
+          },
+          {
+            "keyword": "Alors",
+            "text": "le formulaire permet d'importer depuis Mobilizon ou Transiscope"
+          }
+        ]
+      },
+      {
+        "name": "Pas d'alerte doublon lors d'un import externe",
+        "tags": [],
+        "steps": [
+          {
+            "keyword": "Étant donné que ",
+            "text": "l'écran \"create-event\" est affiché"
+          },
+          {
+            "keyword": "Alors",
+            "text": "l'import externe ne déclenche pas d'alerte doublon"
+          }
+        ]
+      },
+      {
         "name": "Modifier un événement",
         "tags": [],
         "steps": []
@@ -196,7 +238,7 @@ export const parsedFeatures: ParsedFeature[] = [
       }
     ],
     "filePath": "features/event/us-13-creer-evenement.feature",
-    "rawContent": "# language: fr\n@EVENT @priority-1\nFonctionnalité: US-13 Relayer/Modifier/Supprimer un événement\n  En tant qu'utilisateur\n  Je peux relayer/modifier/supprimer un événement\n  En choisissant les dates, horaires, lieu et thématique\n  Afin de relayer/présenter le contenu de cet événement et le catégoriser\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Accéder au formulaire de relai d'événement\n    Étant donné que je suis sur la page \"accueil\"\n    Quand je navigue vers \"relayer un événement\"\n    Alors je vois l'écran \"create-event\"\n\n  Scénario: Vérifier les champs obligatoires du formulaire\n    Étant donné que l'écran \"create-event\" est affiché\n    Alors le formulaire contient les champs obligatoires suivants:\n      | Nom de l'événement |\n      | Date de début      |\n      | Heure de début     |\n      | Lieu               |\n      | Thématique         |\n\n  Scénario: Vérifier la présence du bouton de relai\n    Étant donné que je suis sur la page \"relayer un événement\"\n    Alors l'écran contient une section \"Relayer l'événement\"\n\n  Scénario: Pouvoir annuler le relai d'événement\n    Étant donné que je suis sur la page \"relayer un événement\"\n    Alors je peux annuler et revenir à l'écran précédent\n\n  Scénario: Modifier un événement\n    * Scénario non implémenté\n\n  Scénario: Supprimer un événement\n    * Scénario non implémenté\n\n  Scénario: Retirer une organisation (personne ou structure)\n    * Scénario non implémenté\n",
+    "rawContent": "# language: fr\n@EVENT @priority-1\nFonctionnalité: US-13 Relayer/Modifier/Supprimer un événement\n  En tant qu'utilisateur\n  Je peux relayer/modifier/supprimer un événement\n  En choisissant les dates, horaires, lieu et thématique\n  Afin de relayer/présenter le contenu de cet événement et le catégoriser\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Accéder au formulaire de relai d'événement\n    Étant donné que je suis sur la page \"accueil\"\n    Quand je navigue vers \"relayer un événement\"\n    Alors je vois l'écran \"create-event\"\n\n  Scénario: Vérifier les champs obligatoires du formulaire\n    Étant donné que l'écran \"create-event\" est affiché\n    Alors le formulaire contient les champs obligatoires suivants:\n      | Nom de l'événement |\n      | Date de début      |\n      | Heure de début     |\n      | Lieu               |\n      | Thématique         |\n\n  Scénario: Vérifier la présence du bouton de relai\n    Étant donné que je suis sur la page \"relayer un événement\"\n    Alors l'écran contient une section \"Relayer l'événement\"\n\n  Scénario: Pouvoir annuler le relai d'événement\n    Étant donné que je suis sur la page \"relayer un événement\"\n    Alors je peux annuler et revenir à l'écran précédent\n\n  Scénario: Détecter un événement similaire déjà relayé\n    Étant donné que l'écran \"create-event\" est affiché\n    Alors le formulaire permet de détecter les doublons\n\n  Scénario: Importer un événement depuis une source externe\n    Étant donné que l'écran \"create-event\" est affiché\n    Alors le formulaire permet d'importer depuis Mobilizon ou Transiscope\n\n  Scénario: Pas d'alerte doublon lors d'un import externe\n    Étant donné que l'écran \"create-event\" est affiché\n    Alors l'import externe ne déclenche pas d'alerte doublon\n\n  Scénario: Modifier un événement\n    * Scénario non implémenté\n\n  Scénario: Supprimer un événement\n    * Scénario non implémenté\n\n  Scénario: Retirer une organisation (personne ou structure)\n    * Scénario non implémenté\n",
     "screenIds": [
       "create-event",
       "home"
@@ -501,6 +543,20 @@ export const parsedFeatures: ParsedFeature[] = [
         ]
       },
       {
+        "name": "Voir la localisation des événements",
+        "tags": [],
+        "steps": [
+          {
+            "keyword": "Étant donné que ",
+            "text": "je suis sur la page \"profil utilisateur\""
+          },
+          {
+            "keyword": "Alors",
+            "text": "les événements affichent leur localisation et distance"
+          }
+        ]
+      },
+      {
         "name": "Voir le formulaire de contact",
         "tags": [],
         "steps": [
@@ -535,7 +591,7 @@ export const parsedFeatures: ParsedFeature[] = [
       }
     ],
     "filePath": "features/user/us-10-profil-participant.feature",
-    "rawContent": "# language: fr\n@USER @priority-1\nFonctionnalité: US-10 Visualiser la fiche/le profil d'un participant\n  En tant qu'utilisateur\n  Je peux sélectionner un individu dans la liste des inscrits à un événement/atelier\n  Afin de voir les événements auxquels la personne a participé et voir un formulaire de contact\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Accéder au profil d'un participant\n    Étant donné que je suis sur la page \"détail événement\"\n    Quand je clique sur un participant\n    Alors je vois l'écran \"user-profile\"\n\n  Scénario: Voir les événements du participant\n    Étant donné que je suis sur la page \"profil utilisateur\"\n    Alors je peux voir les événements auxquels l'utilisateur a participé\n\n  Scénario: Voir le formulaire de contact\n    Étant donné que je suis sur la page \"profil utilisateur\"\n    Alors je peux contacter l'utilisateur\n\n  Scénario: Vérifier les informations du profil\n    * Scénario non implémenté\n\n  Scénario: Voir les détails du profil utilisateur\n    Étant donné que je suis sur la page \"profil utilisateur\"\n    Alors l'écran affiche les informations du profil\n",
+    "rawContent": "# language: fr\n@USER @priority-1\nFonctionnalité: US-10 Visualiser la fiche/le profil d'un participant\n  En tant qu'utilisateur\n  Je peux sélectionner un individu dans la liste des inscrits à un événement/atelier\n  Afin de voir les événements auxquels la personne a participé et voir un formulaire de contact\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Accéder au profil d'un participant\n    Étant donné que je suis sur la page \"détail événement\"\n    Quand je clique sur un participant\n    Alors je vois l'écran \"user-profile\"\n\n  Scénario: Voir les événements du participant\n    Étant donné que je suis sur la page \"profil utilisateur\"\n    Alors je peux voir les événements auxquels l'utilisateur a participé\n\n  Scénario: Voir la localisation des événements\n    Étant donné que je suis sur la page \"profil utilisateur\"\n    Alors les événements affichent leur localisation et distance\n\n  Scénario: Voir le formulaire de contact\n    Étant donné que je suis sur la page \"profil utilisateur\"\n    Alors je peux contacter l'utilisateur\n\n  Scénario: Vérifier les informations du profil\n    * Scénario non implémenté\n\n  Scénario: Voir les détails du profil utilisateur\n    Étant donné que je suis sur la page \"profil utilisateur\"\n    Alors l'écran affiche les informations du profil\n",
     "screenIds": [
       "event-detail",
       "user-profile"

@@ -180,6 +180,17 @@ Then('je peux voir les événements auxquels l\'utilisateur a participé', async
   expect(/Événements passés/.test(source), 'User profile should have "Événements passés" section').to.be.true;
 });
 
+Then('les événements affichent leur localisation et distance', async function (this: FestipodWorld) {
+  expect(this.currentScreenId).to.equal('user-profile');
+  const source = this.getRenderedText();
+  // UserProfileScreen.tsx: events have location and distance in data
+  expect(/location: '[^']+'/.test(source), 'Events should have location data').to.be.true;
+  expect(/distance: \d+/.test(source), 'Events should have distance data').to.be.true;
+  // Verify location is rendered in template
+  expect(/\{event\.location\}/.test(source), 'Events should render location').to.be.true;
+  expect(/\{event\.distance\}/.test(source), 'Events should render distance').to.be.true;
+});
+
 Then('je peux configurer mes notifications', async function (this: FestipodWorld) {
   expect(this.currentScreenId).to.equal('settings');
   const source = this.getRenderedText();

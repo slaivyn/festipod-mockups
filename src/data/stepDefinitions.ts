@@ -207,6 +207,27 @@ export const stepDefinitions: StepDefinitionInfo[] = [
     "lineNumber": 53
   },
   {
+    "pattern": "le formulaire permet de détecter les doublons",
+    "keyword": "Then",
+    "file": "form.steps.ts",
+    "sourceCode": "Then('le formulaire permet de détecter les doublons', async function (this: FestipodWorld) {\n  expect(this.currentScreenId).to.equal('create-event');\n  const source = this.getRenderedText();\n  // CreateEventScreen.tsx has: showDuplicateWarning logic and \"Événement similaire détecté\" warning\n  expect(/showDuplicateWarning/.test(source), 'Form should have duplicate detection logic').to.be.true;\n  expect(/Événement similaire détecté/.test(source), 'Form should have duplicate warning message').to.be.true;\n});",
+    "lineNumber": 64
+  },
+  {
+    "pattern": "le formulaire permet d'importer depuis Mobilizon ou Transiscope",
+    "keyword": "Then",
+    "file": "form.steps.ts",
+    "sourceCode": "Then('le formulaire permet d\\'importer depuis Mobilizon ou Transiscope', async function (this: FestipodWorld) {\n  expect(this.currentScreenId).to.equal('create-event');\n  const source = this.getRenderedText();\n  // CreateEventScreen.tsx has: importableEvents with Mobilizon and Transiscope sources\n  expect(/importableEvents/.test(source), 'Form should have importable events data').to.be.true;\n  expect(/Mobilizon/.test(source), 'Form should support Mobilizon import').to.be.true;\n  expect(/Transiscope/.test(source), 'Form should support Transiscope import').to.be.true;\n  expect(/Importer depuis une source externe/.test(source), 'Form should have import section').to.be.true;\n});",
+    "lineNumber": 72
+  },
+  {
+    "pattern": "l'import externe ne déclenche pas d'alerte doublon",
+    "keyword": "Then",
+    "file": "form.steps.ts",
+    "sourceCode": "Then('l\\'import externe ne déclenche pas d\\'alerte doublon', async function (this: FestipodWorld) {\n  expect(this.currentScreenId).to.equal('create-event');\n  const source = this.getRenderedText();\n  // CreateEventScreen.tsx has: importedFrom state and !importedFrom in showDuplicateWarning condition\n  expect(/importedFrom/.test(source), 'Form should track import source').to.be.true;\n  expect(/&& !importedFrom/.test(source), 'Duplicate warning should be disabled for imports').to.be.true;\n});",
+    "lineNumber": 82
+  },
+  {
     "pattern": "je peux voir la liste des participants",
     "keyword": "Then",
     "file": "screen.steps.ts",
@@ -326,11 +347,18 @@ export const stepDefinitions: StepDefinitionInfo[] = [
     "lineNumber": 175
   },
   {
+    "pattern": "les événements affichent leur localisation et distance",
+    "keyword": "Then",
+    "file": "screen.steps.ts",
+    "sourceCode": "Then('les événements affichent leur localisation et distance', async function (this: FestipodWorld) {\n  expect(this.currentScreenId).to.equal('user-profile');\n  const source = this.getRenderedText();\n  // UserProfileScreen.tsx: events have location and distance in data\n  expect(/location: '[^']+'/.test(source), 'Events should have location data').to.be.true;\n  expect(/distance: \\d+/.test(source), 'Events should have distance data').to.be.true;\n  // Verify location is rendered in template\n  expect(/\\{event\\.location\\}/.test(source), 'Events should render location').to.be.true;\n  expect(/\\{event\\.distance\\}/.test(source), 'Events should render distance').to.be.true;\n});",
+    "lineNumber": 183
+  },
+  {
     "pattern": "je peux configurer mes notifications",
     "keyword": "Then",
     "file": "screen.steps.ts",
     "sourceCode": "Then('je peux configurer mes notifications', async function (this: FestipodWorld) {\n  expect(this.currentScreenId).to.equal('settings');\n  const source = this.getRenderedText();\n  // SettingsScreen.tsx line 25: <Text>Notifications</Text> with Toggle\n  expect(/>Notifications</.test(source), 'Settings should have \"Notifications\" text').to.be.true;\n  expect(/<Toggle[^>]*checked=\\{notifications\\}/.test(source), 'Settings should have Toggle for notifications').to.be.true;\n});",
-    "lineNumber": 183
+    "lineNumber": 194
   }
 ];
 
