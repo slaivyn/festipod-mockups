@@ -68,6 +68,15 @@ Then('je peux voir la liste des événements', async function (this: FestipodWor
   }
 });
 
+Then('les événements affichent leur lieu', async function (this: FestipodWorld) {
+  const source = this.getRenderedText();
+  // HomeScreen.tsx and EventsScreen.tsx EventCard components display location as:
+  // 📍 <span className="user-content">{location}</span>
+  // Check that there's actual location text after the emoji
+  const locationPattern = /📍.*<span[^>]*className="user-content"[^>]*>[^<]+<\/span>/;
+  expect(locationPattern.test(source), 'Event cards should display location text after 📍 emoji').to.be.true;
+});
+
 Then('je peux voir le QR code', async function (this: FestipodWorld) {
   const source = this.getRenderedText();
   if (this.currentScreenId === 'share-profile') {

@@ -52,38 +52,38 @@ export function EventsScreen({ navigate }: ScreenProps) {
       {/* Content */}
       <div style={{ flex: 1, padding: 16, overflow: 'auto' }}>
         <EventCard
-          title="Barbecue d'été"
-          date="Sam. 25 jan. · 16h00"
-          location="Parc Central"
+          title="Résidence Reconnexion"
+          date="Lun. 16 - Ven. 20 fév."
+          location="Le Revel, Rogues (30)"
+          attendees={24}
+          onClick={() => navigate('event-detail')}
+        />
+        <EventCard
+          title="Atelier low-tech"
+          date="Sam. 8 fév. · 14h00"
+          location="La Maison du Vélo, Lyon"
           attendees={12}
           onClick={() => navigate('event-detail')}
         />
         <EventCard
-          title="Soirée jeux de société"
-          date="Ven. 31 jan. · 19h00"
-          location="Chez Joe"
-          attendees={8}
+          title="Forum Ouvert Transition"
+          date="Sam. 22 fév. · 9h00"
+          location="Tiers-lieu L'Hermitage"
+          attendees={45}
           onClick={() => navigate('event-detail')}
         />
         <EventCard
-          title="Randonnée"
-          date="Dim. 2 fév. · 9h00"
-          location="Sentier de montagne"
-          attendees={5}
+          title="Formation CNV"
+          date="Sam. 1 mars · 9h30"
+          location="MJC Montplaisir, Lyon"
+          attendees={16}
           onClick={() => navigate('event-detail')}
         />
         <EventCard
-          title="Marathon films"
-          date="Sam. 8 fév. · 18h00"
-          location="Chez Sarah"
-          attendees={6}
-          onClick={() => navigate('event-detail')}
-        />
-        <EventCard
-          title="Yoga au parc"
-          date="Dim. 9 fév. · 8h00"
-          location="Parc Riverside"
-          attendees={15}
+          title="Rencontre des Colibris"
+          date="Mer. 12 fév. · 19h00"
+          location="La Maison de l'Environnement"
+          attendees={30}
           onClick={() => navigate('event-detail')}
         />
       </div>

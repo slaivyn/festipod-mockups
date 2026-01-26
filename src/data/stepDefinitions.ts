@@ -249,81 +249,88 @@ export const stepDefinitions: StepDefinitionInfo[] = [
     "lineNumber": 58
   },
   {
+    "pattern": "les événements affichent leur lieu",
+    "keyword": "Then",
+    "file": "screen.steps.ts",
+    "sourceCode": "Then('les événements affichent leur lieu', async function (this: FestipodWorld) {\n  const source = this.getRenderedText();\n  // HomeScreen.tsx and EventsScreen.tsx EventCard components display location as:\n  // 📍 <span className=\"user-content\">{location}</span>\n  // Check that there's actual location text after the emoji\n  const locationPattern = /📍.*<span[^>]*className=\"user-content\"[^>]*>[^<]+<\\/span>/;\n  expect(locationPattern.test(source), 'Event cards should display location text after 📍 emoji').to.be.true;\n});",
+    "lineNumber": 71
+  },
+  {
     "pattern": "je peux voir le QR code",
     "keyword": "Then",
     "file": "screen.steps.ts",
     "sourceCode": "Then('je peux voir le QR code', async function (this: FestipodWorld) {\n  const source = this.getRenderedText();\n  if (this.currentScreenId === 'share-profile') {\n    // ShareProfileScreen.tsx has: \"QR Code\" comment and \"Scannez pour me retrouver\" text\n    expect(/QR Code/.test(source), 'Share profile should have \"QR Code\" text').to.be.true;\n    expect(/Scannez pour me retrouver/.test(source), 'Share profile should have \"Scannez pour me retrouver\" text').to.be.true;\n  } else if (this.currentScreenId === 'meeting-points') {\n    // MeetingPointsScreen.tsx has: \"Mon QR Code\" text and \"Scannez pour m'ajouter\"\n    expect(/Mon QR Code/.test(source), 'Meeting points should have \"Mon QR Code\" text').to.be.true;\n    expect(/Scannez pour m'ajouter/.test(source), 'Meeting points should have \"Scannez pour m\\'ajouter\" text').to.be.true;\n  } else {\n    expect.fail(`QR code should be on share-profile or meeting-points, not \"${this.currentScreenId}\"`);\n  }\n});",
-    "lineNumber": 71
+    "lineNumber": 80
   },
   {
     "pattern": "je peux voir le lien de partage",
     "keyword": "Then",
     "file": "screen.steps.ts",
     "sourceCode": "Then('je peux voir le lien de partage', async function (this: FestipodWorld) {\n  expect(this.currentScreenId, 'Share link should be on share-profile screen').to.equal('share-profile');\n  const source = this.getRenderedText();\n  // ShareProfileScreen.tsx has: \"Mon lien de profil\" text and profileLink variable\n  expect(/Mon lien de profil/.test(source), 'Share profile should have \"Mon lien de profil\" text').to.be.true;\n  expect(/festipod\\.app\\/u\\//.test(source), 'Share profile should have profile link URL').to.be.true;\n});",
-    "lineNumber": 86
+    "lineNumber": 95
   },
   {
     "pattern": "je visualise l'événement {string}",
     "keyword": "Given",
     "file": "screen.steps.ts",
     "sourceCode": "Given('je visualise l\\'événement {string}', async function (this: FestipodWorld, eventName: string) {\n  this.navigateTo('#/demo/event-detail');\n  expect(this.currentScreen, 'Event detail screen should be loaded').to.not.be.null;\n  this.attach(`Viewing event: ${eventName}`, 'text/plain');\n});",
-    "lineNumber": 97
+    "lineNumber": 106
   },
   {
     "pattern": "je visualise le profil de {string}",
     "keyword": "Given",
     "file": "screen.steps.ts",
     "sourceCode": "Given('je visualise le profil de {string}', async function (this: FestipodWorld, userName: string) {\n  this.navigateTo('#/demo/user-profile');\n  expect(this.currentScreen, 'User profile screen should be loaded').to.not.be.null;\n  this.attach(`Viewing profile: ${userName}`, 'text/plain');\n});",
-    "lineNumber": 103
+    "lineNumber": 112
   },
   {
     "pattern": "l'écran affiche les informations de l'événement",
     "keyword": "Then",
     "file": "screen.steps.ts",
     "sourceCode": "Then('l\\'écran affiche les informations de l\\'événement', async function (this: FestipodWorld) {\n  expect(this.currentScreenId).to.equal('event-detail');\n  const source = this.getRenderedText();\n  // EventDetailScreen.tsx has: <Title>, 📅, 🕓, 📍 emojis, and \"À propos\" section\n  expect(/<Title[^>]*>[^<]+<\\/Title>/.test(source), 'Event detail should have a Title').to.be.true;\n  expect(/📅/.test(source), 'Event detail should have date emoji 📅').to.be.true;\n  expect(/🕓/.test(source), 'Event detail should have time emoji 🕓').to.be.true;\n  expect(/📍/.test(source), 'Event detail should have location emoji 📍').to.be.true;\n  expect(/À propos/.test(source), 'Event detail should have \"À propos\" section').to.be.true;\n});",
-    "lineNumber": 109
+    "lineNumber": 118
   },
   {
     "pattern": "l'écran affiche les informations du profil",
     "keyword": "Then",
     "file": "screen.steps.ts",
     "sourceCode": "Then('l\\'écran affiche les informations du profil', async function (this: FestipodWorld) {\n  const source = this.getRenderedText();\n  if (this.currentScreenId === 'profile') {\n    // ProfileScreen.tsx has: <Avatar initials=\"MD\" size=\"lg\" />, <Title>Marie Dupont</Title>, @mariedupont\n    expect(/<Avatar[^>]*initials=\"MD\"/.test(source), 'Profile should have Avatar with initials=\"MD\"').to.be.true;\n    expect(/<Title[^>]*>Marie Dupont<\\/Title>/.test(source), 'Profile should have Title \"Marie Dupont\"').to.be.true;\n    expect(/@mariedupont/.test(source), 'Profile should have username @mariedupont').to.be.true;\n  } else if (this.currentScreenId === 'user-profile') {\n    // UserProfileScreen.tsx has: <Avatar initials=\"JD\" size=\"lg\" />, <Title>Jean Durand</Title>, @jeandurand\n    expect(/<Avatar[^>]*initials=\"JD\"/.test(source), 'User profile should have Avatar with initials=\"JD\"').to.be.true;\n    expect(/<Title[^>]*>Jean Durand<\\/Title>/.test(source), 'User profile should have Title \"Jean Durand\"').to.be.true;\n    expect(/@jeandurand/.test(source), 'User profile should have username @jeandurand').to.be.true;\n  } else {\n    expect.fail(`Unexpected screen \"${this.currentScreenId}\" for profile info check`);\n  }\n});",
-    "lineNumber": 120
+    "lineNumber": 129
   },
   {
     "pattern": "je peux m'inscrire à l'événement",
     "keyword": "Then",
     "file": "screen.steps.ts",
     "sourceCode": "Then('je peux m\\'inscrire à l\\'événement', async function (this: FestipodWorld) {\n  expect(this.currentScreenId).to.equal('event-detail');\n  const source = this.getRenderedText();\n  // EventDetailScreen.tsx line 49: {isJoined ? '✓ Inscrit' : 'Participer'}\n  // The button shows \"Participer\" when not joined\n  const hasParticiperButton = /isJoined \\? '✓ Inscrit' : 'Participer'/.test(source);\n  expect(hasParticiperButton, 'Event detail should have Participer/Inscrit toggle button').to.be.true;\n});",
-    "lineNumber": 140
+    "lineNumber": 149
   },
   {
     "pattern": "je peux me désinscrire de l'événement",
     "keyword": "Then",
     "file": "screen.steps.ts",
     "sourceCode": "Then('je peux me désinscrire de l\\'événement', async function (this: FestipodWorld) {\n  expect(this.currentScreenId).to.equal('event-detail');\n  const source = this.getRenderedText();\n  // EventDetailScreen.tsx line 49: {isJoined ? '✓ Inscrit' : 'Participer'}\n  // Same button toggles - clicking \"✓ Inscrit\" will unregister\n  const hasInscritButton = /isJoined \\? '✓ Inscrit' : 'Participer'/.test(source);\n  expect(hasInscritButton, 'Event detail should have Participer/Inscrit toggle button (click to unregister)').to.be.true;\n});",
-    "lineNumber": 149
+    "lineNumber": 158
   },
   {
     "pattern": "je peux contacter l'utilisateur",
     "keyword": "Then",
     "file": "screen.steps.ts",
     "sourceCode": "Then('je peux contacter l\\'utilisateur', async function (this: FestipodWorld) {\n  expect(this.currentScreenId).to.equal('user-profile');\n  const source = this.getRenderedText();\n  // UserProfileScreen.tsx line 44: <Button>Contacter</Button>\n  const hasContactButton = /<Button>Contacter<\\/Button>/.test(source);\n  expect(hasContactButton, 'User profile should have \"Contacter\" button').to.be.true;\n});",
-    "lineNumber": 158
+    "lineNumber": 167
   },
   {
     "pattern": "je peux voir les événements auxquels l'utilisateur a participé",
     "keyword": "Then",
     "file": "screen.steps.ts",
     "sourceCode": "Then('je peux voir les événements auxquels l\\'utilisateur a participé', async function (this: FestipodWorld) {\n  expect(this.currentScreenId).to.equal('user-profile');\n  const source = this.getRenderedText();\n  // UserProfileScreen.tsx line 52: \"Événements en commun\" section with pastEvents\n  expect(/Événements en commun/.test(source), 'User profile should have \"Événements en commun\" section').to.be.true;\n  expect(/pastEvents/.test(source), 'User profile should display pastEvents data').to.be.true;\n});",
-    "lineNumber": 166
+    "lineNumber": 175
   },
   {
     "pattern": "je peux configurer mes notifications",
     "keyword": "Then",
     "file": "screen.steps.ts",
     "sourceCode": "Then('je peux configurer mes notifications', async function (this: FestipodWorld) {\n  expect(this.currentScreenId).to.equal('settings');\n  const source = this.getRenderedText();\n  // SettingsScreen.tsx line 25: <Text>Notifications</Text> with Toggle\n  expect(/>Notifications</.test(source), 'Settings should have \"Notifications\" text').to.be.true;\n  expect(/<Toggle[^>]*checked=\\{notifications\\}/.test(source), 'Settings should have Toggle for notifications').to.be.true;\n});",
-    "lineNumber": 174
+    "lineNumber": 183
   }
 ];
 

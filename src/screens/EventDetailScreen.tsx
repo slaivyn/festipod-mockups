@@ -26,17 +26,17 @@ export function EventDetailScreen({ navigate }: ScreenProps) {
         <Placeholder height={180} label="Photo de couverture" />
 
         <div style={{ padding: 16 }}>
-          <Title className="user-content" style={{ marginBottom: 8 }}>Barbecue d'été</Title>
+          <Title className="user-content" style={{ marginBottom: 8 }}>Résidence Reconnexion</Title>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 16 }}>
             <Text style={{ margin: 0, fontSize: 15 }}>
-              📅 <span className="user-content">Samedi 25 janvier 2025</span>
+              📅 <span className="user-content">Lundi 16 - Vendredi 20 février 2026</span>
             </Text>
             <Text style={{ margin: 0, fontSize: 15 }}>
-              🕓 <span className="user-content">16h00 - 21h00</span>
+              🕓 <span className="user-content">Semaine complète (arrivée dimanche possible)</span>
             </Text>
             <Text style={{ margin: 0, fontSize: 15 }}>
-              📍 <span className="user-content">Parc Central, Pelouse Ouest</span>
+              📍 <span className="user-content">Le Revel, Rogues (30)</span>
             </Text>
           </div>
 
@@ -64,9 +64,9 @@ export function EventDetailScreen({ navigate }: ScreenProps) {
 
           {/* Host */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
-            <Avatar initials="MD" />
+            <Avatar initials="RC" />
             <div>
-              <Text className="user-content" style={{ margin: 0, fontWeight: 'bold' }}>Marie Dupont</Text>
+              <Text className="user-content" style={{ margin: 0, fontWeight: 'bold' }}>Reconnexion</Text>
               <Text style={{ margin: 0, fontSize: 14, color: 'var(--sketch-gray)' }}>Organisateur</Text>
             </div>
           </div>
@@ -76,15 +76,16 @@ export function EventDetailScreen({ navigate }: ScreenProps) {
           {/* Description */}
           <Text style={{ fontWeight: 'bold', marginBottom: 8 }}>À propos</Text>
           <Text className="user-content" style={{ lineHeight: 1.6 }}>
-            Rejoignez-nous pour un super barbecue d'été ! Au menu : burgers, saucisses, options végé
-            et plein de boissons. Apportez votre plat préféré à partager. Jeux et musique assurés !
+            Une semaine collaborative pour se rencontrer, co-créer et faire avancer le projet de Réseau Social Universel.
+            Au programme : sessions plénières en intelligence collective, ateliers en forum ouvert, et randonnée
+            au Cirque de Navacelles. Hébergement sur place au Revel, écolieu à Rogues dans le Gard.
           </Text>
 
           <Divider />
 
           {/* Attendees */}
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
-            <Text style={{ fontWeight: 'bold', margin: 0 }}>Participants (12)</Text>
+            <Text style={{ fontWeight: 'bold', margin: 0 }}>Participants (24)</Text>
             <Text
               style={{ margin: 0, fontSize: 14, cursor: 'pointer' }}
               onClick={() => navigate('participants-list')}
@@ -118,7 +119,7 @@ export function EventDetailScreen({ navigate }: ScreenProps) {
                 justifyContent: 'center',
                 fontSize: 12,
               }}>
-                +8
+                +20
               </div>
               <Text style={{ margin: '4px 0 0 0', fontSize: 12 }}>autres</Text>
             </div>

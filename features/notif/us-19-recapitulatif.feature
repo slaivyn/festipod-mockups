@@ -27,5 +27,4 @@ Fonctionnalité: US-19 Recevoir un récapitulatif des prochaines rencontres
 
   Scénario: Vérifier les données de l'accueil
     Étant donné que je suis sur la page "accueil"
-    Alors l'écran contient un texte "Barbecue d'été"
-    Et l'écran contient un texte "Soirée jeux de société"
+    Alors les événements affichent leur lieu

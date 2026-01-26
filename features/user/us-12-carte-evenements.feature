@@ -24,7 +24,8 @@ Fonctionnalité: US-12 Consulter la carte/tableau des événements
     Alors je peux voir les événements auxquels l'utilisateur a participé
 
   Scénario: Vérifier les données de l'écran événements
-    * Scénario non implémenté
+    Étant donné que je suis sur la page "découvrir"
+    Alors les événements affichent leur lieu
 
   Scénario: Vérifier les données de l'écran profil
     * Scénario non implémenté

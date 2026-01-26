@@ -372,8 +372,8 @@ export const sampleUsers = [
 ];
 
 export const sampleEvents = [
-  { id: '1', title: 'Barbecue d\'été', date: '25 jan.', location: 'Parc de la Tête d\'Or', participants: 24 },
-  { id: '2', title: 'Soirée jeux', date: '31 jan.', location: 'Chez Marie', participants: 12 },
-  { id: '3', title: 'Randonnée des Monts', date: '15 fév.', location: 'Mont Pilat', participants: 18 },
-  { id: '4', title: 'Atelier poterie', date: '22 fév.', location: 'L\'Atelier Créatif', participants: 8 },
+  { id: '1', title: 'Résidence Reconnexion', date: '16-20 fév.', location: 'Le Revel, Rogues (30)', participants: 24 },
+  { id: '2', title: 'Atelier low-tech', date: '8 fév.', location: 'La Maison du Vélo, Lyon', participants: 12 },
+  { id: '3', title: 'Forum Ouvert Transition', date: '22 fév.', location: 'Tiers-lieu L\'Hermitage', participants: 45 },
+  { id: '4', title: 'Formation CNV', date: '1 mars', location: 'MJC Montplaisir, Lyon', participants: 16 },
 ];
