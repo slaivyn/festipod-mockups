@@ -5,12 +5,11 @@ import type { ScreenProps } from './index';
 export function EventDetailScreen({ navigate }: ScreenProps) {
   const [isJoined, setIsJoined] = useState(false);
 
-  const attendees = [
+  const knownAttendees = [
     { initials: 'MD', name: 'Marie' },
-    { initials: 'PD', name: 'Pierre' },
-    { initials: 'SL', name: 'Sophie' },
     { initials: 'TM', name: 'Thomas' },
   ];
+  const unknownCount = 22;
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
@@ -95,7 +94,7 @@ export function EventDetailScreen({ navigate }: ScreenProps) {
           </div>
 
           <div style={{ display: 'flex', gap: 12 }}>
-            {attendees.map((a, i) => (
+            {knownAttendees.map((a, i) => (
               <div
                 key={i}
                 style={{ textAlign: 'center', cursor: 'pointer' }}
@@ -119,9 +118,9 @@ export function EventDetailScreen({ navigate }: ScreenProps) {
                 justifyContent: 'center',
                 fontSize: 12,
               }}>
-                +20
+                +{unknownCount}
               </div>
-              <Text style={{ margin: '4px 0 0 0', fontSize: 12 }}>autres</Text>
+              <Text style={{ margin: '4px 0 0 0', fontSize: 12, color: 'var(--sketch-gray)' }}>inconnus</Text>
             </div>
           </div>
         </div>

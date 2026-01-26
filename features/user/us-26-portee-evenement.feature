@@ -2,23 +2,23 @@
 @USER @priority-2
 Fonctionnalité: US-26 Définir la portée d'un événement
   En tant qu'utilisateur
-  Je peux créer/présenter le contenu d'un événement et le catégoriser par type/thématique
+  Je peux relayer/présenter le contenu d'un événement et le catégoriser par type/thématique
   En indiquant son rayon d'intérêt en kilomètres
   Afin de m'assurer que les utilisateurs qui habitent trop loin ne reçoivent pas de notification
 
   Contexte:
     Étant donné que je suis connecté en tant qu'utilisateur
 
-  Scénario: Accéder à la création d'événement
+  Scénario: Accéder au formulaire de relai d'événement
     Étant donné que je suis sur la page "accueil"
-    Quand je navigue vers "créer un événement"
+    Quand je navigue vers "relayer un événement"
     Alors je vois l'écran "create-event"
 
   Scénario: Définir le rayon d'intérêt
     * Scénario non implémenté
 
   Scénario: Choisir une thématique
-    Étant donné que je suis sur la page "créer un événement"
+    Étant donné que je suis sur la page "relayer un événement"
     Alors l'écran contient une section "Thématique"
 
   Scénario: Vérifier les champs obligatoires

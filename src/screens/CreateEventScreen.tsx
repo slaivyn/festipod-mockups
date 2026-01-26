@@ -6,7 +6,7 @@ export function CreateEventScreen({ navigate }: ScreenProps) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       <Header
-        title="Créer un événement"
+        title="Relayer un événement"
         left={<span onClick={() => navigate('home')} style={{ cursor: 'pointer' }}>✕</span>}
       />
 
@@ -96,7 +96,7 @@ export function CreateEventScreen({ navigate }: ScreenProps) {
           style={{ width: '100%' }}
           onClick={() => navigate('event-detail')}
         >
-          Créer l'événement
+          Relayer l'événement
         </Button>
       </div>
     </div>

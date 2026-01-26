@@ -64,7 +64,7 @@ export function HomeScreen({ navigate }: ScreenProps) {
 
         <div style={{ marginTop: 24 }}>
           <Button variant="primary" onClick={() => navigate('create-event')} style={{ width: '100%' }}>
-            + Créer un événement
+            + Relayer un événement
           </Button>
         </div>
       </div>
@@ -74,7 +74,7 @@ export function HomeScreen({ navigate }: ScreenProps) {
         items={[
           { icon: '⌂', label: 'Accueil', active: true },
           { icon: '◎', label: 'Découvrir', onClick: () => navigate('events') },
-          { icon: '+', label: 'Créer', onClick: () => navigate('create-event') },
+          { icon: '+', label: 'Relayer', onClick: () => navigate('create-event') },
           { icon: '☺', label: 'Profil', onClick: () => navigate('profile') },
         ]}
       />

@@ -104,8 +104,8 @@ export const parsedFeatures: ParsedFeature[] = [
   },
   {
     "id": "us-13",
-    "name": "US-13 Créer/Modifier/Supprimer un événement",
-    "description": "En tant qu'utilisateur Je peux créer/modifier/supprimer un événement En choisissant les dates, horaires, lieu et thématique Afin de créer/présenter le contenu de cet événement et le catégoriser",
+    "name": "US-13 Relayer/Modifier/Supprimer un événement",
+    "description": "En tant qu'utilisateur Je peux relayer/modifier/supprimer un événement En choisissant les dates, horaires, lieu et thématique Afin de relayer/présenter le contenu de cet événement et le catégoriser",
     "tags": [
       "@EVENT",
       "@priority-1"
@@ -120,7 +120,7 @@ export const parsedFeatures: ParsedFeature[] = [
     ],
     "scenarios": [
       {
-        "name": "Accéder à la création d'événement",
+        "name": "Accéder au formulaire de relai d'événement",
         "tags": [],
         "steps": [
           {
@@ -129,7 +129,7 @@ export const parsedFeatures: ParsedFeature[] = [
           },
           {
             "keyword": "Quand",
-            "text": "je navigue vers \"créer un événement\""
+            "text": "je navigue vers \"relayer un événement\""
           },
           {
             "keyword": "Alors",
@@ -152,26 +152,26 @@ export const parsedFeatures: ParsedFeature[] = [
         ]
       },
       {
-        "name": "Vérifier la présence du bouton de création",
+        "name": "Vérifier la présence du bouton de relai",
         "tags": [],
         "steps": [
           {
             "keyword": "Étant donné que ",
-            "text": "je suis sur la page \"créer un événement\""
+            "text": "je suis sur la page \"relayer un événement\""
           },
           {
             "keyword": "Alors",
-            "text": "l'écran contient une section \"Créer l'événement\""
+            "text": "l'écran contient une section \"Relayer l'événement\""
           }
         ]
       },
       {
-        "name": "Pouvoir annuler la création d'événement",
+        "name": "Pouvoir annuler le relai d'événement",
         "tags": [],
         "steps": [
           {
             "keyword": "Étant donné que ",
-            "text": "je suis sur la page \"créer un événement\""
+            "text": "je suis sur la page \"relayer un événement\""
           },
           {
             "keyword": "Alors",
@@ -196,7 +196,7 @@ export const parsedFeatures: ParsedFeature[] = [
       }
     ],
     "filePath": "features/event/us-13-creer-evenement.feature",
-    "rawContent": "# language: fr\n@EVENT @priority-1\nFonctionnalité: US-13 Créer/Modifier/Supprimer un événement\n  En tant qu'utilisateur\n  Je peux créer/modifier/supprimer un événement\n  En choisissant les dates, horaires, lieu et thématique\n  Afin de créer/présenter le contenu de cet événement et le catégoriser\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Accéder à la création d'événement\n    Étant donné que je suis sur la page \"accueil\"\n    Quand je navigue vers \"créer un événement\"\n    Alors je vois l'écran \"create-event\"\n\n  Scénario: Vérifier les champs obligatoires du formulaire\n    Étant donné que l'écran \"create-event\" est affiché\n    Alors le formulaire contient les champs obligatoires suivants:\n      | Nom de l'événement |\n      | Date de début      |\n      | Heure de début     |\n      | Lieu               |\n      | Thématique         |\n\n  Scénario: Vérifier la présence du bouton de création\n    Étant donné que je suis sur la page \"créer un événement\"\n    Alors l'écran contient une section \"Créer l'événement\"\n\n  Scénario: Pouvoir annuler la création d'événement\n    Étant donné que je suis sur la page \"créer un événement\"\n    Alors je peux annuler et revenir à l'écran précédent\n\n  Scénario: Modifier un événement\n    * Scénario non implémenté\n\n  Scénario: Supprimer un événement\n    * Scénario non implémenté\n\n  Scénario: Retirer une organisation (personne ou structure)\n    * Scénario non implémenté\n",
+    "rawContent": "# language: fr\n@EVENT @priority-1\nFonctionnalité: US-13 Relayer/Modifier/Supprimer un événement\n  En tant qu'utilisateur\n  Je peux relayer/modifier/supprimer un événement\n  En choisissant les dates, horaires, lieu et thématique\n  Afin de relayer/présenter le contenu de cet événement et le catégoriser\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Accéder au formulaire de relai d'événement\n    Étant donné que je suis sur la page \"accueil\"\n    Quand je navigue vers \"relayer un événement\"\n    Alors je vois l'écran \"create-event\"\n\n  Scénario: Vérifier les champs obligatoires du formulaire\n    Étant donné que l'écran \"create-event\" est affiché\n    Alors le formulaire contient les champs obligatoires suivants:\n      | Nom de l'événement |\n      | Date de début      |\n      | Heure de début     |\n      | Lieu               |\n      | Thématique         |\n\n  Scénario: Vérifier la présence du bouton de relai\n    Étant donné que je suis sur la page \"relayer un événement\"\n    Alors l'écran contient une section \"Relayer l'événement\"\n\n  Scénario: Pouvoir annuler le relai d'événement\n    Étant donné que je suis sur la page \"relayer un événement\"\n    Alors je peux annuler et revenir à l'écran précédent\n\n  Scénario: Modifier un événement\n    * Scénario non implémenté\n\n  Scénario: Supprimer un événement\n    * Scénario non implémenté\n\n  Scénario: Retirer une organisation (personne ou structure)\n    * Scénario non implémenté\n",
     "screenIds": [
       "create-event",
       "home"
@@ -1150,7 +1150,7 @@ export const parsedFeatures: ParsedFeature[] = [
   {
     "id": "us-26",
     "name": "US-26 Définir la portée d'un événement",
-    "description": "En tant qu'utilisateur Je peux créer/présenter le contenu d'un événement et le catégoriser par type/thématique En indiquant son rayon d'intérêt en kilomètres Afin de m'assurer que les utilisateurs qui habitent trop loin ne reçoivent pas de notification",
+    "description": "En tant qu'utilisateur Je peux relayer/présenter le contenu d'un événement et le catégoriser par type/thématique En indiquant son rayon d'intérêt en kilomètres Afin de m'assurer que les utilisateurs qui habitent trop loin ne reçoivent pas de notification",
     "tags": [
       "@USER",
       "@priority-2"
@@ -1165,7 +1165,7 @@ export const parsedFeatures: ParsedFeature[] = [
     ],
     "scenarios": [
       {
-        "name": "Accéder à la création d'événement",
+        "name": "Accéder au formulaire de relai d'événement",
         "tags": [],
         "steps": [
           {
@@ -1174,7 +1174,7 @@ export const parsedFeatures: ParsedFeature[] = [
           },
           {
             "keyword": "Quand",
-            "text": "je navigue vers \"créer un événement\""
+            "text": "je navigue vers \"relayer un événement\""
           },
           {
             "keyword": "Alors",
@@ -1193,7 +1193,7 @@ export const parsedFeatures: ParsedFeature[] = [
         "steps": [
           {
             "keyword": "Étant donné que ",
-            "text": "je suis sur la page \"créer un événement\""
+            "text": "je suis sur la page \"relayer un événement\""
           },
           {
             "keyword": "Alors",
@@ -1217,7 +1217,7 @@ export const parsedFeatures: ParsedFeature[] = [
       }
     ],
     "filePath": "features/user/us-26-portee-evenement.feature",
-    "rawContent": "# language: fr\n@USER @priority-2\nFonctionnalité: US-26 Définir la portée d'un événement\n  En tant qu'utilisateur\n  Je peux créer/présenter le contenu d'un événement et le catégoriser par type/thématique\n  En indiquant son rayon d'intérêt en kilomètres\n  Afin de m'assurer que les utilisateurs qui habitent trop loin ne reçoivent pas de notification\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Accéder à la création d'événement\n    Étant donné que je suis sur la page \"accueil\"\n    Quand je navigue vers \"créer un événement\"\n    Alors je vois l'écran \"create-event\"\n\n  Scénario: Définir le rayon d'intérêt\n    * Scénario non implémenté\n\n  Scénario: Choisir une thématique\n    Étant donné que je suis sur la page \"créer un événement\"\n    Alors l'écran contient une section \"Thématique\"\n\n  Scénario: Vérifier les champs obligatoires\n    Étant donné que l'écran \"create-event\" est affiché\n    Alors le formulaire contient les champs obligatoires suivants:\n      | Nom de l'événement |\n      | Date de début      |\n      | Heure de début     |\n      | Lieu               |\n      | Thématique         |\n",
+    "rawContent": "# language: fr\n@USER @priority-2\nFonctionnalité: US-26 Définir la portée d'un événement\n  En tant qu'utilisateur\n  Je peux relayer/présenter le contenu d'un événement et le catégoriser par type/thématique\n  En indiquant son rayon d'intérêt en kilomètres\n  Afin de m'assurer que les utilisateurs qui habitent trop loin ne reçoivent pas de notification\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Accéder au formulaire de relai d'événement\n    Étant donné que je suis sur la page \"accueil\"\n    Quand je navigue vers \"relayer un événement\"\n    Alors je vois l'écran \"create-event\"\n\n  Scénario: Définir le rayon d'intérêt\n    * Scénario non implémenté\n\n  Scénario: Choisir une thématique\n    Étant donné que je suis sur la page \"relayer un événement\"\n    Alors l'écran contient une section \"Thématique\"\n\n  Scénario: Vérifier les champs obligatoires\n    Étant donné que l'écran \"create-event\" est affiché\n    Alors le formulaire contient les champs obligatoires suivants:\n      | Nom de l'événement |\n      | Date de début      |\n      | Heure de début     |\n      | Lieu               |\n      | Thématique         |\n",
     "screenIds": [
       "create-event",
       "home"

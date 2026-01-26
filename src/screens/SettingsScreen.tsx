@@ -83,7 +83,7 @@ export function SettingsScreen({ navigate }: ScreenProps) {
         items={[
           { icon: '⌂', label: 'Accueil', onClick: () => navigate('home') },
           { icon: '◎', label: 'Découvrir', onClick: () => navigate('events') },
-          { icon: '+', label: 'Créer', onClick: () => navigate('create-event') },
+          { icon: '+', label: 'Relayer', onClick: () => navigate('create-event') },
           { icon: '☺', label: 'Profil', onClick: () => navigate('profile') },
         ]}
       />
