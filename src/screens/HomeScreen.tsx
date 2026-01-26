@@ -30,6 +30,19 @@ export function HomeScreen({ navigate }: ScreenProps) {
 
       {/* Content */}
       <div style={{ flex: 1, padding: 16, overflow: 'auto' }}>
+        {/* Helper text */}
+        <div style={{
+          background: 'var(--sketch-light-gray)',
+          padding: 12,
+          borderRadius: 8,
+          marginBottom: 16,
+        }}>
+          <Text style={{ margin: 0, fontSize: 13, color: 'var(--sketch-gray)', lineHeight: 1.5 }}>
+            Voici les événements auxquels vous participez. Retrouvez les infos pratiques
+            et les autres participants.
+          </Text>
+        </div>
+
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
           <Text style={{ margin: 0, fontWeight: 'bold' }}>Mes événements à venir</Text>
           <Text

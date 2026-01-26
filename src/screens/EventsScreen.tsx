@@ -51,6 +51,19 @@ export function EventsScreen({ navigate }: ScreenProps) {
 
       {/* Content */}
       <div style={{ flex: 1, padding: 16, overflow: 'auto' }}>
+        {/* Helper text */}
+        <div style={{
+          background: 'var(--sketch-light-gray)',
+          padding: 12,
+          borderRadius: 8,
+          marginBottom: 16,
+        }}>
+          <Text style={{ margin: 0, fontSize: 13, color: 'var(--sketch-gray)', lineHeight: 1.5 }}>
+            Événements relayés par vos contacts. Explorez, participez, et relayez
+            à votre tour pour faire grandir votre réseau.
+          </Text>
+        </div>
+
         <EventCard
           title="Résidence Reconnexion"
           date="Lun. 16 - Ven. 20 fév."

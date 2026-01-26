@@ -12,6 +12,7 @@ import { ParticipantsListScreen } from './ParticipantsListScreen';
 import { MeetingPointsScreen } from './MeetingPointsScreen';
 import { FriendsListScreen } from './FriendsListScreen';
 import { ShareProfileScreen } from './ShareProfileScreen';
+import { WelcomeScreen } from './WelcomeScreen';
 
 export interface Screen {
   id: string;
@@ -34,6 +35,7 @@ export const screenGroups: ScreenGroup[] = [
     id: 'home',
     name: 'Accueil',
     screens: [
+      { id: 'welcome', name: 'Bienvenue', component: WelcomeScreen },
       { id: 'home', name: 'Accueil', component: HomeScreen },
     ],
   },
