@@ -4,9 +4,9 @@ import type { ScreenProps } from './index';
 
 export function UserProfileScreen({ navigate }: ScreenProps) {
   const pastEvents = [
-    { title: 'Atelier poterie', date: '15 déc. 2025', role: 'Participant' },
-    { title: 'Festival d\'été', date: '20 juil. 2025', role: 'Organisateur' },
-    { title: 'Randonnée collective', date: '5 mai 2025', role: 'Participant' },
+    { title: 'Forum Ouvert Transition', date: '22 fév.' },
+    { title: 'Rencontre des Colibris', date: '12 fév.' },
+    { title: 'Formation CNV', date: '1 mars' },
   ];
 
   return (
@@ -56,15 +56,10 @@ export function UserProfileScreen({ navigate }: ScreenProps) {
 
           {pastEvents.map((event, i) => (
             <Card key={i} onClick={() => navigate('event-detail')} style={{ marginBottom: 12 }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <div>
-                  <Text className="user-content" style={{ margin: 0, fontWeight: 'bold' }}>{event.title}</Text>
-                  <Text className="user-content" style={{ margin: '4px 0 0 0', fontSize: 14 }}>
-                    {event.date}
-                  </Text>
-                </div>
-                <Badge>{event.role}</Badge>
-              </div>
+              <Text className="user-content" style={{ margin: 0, fontWeight: 'bold' }}>{event.title}</Text>
+              <Text className="user-content" style={{ margin: '4px 0 0 0', fontSize: 14 }}>
+                {event.date}
+              </Text>
             </Card>
           ))}
         </div>

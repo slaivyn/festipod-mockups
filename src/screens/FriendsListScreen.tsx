@@ -15,10 +15,10 @@ export function FriendsListScreen({ navigate }: ScreenProps) {
   ];
 
   const publicProfiles = [
-    { initials: 'LB', name: 'Léa Bernard', username: '@leabernard', events: 45, role: 'Organisatrice' },
+    { initials: 'LB', name: 'Léa Bernard', username: '@leabernard', events: 45, role: 'Relayeuse' },
     { initials: 'MR', name: 'Marc Richard', username: '@marcrichard', events: 67, role: 'Animateur' },
     { initials: 'SF', name: 'Sophie Fontaine', username: '@sophief', events: 23, role: 'Créatrice' },
-    { initials: 'PG', name: 'Pierre Gagnon', username: '@pierreg', events: 89, role: 'Organisateur' },
+    { initials: 'PG', name: 'Pierre Gagnon', username: '@pierreg', events: 89, role: 'Relayeur' },
   ];
 
   const displayedList = activeTab === 'friends' ? friends : publicProfiles;

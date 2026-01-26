@@ -4,8 +4,8 @@ import type { ScreenProps } from './index';
 
 export function ProfileScreen({ navigate }: ScreenProps) {
   const upcomingEvents = [
-    { title: 'Barbecue d\'été', date: '25 jan.', role: 'Organisateur' },
-    { title: 'Soirée jeux', date: '31 jan.', role: 'Participant' },
+    { title: 'Résidence Reconnexion', date: '16-20 fév.' },
+    { title: 'Atelier low-tech', date: '8 fév.' },
   ];
 
   return (
@@ -52,15 +52,10 @@ export function ProfileScreen({ navigate }: ScreenProps) {
           <Text style={{ fontWeight: 'bold', marginBottom: 12 }}>Mes événements à venir</Text>
           {upcomingEvents.map((event, i) => (
             <Card key={i} onClick={() => navigate('event-detail')} style={{ marginBottom: 12 }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <div>
-                  <Text className="user-content" style={{ margin: 0, fontWeight: 'bold' }}>{event.title}</Text>
-                  <Text className="user-content" style={{ margin: '4px 0 0 0', fontSize: 14 }}>
-                    {event.date}
-                  </Text>
-                </div>
-                <Badge>{event.role}</Badge>
-              </div>
+              <Text className="user-content" style={{ margin: 0, fontWeight: 'bold' }}>{event.title}</Text>
+              <Text className="user-content" style={{ margin: '4px 0 0 0', fontSize: 14 }}>
+                {event.date}
+              </Text>
             </Card>
           ))}
           <Button style={{ width: '100%' }} onClick={() => navigate('events')}>

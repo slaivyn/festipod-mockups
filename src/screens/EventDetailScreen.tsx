@@ -67,7 +67,7 @@ export function EventDetailScreen({ navigate }: ScreenProps) {
             <Avatar initials="RC" />
             <div>
               <Text className="user-content" style={{ margin: 0, fontWeight: 'bold' }}>Reconnexion</Text>
-              <Text style={{ margin: 0, fontSize: 14, color: 'var(--sketch-gray)' }}>Organisateur</Text>
+              <Text style={{ margin: 0, fontSize: 14, color: 'var(--sketch-gray)' }}>Relayé par</Text>
             </div>
           </div>
 
