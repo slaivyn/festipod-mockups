@@ -103,79 +103,6 @@ export const parsedFeatures: ParsedFeature[] = [
     ]
   },
   {
-    "id": "us-7",
-    "name": "US-7 M'inscrire/me désinscrire à un événement",
-    "description": "En tant qu'utilisateur Je peux m'inscrire/me désinscrire à un événement Après avoir consulté la description de l'événement, les dates et le lieu S'il existe déjà dans le système ou en le retrouvant dans une base existante",
-    "tags": [
-      "@EVENT",
-      "@priority-1"
-    ],
-    "category": "EVENT",
-    "priority": 1,
-    "background": [
-      {
-        "keyword": "Étant donné que ",
-        "text": "je suis connecté en tant qu'utilisateur"
-      }
-    ],
-    "scenarios": [
-      {
-        "name": "Consulter un événement avant inscription",
-        "tags": [],
-        "steps": [
-          {
-            "keyword": "Étant donné que ",
-            "text": "je suis sur la page \"détail événement\""
-          },
-          {
-            "keyword": "Alors",
-            "text": "l'écran affiche les informations de l'événement"
-          }
-        ]
-      },
-      {
-        "name": "S'inscrire à un événement",
-        "tags": [],
-        "steps": []
-      },
-      {
-        "name": "Se désinscrire d'un événement",
-        "tags": [],
-        "steps": []
-      },
-      {
-        "name": "Rechercher un événement existant",
-        "tags": [],
-        "steps": [
-          {
-            "keyword": "Étant donné que ",
-            "text": "je suis sur la page \"découvrir\""
-          },
-          {
-            "keyword": "Alors",
-            "text": "je peux voir la liste des événements"
-          }
-        ]
-      },
-      {
-        "name": "Vérifier les données de l'écran",
-        "tags": [],
-        "steps": []
-      },
-      {
-        "name": "Rechercher dans une base existante (Mobilizon)",
-        "tags": [],
-        "steps": []
-      }
-    ],
-    "filePath": "features/event/us-7-inscription-evenement.feature",
-    "rawContent": "# language: fr\n@EVENT @priority-1\nFonctionnalité: US-7 M'inscrire/me désinscrire à un événement\n  En tant qu'utilisateur\n  Je peux m'inscrire/me désinscrire à un événement\n  Après avoir consulté la description de l'événement, les dates et le lieu\n  S'il existe déjà dans le système ou en le retrouvant dans une base existante\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Consulter un événement avant inscription\n    Étant donné que je suis sur la page \"détail événement\"\n    Alors l'écran affiche les informations de l'événement\n\n  Scénario: S'inscrire à un événement\n    * Scénario non implémenté\n\n  Scénario: Se désinscrire d'un événement\n    * Scénario non implémenté\n\n  Scénario: Rechercher un événement existant\n    Étant donné que je suis sur la page \"découvrir\"\n    Alors je peux voir la liste des événements\n\n  Scénario: Vérifier les données de l'écran\n    * Scénario non implémenté\n\n  Scénario: Rechercher dans une base existante (Mobilizon)\n    * Scénario non implémenté\n",
-    "screenIds": [
-      "event-detail",
-      "events"
-    ]
-  },
-  {
     "id": "us-13",
     "name": "US-13 Créer/Modifier/Supprimer un événement",
     "description": "En tant qu'utilisateur Je peux créer/modifier/supprimer un événement En choisissant les dates, horaires, lieu et thématique Afin de créer/présenter le contenu de cet événement et le catégoriser",
@@ -269,7 +196,7 @@ export const parsedFeatures: ParsedFeature[] = [
       }
     ],
     "filePath": "features/event/us-13-creer-evenement.feature",
-    "rawContent": "# language: fr\n@EVENT @priority-1\nFonctionnalité: US-13 Créer/Modifier/Supprimer un événement\n  En tant qu'utilisateur\n  Je peux créer/modifier/supprimer un événement\n  En choisissant les dates, horaires, lieu et thématique\n  Afin de créer/présenter le contenu de cet événement et le catégoriser\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Accéder à la création d'événement\n    Étant donné que je suis sur la page \"accueil\"\n    Quand je navigue vers \"créer un événement\"\n    Alors je vois l'écran \"create-event\"\n\n  Scénario: Vérifier les champs obligatoires du formulaire\n    Étant donné que l'écran \"create-event\" est affiché\n    Alors le formulaire contient les champs obligatoires suivants:\n      | Nom de l'événement |\n      | Date               |\n      | Heure de début     |\n      | Lieu               |\n      | Thématique         |\n\n  Scénario: Vérifier la présence du bouton de création\n    Étant donné que je suis sur la page \"créer un événement\"\n    Alors l'écran contient une section \"Créer l'événement\"\n\n  Scénario: Pouvoir annuler la création d'événement\n    Étant donné que je suis sur la page \"créer un événement\"\n    Alors je peux annuler et revenir à l'écran précédent\n\n  Scénario: Modifier un événement\n    * Scénario non implémenté\n\n  Scénario: Supprimer un événement\n    * Scénario non implémenté\n\n  Scénario: Retirer une organisation (personne ou structure)\n    * Scénario non implémenté\n",
+    "rawContent": "# language: fr\n@EVENT @priority-1\nFonctionnalité: US-13 Créer/Modifier/Supprimer un événement\n  En tant qu'utilisateur\n  Je peux créer/modifier/supprimer un événement\n  En choisissant les dates, horaires, lieu et thématique\n  Afin de créer/présenter le contenu de cet événement et le catégoriser\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Accéder à la création d'événement\n    Étant donné que je suis sur la page \"accueil\"\n    Quand je navigue vers \"créer un événement\"\n    Alors je vois l'écran \"create-event\"\n\n  Scénario: Vérifier les champs obligatoires du formulaire\n    Étant donné que l'écran \"create-event\" est affiché\n    Alors le formulaire contient les champs obligatoires suivants:\n      | Nom de l'événement |\n      | Date de début      |\n      | Heure de début     |\n      | Lieu               |\n      | Thématique         |\n\n  Scénario: Vérifier la présence du bouton de création\n    Étant donné que je suis sur la page \"créer un événement\"\n    Alors l'écran contient une section \"Créer l'événement\"\n\n  Scénario: Pouvoir annuler la création d'événement\n    Étant donné que je suis sur la page \"créer un événement\"\n    Alors je peux annuler et revenir à l'écran précédent\n\n  Scénario: Modifier un événement\n    * Scénario non implémenté\n\n  Scénario: Supprimer un événement\n    * Scénario non implémenté\n\n  Scénario: Retirer une organisation (personne ou structure)\n    * Scénario non implémenté\n",
     "screenIds": [
       "create-event",
       "home"
@@ -344,6 +271,79 @@ export const parsedFeatures: ParsedFeature[] = [
     "screenIds": [
       "event-detail",
       "home"
+    ]
+  },
+  {
+    "id": "us-7",
+    "name": "US-7 M'inscrire/me désinscrire à un événement",
+    "description": "En tant qu'utilisateur Je peux m'inscrire/me désinscrire à un événement Après avoir consulté la description de l'événement, les dates et le lieu S'il existe déjà dans le système ou en le retrouvant dans une base existante",
+    "tags": [
+      "@EVENT",
+      "@priority-1"
+    ],
+    "category": "EVENT",
+    "priority": 1,
+    "background": [
+      {
+        "keyword": "Étant donné que ",
+        "text": "je suis connecté en tant qu'utilisateur"
+      }
+    ],
+    "scenarios": [
+      {
+        "name": "Consulter un événement avant inscription",
+        "tags": [],
+        "steps": [
+          {
+            "keyword": "Étant donné que ",
+            "text": "je suis sur la page \"détail événement\""
+          },
+          {
+            "keyword": "Alors",
+            "text": "l'écran affiche les informations de l'événement"
+          }
+        ]
+      },
+      {
+        "name": "S'inscrire à un événement",
+        "tags": [],
+        "steps": []
+      },
+      {
+        "name": "Se désinscrire d'un événement",
+        "tags": [],
+        "steps": []
+      },
+      {
+        "name": "Rechercher un événement existant",
+        "tags": [],
+        "steps": [
+          {
+            "keyword": "Étant donné que ",
+            "text": "je suis sur la page \"découvrir\""
+          },
+          {
+            "keyword": "Alors",
+            "text": "je peux voir la liste des événements"
+          }
+        ]
+      },
+      {
+        "name": "Vérifier les données de l'écran",
+        "tags": [],
+        "steps": []
+      },
+      {
+        "name": "Rechercher dans une base existante (Mobilizon)",
+        "tags": [],
+        "steps": []
+      }
+    ],
+    "filePath": "features/event/us-7-inscription-evenement.feature",
+    "rawContent": "# language: fr\n@EVENT @priority-1\nFonctionnalité: US-7 M'inscrire/me désinscrire à un événement\n  En tant qu'utilisateur\n  Je peux m'inscrire/me désinscrire à un événement\n  Après avoir consulté la description de l'événement, les dates et le lieu\n  S'il existe déjà dans le système ou en le retrouvant dans une base existante\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Consulter un événement avant inscription\n    Étant donné que je suis sur la page \"détail événement\"\n    Alors l'écran affiche les informations de l'événement\n\n  Scénario: S'inscrire à un événement\n    * Scénario non implémenté\n\n  Scénario: Se désinscrire d'un événement\n    * Scénario non implémenté\n\n  Scénario: Rechercher un événement existant\n    Étant donné que je suis sur la page \"découvrir\"\n    Alors je peux voir la liste des événements\n\n  Scénario: Vérifier les données de l'écran\n    * Scénario non implémenté\n\n  Scénario: Rechercher dans une base existante (Mobilizon)\n    * Scénario non implémenté\n",
+    "screenIds": [
+      "event-detail",
+      "events"
     ]
   },
   {
@@ -444,6 +444,177 @@ export const parsedFeatures: ParsedFeature[] = [
     ]
   },
   {
+    "id": "us-10",
+    "name": "US-10 Visualiser la fiche/le profil d'un participant",
+    "description": "En tant qu'utilisateur Je peux sélectionner un individu dans la liste des inscrits à un événement/atelier Afin de voir les événements auxquels la personne a participé et voir un formulaire de contact",
+    "tags": [
+      "@USER",
+      "@priority-1"
+    ],
+    "category": "USER",
+    "priority": 1,
+    "background": [
+      {
+        "keyword": "Étant donné que ",
+        "text": "je suis connecté en tant qu'utilisateur"
+      }
+    ],
+    "scenarios": [
+      {
+        "name": "Accéder au profil d'un participant",
+        "tags": [],
+        "steps": [
+          {
+            "keyword": "Étant donné que ",
+            "text": "je suis sur la page \"détail événement\""
+          },
+          {
+            "keyword": "Quand",
+            "text": "je clique sur un participant"
+          },
+          {
+            "keyword": "Alors",
+            "text": "je vois l'écran \"user-profile\""
+          }
+        ]
+      },
+      {
+        "name": "Voir les événements du participant",
+        "tags": [],
+        "steps": [
+          {
+            "keyword": "Étant donné que ",
+            "text": "je suis sur la page \"profil utilisateur\""
+          },
+          {
+            "keyword": "Alors",
+            "text": "je peux voir les événements auxquels l'utilisateur a participé"
+          }
+        ]
+      },
+      {
+        "name": "Voir le formulaire de contact",
+        "tags": [],
+        "steps": [
+          {
+            "keyword": "Étant donné que ",
+            "text": "je suis sur la page \"profil utilisateur\""
+          },
+          {
+            "keyword": "Alors",
+            "text": "je peux contacter l'utilisateur"
+          }
+        ]
+      },
+      {
+        "name": "Vérifier les informations du profil",
+        "tags": [],
+        "steps": []
+      },
+      {
+        "name": "Voir les détails du profil utilisateur",
+        "tags": [],
+        "steps": [
+          {
+            "keyword": "Étant donné que ",
+            "text": "je suis sur la page \"profil utilisateur\""
+          },
+          {
+            "keyword": "Alors",
+            "text": "l'écran affiche les informations du profil"
+          }
+        ]
+      }
+    ],
+    "filePath": "features/user/us-10-profil-participant.feature",
+    "rawContent": "# language: fr\n@USER @priority-1\nFonctionnalité: US-10 Visualiser la fiche/le profil d'un participant\n  En tant qu'utilisateur\n  Je peux sélectionner un individu dans la liste des inscrits à un événement/atelier\n  Afin de voir les événements auxquels la personne a participé et voir un formulaire de contact\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Accéder au profil d'un participant\n    Étant donné que je suis sur la page \"détail événement\"\n    Quand je clique sur un participant\n    Alors je vois l'écran \"user-profile\"\n\n  Scénario: Voir les événements du participant\n    Étant donné que je suis sur la page \"profil utilisateur\"\n    Alors je peux voir les événements auxquels l'utilisateur a participé\n\n  Scénario: Voir le formulaire de contact\n    Étant donné que je suis sur la page \"profil utilisateur\"\n    Alors je peux contacter l'utilisateur\n\n  Scénario: Vérifier les informations du profil\n    * Scénario non implémenté\n\n  Scénario: Voir les détails du profil utilisateur\n    Étant donné que je suis sur la page \"profil utilisateur\"\n    Alors l'écran affiche les informations du profil\n",
+    "screenIds": [
+      "event-detail",
+      "user-profile"
+    ]
+  },
+  {
+    "id": "us-15",
+    "name": "US-15 Visualiser les inscrits à un atelier/événement",
+    "description": "En tant qu'utilisateur Je peux visualiser les inscrits à un atelier/événement En sélectionnant l'atelier/l'événement désiré dans la liste Afin de consulter la liste des inscrits triée par ordre alphabétique",
+    "tags": [
+      "@USER",
+      "@priority-1"
+    ],
+    "category": "USER",
+    "priority": 1,
+    "background": [
+      {
+        "keyword": "Étant donné que ",
+        "text": "je suis connecté en tant qu'utilisateur"
+      }
+    ],
+    "scenarios": [
+      {
+        "name": "Accéder à la liste des inscrits d'un événement",
+        "tags": [],
+        "steps": [
+          {
+            "keyword": "Étant donné que ",
+            "text": "je suis sur la page \"détail événement\""
+          },
+          {
+            "keyword": "Alors",
+            "text": "je peux voir la liste des participants"
+          }
+        ]
+      },
+      {
+        "name": "Accéder à la liste des inscrits d'un atelier",
+        "tags": [],
+        "steps": []
+      },
+      {
+        "name": "Voir la liste des participants d'un événement",
+        "tags": [],
+        "steps": [
+          {
+            "keyword": "Étant donné que ",
+            "text": "je suis sur la page \"détail événement\""
+          },
+          {
+            "keyword": "Alors",
+            "text": "l'écran contient une section \"Participants\""
+          }
+        ]
+      },
+      {
+        "name": "Voir la liste des participants d'un atelier",
+        "tags": [],
+        "steps": []
+      },
+      {
+        "name": "Cliquer sur un inscrit pour voir son profil",
+        "tags": [],
+        "steps": [
+          {
+            "keyword": "Étant donné que ",
+            "text": "je suis sur la page \"détail événement\""
+          },
+          {
+            "keyword": "Quand",
+            "text": "je clique sur un participant"
+          },
+          {
+            "keyword": "Alors",
+            "text": "je vois l'écran \"user-profile\""
+          }
+        ]
+      }
+    ],
+    "filePath": "features/user/us-15-visualiser-inscrits.feature",
+    "rawContent": "# language: fr\n@USER @priority-1\nFonctionnalité: US-15 Visualiser les inscrits à un atelier/événement\n  En tant qu'utilisateur\n  Je peux visualiser les inscrits à un atelier/événement\n  En sélectionnant l'atelier/l'événement désiré dans la liste\n  Afin de consulter la liste des inscrits triée par ordre alphabétique\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Accéder à la liste des inscrits d'un événement\n    Étant donné que je suis sur la page \"détail événement\"\n    Alors je peux voir la liste des participants\n\n  Scénario: Accéder à la liste des inscrits d'un atelier\n    * Scénario non implémenté\n\n  Scénario: Voir la liste des participants d'un événement\n    Étant donné que je suis sur la page \"détail événement\"\n    Alors l'écran contient une section \"Participants\"\n\n  Scénario: Voir la liste des participants d'un atelier\n    * Scénario non implémenté\n\n  Scénario: Cliquer sur un inscrit pour voir son profil\n    Étant donné que je suis sur la page \"détail événement\"\n    Quand je clique sur un participant\n    Alors je vois l'écran \"user-profile\"\n",
+    "screenIds": [
+      "event-detail",
+      "user-profile"
+    ]
+  },
+  {
     "id": "us-23",
     "name": "US-23 Me connecter avec d'autres utilisateurs",
     "description": "En tant qu'utilisateur Je peux me connecter avec d'autres utilisateurs En partageant mon QR code ou mon lien de contact Afin d'étendre mon réseau",
@@ -540,177 +711,6 @@ export const parsedFeatures: ParsedFeature[] = [
     "screenIds": [
       "profile",
       "share-profile"
-    ]
-  },
-  {
-    "id": "us-15",
-    "name": "US-15 Visualiser les inscrits à un atelier/événement",
-    "description": "En tant qu'utilisateur Je peux visualiser les inscrits à un atelier/événement En sélectionnant l'atelier/l'événement désiré dans la liste Afin de consulter la liste des inscrits triée par ordre alphabétique",
-    "tags": [
-      "@USER",
-      "@priority-1"
-    ],
-    "category": "USER",
-    "priority": 1,
-    "background": [
-      {
-        "keyword": "Étant donné que ",
-        "text": "je suis connecté en tant qu'utilisateur"
-      }
-    ],
-    "scenarios": [
-      {
-        "name": "Accéder à la liste des inscrits d'un événement",
-        "tags": [],
-        "steps": [
-          {
-            "keyword": "Étant donné que ",
-            "text": "je suis sur la page \"détail événement\""
-          },
-          {
-            "keyword": "Alors",
-            "text": "je peux voir la liste des participants"
-          }
-        ]
-      },
-      {
-        "name": "Accéder à la liste des inscrits d'un atelier",
-        "tags": [],
-        "steps": []
-      },
-      {
-        "name": "Voir la liste des participants d'un événement",
-        "tags": [],
-        "steps": [
-          {
-            "keyword": "Étant donné que ",
-            "text": "je suis sur la page \"détail événement\""
-          },
-          {
-            "keyword": "Alors",
-            "text": "l'écran contient une section \"Participants\""
-          }
-        ]
-      },
-      {
-        "name": "Voir la liste des participants d'un atelier",
-        "tags": [],
-        "steps": []
-      },
-      {
-        "name": "Cliquer sur un inscrit pour voir son profil",
-        "tags": [],
-        "steps": [
-          {
-            "keyword": "Étant donné que ",
-            "text": "je suis sur la page \"détail événement\""
-          },
-          {
-            "keyword": "Quand",
-            "text": "je clique sur un participant"
-          },
-          {
-            "keyword": "Alors",
-            "text": "je vois l'écran \"user-profile\""
-          }
-        ]
-      }
-    ],
-    "filePath": "features/user/us-15-visualiser-inscrits.feature",
-    "rawContent": "# language: fr\n@USER @priority-1\nFonctionnalité: US-15 Visualiser les inscrits à un atelier/événement\n  En tant qu'utilisateur\n  Je peux visualiser les inscrits à un atelier/événement\n  En sélectionnant l'atelier/l'événement désiré dans la liste\n  Afin de consulter la liste des inscrits triée par ordre alphabétique\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Accéder à la liste des inscrits d'un événement\n    Étant donné que je suis sur la page \"détail événement\"\n    Alors je peux voir la liste des participants\n\n  Scénario: Accéder à la liste des inscrits d'un atelier\n    * Scénario non implémenté\n\n  Scénario: Voir la liste des participants d'un événement\n    Étant donné que je suis sur la page \"détail événement\"\n    Alors l'écran contient une section \"Participants\"\n\n  Scénario: Voir la liste des participants d'un atelier\n    * Scénario non implémenté\n\n  Scénario: Cliquer sur un inscrit pour voir son profil\n    Étant donné que je suis sur la page \"détail événement\"\n    Quand je clique sur un participant\n    Alors je vois l'écran \"user-profile\"\n",
-    "screenIds": [
-      "event-detail",
-      "user-profile"
-    ]
-  },
-  {
-    "id": "us-10",
-    "name": "US-10 Visualiser la fiche/le profil d'un participant",
-    "description": "En tant qu'utilisateur Je peux sélectionner un individu dans la liste des inscrits à un événement/atelier Afin de voir les événements auxquels la personne a participé et voir un formulaire de contact",
-    "tags": [
-      "@USER",
-      "@priority-1"
-    ],
-    "category": "USER",
-    "priority": 1,
-    "background": [
-      {
-        "keyword": "Étant donné que ",
-        "text": "je suis connecté en tant qu'utilisateur"
-      }
-    ],
-    "scenarios": [
-      {
-        "name": "Accéder au profil d'un participant",
-        "tags": [],
-        "steps": [
-          {
-            "keyword": "Étant donné que ",
-            "text": "je suis sur la page \"détail événement\""
-          },
-          {
-            "keyword": "Quand",
-            "text": "je clique sur un participant"
-          },
-          {
-            "keyword": "Alors",
-            "text": "je vois l'écran \"user-profile\""
-          }
-        ]
-      },
-      {
-        "name": "Voir les événements du participant",
-        "tags": [],
-        "steps": [
-          {
-            "keyword": "Étant donné que ",
-            "text": "je suis sur la page \"profil utilisateur\""
-          },
-          {
-            "keyword": "Alors",
-            "text": "je peux voir les événements auxquels l'utilisateur a participé"
-          }
-        ]
-      },
-      {
-        "name": "Voir le formulaire de contact",
-        "tags": [],
-        "steps": [
-          {
-            "keyword": "Étant donné que ",
-            "text": "je suis sur la page \"profil utilisateur\""
-          },
-          {
-            "keyword": "Alors",
-            "text": "je peux contacter l'utilisateur"
-          }
-        ]
-      },
-      {
-        "name": "Vérifier les informations du profil",
-        "tags": [],
-        "steps": []
-      },
-      {
-        "name": "Voir les détails du profil utilisateur",
-        "tags": [],
-        "steps": [
-          {
-            "keyword": "Étant donné que ",
-            "text": "je suis sur la page \"profil utilisateur\""
-          },
-          {
-            "keyword": "Alors",
-            "text": "l'écran affiche les informations du profil"
-          }
-        ]
-      }
-    ],
-    "filePath": "features/user/us-10-profil-participant.feature",
-    "rawContent": "# language: fr\n@USER @priority-1\nFonctionnalité: US-10 Visualiser la fiche/le profil d'un participant\n  En tant qu'utilisateur\n  Je peux sélectionner un individu dans la liste des inscrits à un événement/atelier\n  Afin de voir les événements auxquels la personne a participé et voir un formulaire de contact\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Accéder au profil d'un participant\n    Étant donné que je suis sur la page \"détail événement\"\n    Quand je clique sur un participant\n    Alors je vois l'écran \"user-profile\"\n\n  Scénario: Voir les événements du participant\n    Étant donné que je suis sur la page \"profil utilisateur\"\n    Alors je peux voir les événements auxquels l'utilisateur a participé\n\n  Scénario: Voir le formulaire de contact\n    Étant donné que je suis sur la page \"profil utilisateur\"\n    Alors je peux contacter l'utilisateur\n\n  Scénario: Vérifier les informations du profil\n    * Scénario non implémenté\n\n  Scénario: Voir les détails du profil utilisateur\n    Étant donné que je suis sur la page \"profil utilisateur\"\n    Alors l'écran affiche les informations du profil\n",
-    "screenIds": [
-      "event-detail",
-      "user-profile"
     ]
   },
   {
@@ -1013,139 +1013,6 @@ export const parsedFeatures: ParsedFeature[] = [
     ]
   },
   {
-    "id": "us-24",
-    "name": "US-24 Être notifié des activités de mes contacts",
-    "description": "En tant qu'utilisateur Je peux être notifié lorsqu'un contact participe à des événements Afin d'obtenir une synthèse du contenu des ateliers et événements",
-    "tags": [
-      "@USER",
-      "@priority-2"
-    ],
-    "category": "USER",
-    "priority": 2,
-    "background": [
-      {
-        "keyword": "Étant donné que ",
-        "text": "je suis connecté en tant qu'utilisateur"
-      }
-    ],
-    "scenarios": [
-      {
-        "name": "Accéder aux paramètres de notification",
-        "tags": [],
-        "steps": [
-          {
-            "keyword": "Étant donné que ",
-            "text": "je suis sur la page \"paramètres\""
-          },
-          {
-            "keyword": "Alors",
-            "text": "l'écran contient une section \"Notifications\""
-          }
-        ]
-      },
-      {
-        "name": "Configurer les notifications de contacts",
-        "tags": [],
-        "steps": [
-          {
-            "keyword": "Étant donné que ",
-            "text": "je suis sur la page \"paramètres\""
-          },
-          {
-            "keyword": "Alors",
-            "text": "je peux configurer mes notifications"
-          }
-        ]
-      },
-      {
-        "name": "Voir les activités de mes contacts sur l'accueil",
-        "tags": [],
-        "steps": []
-      }
-    ],
-    "filePath": "features/user/us-24-notification-contacts.feature",
-    "rawContent": "# language: fr\n@USER @priority-2\nFonctionnalité: US-24 Être notifié des activités de mes contacts\n  En tant qu'utilisateur\n  Je peux être notifié lorsqu'un contact participe à des événements\n  Afin d'obtenir une synthèse du contenu des ateliers et événements\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Accéder aux paramètres de notification\n    Étant donné que je suis sur la page \"paramètres\"\n    Alors l'écran contient une section \"Notifications\"\n\n  Scénario: Configurer les notifications de contacts\n    Étant donné que je suis sur la page \"paramètres\"\n    Alors je peux configurer mes notifications\n\n  Scénario: Voir les activités de mes contacts sur l'accueil\n    * Scénario non implémenté\n",
-    "screenIds": [
-      "settings"
-    ]
-  },
-  {
-    "id": "us-26",
-    "name": "US-26 Définir la portée d'un événement",
-    "description": "En tant qu'utilisateur Je peux créer/présenter le contenu d'un événement et le catégoriser par type/thématique En indiquant son rayon d'intérêt en kilomètres Afin de m'assurer que les utilisateurs qui habitent trop loin ne reçoivent pas de notification",
-    "tags": [
-      "@USER",
-      "@priority-2"
-    ],
-    "category": "USER",
-    "priority": 2,
-    "background": [
-      {
-        "keyword": "Étant donné que ",
-        "text": "je suis connecté en tant qu'utilisateur"
-      }
-    ],
-    "scenarios": [
-      {
-        "name": "Accéder à la création d'événement",
-        "tags": [],
-        "steps": [
-          {
-            "keyword": "Étant donné que ",
-            "text": "je suis sur la page \"accueil\""
-          },
-          {
-            "keyword": "Quand",
-            "text": "je navigue vers \"créer un événement\""
-          },
-          {
-            "keyword": "Alors",
-            "text": "je vois l'écran \"create-event\""
-          }
-        ]
-      },
-      {
-        "name": "Définir le rayon d'intérêt",
-        "tags": [],
-        "steps": []
-      },
-      {
-        "name": "Choisir une thématique",
-        "tags": [],
-        "steps": [
-          {
-            "keyword": "Étant donné que ",
-            "text": "je suis sur la page \"créer un événement\""
-          },
-          {
-            "keyword": "Alors",
-            "text": "l'écran contient une section \"Thématique\""
-          }
-        ]
-      },
-      {
-        "name": "Vérifier les champs obligatoires",
-        "tags": [],
-        "steps": [
-          {
-            "keyword": "Étant donné que ",
-            "text": "l'écran \"create-event\" est affiché"
-          },
-          {
-            "keyword": "Alors",
-            "text": "le formulaire contient les champs obligatoires suivants:"
-          }
-        ]
-      }
-    ],
-    "filePath": "features/user/us-26-portee-evenement.feature",
-    "rawContent": "# language: fr\n@USER @priority-2\nFonctionnalité: US-26 Définir la portée d'un événement\n  En tant qu'utilisateur\n  Je peux créer/présenter le contenu d'un événement et le catégoriser par type/thématique\n  En indiquant son rayon d'intérêt en kilomètres\n  Afin de m'assurer que les utilisateurs qui habitent trop loin ne reçoivent pas de notification\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Accéder à la création d'événement\n    Étant donné que je suis sur la page \"accueil\"\n    Quand je navigue vers \"créer un événement\"\n    Alors je vois l'écran \"create-event\"\n\n  Scénario: Définir le rayon d'intérêt\n    * Scénario non implémenté\n\n  Scénario: Choisir une thématique\n    Étant donné que je suis sur la page \"créer un événement\"\n    Alors l'écran contient une section \"Thématique\"\n\n  Scénario: Vérifier les champs obligatoires\n    Étant donné que l'écran \"create-event\" est affiché\n    Alors le formulaire contient les champs obligatoires suivants:\n      | Nom de l'événement |\n      | Date               |\n      | Heure de début     |\n      | Lieu               |\n      | Thématique         |\n",
-    "screenIds": [
-      "create-event",
-      "home"
-    ]
-  },
-  {
     "id": "us-12",
     "name": "US-12 Consulter la carte/tableau des événements",
     "description": "En tant qu'utilisateur Je peux consulter la carte/tableau des événements auxquels j'ai participé En filtrant les événements par dates ou par personne Afin d'avoir une vue consolidée des événements et lieux de rencontre",
@@ -1230,6 +1097,187 @@ export const parsedFeatures: ParsedFeature[] = [
     "screenIds": [
       "events",
       "user-profile"
+    ]
+  },
+  {
+    "id": "us-25",
+    "name": "US-25 Être averti des événements susceptibles de m'intéresser",
+    "description": "En tant qu'utilisateur Je peux être notifié lorsqu'un nouvel événement est ajouté près de chez moi Et/ou avec une thématique qui m'intéresse En configurant mes notifications",
+    "tags": [
+      "@USER",
+      "@priority-2"
+    ],
+    "category": "USER",
+    "priority": 2,
+    "background": [
+      {
+        "keyword": "Étant donné que ",
+        "text": "je suis connecté en tant qu'utilisateur"
+      }
+    ],
+    "scenarios": [
+      {
+        "name": "Accéder aux paramètres de notification",
+        "tags": [],
+        "steps": [
+          {
+            "keyword": "Étant donné que ",
+            "text": "je suis sur la page \"paramètres\""
+          },
+          {
+            "keyword": "Alors",
+            "text": "l'écran contient une section \"Notifications\""
+          }
+        ]
+      },
+      {
+        "name": "Configurer le rayon de notification",
+        "tags": [],
+        "steps": []
+      },
+      {
+        "name": "Configurer les thématiques d'intérêt",
+        "tags": [],
+        "steps": []
+      }
+    ],
+    "filePath": "features/user/us-25-notification-evenements.feature",
+    "rawContent": "# language: fr\n@USER @priority-2\nFonctionnalité: US-25 Être averti des événements susceptibles de m'intéresser\n  En tant qu'utilisateur\n  Je peux être notifié lorsqu'un nouvel événement est ajouté près de chez moi\n  Et/ou avec une thématique qui m'intéresse\n  En configurant mes notifications\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Accéder aux paramètres de notification\n    Étant donné que je suis sur la page \"paramètres\"\n    Alors l'écran contient une section \"Notifications\"\n\n  Scénario: Configurer le rayon de notification\n    * Scénario non implémenté\n\n  Scénario: Configurer les thématiques d'intérêt\n    * Scénario non implémenté\n",
+    "screenIds": [
+      "settings"
+    ]
+  },
+  {
+    "id": "us-26",
+    "name": "US-26 Définir la portée d'un événement",
+    "description": "En tant qu'utilisateur Je peux créer/présenter le contenu d'un événement et le catégoriser par type/thématique En indiquant son rayon d'intérêt en kilomètres Afin de m'assurer que les utilisateurs qui habitent trop loin ne reçoivent pas de notification",
+    "tags": [
+      "@USER",
+      "@priority-2"
+    ],
+    "category": "USER",
+    "priority": 2,
+    "background": [
+      {
+        "keyword": "Étant donné que ",
+        "text": "je suis connecté en tant qu'utilisateur"
+      }
+    ],
+    "scenarios": [
+      {
+        "name": "Accéder à la création d'événement",
+        "tags": [],
+        "steps": [
+          {
+            "keyword": "Étant donné que ",
+            "text": "je suis sur la page \"accueil\""
+          },
+          {
+            "keyword": "Quand",
+            "text": "je navigue vers \"créer un événement\""
+          },
+          {
+            "keyword": "Alors",
+            "text": "je vois l'écran \"create-event\""
+          }
+        ]
+      },
+      {
+        "name": "Définir le rayon d'intérêt",
+        "tags": [],
+        "steps": []
+      },
+      {
+        "name": "Choisir une thématique",
+        "tags": [],
+        "steps": [
+          {
+            "keyword": "Étant donné que ",
+            "text": "je suis sur la page \"créer un événement\""
+          },
+          {
+            "keyword": "Alors",
+            "text": "l'écran contient une section \"Thématique\""
+          }
+        ]
+      },
+      {
+        "name": "Vérifier les champs obligatoires",
+        "tags": [],
+        "steps": [
+          {
+            "keyword": "Étant donné que ",
+            "text": "l'écran \"create-event\" est affiché"
+          },
+          {
+            "keyword": "Alors",
+            "text": "le formulaire contient les champs obligatoires suivants:"
+          }
+        ]
+      }
+    ],
+    "filePath": "features/user/us-26-portee-evenement.feature",
+    "rawContent": "# language: fr\n@USER @priority-2\nFonctionnalité: US-26 Définir la portée d'un événement\n  En tant qu'utilisateur\n  Je peux créer/présenter le contenu d'un événement et le catégoriser par type/thématique\n  En indiquant son rayon d'intérêt en kilomètres\n  Afin de m'assurer que les utilisateurs qui habitent trop loin ne reçoivent pas de notification\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Accéder à la création d'événement\n    Étant donné que je suis sur la page \"accueil\"\n    Quand je navigue vers \"créer un événement\"\n    Alors je vois l'écran \"create-event\"\n\n  Scénario: Définir le rayon d'intérêt\n    * Scénario non implémenté\n\n  Scénario: Choisir une thématique\n    Étant donné que je suis sur la page \"créer un événement\"\n    Alors l'écran contient une section \"Thématique\"\n\n  Scénario: Vérifier les champs obligatoires\n    Étant donné que l'écran \"create-event\" est affiché\n    Alors le formulaire contient les champs obligatoires suivants:\n      | Nom de l'événement |\n      | Date de début      |\n      | Heure de début     |\n      | Lieu               |\n      | Thématique         |\n",
+    "screenIds": [
+      "create-event",
+      "home"
+    ]
+  },
+  {
+    "id": "us-24",
+    "name": "US-24 Être notifié des activités de mes contacts",
+    "description": "En tant qu'utilisateur Je peux être notifié lorsqu'un contact participe à des événements Afin d'obtenir une synthèse du contenu des ateliers et événements",
+    "tags": [
+      "@USER",
+      "@priority-2"
+    ],
+    "category": "USER",
+    "priority": 2,
+    "background": [
+      {
+        "keyword": "Étant donné que ",
+        "text": "je suis connecté en tant qu'utilisateur"
+      }
+    ],
+    "scenarios": [
+      {
+        "name": "Accéder aux paramètres de notification",
+        "tags": [],
+        "steps": [
+          {
+            "keyword": "Étant donné que ",
+            "text": "je suis sur la page \"paramètres\""
+          },
+          {
+            "keyword": "Alors",
+            "text": "l'écran contient une section \"Notifications\""
+          }
+        ]
+      },
+      {
+        "name": "Configurer les notifications de contacts",
+        "tags": [],
+        "steps": [
+          {
+            "keyword": "Étant donné que ",
+            "text": "je suis sur la page \"paramètres\""
+          },
+          {
+            "keyword": "Alors",
+            "text": "je peux configurer mes notifications"
+          }
+        ]
+      },
+      {
+        "name": "Voir les activités de mes contacts sur l'accueil",
+        "tags": [],
+        "steps": []
+      }
+    ],
+    "filePath": "features/user/us-24-notification-contacts.feature",
+    "rawContent": "# language: fr\n@USER @priority-2\nFonctionnalité: US-24 Être notifié des activités de mes contacts\n  En tant qu'utilisateur\n  Je peux être notifié lorsqu'un contact participe à des événements\n  Afin d'obtenir une synthèse du contenu des ateliers et événements\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Accéder aux paramètres de notification\n    Étant donné que je suis sur la page \"paramètres\"\n    Alors l'écran contient une section \"Notifications\"\n\n  Scénario: Configurer les notifications de contacts\n    Étant donné que je suis sur la page \"paramètres\"\n    Alors je peux configurer mes notifications\n\n  Scénario: Voir les activités de mes contacts sur l'accueil\n    * Scénario non implémenté\n",
+    "screenIds": [
+      "settings"
     ]
   },
   {
@@ -1416,54 +1464,6 @@ export const parsedFeatures: ParsedFeature[] = [
     ]
   },
   {
-    "id": "us-25",
-    "name": "US-25 Être averti des événements susceptibles de m'intéresser",
-    "description": "En tant qu'utilisateur Je peux être notifié lorsqu'un nouvel événement est ajouté près de chez moi Et/ou avec une thématique qui m'intéresse En configurant mes notifications",
-    "tags": [
-      "@USER",
-      "@priority-2"
-    ],
-    "category": "USER",
-    "priority": 2,
-    "background": [
-      {
-        "keyword": "Étant donné que ",
-        "text": "je suis connecté en tant qu'utilisateur"
-      }
-    ],
-    "scenarios": [
-      {
-        "name": "Accéder aux paramètres de notification",
-        "tags": [],
-        "steps": [
-          {
-            "keyword": "Étant donné que ",
-            "text": "je suis sur la page \"paramètres\""
-          },
-          {
-            "keyword": "Alors",
-            "text": "l'écran contient une section \"Notifications\""
-          }
-        ]
-      },
-      {
-        "name": "Configurer le rayon de notification",
-        "tags": [],
-        "steps": []
-      },
-      {
-        "name": "Configurer les thématiques d'intérêt",
-        "tags": [],
-        "steps": []
-      }
-    ],
-    "filePath": "features/user/us-25-notification-evenements.feature",
-    "rawContent": "# language: fr\n@USER @priority-2\nFonctionnalité: US-25 Être averti des événements susceptibles de m'intéresser\n  En tant qu'utilisateur\n  Je peux être notifié lorsqu'un nouvel événement est ajouté près de chez moi\n  Et/ou avec une thématique qui m'intéresse\n  En configurant mes notifications\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Accéder aux paramètres de notification\n    Étant donné que je suis sur la page \"paramètres\"\n    Alors l'écran contient une section \"Notifications\"\n\n  Scénario: Configurer le rayon de notification\n    * Scénario non implémenté\n\n  Scénario: Configurer les thématiques d'intérêt\n    * Scénario non implémenté\n",
-    "screenIds": [
-      "settings"
-    ]
-  },
-  {
     "id": "us-5",
     "name": "US-5 Ajouter/modifier/supprimer un commentaire à un événement",
     "description": "En tant qu'utilisateur Je peux consulter et ajouter/modifier/supprimer un commentaire à un événement En sélectionnant l'icône \"ajouter un commentaire\" en dessous du titre Afin de voir les commentaires précédents et ajouter mes notes personnelles",
@@ -1570,132 +1570,6 @@ export const parsedFeatures: ParsedFeature[] = [
     ],
     "filePath": "features/event/us-8-macro-evenement.feature",
     "rawContent": "# language: fr\n@EVENT @priority-3\nFonctionnalité: US-8 Consulter et m'inscrire à un macro-événement\n  En tant qu'utilisateur\n  Je peux consulter et m'inscrire à un événement de type \"Macro-événement\"\n  En créant ou en rattachant des événements existants à ce macro-événement\n  Afin de voir une consolidation des commentaires/liens/ressources/participants\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Consulter un macro-événement\n    * Scénario non implémenté\n\n  Scénario: Voir les événements rattachés\n    * Scénario non implémenté\n\n  Scénario: Rattacher un événement existant\n    * Scénario non implémenté\n\n  Scénario: Voir la consolidation des participants\n    * Scénario non implémenté\n\n  Scénario: Créer un macro-événement\n    * Scénario non implémenté\n\n  Scénario: Voir la consolidation des commentaires/liens/ressources\n    * Scénario non implémenté\n\n  Scénario: Rattacher à une thématique particulière\n    * Scénario non implémenté\n\n  Scénario: Gérer un événement répété sur plusieurs périodes\n    * Scénario non implémenté\n",
-    "screenIds": []
-  },
-  {
-    "id": "us-6",
-    "name": "US-6 M'inscrire/me désinscrire à un atelier",
-    "description": "En tant qu'utilisateur Je peux m'inscrire/me désinscrire à un atelier En regardant si l'événement public existe déjà et en m'enregistrant sur les différents ateliers Afin de m'inscrire à l'atelier tout en visualisant les personnes qui sont déjà pré-inscrites",
-    "tags": [
-      "@WORKSHOP",
-      "@priority-3"
-    ],
-    "category": "WORKSHOP",
-    "priority": 3,
-    "background": [
-      {
-        "keyword": "Étant donné que ",
-        "text": "je suis connecté en tant qu'utilisateur"
-      }
-    ],
-    "scenarios": [
-      {
-        "name": "Voir les ateliers d'un événement",
-        "tags": [],
-        "steps": []
-      },
-      {
-        "name": "Voir les personnes pré-inscrites à un atelier",
-        "tags": [],
-        "steps": []
-      },
-      {
-        "name": "S'inscrire à un atelier",
-        "tags": [],
-        "steps": []
-      },
-      {
-        "name": "Se désinscrire d'un atelier",
-        "tags": [],
-        "steps": []
-      }
-    ],
-    "filePath": "features/workshop/us-6-inscription-atelier.feature",
-    "rawContent": "# language: fr\n@WORKSHOP @priority-3\nFonctionnalité: US-6 M'inscrire/me désinscrire à un atelier\n  En tant qu'utilisateur\n  Je peux m'inscrire/me désinscrire à un atelier\n  En regardant si l'événement public existe déjà et en m'enregistrant sur les différents ateliers\n  Afin de m'inscrire à l'atelier tout en visualisant les personnes qui sont déjà pré-inscrites\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Voir les ateliers d'un événement\n    * Scénario non implémenté\n\n  Scénario: Voir les personnes pré-inscrites à un atelier\n    * Scénario non implémenté\n\n  Scénario: S'inscrire à un atelier\n    * Scénario non implémenté\n\n  Scénario: Se désinscrire d'un atelier\n    * Scénario non implémenté\n",
-    "screenIds": []
-  },
-  {
-    "id": "us-4",
-    "name": "US-4 Ajouter/modifier/supprimer un commentaire à un atelier",
-    "description": "En tant qu'utilisateur Je peux consulter et ajouter/modifier/supprimer un commentaire à un atelier En sélectionnant l'icône \"ajouter un commentaire\" en dessous du titre de l'atelier Afin de voir les commentaires précédents et ajouter mes commentaires",
-    "tags": [
-      "@WORKSHOP",
-      "@priority-3"
-    ],
-    "category": "WORKSHOP",
-    "priority": 3,
-    "background": [
-      {
-        "keyword": "Étant donné que ",
-        "text": "je suis connecté en tant qu'utilisateur"
-      }
-    ],
-    "scenarios": [
-      {
-        "name": "Voir les commentaires existants d'un atelier",
-        "tags": [],
-        "steps": []
-      },
-      {
-        "name": "Ajouter un commentaire à un atelier",
-        "tags": [],
-        "steps": []
-      },
-      {
-        "name": "Modifier un commentaire existant",
-        "tags": [],
-        "steps": []
-      },
-      {
-        "name": "Supprimer un commentaire",
-        "tags": [],
-        "steps": []
-      },
-      {
-        "name": "Accéder à l'icône ajouter un commentaire",
-        "tags": [],
-        "steps": []
-      }
-    ],
-    "filePath": "features/workshop/us-4-commentaires-atelier.feature",
-    "rawContent": "# language: fr\n@WORKSHOP @priority-3\nFonctionnalité: US-4 Ajouter/modifier/supprimer un commentaire à un atelier\n  En tant qu'utilisateur\n  Je peux consulter et ajouter/modifier/supprimer un commentaire à un atelier\n  En sélectionnant l'icône \"ajouter un commentaire\" en dessous du titre de l'atelier\n  Afin de voir les commentaires précédents et ajouter mes commentaires\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Voir les commentaires existants d'un atelier\n    * Scénario non implémenté\n\n  Scénario: Ajouter un commentaire à un atelier\n    * Scénario non implémenté\n\n  Scénario: Modifier un commentaire existant\n    * Scénario non implémenté\n\n  Scénario: Supprimer un commentaire\n    * Scénario non implémenté\n\n  Scénario: Accéder à l'icône ajouter un commentaire\n    * Scénario non implémenté\n",
-    "screenIds": []
-  },
-  {
-    "id": "us-11",
-    "name": "US-11 Visualiser le bilan consolidé de l'événement",
-    "description": "En tant qu'utilisateur Je peux visualiser le bilan consolidé de l'événement En consultant l'ensemble des commentaires regroupés par atelier Afin d'obtenir une synthèse du contenu de chaque atelier et de l'ensemble des ateliers",
-    "tags": [
-      "@WORKSHOP",
-      "@priority-3"
-    ],
-    "category": "WORKSHOP",
-    "priority": 3,
-    "background": [
-      {
-        "keyword": "Étant donné que ",
-        "text": "je suis connecté en tant qu'utilisateur"
-      }
-    ],
-    "scenarios": [
-      {
-        "name": "Accéder au bilan consolidé",
-        "tags": [],
-        "steps": []
-      },
-      {
-        "name": "Voir les commentaires regroupés par atelier",
-        "tags": [],
-        "steps": []
-      },
-      {
-        "name": "Voir la synthèse globale",
-        "tags": [],
-        "steps": []
-      }
-    ],
-    "filePath": "features/workshop/us-11-bilan-consolide.feature",
-    "rawContent": "# language: fr\n@WORKSHOP @priority-3\nFonctionnalité: US-11 Visualiser le bilan consolidé de l'événement\n  En tant qu'utilisateur\n  Je peux visualiser le bilan consolidé de l'événement\n  En consultant l'ensemble des commentaires regroupés par atelier\n  Afin d'obtenir une synthèse du contenu de chaque atelier et de l'ensemble des ateliers\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Accéder au bilan consolidé\n    * Scénario non implémenté\n\n  Scénario: Voir les commentaires regroupés par atelier\n    * Scénario non implémenté\n\n  Scénario: Voir la synthèse globale\n    * Scénario non implémenté\n",
     "screenIds": []
   },
   {
@@ -1847,6 +1721,132 @@ export const parsedFeatures: ParsedFeature[] = [
     ],
     "filePath": "features/workshop/us-14-creer-atelier.feature",
     "rawContent": "# language: fr\n@WORKSHOP @priority-3\nFonctionnalité: US-14 Créer/Modifier/Supprimer un atelier\n  En tant qu'utilisateur\n  Je peux créer/modifier/supprimer un atelier\n  En sélectionnant mon événement et en saisissant les dates et horaires de l'atelier\n  Afin de définir le programme de mon événement et ajouter une description\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Accéder à la création d'atelier\n    * Scénario non implémenté\n\n  Scénario: Vérifier les champs obligatoires pour créer un atelier\n    * Scénario non implémenté\n\n  Scénario: Créer un atelier\n    * Scénario non implémenté\n\n  Scénario: Modifier un atelier existant\n    * Scénario non implémenté\n\n  Scénario: Supprimer un atelier\n    * Scénario non implémenté\n\n  Scénario: Sélectionner mon événement parent\n    * Scénario non implémenté\n\n  Scénario: Définir les horaires de fin de l'atelier\n    * Scénario non implémenté\n",
+    "screenIds": []
+  },
+  {
+    "id": "us-11",
+    "name": "US-11 Visualiser le bilan consolidé de l'événement",
+    "description": "En tant qu'utilisateur Je peux visualiser le bilan consolidé de l'événement En consultant l'ensemble des commentaires regroupés par atelier Afin d'obtenir une synthèse du contenu de chaque atelier et de l'ensemble des ateliers",
+    "tags": [
+      "@WORKSHOP",
+      "@priority-3"
+    ],
+    "category": "WORKSHOP",
+    "priority": 3,
+    "background": [
+      {
+        "keyword": "Étant donné que ",
+        "text": "je suis connecté en tant qu'utilisateur"
+      }
+    ],
+    "scenarios": [
+      {
+        "name": "Accéder au bilan consolidé",
+        "tags": [],
+        "steps": []
+      },
+      {
+        "name": "Voir les commentaires regroupés par atelier",
+        "tags": [],
+        "steps": []
+      },
+      {
+        "name": "Voir la synthèse globale",
+        "tags": [],
+        "steps": []
+      }
+    ],
+    "filePath": "features/workshop/us-11-bilan-consolide.feature",
+    "rawContent": "# language: fr\n@WORKSHOP @priority-3\nFonctionnalité: US-11 Visualiser le bilan consolidé de l'événement\n  En tant qu'utilisateur\n  Je peux visualiser le bilan consolidé de l'événement\n  En consultant l'ensemble des commentaires regroupés par atelier\n  Afin d'obtenir une synthèse du contenu de chaque atelier et de l'ensemble des ateliers\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Accéder au bilan consolidé\n    * Scénario non implémenté\n\n  Scénario: Voir les commentaires regroupés par atelier\n    * Scénario non implémenté\n\n  Scénario: Voir la synthèse globale\n    * Scénario non implémenté\n",
+    "screenIds": []
+  },
+  {
+    "id": "us-4",
+    "name": "US-4 Ajouter/modifier/supprimer un commentaire à un atelier",
+    "description": "En tant qu'utilisateur Je peux consulter et ajouter/modifier/supprimer un commentaire à un atelier En sélectionnant l'icône \"ajouter un commentaire\" en dessous du titre de l'atelier Afin de voir les commentaires précédents et ajouter mes commentaires",
+    "tags": [
+      "@WORKSHOP",
+      "@priority-3"
+    ],
+    "category": "WORKSHOP",
+    "priority": 3,
+    "background": [
+      {
+        "keyword": "Étant donné que ",
+        "text": "je suis connecté en tant qu'utilisateur"
+      }
+    ],
+    "scenarios": [
+      {
+        "name": "Voir les commentaires existants d'un atelier",
+        "tags": [],
+        "steps": []
+      },
+      {
+        "name": "Ajouter un commentaire à un atelier",
+        "tags": [],
+        "steps": []
+      },
+      {
+        "name": "Modifier un commentaire existant",
+        "tags": [],
+        "steps": []
+      },
+      {
+        "name": "Supprimer un commentaire",
+        "tags": [],
+        "steps": []
+      },
+      {
+        "name": "Accéder à l'icône ajouter un commentaire",
+        "tags": [],
+        "steps": []
+      }
+    ],
+    "filePath": "features/workshop/us-4-commentaires-atelier.feature",
+    "rawContent": "# language: fr\n@WORKSHOP @priority-3\nFonctionnalité: US-4 Ajouter/modifier/supprimer un commentaire à un atelier\n  En tant qu'utilisateur\n  Je peux consulter et ajouter/modifier/supprimer un commentaire à un atelier\n  En sélectionnant l'icône \"ajouter un commentaire\" en dessous du titre de l'atelier\n  Afin de voir les commentaires précédents et ajouter mes commentaires\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Voir les commentaires existants d'un atelier\n    * Scénario non implémenté\n\n  Scénario: Ajouter un commentaire à un atelier\n    * Scénario non implémenté\n\n  Scénario: Modifier un commentaire existant\n    * Scénario non implémenté\n\n  Scénario: Supprimer un commentaire\n    * Scénario non implémenté\n\n  Scénario: Accéder à l'icône ajouter un commentaire\n    * Scénario non implémenté\n",
+    "screenIds": []
+  },
+  {
+    "id": "us-6",
+    "name": "US-6 M'inscrire/me désinscrire à un atelier",
+    "description": "En tant qu'utilisateur Je peux m'inscrire/me désinscrire à un atelier En regardant si l'événement public existe déjà et en m'enregistrant sur les différents ateliers Afin de m'inscrire à l'atelier tout en visualisant les personnes qui sont déjà pré-inscrites",
+    "tags": [
+      "@WORKSHOP",
+      "@priority-3"
+    ],
+    "category": "WORKSHOP",
+    "priority": 3,
+    "background": [
+      {
+        "keyword": "Étant donné que ",
+        "text": "je suis connecté en tant qu'utilisateur"
+      }
+    ],
+    "scenarios": [
+      {
+        "name": "Voir les ateliers d'un événement",
+        "tags": [],
+        "steps": []
+      },
+      {
+        "name": "Voir les personnes pré-inscrites à un atelier",
+        "tags": [],
+        "steps": []
+      },
+      {
+        "name": "S'inscrire à un atelier",
+        "tags": [],
+        "steps": []
+      },
+      {
+        "name": "Se désinscrire d'un atelier",
+        "tags": [],
+        "steps": []
+      }
+    ],
+    "filePath": "features/workshop/us-6-inscription-atelier.feature",
+    "rawContent": "# language: fr\n@WORKSHOP @priority-3\nFonctionnalité: US-6 M'inscrire/me désinscrire à un atelier\n  En tant qu'utilisateur\n  Je peux m'inscrire/me désinscrire à un atelier\n  En regardant si l'événement public existe déjà et en m'enregistrant sur les différents ateliers\n  Afin de m'inscrire à l'atelier tout en visualisant les personnes qui sont déjà pré-inscrites\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Voir les ateliers d'un événement\n    * Scénario non implémenté\n\n  Scénario: Voir les personnes pré-inscrites à un atelier\n    * Scénario non implémenté\n\n  Scénario: S'inscrire à un atelier\n    * Scénario non implémenté\n\n  Scénario: Se désinscrire d'un atelier\n    * Scénario non implémenté\n",
     "screenIds": []
   }
 ];

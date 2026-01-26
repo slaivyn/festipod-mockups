@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, Text, Input, Button, Placeholder, Divider } from '../components/sketchy';
+import { Header, Text, Input, Button, Placeholder } from '../components/sketchy';
 import type { ScreenProps } from './index';
 
 export function CreateEventScreen({ navigate }: ScreenProps) {
@@ -25,9 +25,15 @@ export function CreateEventScreen({ navigate }: ScreenProps) {
             <Input placeholder="Donnez un nom à votre événement" />
           </div>
 
-          <div>
-            <Text style={{ marginBottom: 6, fontSize: 14 }}>Date *</Text>
-            <Input type="date" placeholder="Sélectionner une date" />
+          <div style={{ display: 'flex', gap: 12 }}>
+            <div style={{ flex: 1 }}>
+              <Text style={{ marginBottom: 6, fontSize: 14 }}>Date de début *</Text>
+              <Input type="date" placeholder="Début" />
+            </div>
+            <div style={{ flex: 1 }}>
+              <Text style={{ marginBottom: 6, fontSize: 14 }}>Date de fin</Text>
+              <Input type="date" placeholder="Fin" />
+            </div>
           </div>
 
           <div style={{ display: 'flex', gap: 12 }}>
@@ -80,16 +86,6 @@ export function CreateEventScreen({ navigate }: ScreenProps) {
             </div>
           </div>
 
-          <Divider />
-
-          <div>
-            <Text style={{ marginBottom: 6, fontSize: 14 }}>Qui peut voir cet événement ?</Text>
-            <div style={{ display: 'flex', gap: 8 }}>
-              <Button style={{ flex: 1 }}>Public</Button>
-              <Button variant="primary" style={{ flex: 1 }}>Amis</Button>
-              <Button style={{ flex: 1 }}>Sur invitation</Button>
-            </div>
-          </div>
         </div>
       </div>
 

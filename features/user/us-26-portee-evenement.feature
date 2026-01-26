@@ -25,7 +25,7 @@ Fonctionnalité: US-26 Définir la portée d'un événement
     Étant donné que l'écran "create-event" est affiché
     Alors le formulaire contient les champs obligatoires suivants:
       | Nom de l'événement |
-      | Date               |
+      | Date de début      |
       | Heure de début     |
       | Lieu               |
       | Thématique         |
