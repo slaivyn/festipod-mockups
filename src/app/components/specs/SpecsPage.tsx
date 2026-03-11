@@ -1,0 +1,333 @@
+import React, { useState, useMemo, useRef, useEffect } from 'react';
+import { parsedFeatures, getFeatureById } from '../../../shared/data/features';
+import { categoryLabels, categoryColors, priorityLabels, priorityColors, getStoryById, getScreenIdsWithStories, type StoryCategory } from '../../../shared/data';
+import { getTestStatus, getTestSummary } from '../../../shared/data/testResults';
+import { getScreen } from '../../../screens';
+import { FeatureView } from './FeatureView';
+import { FeatureFilter } from './FeatureFilter';
+import { Card, CardHeader, CardTitle, CardContent } from '../../../shared/components/ui/card';
+import { Button } from '../../../shared/components/ui/button';
+import { ArrowLeft, FileText, Monitor, CheckCircle2, XCircle, AlertCircle, ExternalLink } from 'lucide-react';
+import type { ParsedFeature } from '../../../shared/types/gherkin';
+import { ThemeToggle } from '../ThemeToggle';
+
+interface SpecsPageProps {
+  selectedFeatureId?: string;
+  selectedStoryId?: string;
+  onBack: () => void;
+  onSelectScreen: (screenId: string) => void;
+  onSelectStory: (storyId: string) => void;
+}
+
+export function SpecsPage({ selectedFeatureId, selectedStoryId, onBack, onSelectScreen, onSelectStory }: SpecsPageProps) {
+  const [selectedCategories, setSelectedCategories] = useState<Set<string>>(new Set());
+  const [selectedPriorities, setSelectedPriorities] = useState<Set<number>>(new Set());
+  const [selectedScreens, setSelectedScreens] = useState<Set<string>>(new Set());
+  const [searchQuery, setSearchQuery] = useState('');
+  const featureRefs = useRef<Map<string, HTMLDivElement>>(new Map());
+
+  // Get screens that have linked stories for the filter
+  const screensWithStories = useMemo(() => {
+    const screenIds = getScreenIdsWithStories();
+    return screenIds
+      .map(id => ({ id, screen: getScreen(id) }))
+      .filter(({ screen }) => screen !== undefined);
+  }, []);
+
+  // Scroll to selected story on mount
+  useEffect(() => {
+    if (selectedStoryId) {
+      const element = featureRefs.current.get(selectedStoryId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+  }, [selectedStoryId]);
+
+  // Filter features - must be before any conditional returns to respect hooks rules
+  const filteredFeatures = useMemo(() => {
+    return parsedFeatures.filter(feature => {
+      if (selectedCategories.size > 0 && !selectedCategories.has(feature.category)) {
+        return false;
+      }
+      if (selectedPriorities.size > 0 && !selectedPriorities.has(feature.priority)) {
+        return false;
+      }
+      if (selectedScreens.size > 0) {
+        const linkedStory = getStoryById(feature.id);
+        if (!linkedStory || !linkedStory.screenIds.some(id => selectedScreens.has(id))) {
+          return false;
+        }
+      }
+      if (searchQuery) {
+        const query = searchQuery.toLowerCase();
+        return feature.name.toLowerCase().includes(query) ||
+               feature.description.toLowerCase().includes(query);
+      }
+      return true;
+    });
+  }, [selectedCategories, selectedPriorities, selectedScreens, searchQuery]);
+
+  // Group by priority
+  const featuresByPriority = [0, 1, 2, 3].map(priority => ({
+    priority,
+    features: filteredFeatures.filter(f => f.priority === priority),
+  })).filter(({ features }) => features.length > 0);
+
+  // If a feature is selected, show detail view
+  if (selectedFeatureId) {
+    const feature = getFeatureById(selectedFeatureId);
+    if (feature) {
+      return (
+        <FeatureView
+          feature={feature}
+          onBack={onBack}
+          onSelectScreen={onSelectScreen}
+          onSelectStory={onSelectStory}
+        />
+      );
+    }
+  }
+
+  const testSummary = getTestSummary();
+
+  return (
+    <div className="min-h-screen bg-background">
+      {/* Header */}
+      <div className="border-b border-border px-4 sm:px-8 py-4 sm:py-6 bg-card">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="flex items-center gap-3 sm:gap-4">
+            <Button variant="outline" size="sm" onClick={onBack}>
+              <ArrowLeft className="w-4 h-4 sm:mr-2" />
+              <span className="hidden sm:inline">Retour</span>
+            </Button>
+            <div>
+              <h1 className="text-xl sm:text-2xl font-semibold">Specs BDD</h1>
+              <p className="text-xs sm:text-sm text-muted-foreground mt-1">
+                {filteredFeatures.length} / {parsedFeatures.length} fonctionnalités
+              </p>
+            </div>
+            <div className="sm:hidden ml-auto">
+              <ThemeToggle />
+            </div>
+          </div>
+          {/* Test Results Summary */}
+          {testSummary.totalScenarios > 0 && (
+            <div className="flex items-center gap-2 sm:gap-4 text-xs sm:text-sm flex-wrap">
+              <div className="flex items-center gap-1 sm:gap-2">
+                <CheckCircle2 className="w-3 h-3 sm:w-4 sm:h-4 text-green-500" />
+                <span className="text-green-600 font-medium">{testSummary.passed}</span>
+              </div>
+              {testSummary.failed > 0 && (
+                <div className="flex items-center gap-1 sm:gap-2">
+                  <XCircle className="w-3 h-3 sm:w-4 sm:h-4 text-red-500" />
+                  <span className="text-red-600 font-medium">{testSummary.failed}</span>
+                </div>
+              )}
+              {testSummary.skipped > 0 && (
+                <div className="flex items-center gap-1 sm:gap-2">
+                  <AlertCircle className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-500" />
+                  <span className="text-yellow-600 font-medium">{testSummary.skipped}</span>
+                </div>
+              )}
+              <a href="/reports/cucumber" target="_blank" rel="noopener noreferrer" className="hidden sm:block">
+                <Button variant="outline" size="sm">
+                  <ExternalLink className="w-4 h-4 mr-2" />
+                  Rapport
+                </Button>
+              </a>
+              <div className="hidden sm:block">
+                <ThemeToggle />
+              </div>
+            </div>
+          )}
+          {testSummary.totalScenarios === 0 && <div className="hidden sm:block"><ThemeToggle /></div>}
+        </div>
+      </div>
+
+      {/* Filters */}
+      <FeatureFilter
+        selectedCategories={selectedCategories}
+        onCategoriesChange={setSelectedCategories}
+        selectedPriorities={selectedPriorities}
+        onPrioritiesChange={setSelectedPriorities}
+        selectedScreens={selectedScreens}
+        onScreensChange={setSelectedScreens}
+        screensWithStories={screensWithStories}
+        searchQuery={searchQuery}
+        onSearchChange={setSearchQuery}
+      />
+
+      {/* Feature list */}
+      <div className="px-4 sm:px-8 py-4 sm:py-6 space-y-6 sm:space-y-8">
+        {featuresByPriority.map(({ priority, features }) => (
+          <div key={priority}>
+            <div className="flex items-center gap-3 mb-4">
+              <span
+                className="px-3 py-1 text-sm font-medium text-white rounded-md"
+                style={{ backgroundColor: priorityColors[priority] }}
+              >
+                P{priority}
+              </span>
+              <h2 className="text-lg font-semibold">
+                Priorite {priorityLabels[priority]}
+              </h2>
+              <span className="text-sm text-muted-foreground">
+                ({features.length} fonctionnalites)
+              </span>
+            </div>
+
+            <div className="flex flex-col gap-3 sm:gap-4">
+              {features.map(feature => (
+                <FeatureCard
+                  key={feature.id}
+                  ref={(el) => {
+                    if (el) featureRefs.current.set(feature.id, el);
+                  }}
+                  feature={feature}
+                  isSelected={feature.id === selectedStoryId}
+                  onClick={() => window.location.hash = `#/specs/${feature.id}`}
+                  onSelectScreen={onSelectScreen}
+                />
+              ))}
+            </div>
+          </div>
+        ))}
+
+        {featuresByPriority.length === 0 && (
+          <div className="text-center py-12 text-muted-foreground">
+            Aucune fonctionnalite ne correspond aux filtres selectionnes
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// Split user story description into separate lines
+function formatUserStory(description: string): string[] {
+  // Split on user story keywords while keeping the keywords
+  return description
+    .split(/(?=En tant qu|Je peux|Je veux|Et |Afin d)/)
+    .map(s => s.trim())
+    .filter(Boolean);
+}
+
+interface FeatureCardProps {
+  feature: ParsedFeature;
+  isSelected?: boolean;
+  onClick: () => void;
+  onSelectScreen: (screenId: string) => void;
+}
+
+const FeatureCard = React.forwardRef<HTMLDivElement, FeatureCardProps>(
+  function FeatureCard({ feature, isSelected, onClick, onSelectScreen }, ref) {
+  const linkedStory = getStoryById(feature.id);
+  const linkedScreens = linkedStory?.screenIds
+    .map(id => ({ id, screen: getScreen(id) }))
+    .filter(({ screen }) => screen !== undefined) || [];
+  const testStatus = getTestStatus(feature.id);
+
+  const getStatusIcon = () => {
+    if (!testStatus) return null;
+    if (testStatus.failed > 0) {
+      return <XCircle className="w-4 h-4 text-red-500" />;
+    }
+    if (testStatus.skipped > 0) {
+      return <AlertCircle className="w-4 h-4 text-yellow-500" />;
+    }
+    return <CheckCircle2 className="w-4 h-4 text-green-500" />;
+  };
+
+  const getStatusText = () => {
+    if (!testStatus) return null;
+    if (testStatus.failed > 0) {
+      return <span className="text-red-600">{testStatus.passed}/{testStatus.totalScenarios}</span>;
+    }
+    if (testStatus.skipped > 0) {
+      return <span className="text-yellow-600">{testStatus.passed}/{testStatus.totalScenarios}</span>;
+    }
+    return <span className="text-green-600">{testStatus.passed}/{testStatus.totalScenarios}</span>;
+  };
+
+  return (
+    <Card
+      ref={ref}
+      className={`cursor-pointer hover:border-primary hover:shadow-md transition-all ${
+        isSelected ? 'border-2 border-blue-500 bg-blue-50 dark:bg-blue-950/20' : ''
+      }`}
+      onClick={onClick}
+    >
+      <CardHeader className="pb-3">
+        <div className="flex items-center justify-between mb-2">
+          <div className="flex items-center gap-2">
+            <span
+              className="px-2 py-0.5 text-xs font-medium text-white rounded"
+              style={{ backgroundColor: categoryColors[feature.category as StoryCategory] }}
+            >
+              {categoryLabels[feature.category as StoryCategory]}
+            </span>
+            <span className="text-xs text-muted-foreground font-mono">
+              {feature.id.toUpperCase()}
+            </span>
+          </div>
+          {testStatus && (
+            <div className="flex items-center gap-1 text-xs">
+              {getStatusIcon()}
+              {getStatusText()}
+            </div>
+          )}
+        </div>
+        <CardTitle className="text-base leading-tight line-clamp-2">
+          {feature.name.replace(/^US-\d+\s*/, '')}
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
+        {feature.description && (
+          <div className="text-sm text-muted-foreground mb-3 space-y-1">
+            {formatUserStory(feature.description).map((line, i) => (
+              <div key={i} className="leading-snug">
+                {line}
+              </div>
+            ))}
+          </div>
+        )}
+        <div className="flex items-center gap-4 text-xs text-muted-foreground mb-3">
+          <span className="flex items-center gap-1">
+            <FileText className="w-3 h-3" />
+            {feature.scenarios.length} scenarios
+          </span>
+          {linkedScreens.length > 0 && (
+            <span className="flex items-center gap-1">
+              <Monitor className="w-3 h-3" />
+              {linkedScreens.length} ecrans
+            </span>
+          )}
+        </div>
+        {/* Screen buttons */}
+        {linkedScreens.length > 0 ? (
+          <div className="flex gap-2 flex-wrap">
+            {linkedScreens.map(({ id, screen }) => (
+              <Button
+                key={id}
+                variant="outline"
+                size="sm"
+                className="text-xs"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onSelectScreen(id);
+                }}
+              >
+                {screen!.name}
+              </Button>
+            ))}
+          </div>
+        ) : (
+          <p className="text-xs text-muted-foreground italic">
+            Pas encore de mockup
+          </p>
+        )}
+      </CardContent>
+    </Card>
+  );
+});

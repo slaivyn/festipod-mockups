@@ -11,11 +11,23 @@ interface StepDefinition {
   lineNumber: number;
 }
 
-const stepFiles = [
-  'features/step_definitions/navigation.steps.ts',
-  'features/step_definitions/form.steps.ts',
-  'features/step_definitions/screen.steps.ts',
-];
+import { Glob } from 'bun';
+
+// Discover all step definition files: shared + module-specific
+function discoverStepFiles(): string[] {
+  const files: string[] = [];
+  // Shared steps
+  for (const f of new Glob('src/shared/steps/**/*.steps.ts').scanSync('.')) {
+    files.push(f);
+  }
+  // Module steps
+  for (const f of new Glob('src/modules/*/steps/**/*.steps.ts').scanSync('.')) {
+    files.push(f);
+  }
+  return files.sort();
+}
+
+const stepFiles = discoverStepFiles();
 
 function extractStepDefinitions(): StepDefinition[] {
   const definitions: StepDefinition[] = [];
@@ -115,7 +127,7 @@ export const stepDefinitions: StepDefinitionInfo[] = ${JSON.stringify(definition
 ${findFunctionCode}
 `;
 
-  await Bun.write('src/data/stepDefinitions.ts', output);
+  await Bun.write('src/shared/data/stepDefinitions.ts', output);
   console.log(`Generated ${definitions.length} step definitions`);
 }
 

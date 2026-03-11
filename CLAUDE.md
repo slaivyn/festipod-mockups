@@ -1,25 +1,70 @@
+@AGENTS.md
+
 # Festipod Project
 
 This project has two parts:
-1. **Festipod App** - Mobile app mockups in `src/screens/` with sketchy hand-drawn UI
+1. **Festipod App** - Mobile app mockups with sketchy hand-drawn UI
 2. **Prototyping Tool** - Web app to view mockups, user stories, and BDD specs
+
+## Architecture
+
+Feature-based architecture: code is organized by business domain (module), not by technical layer. A module can only import from `shared/` — never from another module.
+
+Multi-layer BDD: each module has `steps/frontend/`, `steps/backend/`, `steps/e2e/` directories. Shared step definitions live in `src/shared/steps/`.
 
 ## Project Structure
 
 ```
 src/
-  screens/           # Mockup screens (HomeScreen, EventDetailScreen, etc.)
-  components/
-    sketchy/         # Hand-drawn UI components (Button, Card, Avatar, etc.)
-    specs/           # Specs viewer (GherkinHighlighter, FeatureView, etc.)
-    ui/              # Shadcn/Radix components
-  data/
-    index.ts         # User stories definitions
-    features.ts      # Auto-generated from .feature files
-    testResults.ts   # Cucumber test results
-features/            # Gherkin .feature files (French)
-scripts/             # Build scripts for parsing features
-docs/                # Documentation
+  modules/                  # Business domain modules
+    event/                  # Events (create, discover, detail, update, invite, participants, meeting points)
+      screens/              # EventsScreen, EventDetailScreen, CreateEventScreen, etc.
+      features/             # Gherkin .feature files for this domain
+      steps/                # BDD step definitions
+        frontend/           # Frontend-layer steps
+        backend/            # Backend-layer steps (planned)
+        e2e/                # E2E steps (planned)
+    user/                   # User profiles, friends, sharing
+      screens/              # ProfileScreen, FriendsListScreen, ShareProfileScreen, etc.
+      features/
+      steps/
+    home/                   # Home dashboard, settings
+      screens/              # HomeScreen, SettingsScreen
+    auth/                   # Authentication, onboarding
+      screens/              # LoginScreen, WelcomeScreen
+    workshop/               # Workshop/atelier specs (no screens yet)
+      features/
+      steps/
+    meeting/                # Meeting point specs
+      features/
+      steps/
+    notification/           # Notification specs
+      features/
+      steps/
+  shared/                   # Shared code (importable by all modules)
+    components/
+      sketchy/              # Hand-drawn UI components (Button, Card, Avatar, etc.)
+      ui/                   # Shadcn/Radix components
+    context/                # ThemeContext, NextGraphContext, FestipodDataContext
+    data/                   # User stories, features.ts (auto-generated), testResults.ts
+    hooks/                  # Custom hooks (useShapeWithDefaults)
+    shapes/                 # SHEX shapes + ORM bindings (NextGraph)
+    utils/                  # ngSession, ngBootstrap
+    steps/                  # Shared BDD step definitions (cross-domain)
+      frontend/             # navigation.steps.ts, form.steps.ts, screen.steps.ts
+      backend/
+    support/                # Cucumber hooks.ts, world.ts
+    types/                  # TypeScript type definitions
+    lib/                    # Utility functions (cn, etc.)
+  app/                      # Prototyping tool (app shell)
+    App.tsx                 # Root component with providers
+    router.tsx              # Hash-based routing
+    frontend.tsx            # React entry point
+    components/             # Gallery, DemoMode, ThemeToggle, specs/
+  screens/
+    index.ts                # Screen registry (imports from all modules)
+scripts/                    # Build scripts for parsing features
+docs/                       # Documentation
 ```
 
 ## Key Commands

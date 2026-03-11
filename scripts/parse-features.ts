@@ -1,5 +1,5 @@
 import { Glob } from 'bun';
-import type { ParsedFeature, ParsedScenario, ParsedStep } from '../src/types/gherkin';
+import type { ParsedFeature, ParsedScenario, ParsedStep } from '../src/shared/types/gherkin';
 
 // Map French screen names to screen IDs (same as navigation.steps.ts)
 const screenNameMap: Record<string, string> = {
@@ -73,7 +73,7 @@ function extractScreenIdsFromSteps(steps: ParsedStep[]): Set<string> {
 }
 
 async function parseFeatures(): Promise<ParsedFeature[]> {
-  const glob = new Glob('features/**/*.feature');
+  const glob = new Glob('src/modules/*/features/**/*.feature');
   const features: ParsedFeature[] = [];
 
   for await (const filePath of glob.scan('.')) {
@@ -116,7 +116,7 @@ export function getAllPriorities(): number[] {
 }
 `;
 
-  await Bun.write('src/data/features.ts', output);
+  await Bun.write('src/shared/data/features.ts', output);
   console.log(`Parsed ${features.length} feature files`);
   return features;
 }

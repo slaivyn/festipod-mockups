@@ -1,0 +1,49 @@
+PREFIX fp: <http://festipod.org/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+fp:Event {
+  a [fp:Event] ;
+  fp:title xsd:string
+    // rdfs:comment "The title of the event" ;
+  fp:description xsd:string ?
+    // rdfs:comment "A description of the event" ;
+  fp:date xsd:string
+    // rdfs:comment "The display date of the event (e.g. 'Lun. 16 - Ven. 20 fév.')" ;
+  fp:location xsd:string
+    // rdfs:comment "The location of the event" ;
+  fp:distance xsd:float ?
+    // rdfs:comment "Distance in km from the user" ;
+  fp:participantCount xsd:integer
+    // rdfs:comment "Number of participants" ;
+  fp:coverImage xsd:string ?
+    // rdfs:comment "URL of the cover image" ;
+  fp:hostName xsd:string ?
+    // rdfs:comment "Name of the event host or relay" ;
+  fp:hostInitials xsd:string ?
+    // rdfs:comment "Initials of the event host" ;
+}
+
+fp:UserProfile {
+  a [fp:UserProfile] ;
+  fp:name xsd:string
+    // rdfs:comment "Full name of the user" ;
+  fp:initials xsd:string
+    // rdfs:comment "Initials for avatar display" ;
+  fp:username xsd:string
+    // rdfs:comment "Username handle (e.g. @mariedupont)" ;
+  fp:role xsd:string ?
+    // rdfs:comment "Role or title of the user" ;
+  fp:isPublic xsd:boolean ?
+    // rdfs:comment "Whether the profile is public" ;
+}
+
+fp:Participation {
+  a [fp:Participation] ;
+  fp:event IRI
+    // rdfs:comment "Reference to the event" ;
+  fp:user IRI
+    // rdfs:comment "Reference to the user" ;
+  fp:isConfirmed xsd:boolean
+    // rdfs:comment "Whether the participation is confirmed" ;
+}

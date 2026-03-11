@@ -4,16 +4,22 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "bun --hot src/index.ts",
+    "dev": "portless run bun --hot src/index.ts",
     "start": "NODE_ENV=production bun src/index.ts",
     "build": "bun run build.ts",
     "test:cucumber": "bun run cucumber:run && bun run cucumber:report && bun run features:parse && bun run steps:extract",
     "cucumber:run": "node --import tsx/esm node_modules/.bin/cucumber-js --config cucumber.json",
     "cucumber:report": "bun scripts/parse-test-results.ts",
     "features:parse": "bun scripts/parse-features.ts",
-    "steps:extract": "bun scripts/extract-step-definitions.ts"
+    "steps:extract": "bun scripts/extract-step-definitions.ts",
+    "build:orm": "rdf-orm build --input ./src/shapes/shex --output ./src/shapes/orm",
+    "build:ng": "bash scripts/build-ng-packages.sh"
   },
   "dependencies": {
+    "@ng-org/alien-deepsignals": ".ng-tarballs/ng-org-alien-deepsignals-0.1.2-alpha.11.tgz",
+    "@ng-org/orm": ".ng-tarballs/ng-org-orm-0.1.2-alpha.15.tgz",
+    "@ng-org/shex-orm": ".ng-tarballs/ng-org-shex-orm-0.1.2-alpha.7.tgz",
+    "@ng-org/web": ".ng-tarballs/ng-org-web-0.1.2-alpha.11.tgz",
     "@radix-ui/react-label": "^2.1.7",
     "@radix-ui/react-select": "^2.2.6",
     "@radix-ui/react-slot": "^1.2.3",

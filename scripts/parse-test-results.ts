@@ -1,4 +1,4 @@
-import type { FeatureTestStatus, ScenarioTestResult } from '../src/types/gherkin';
+import type { FeatureTestStatus, ScenarioTestResult } from '../src/shared/types/gherkin';
 
 interface CucumberScenario {
   id: string;
@@ -137,7 +137,7 @@ export function getTestSummary() {
 }
 `;
 
-  await Bun.write('src/data/testResults.ts', output);
+  await Bun.write('src/shared/data/testResults.ts', output);
   console.log(`Generated test results for ${results.size} features`);
 
   // Print summary

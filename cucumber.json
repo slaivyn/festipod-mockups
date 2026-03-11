@@ -1,10 +1,11 @@
 {
   "default": {
     "import": [
-      "features/support/**/*.ts",
-      "features/step_definitions/**/*.ts"
+      "src/shared/support/**/*.ts",
+      "src/shared/steps/**/*.ts",
+      "src/modules/*/steps/**/*.ts"
     ],
-    "paths": ["features/**/*.feature"],
+    "paths": ["src/modules/*/features/**/*.feature"],
     "format": [
       "progress-bar",
       "json:reports/cucumber-report.json",
