@@ -10,7 +10,7 @@ This project has two parts:
 
 Feature-based architecture: code is organized by business domain (module), not by technical layer. A module can only import from `shared/` — never from another module.
 
-Multi-layer BDD: each module has `steps/frontend/`, `steps/backend/`, `steps/e2e/` directories. Shared step definitions live in `src/shared/steps/`.
+Multi-layer BDD: each module has `steps/ui/`, `steps/data/`, `steps/e2e/` directories. Shared step definitions live in `src/shared/steps/`.
 
 ## Project Structure
 
@@ -21,8 +21,8 @@ src/
       screens/              # EventsScreen, EventDetailScreen, CreateEventScreen, etc.
       features/             # Gherkin .feature files for this domain
       steps/                # BDD step definitions
-        frontend/           # Frontend-layer steps
-        backend/            # Backend-layer steps (planned)
+        ui/                 # UI-layer steps
+        data/               # Data-layer steps
         e2e/                # E2E steps (planned)
     user/                   # User profiles, friends, sharing
       screens/              # ProfileScreen, FriendsListScreen, ShareProfileScreen, etc.
@@ -51,8 +51,8 @@ src/
     shapes/                 # SHEX shapes + ORM bindings (NextGraph)
     utils/                  # ngSession, ngBootstrap
     steps/                  # Shared BDD step definitions (cross-domain)
-      frontend/             # navigation.steps.ts, form.steps.ts, screen.steps.ts
-      backend/
+      ui/                   # navigation.steps.ts, form.steps.ts, screen.steps.ts
+      data/
     support/                # Cucumber hooks.ts, world.ts
     types/                  # TypeScript type definitions
     lib/                    # Utility functions (cn, etc.)

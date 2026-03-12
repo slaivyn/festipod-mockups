@@ -134,14 +134,18 @@ export const parsedFeatures: ParsedFeature[] = [
         ]
       },
       {
-        "name": "S'inscrire à un événement",
+        "name": "Voir le bouton d'inscription sur l'écran",
         "tags": [],
-        "steps": []
-      },
-      {
-        "name": "Se désinscrire d'un événement",
-        "tags": [],
-        "steps": []
+        "steps": [
+          {
+            "keyword": "Étant donné que ",
+            "text": "je suis sur la page \"détail événement\""
+          },
+          {
+            "keyword": "Alors",
+            "text": "je peux m'inscrire à l'événement"
+          }
+        ]
       },
       {
         "name": "Rechercher un événement existant",
@@ -158,18 +162,136 @@ export const parsedFeatures: ParsedFeature[] = [
         ]
       },
       {
-        "name": "Vérifier les données de l'écran",
+        "name": "S'inscrire à un événement",
         "tags": [],
-        "steps": []
+        "steps": [
+          {
+            "keyword": "Étant donné",
+            "text": "un événement \"Formation CNV\" existe"
+          },
+          {
+            "keyword": "Et",
+            "text": "l'utilisateur n'est pas inscrit à l'événement \"Formation CNV\""
+          },
+          {
+            "keyword": "Et",
+            "text": "l'événement \"Formation CNV\" a 8 participants au départ"
+          },
+          {
+            "keyword": "Quand",
+            "text": "l'utilisateur s'inscrit à l'événement \"Formation CNV\""
+          },
+          {
+            "keyword": "Alors",
+            "text": "l'utilisateur est participant de l'événement \"Formation CNV\""
+          },
+          {
+            "keyword": "Et",
+            "text": "l'utilisateur apparaît dans la liste des participants de l'événement \"Formation CNV\""
+          },
+          {
+            "keyword": "Et",
+            "text": "l'événement \"Formation CNV\" compte 9 participants"
+          }
+        ]
       },
       {
-        "name": "Rechercher dans une base existante (Mobilizon)",
+        "name": "Se désinscrire d'un événement",
         "tags": [],
-        "steps": []
+        "steps": [
+          {
+            "keyword": "Étant donné",
+            "text": "un événement \"Résidence Reconnexion\" existe"
+          },
+          {
+            "keyword": "Et",
+            "text": "l'utilisateur est inscrit à l'événement \"Résidence Reconnexion\""
+          },
+          {
+            "keyword": "Et",
+            "text": "l'événement \"Résidence Reconnexion\" a 12 participants au départ"
+          },
+          {
+            "keyword": "Quand",
+            "text": "l'utilisateur se désinscrit de l'événement \"Résidence Reconnexion\""
+          },
+          {
+            "keyword": "Alors",
+            "text": "l'utilisateur n'est plus participant de l'événement \"Résidence Reconnexion\""
+          },
+          {
+            "keyword": "Et",
+            "text": "l'utilisateur n'apparaît plus dans la liste des participants de l'événement \"Résidence Reconnexion\""
+          },
+          {
+            "keyword": "Et",
+            "text": "l'événement \"Résidence Reconnexion\" compte 11 participants"
+          }
+        ]
+      },
+      {
+        "name": "L'inscription est idempotente",
+        "tags": [],
+        "steps": [
+          {
+            "keyword": "Étant donné",
+            "text": "un événement \"Résidence Reconnexion\" existe"
+          },
+          {
+            "keyword": "Et",
+            "text": "l'utilisateur est inscrit à l'événement \"Résidence Reconnexion\""
+          },
+          {
+            "keyword": "Et",
+            "text": "l'événement \"Résidence Reconnexion\" a 12 participants au départ"
+          },
+          {
+            "keyword": "Quand",
+            "text": "l'utilisateur essaie de s'inscrire une seconde fois à l'événement \"Résidence Reconnexion\""
+          },
+          {
+            "keyword": "Alors",
+            "text": "l'inscription est idempotente pour l'événement \"Résidence Reconnexion\""
+          },
+          {
+            "keyword": "Et",
+            "text": "l'événement \"Résidence Reconnexion\" compte 12 participants"
+          }
+        ]
+      },
+      {
+        "name": "Se désinscrire d'un événement auquel on n'est pas inscrit",
+        "tags": [],
+        "steps": [
+          {
+            "keyword": "Étant donné",
+            "text": "un événement \"Formation CNV\" existe"
+          },
+          {
+            "keyword": "Et",
+            "text": "l'utilisateur n'est pas inscrit à l'événement \"Formation CNV\""
+          },
+          {
+            "keyword": "Et",
+            "text": "l'événement \"Formation CNV\" a 8 participants au départ"
+          },
+          {
+            "keyword": "Quand",
+            "text": "l'utilisateur se désinscrit de l'événement \"Formation CNV\""
+          },
+          {
+            "keyword": "Alors",
+            "text": "l'utilisateur n'est plus participant de l'événement \"Formation CNV\""
+          },
+          {
+            "keyword": "Et",
+            "text": "l'événement \"Formation CNV\" compte 8 participants"
+          }
+        ]
       }
     ],
     "filePath": "src/modules/event/features/us-7-inscription-evenement.feature",
-    "rawContent": "# language: fr\n@EVENT @priority-1\nFonctionnalité: US-7 M'inscrire/me désinscrire à un événement\n  En tant qu'utilisateur\n  Je peux m'inscrire/me désinscrire à un événement\n  Après avoir consulté la description de l'événement, les dates et le lieu\n  S'il existe déjà dans le système ou en le retrouvant dans une base existante\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  Scénario: Consulter un événement avant inscription\n    Étant donné que je suis sur la page \"détail événement\"\n    Alors l'écran affiche les informations de l'événement\n\n  Scénario: S'inscrire à un événement\n    * Scénario non implémenté\n\n  Scénario: Se désinscrire d'un événement\n    * Scénario non implémenté\n\n  Scénario: Rechercher un événement existant\n    Étant donné que je suis sur la page \"découvrir\"\n    Alors je peux voir la liste des événements\n\n  Scénario: Vérifier les données de l'écran\n    * Scénario non implémenté\n\n  Scénario: Rechercher dans une base existante (Mobilizon)\n    * Scénario non implémenté\n",
+    "rawContent": "# language: fr\n@EVENT @priority-1\nFonctionnalité: US-7 M'inscrire/me désinscrire à un événement\n  En tant qu'utilisateur\n  Je peux m'inscrire/me désinscrire à un événement\n  Après avoir consulté la description de l'événement, les dates et le lieu\n  S'il existe déjà dans le système ou en le retrouvant dans une base existante\n\n  Contexte:\n    Étant donné que je suis connecté en tant qu'utilisateur\n\n  # --- UI ---\n\n  Scénario: Consulter un événement avant inscription\n    Étant donné que je suis sur la page \"détail événement\"\n    Alors l'écran affiche les informations de l'événement\n\n  Scénario: Voir le bouton d'inscription sur l'écran\n    Étant donné que je suis sur la page \"détail événement\"\n    Alors je peux m'inscrire à l'événement\n\n  Scénario: Rechercher un événement existant\n    Étant donné que je suis sur la page \"découvrir\"\n    Alors je peux voir la liste des événements\n\n  # --- Data ---\n\n  @data\n  Scénario: S'inscrire à un événement\n    Étant donné un événement \"Formation CNV\" existe\n    Et l'utilisateur n'est pas inscrit à l'événement \"Formation CNV\"\n    Et l'événement \"Formation CNV\" a 8 participants au départ\n    Quand l'utilisateur s'inscrit à l'événement \"Formation CNV\"\n    Alors l'utilisateur est participant de l'événement \"Formation CNV\"\n    Et l'utilisateur apparaît dans la liste des participants de l'événement \"Formation CNV\"\n    Et l'événement \"Formation CNV\" compte 9 participants\n\n  @data\n  Scénario: Se désinscrire d'un événement\n    Étant donné un événement \"Résidence Reconnexion\" existe\n    Et l'utilisateur est inscrit à l'événement \"Résidence Reconnexion\"\n    Et l'événement \"Résidence Reconnexion\" a 12 participants au départ\n    Quand l'utilisateur se désinscrit de l'événement \"Résidence Reconnexion\"\n    Alors l'utilisateur n'est plus participant de l'événement \"Résidence Reconnexion\"\n    Et l'utilisateur n'apparaît plus dans la liste des participants de l'événement \"Résidence Reconnexion\"\n    Et l'événement \"Résidence Reconnexion\" compte 11 participants\n\n  @data\n  Scénario: L'inscription est idempotente\n    Étant donné un événement \"Résidence Reconnexion\" existe\n    Et l'utilisateur est inscrit à l'événement \"Résidence Reconnexion\"\n    Et l'événement \"Résidence Reconnexion\" a 12 participants au départ\n    Quand l'utilisateur essaie de s'inscrire une seconde fois à l'événement \"Résidence Reconnexion\"\n    Alors l'inscription est idempotente pour l'événement \"Résidence Reconnexion\"\n    Et l'événement \"Résidence Reconnexion\" compte 12 participants\n\n  @data\n  Scénario: Se désinscrire d'un événement auquel on n'est pas inscrit\n    Étant donné un événement \"Formation CNV\" existe\n    Et l'utilisateur n'est pas inscrit à l'événement \"Formation CNV\"\n    Et l'événement \"Formation CNV\" a 8 participants au départ\n    Quand l'utilisateur se désinscrit de l'événement \"Formation CNV\"\n    Alors l'utilisateur n'est plus participant de l'événement \"Formation CNV\"\n    Et l'événement \"Formation CNV\" compte 8 participants\n",
     "screenIds": [
       "event-detail",
       "events"

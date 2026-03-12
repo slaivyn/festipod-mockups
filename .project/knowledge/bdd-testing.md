@@ -15,12 +15,12 @@ Each module has step directories for three test layers:
 
 ```
 src/modules/event/steps/
-  frontend/     # UI/screen assertions (active)
-  backend/      # Data layer assertions (planned)
+  ui/           # UI/screen assertions (active)
+  data/         # Data layer assertions
   e2e/          # Full integration (planned)
 ```
 
-Shared steps (cross-domain) live in `src/shared/steps/frontend/`.
+Shared steps (cross-domain) live in `src/shared/steps/ui/`.
 
 ## Feature Files
 
@@ -37,7 +37,7 @@ Tagged with `@CATEGORY @priority-N` for filtering.
 
 ## Step Definitions
 
-### Shared Steps (`src/shared/steps/frontend/`)
+### Shared Steps (`src/shared/steps/ui/`)
 
 | File | Purpose |
 |------|---------|
@@ -45,7 +45,7 @@ Tagged with `@CATEGORY @priority-N` for filtering.
 | `form.steps.ts` | Form field validation, required fields, import/duplicate detection |
 | `screen.steps.ts` | Screen content assertions (participants, events, profiles, QR codes) |
 
-### How Frontend Steps Work
+### How UI Steps Work
 
 Steps analyze screen **source code** (not rendered DOM):
 1. `world.ts` loads screen `.tsx` file content via `loadScreenSource()`
@@ -89,13 +89,17 @@ Scripts in `scripts/` parse features and steps into TypeScript data files consum
 |--------|-------|--------|
 | `parse-features.ts` | `src/modules/*/features/*.feature` | `src/shared/data/features.ts` |
 | `parse-test-results.ts` | `reports/cucumber-report.json` | `src/shared/data/testResults.ts` |
-| `extract-step-definitions.ts` | `src/shared/steps/frontend/*.ts` | `src/shared/data/stepDefinitions.ts` |
+| `extract-step-definitions.ts` | `src/shared/steps/ui/*.ts` | `src/shared/data/stepDefinitions.ts` |
 
 Run all: `bun run test:cucumber`
 
+## Data-Layer Testing
+
+`@data` scenarios test through the real NextGraph broker. See [data-layer-testing](./data-layer-testing.md) for full architecture.
+
 ## Adding New Steps
 
-1. **Module-specific**: Create in `src/modules/{module}/steps/frontend/`
-2. **Cross-domain**: Add to `src/shared/steps/frontend/`
+1. **Module-specific**: Create in `src/modules/{module}/steps/ui/`
+2. **Cross-domain**: Add to `src/shared/steps/ui/`
 3. Import `FestipodWorld` type from `../../support/world` (shared) or adjust relative path
 4. Run `bun run steps:extract` to regenerate tooltip data

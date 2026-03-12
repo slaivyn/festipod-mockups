@@ -18,7 +18,7 @@ src/modules/
 Each module can contain:
 - `screens/` — React screen components
 - `features/` — Gherkin `.feature` files (BDD specs)
-- `steps/{frontend,backend,e2e}/` — Cucumber step definitions by layer
+- `steps/{ui,data,e2e}/` — Cucumber step definitions by layer
 
 ## Import Rules
 
@@ -45,7 +45,7 @@ src/modules/event/screens/EventDetailScreen.tsx
 | `hooks/` | `useShapeWithDefaults` (NextGraph) |
 | `shapes/` | SHEX definitions + ORM TypeScript bindings |
 | `utils/` | `ngSession.ts`, `ngBootstrap.ts` |
-| `steps/frontend/` | Shared BDD step definitions (navigation, screen, form) |
+| `steps/ui/` | Shared BDD step definitions (navigation, screen, form) |
 | `support/` | Cucumber `world.ts`, `hooks.ts` |
 | `types/` | `gherkin.ts` (ParsedFeature, ParsedScenario types) |
 | `lib/` | `utils.ts` (cn helper for Tailwind) |

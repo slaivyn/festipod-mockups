@@ -1,5 +1,6 @@
 import { World, setWorldConstructor, type IWorldOptions } from '@cucumber/cucumber';
 import { getScreen, type Screen } from '../../screens/index';
+import type { Page, Frame } from 'playwright';
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -10,9 +11,13 @@ export interface FestipodWorld extends World {
   navigationHistory: string[];
   isAuthenticated: boolean;
 
-  // Screen analysis
+  // Screen analysis (UI layer)
   currentScreen: Screen | null;
   screenSourceContent: string;
+
+  // Playwright (data layer)
+  page: Page | null;
+  appFrame: Frame | null;
 
   navigateTo(route: string): void;
   getFormField(name: string): { required: boolean; value: string } | undefined;
@@ -223,6 +228,10 @@ class CustomWorld extends World implements FestipodWorld {
   // Screen analysis
   currentScreen: Screen | null = null;
   screenSourceContent: string = '';
+
+  // Playwright (data layer testing)
+  page: Page | null = null;
+  appFrame: Frame | null = null;
 
   constructor(options: IWorldOptions) {
     super(options);
