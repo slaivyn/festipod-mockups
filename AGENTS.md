@@ -28,7 +28,7 @@ NextGraph (P2P/local-first) with SHEX shapes and ORM. See [data-layer](.project/
 
 Multi-layer Cucumber/Gherkin in French. See [bdd-testing](.project/knowledge/bdd-testing.md).
 
-`@data` scenarios test through the real NextGraph broker with Playwright. See [data-layer-testing](.project/knowledge/data-layer-testing.md).
+`@data` scenarios test data operations through the real NextGraph broker. `@e2e` scenarios test the real app UI in the broker iframe. Both use Playwright. See [data-layer-testing](.project/knowledge/data-layer-testing.md).
 
 ## Quick Start
 
@@ -47,4 +47,4 @@ bun run build:orm        # Regenerate ORM from SHEX shapes
 - [Data Layer](.project/knowledge/data-layer.md) — NextGraph, shapes, context, seed data
 - [BDD Testing](.project/knowledge/bdd-testing.md) — Cucumber setup, step layers, feature files
 - [Screens](.project/knowledge/screens.md) — screen inventory, registry, sketchy components
-- [Data-Layer Testing](.project/knowledge/data-layer-testing.md) — real broker testing, wallet setup, Playwright harness
+- [Data-Layer Testing](.project/knowledge/data-layer-testing.md) — real broker testing, wallet setup, Playwright harness, e2e layer

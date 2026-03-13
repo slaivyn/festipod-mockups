@@ -15,9 +15,9 @@ Each module has step directories for three test layers:
 
 ```
 src/modules/event/steps/
-  ui/           # UI/screen assertions (active)
-  data/         # Data layer assertions
-  e2e/          # Full integration (planned)
+  ui/           # UI/screen assertions (source analysis)
+  data/         # Data layer assertions (Playwright + broker)
+  e2e/          # E2E assertions (Playwright + broker + real app UI)
 ```
 
 Shared steps (cross-domain) live in `src/shared/steps/ui/`.
@@ -96,6 +96,15 @@ Run all: `bun run test:cucumber`
 ## Data-Layer Testing
 
 `@data` scenarios test through the real NextGraph broker. See [data-layer-testing](./data-layer-testing.md) for full architecture.
+
+## E2E Testing
+
+`@e2e` scenarios test the real app running in the broker iframe. See [data-layer-testing](./data-layer-testing.md#e2e-layer) for architecture. Key differences from `@data`:
+
+- Uses the **real app** (not a test harness) served on a local HTTP port
+- Interacts via Playwright locators and `evaluate()` on the app iframe
+- Tests actual UI behavior: navigation, redirects, button clicks, screen content
+- Requires real broker mode (fails with `Error` if broker unavailable)
 
 ## Adding New Steps
 

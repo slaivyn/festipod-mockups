@@ -87,15 +87,75 @@ Exposed by the harness, consumed by steps via `appFrame.evaluate()`:
 - `isParticipating(eventId, userId)`, `getEventParticipants(eventId)` — queries
 - `updateEvent(eventId, updates)` — field updates
 
+## E2E Layer (`@e2e`)
+
+`@e2e` scenarios test the real app UI running inside the broker iframe. Unlike `@data` which loads a test harness, `@e2e` loads the actual app.
+
+### Architecture
+
+```
+Cucumber steps → Playwright (Chromium, persistent profile)
+                      ↓
+               https://nextgraph.net/redir/#/?o=http://127.0.0.1:{appPort}
+                      ↓
+               Broker wallet login (automated, same as @data)
+                      ↓
+               Broker loads REAL APP in iframe → http://127.0.0.1:{appPort}
+                      ↓
+               App renders with NextGraphProvider auto-connecting
+                      ↓
+               Steps interact via appFrame.evaluate() and Playwright locators
+```
+
+### App Server
+
+Started in `BeforeAll` alongside the harness server:
+1. Find a free port
+2. `spawn('bun', ['src/index.ts'], { env: { PORT: appPort } })`
+3. Poll until the server responds to HTTP GET
+4. Killed in `AfterAll`
+
+### Shared Infrastructure
+
+`@e2e` reuses the same `setupBrokerPage()` helper as `@data` — handles broker redirect URL construction, wallet login automation, and iframe discovery.
+
+### Step Definitions
+
+E2E steps live in module directories (e.g., `src/modules/auth/steps/e2e/connexion.steps.ts`). They use:
+- `this.appFrame!.evaluate()` — run JS in the app iframe (hash navigation, content checks)
+- `this.appFrame!.locator()` — find and interact with DOM elements
+- `this.appFrame!.waitForFunction()` — poll for expected state (screen content, URL changes)
+- `SCREEN_MARKERS` — map screen IDs to unique text content for verification
+
+### Before Hook (`@e2e`)
+
+```
+1. Open new Playwright page
+2. setupBrokerPage(page, realAppUrl) → automated login → find app iframe
+3. Wait for React render (root.innerHTML.length > 100)
+4. Wait 3s for NG connection + provider stabilization
+```
+
+### Differences from `@data`
+
+| Aspect | `@data` | `@e2e` |
+|--------|---------|--------|
+| What loads in iframe | Test harness (`harness-ng.tsx`) | Real app (`src/index.ts`) |
+| Ready signal | `window.__testData.ready === true` | `root.innerHTML.length > 100` |
+| Interaction | `evaluate()` on test bridge | `evaluate()` + Playwright locators |
+| Mock fallback | Yes (standalone DeepSignalSets) | No — requires real broker |
+| Tests | Data operations (CRUD, queries) | UI behavior (navigation, redirects, clicks) |
+
 ## Files
 
 | File | Purpose |
 |------|---------|
 | `src/shared/test-harness/harness-ng.tsx` | Real broker harness (useShape through broker iframe) |
 | `src/shared/test-harness/harness.tsx` | Mock harness (DeepSignalSets, no broker) |
-| `src/shared/support/hooks.ts` | Playwright lifecycle (wallet creation, login automation, iframe detection) |
+| `src/shared/support/hooks.ts` | Playwright lifecycle (wallet creation, login automation, iframe detection, app server) |
 | `src/shared/support/world.ts` | World with `page`/`appFrame` fields |
 | `src/modules/event/steps/data/inscription.steps.ts` | Inscription data steps |
+| `src/modules/auth/steps/e2e/connexion.steps.ts` | Auth/connection e2e steps |
 | `.playwright-profile/` | Persistent Chromium profile (gitignored) |
 | `scripts/debug-browser.ts` | Manual browser debug tool — launches headed Chromium to inspect broker interactions |
 | `.playwright-profile-debug/` | Chromium profile created by debug-browser.ts (gitignored) |
@@ -104,7 +164,7 @@ Exposed by the harness, consumed by steps via `appFrame.evaluate()`:
 
 ```bash
 bun run test:data      # Run @data scenarios (real broker if wallet exists, mock fallback)
-bun run test:cucumber  # Run all scenarios (UI + data)
+bun run test:cucumber  # Run all scenarios (UI + data + e2e)
 ```
 
 ## See Also

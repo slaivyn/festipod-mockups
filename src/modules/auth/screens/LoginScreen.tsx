@@ -1,10 +1,19 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Button, Input, Title, Text, Divider } from '../../../shared/components/sketchy';
 import { useNextGraph } from '../../../shared/context/NextGraphContext';
 import type { ScreenProps } from '../../../screens';
 
 export function LoginScreen({ navigate }: ScreenProps) {
   const { status, connect } = useNextGraph();
+  const navigateRef = useRef(navigate);
+  navigateRef.current = navigate;
+
+  // Auto-navigate to home when connection completes
+  useEffect(() => {
+    if (status === 'connected') {
+      navigateRef.current('home');
+    }
+  }, [status]);
 
   const handleNgLogin = () => {
     if (status === 'connected') {

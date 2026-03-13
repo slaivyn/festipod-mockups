@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { PhoneFrame, BrokerBanner } from '../../shared/components/sketchy';
 import { screenGroups, type Screen } from '../../screens';
 import { ThemeToggle } from './ThemeToggle';
+import { useNextGraph } from '../../shared/context/NextGraphContext';
+import { useFestipodData } from '../../shared/context/FestipodDataContext';
 
 function useIsMobile(breakpoint = 768) {
   const [isMobile, setIsMobile] = useState(window.innerWidth < breakpoint);
@@ -25,6 +27,11 @@ const DEFAULT_SCALE = 0.5;
 export function Gallery({ onSelectScreen, onShowSpecs }: GalleryProps) {
   const [scale, setScale] = useState(DEFAULT_SCALE);
   const isMobile = useIsMobile();
+  const { status, connect } = useNextGraph();
+  const { loadTestData } = useFestipodData();
+  const [loading, setLoading] = useState(false);
+  const isConnected = status === 'connected';
+  const isConnecting = status === 'connecting';
 
   return (
     <div>
@@ -82,6 +89,49 @@ export function Gallery({ onSelectScreen, onShowSpecs }: GalleryProps) {
             >
               Specs BDD
             </button>
+
+            {/* NextGraph: login or load test data */}
+            {!isConnected && (
+              <button
+                onClick={connect}
+                disabled={isConnecting}
+                style={{
+                  background: isConnecting ? 'var(--tool-text-muted)' : '#4CAF50',
+                  color: 'white',
+                  border: '2px solid var(--tool-border)',
+                  borderRadius: '255px 15px 225px 15px/15px 225px 15px 255px',
+                  padding: isMobile ? '6px 12px' : '8px 16px',
+                  fontFamily: 'var(--font-sketch)',
+                  fontSize: isMobile ? 12 : 14,
+                  cursor: isConnecting ? 'wait' : 'pointer',
+                  opacity: isConnecting ? 0.7 : 1,
+                }}
+              >
+                {isConnecting ? 'Connexion...' : 'Se connecter'}
+              </button>
+            )}
+            {isConnected && (
+              <button
+                onClick={async () => {
+                  setLoading(true);
+                  try { await loadTestData(); } finally { setLoading(false); }
+                }}
+                disabled={loading}
+                style={{
+                  background: loading ? 'var(--tool-text-muted)' : '#FF9800',
+                  color: 'white',
+                  border: '2px solid var(--tool-border)',
+                  borderRadius: '255px 15px 225px 15px/15px 225px 15px 255px',
+                  padding: isMobile ? '6px 12px' : '8px 16px',
+                  fontFamily: 'var(--font-sketch)',
+                  fontSize: isMobile ? 12 : 14,
+                  cursor: loading ? 'wait' : 'pointer',
+                  opacity: loading ? 0.7 : 1,
+                }}
+              >
+                {loading ? 'Chargement...' : 'Charger données de test'}
+              </button>
+            )}
 
             {/* Zoom control - hide on mobile */}
             {!isMobile && (

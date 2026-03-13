@@ -14,7 +14,7 @@ function AppContent() {
     return (
       <DemoMode
         initialScreenId={route.screenId}
-        onBack={goBack}
+        onBack={() => navigate({ page: 'gallery' })}
         onNavigateToStory={(storyId) => navigate({ page: 'specs', storyId })}
       />
     );

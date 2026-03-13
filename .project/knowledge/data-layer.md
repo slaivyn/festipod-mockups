@@ -39,15 +39,24 @@ Regenerate with `bun run build:orm`.
 
 ### NextGraphContext (`src/shared/context/NextGraphContext.tsx`)
 - Connection lifecycle: `disconnected` → `connecting` → `connected` | `error`
-- Auto-initializes via `initNg()` from `src/shared/utils/ngSession.ts`
 - Provides session with store IDs (private, protected, public)
+- **Conditional auto-init**: Only auto-calls `initNg()` when running inside the broker iframe (`window.self !== window.top`). Outside the iframe, `initNgWeb()` would redirect the page to the broker — so connection waits for explicit `connect()` call.
+- `connect()`: Called by user clicking "Se connecter". When outside broker, triggers the redirect flow.
+
+#### `@ng-org/web` redirect behavior
+`initNgWeb()` checks `window.self === window.top`. If the app is NOT in an iframe, it redirects to `nextgraph.net/redir/` with the current URL encoded as a return parameter. The broker then loads the app back in an iframe after auth. This means the app must NOT auto-init NG when loaded standalone.
 
 ### FestipodDataContext (`src/shared/context/FestipodDataContext.tsx`)
 - Wraps NextGraph shapes with `useShapeWithDefaults()` hook
 - CRUD: `createEvent()`, `updateEvent()`, `joinEvent()`, `leaveEvent()`, etc.
 - Exposes `useFestipodData()` hook consumed by all screens
 - `selectedEventId` state for cross-screen event navigation
-- Falls back to seed data when disconnected
+- `loadTestData()`: Calls `bootstrapWallet()` to seed test data into NG wallet — only triggered by explicit user action
+- **Provider states based on NG status**:
+  - `disconnected` → `LocalDataProvider` with seed data (demo mode)
+  - `connecting` → `LocalDataProvider` with **empty data** (avoids flashing seed data before wallet loads)
+  - `connected` → `NgDataProvider` with real wallet data
+  - `error` → `LocalDataProvider` with seed data (graceful fallback)
 
 ## Data Types
 

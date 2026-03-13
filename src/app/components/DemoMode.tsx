@@ -38,6 +38,8 @@ export function DemoMode({ initialScreenId, onBack, onNavigateToStory }: DemoMod
     setHistory(newHistory);
     setHistoryIndex(newHistory.length - 1);
     setCurrentScreenId(screenId);
+    // Keep URL in sync so refresh preserves the current screen
+    window.history.replaceState(null, '', `#/demo/${screenId}`);
   };
 
   const canGoBack = historyIndex > 0;

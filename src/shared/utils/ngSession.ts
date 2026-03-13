@@ -16,21 +16,22 @@ export let sessionPromise: Promise<NextGraphSession> = new Promise(
     }
 );
 
-let initCalled = false;
+let initPromise: Promise<void> | null = null;
 
-export async function init() {
-    if (initCalled) return;
-    initCalled = true;
-    console.log('[NG session] init() called');
-    await initNgWeb(
+/**
+ * Register the initNgWeb callback. Idempotent — returns the same promise on repeated calls.
+ * Does NOT trigger login by itself. Call login() separately to open the wallet login page.
+ */
+export function init(): Promise<void> {
+    if (initPromise) return initPromise;
+    console.log('[NG session] init() called — registering callback');
+    initPromise = initNgWeb(
         async (event: any) => {
-            console.log('[NG session] initNgWeb callback received, event type:', event?.type);
+            console.log('[NG session] initNgWeb callback received, event:', JSON.stringify(Object.keys(event || {})));
             session = event.session;
-
             session!.ng ??= ng;
             console.log('[NG session] Session established, private_store_id:', session!.private_store_id);
             resolveSessionPromise(session!);
-
             initNgSignals(ng, session!);
             console.log('[NG session] ORM signals initialized');
         },
@@ -40,6 +41,15 @@ export async function init() {
         console.error('[NG session] init error:', error);
         rejectSessionPromise(error);
     });
+    return initPromise;
+}
+
+/**
+ * Trigger the wallet login page. Must call init() first.
+ */
+export async function login() {
+    console.log('[NG session] login() called — opening wallet login');
+    await ng.login();
 }
 
 export interface NextGraphSession {

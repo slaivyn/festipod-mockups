@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useCallback, useEffect, useRef, type ReactNode } from 'react';
+import React, { createContext, useContext, useState, useCallback, useEffect, type ReactNode } from 'react';
 import type {
   FpEventData,
   FpUserData,
@@ -17,13 +17,13 @@ import {
 import { useNextGraph } from './NextGraphContext';
 import { sessionPromise } from '../utils/ngSession';
 import { useShapeWithDefaults } from '../hooks/useShapeWithDefaults';
-import { bootstrapWallet } from '../utils/ngBootstrap';
 import {
   FpEventShapeType,
   FpUserProfileShapeType,
   FpParticipationShapeType,
 } from '../shapes/orm/festipodShapes.shapeTypes';
 import type { FpEvent, FpUserProfile, FpParticipation } from '../shapes/orm/festipodShapes.typings';
+import { bootstrapWallet, type BootstrapResult } from '../utils/ngBootstrap';
 
 // ============================================================================
 // Context interface
@@ -61,6 +61,7 @@ interface FestipodDataContextValue {
   addMeetingPoint(mp: Omit<FpMeetingPointData, 'id'>): void;
   addFriend(friendId: string): void;
   updateProfile(updates: Partial<FpUserData>): void;
+  loadTestData(): Promise<BootstrapResult>;
 }
 
 const FestipodDataContext = createContext<FestipodDataContextValue | null>(null);
@@ -160,24 +161,25 @@ function buildQueries(
 // Local (disconnected) provider — uses seed data directly, read-only
 // ============================================================================
 
-function useLocalData(): FestipodDataContextValue {
-  const [selectedEventId, setSelectedEventId] = useState<string>('event-1');
+function useLocalData(empty?: boolean): FestipodDataContextValue {
+  const [selectedEventId, setSelectedEventId] = useState<string>(empty ? '' : 'event-1');
   const [selectedUserId, setSelectedUserId] = useState<string>('');
 
-  const events = seedEvents;
-  const users = seedUsers;
-  const participations = seedParticipations;
-  const meetingPoints = seedMeetingPoints;
-  const friendships = seedFriendships;
+  const events = empty ? [] : seedEvents;
+  const users = empty ? [] : seedUsers;
+  const participations = empty ? [] : seedParticipations;
+  const meetingPoints = empty ? [] : seedMeetingPoints;
+  const friendships = empty ? [] : seedFriendships;
 
-  const currentUserId = CURRENT_USER_ID;
+  const currentUserId = empty ? '' : CURRENT_USER_ID;
   const currentUser = users.find(u => u.id === currentUserId);
   const selectedEvent = events.find(e => e.id === selectedEventId);
   const selectedUser = users.find(u => u.id === selectedUserId);
 
   const queries = buildQueries(events, users, participations, meetingPoints, friendships, currentUserId);
 
-  console.log('[FestipodData] Render — local | events:', events.length,
+  console.log('[FestipodData] Render —', empty ? 'connecting (empty)' : 'local',
+    '| events:', events.length,
     '| selectedEvent:', selectedEvent?.title ?? '(none)');
 
   // Local mode: mutations are no-ops (static defaults)
@@ -203,6 +205,10 @@ function useLocalData(): FestipodDataContextValue {
   const updateProfile = useCallback((_updates: Partial<FpUserData>) => {
     console.log('[FestipodData] updateProfile (local, no-op)');
   }, []);
+  const loadTestData = useCallback(async (): Promise<BootstrapResult> => {
+    console.log('[FestipodData] loadTestData (local, no-op)');
+    return { seeded: false, userIdMap: new Map(), eventIdMap: new Map() };
+  }, []);
 
   return {
     currentUserId, currentUser,
@@ -211,101 +217,41 @@ function useLocalData(): FestipodDataContextValue {
     selectedUserId, setSelectedUserId, selectedUser,
     ...queries,
     createEvent, updateEvent, joinEvent, leaveEvent,
-    addMeetingPoint, addFriend, updateProfile,
+    addMeetingPoint, addFriend, updateProfile, loadTestData,
   };
 }
 
 // ============================================================================
-// NextGraph-connected provider — uses useShapeWithDefaults + bootstrap
+// NextGraph-connected provider — reads directly from NG wallet
 // ============================================================================
 
 function useNgData(): FestipodDataContextValue {
-  const [shapesReady, setShapesReady] = useState(false);
+  // useShapeWithDefaults: show EMPTY data until NG populates (no seed defaults)
+  const emptyEvents: FpEventData[] = [];
+  const emptyUsers: FpUserData[] = [];
+  const emptyParticipations: FpParticipationData[] = [];
 
-  // useShapeWithDefaults calls useShape internally (only safe when NG is connected)
-  const eventsShape = useShapeWithDefaults(FpEventShapeType, seedEvents, mapEvent, shapesReady);
-  const usersShape = useShapeWithDefaults(FpUserProfileShapeType, seedUsers, mapUser, shapesReady);
-  const participationsShape = useShapeWithDefaults(FpParticipationShapeType, seedParticipations, mapParticipation, shapesReady);
+  const eventsShape = useShapeWithDefaults(FpEventShapeType, emptyEvents, mapEvent, true);
+  const usersShape = useShapeWithDefaults(FpUserProfileShapeType, emptyUsers, mapUser, true);
+  const participationsShape = useShapeWithDefaults(FpParticipationShapeType, emptyParticipations, mapParticipation, true);
 
   const events = eventsShape.items;
   const users = usersShape.items;
   const participations = participationsShape.items;
 
   // Not in SHEX shapes yet
-  const [meetingPoints, setMeetingPoints] = useState<FpMeetingPointData[]>(seedMeetingPoints);
-  const [friendships, setFriendships] = useState<FpFriendshipData[]>(seedFriendships);
+  const [meetingPoints, setMeetingPoints] = useState<FpMeetingPointData[]>([]);
+  const [friendships, setFriendships] = useState<FpFriendshipData[]>([]);
 
   const [selectedEventId, setSelectedEventId] = useState<string>('');
   const [selectedUserId, setSelectedUserId] = useState<string>('');
 
-  // --- Bootstrap: detect when NG data is available, seed if first time ---
-  const bootstrapDone = useRef(false);
-  const bootstrapInProgress = useRef(false);
-
-  // Reactive detection: when ngSet gets populated, NG data has arrived (returning user)
-  // Skip if bootstrap is currently seeding (to avoid race condition)
+  // Auto-select first event when data appears from NG
   useEffect(() => {
-    if (shapesReady || bootstrapDone.current || bootstrapInProgress.current) return;
-    const evSize = eventsShape.ngSet.size;
-    const uSize = usersShape.ngSet.size;
-    const pSize = participationsShape.ngSet.size;
-    console.log('[FestipodData] Checking ngSet sizes — events:', evSize, 'users:', uSize, 'participations:', pSize);
-    if (evSize > 0 && uSize > 0) {
-      console.log('[FestipodData] NG data fully loaded — returning user, marking ready');
-      bootstrapDone.current = true;
-      setShapesReady(true);
-      // Auto-select first event
-      const first = [...eventsShape.ngSet][0];
-      if (first) {
-        console.log('[FestipodData] Selecting first event:', first.title, first["@id"]);
-        setSelectedEventId(first["@id"]);
-      }
+    if (!selectedEventId && events.length > 0) {
+      setSelectedEventId(events[0].id);
     }
-  });
-
-  // Timeout fallback: if ngSet stays empty, assume empty wallet → bootstrap seed data
-  useEffect(() => {
-    if (bootstrapDone.current) return;
-    const timer = setTimeout(async () => {
-      if (bootstrapDone.current) return;
-      // Lock so reactive effect doesn't fire during seeding
-      bootstrapInProgress.current = true;
-      console.log('[FestipodData] Timeout reached — checking if seeding needed...');
-      console.log('[FestipodData] ngSet sizes — events:', eventsShape.ngSet.size,
-        'users:', usersShape.ngSet.size, 'participations:', participationsShape.ngSet.size);
-
-      // If data arrived while we waited, just mark ready
-      if (eventsShape.ngSet.size > 0 && usersShape.ngSet.size > 0) {
-        console.log('[FestipodData] Data arrived before timeout — marking ready');
-        bootstrapDone.current = true;
-        bootstrapInProgress.current = false;
-        setShapesReady(true);
-        const first = [...eventsShape.ngSet][0];
-        if (first) setSelectedEventId(first["@id"]);
-        return;
-      }
-
-      console.log('[FestipodData] Wallet empty — seeding...');
-      const result = await bootstrapWallet(
-        eventsShape.ngSet as any,
-        usersShape.ngSet as any,
-        participationsShape.ngSet as any,
-      );
-
-      bootstrapDone.current = true;
-      bootstrapInProgress.current = false;
-      setShapesReady(true);
-
-      if (result.seeded) {
-        const firstIri = result.eventIdMap.get('event-1');
-        if (firstIri) {
-          console.log('[FestipodData] Bootstrap done, selecting first event:', firstIri);
-          setSelectedEventId(firstIri);
-        }
-      }
-    }, 3000);
-    return () => clearTimeout(timer);
-  }, []);
+  }, [events.length, selectedEventId]);
 
   // --- Derived ---
   const currentUser = users.find(u => u.username === '@mariedupont') || users[0];
@@ -382,11 +328,7 @@ function useNgData(): FestipodDataContextValue {
 
   const leaveEvent = useCallback((eventId: string, userId?: string) => {
     const uid = userId || currentUserId;
-    console.log('[FestipodData] leaveEvent (NG):', eventId, 'user:', uid,
-      '| ngSet sizes — events:', eventsShape.ngSet.size,
-      'users:', usersShape.ngSet.size,
-      'participations:', participationsShape.ngSet.size,
-      '| bootstrapDone:', bootstrapDone.current);
+    console.log('[FestipodData] leaveEvent (NG):', eventId, 'user:', uid);
     const ngPart = [...participationsShape.ngSet].find(p => p.event === eventId && p.user === uid);
     if (ngPart) {
       console.log('[FestipodData] Deleting participation:', ngPart["@id"]);
@@ -425,6 +367,15 @@ function useNgData(): FestipodDataContextValue {
     }
   }, [usersShape.ngSet]);
 
+  const loadTestData = useCallback(async (): Promise<BootstrapResult> => {
+    console.log('[FestipodData] loadTestData (NG)');
+    return bootstrapWallet(
+      eventsShape.ngSet as any,
+      usersShape.ngSet as any,
+      participationsShape.ngSet as any,
+    );
+  }, [eventsShape.ngSet, usersShape.ngSet, participationsShape.ngSet]);
+
   return {
     currentUserId, currentUser,
     events, users, participations, meetingPoints, friendships,
@@ -432,7 +383,7 @@ function useNgData(): FestipodDataContextValue {
     selectedUserId, setSelectedUserId, selectedUser,
     ...queries,
     createEvent, updateEvent, joinEvent, leaveEvent,
-    addMeetingPoint, addFriend, updateProfile,
+    addMeetingPoint, addFriend, updateProfile, loadTestData,
   };
 }
 
@@ -440,8 +391,8 @@ function useNgData(): FestipodDataContextValue {
 // Provider — switches between local and NG
 // ============================================================================
 
-function LocalDataProvider({ children }: { children: ReactNode }) {
-  const data = useLocalData();
+function LocalDataProvider({ children, empty }: { children: ReactNode; empty?: boolean }) {
+  const data = useLocalData(empty);
   return <FestipodDataContext.Provider value={data}>{children}</FestipodDataContext.Provider>;
 }
 
@@ -457,6 +408,11 @@ export function FestipodDataProvider({ children }: { children: ReactNode }) {
   if (status === 'connected') {
     return <NgDataProvider>{children}</NgDataProvider>;
   }
+  if (status === 'connecting') {
+    // NG initializing: show empty state (no misleading seed data flash)
+    return <LocalDataProvider empty>{children}</LocalDataProvider>;
+  }
+  // Disconnected or error: demo mode with seed data
   return <LocalDataProvider>{children}</LocalDataProvider>;
 }
 

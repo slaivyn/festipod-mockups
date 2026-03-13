@@ -20,18 +20,21 @@ const NextGraphContext = createContext<NextGraphContextValue>({
 // Track whether initNg() has been called (module-level to survive re-renders)
 let ngInitStarted = false;
 
+// Detect if we're running inside the NG broker iframe
+const isInsideBroker = typeof window !== 'undefined' && window.self !== window.top;
+
 export function NextGraphProvider({ children }: { children: ReactNode }) {
   const [status, setStatus] = useState<NgStatus>(session ? 'connected' : 'disconnected');
   const [ngSession, setNgSession] = useState<NextGraphSession | undefined>(session);
   const [error, setError] = useState<string | undefined>();
 
-  // Auto-init on mount: register the initNgWeb callback so we catch the
-  // auto-connect event from the NG iframe. This must happen early.
+  // Auto-init ONLY when running inside the broker iframe.
+  // Outside the broker, initNgWeb() would redirect the page — wait for explicit connect().
   useEffect(() => {
-    if (ngInitStarted) return;
+    if (!isInsideBroker || ngInitStarted) return;
     ngInitStarted = true;
 
-    console.log('[NG] Auto-init: calling initNg() on mount');
+    console.log('[NG] Inside broker iframe — auto-init');
     setStatus('connecting');
     initNg();
 
@@ -52,7 +55,8 @@ export function NextGraphProvider({ children }: { children: ReactNode }) {
       });
   }, []);
 
-  // connect() is now just a fallback — initNg() already started on mount
+  // connect(): called by the user clicking "Se connecter".
+  // When outside the broker, initNgWeb() will redirect to the broker.
   const connect = useCallback(() => {
     if (status === 'connecting' || status === 'connected') return;
 
@@ -60,7 +64,7 @@ export function NextGraphProvider({ children }: { children: ReactNode }) {
     setStatus('connecting');
     setError(undefined);
 
-    // initNg() is idempotent (initNgWeb handles multiple calls)
+    ngInitStarted = true;
     initNg();
 
     sessionPromise

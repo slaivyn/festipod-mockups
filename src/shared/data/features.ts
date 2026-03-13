@@ -616,6 +616,156 @@ export const parsedFeatures: ParsedFeature[] = [
     ]
   },
   {
+    "id": "connexion-nextgraph",
+    "name": "Connexion NextGraph et chargement des données",
+    "description": "En tant qu'utilisateur Je peux me connecter à mon portefeuille NextGraph Et charger les données de test dans mon portefeuille Afin d'utiliser l'application avec mes propres données",
+    "tags": [
+      "@AUTH",
+      "@priority-1"
+    ],
+    "category": "UNKNOWN",
+    "priority": 1,
+    "scenarios": [
+      {
+        "name": "L'écran de connexion affiche le bouton NextGraph",
+        "tags": [],
+        "steps": [
+          {
+            "keyword": "Étant donné",
+            "text": "je suis sur la page \"connexion\""
+          },
+          {
+            "keyword": "Alors",
+            "text": "l'écran contient un bouton \"Se connecter avec NextGraph\""
+          }
+        ]
+      },
+      {
+        "name": "L'écran de connexion redirige automatiquement quand connecté",
+        "tags": [],
+        "steps": [
+          {
+            "keyword": "Étant donné",
+            "text": "je suis sur la page \"connexion\""
+          },
+          {
+            "keyword": "Alors",
+            "text": "l'écran gère la redirection automatique après connexion"
+          }
+        ]
+      },
+      {
+        "name": "L'état initial est \"en cours\" quand une connexion est en attente",
+        "tags": [],
+        "steps": [
+          {
+            "keyword": "Étant donné",
+            "text": "je suis sur la page \"connexion\""
+          },
+          {
+            "keyword": "Alors",
+            "text": "l'écran gère l'état de connexion en cours"
+          }
+        ]
+      },
+      {
+        "name": "Aucune donnée de démonstration n'est visible pendant la connexion",
+        "tags": [],
+        "steps": [
+          {
+            "keyword": "Étant donné",
+            "text": "je suis sur la page \"connexion\""
+          },
+          {
+            "keyword": "Alors",
+            "text": "l'écran n'importe pas de données de démonstration"
+          }
+        ]
+      },
+      {
+        "name": "Un portefeuille connecté est vide par défaut",
+        "tags": [],
+        "steps": [
+          {
+            "keyword": "Alors",
+            "text": "le portefeuille est connecté"
+          },
+          {
+            "keyword": "Et",
+            "text": "le portefeuille ne contient aucun événement de démonstration"
+          }
+        ]
+      },
+      {
+        "name": "Charger les données de test dans le portefeuille",
+        "tags": [],
+        "steps": [
+          {
+            "keyword": "Étant donné que ",
+            "text": "le portefeuille est vide"
+          },
+          {
+            "keyword": "Quand",
+            "text": "je charge les données de test"
+          },
+          {
+            "keyword": "Alors",
+            "text": "le portefeuille contient des événements"
+          },
+          {
+            "keyword": "Et",
+            "text": "le portefeuille contient des utilisateurs"
+          }
+        ]
+      },
+      {
+        "name": "Les données de test ne sont pas rechargées si le portefeuille contient déjà des données",
+        "tags": [],
+        "steps": [
+          {
+            "keyword": "Étant donné que ",
+            "text": "le portefeuille contient déjà des événements"
+          },
+          {
+            "keyword": "Quand",
+            "text": "je charge les données de test"
+          },
+          {
+            "keyword": "Alors",
+            "text": "le nombre d'événements n'a pas changé"
+          }
+        ]
+      },
+      {
+        "name": "Les données du portefeuille sont distinctes des données par défaut",
+        "tags": [],
+        "steps": [
+          {
+            "keyword": "Étant donné que ",
+            "text": "le portefeuille est vide"
+          },
+          {
+            "keyword": "Quand",
+            "text": "je charge les données de test"
+          },
+          {
+            "keyword": "Alors",
+            "text": "les événements ont des identifiants NextGraph"
+          },
+          {
+            "keyword": "Et",
+            "text": "les utilisateurs ont des identifiants NextGraph"
+          }
+        ]
+      }
+    ],
+    "filePath": "src/modules/auth/features/connexion-nextgraph.feature",
+    "rawContent": "# language: fr\n@AUTH @priority-1\nFonctionnalité: Connexion NextGraph et chargement des données\n  En tant qu'utilisateur\n  Je peux me connecter à mon portefeuille NextGraph\n  Et charger les données de test dans mon portefeuille\n  Afin d'utiliser l'application avec mes propres données\n\n  # --- UI layer: écran de connexion ---\n\n  @ui\n  Scénario: L'écran de connexion affiche le bouton NextGraph\n    Étant donné je suis sur la page \"connexion\"\n    Alors l'écran contient un bouton \"Se connecter avec NextGraph\"\n\n  @ui\n  Scénario: L'écran de connexion redirige automatiquement quand connecté\n    Étant donné je suis sur la page \"connexion\"\n    Alors l'écran gère la redirection automatique après connexion\n\n  @ui\n  Scénario: L'état initial est \"en cours\" quand une connexion est en attente\n    Étant donné je suis sur la page \"connexion\"\n    Alors l'écran gère l'état de connexion en cours\n\n  @ui\n  Scénario: Aucune donnée de démonstration n'est visible pendant la connexion\n    Étant donné je suis sur la page \"connexion\"\n    Alors l'écran n'importe pas de données de démonstration\n\n  # --- Data layer: comportement du portefeuille ---\n\n  @data\n  Scénario: Un portefeuille connecté est vide par défaut\n    Alors le portefeuille est connecté\n    Et le portefeuille ne contient aucun événement de démonstration\n\n  @data\n  Scénario: Charger les données de test dans le portefeuille\n    Étant donné que le portefeuille est vide\n    Quand je charge les données de test\n    Alors le portefeuille contient des événements\n    Et le portefeuille contient des utilisateurs\n\n  @data\n  Scénario: Les données de test ne sont pas rechargées si le portefeuille contient déjà des données\n    Étant donné que le portefeuille contient déjà des événements\n    Quand je charge les données de test\n    Alors le nombre d'événements n'a pas changé\n\n  @data\n  Scénario: Les données du portefeuille sont distinctes des données par défaut\n    Étant donné que le portefeuille est vide\n    Quand je charge les données de test\n    Alors les événements ont des identifiants NextGraph\n    Et les utilisateurs ont des identifiants NextGraph\n",
+    "screenIds": [
+      "login"
+    ]
+  },
+  {
     "id": "us-23",
     "name": "US-23 Me connecter avec d'autres utilisateurs",
     "description": "En tant qu'utilisateur Je peux me connecter avec d'autres utilisateurs En partageant mon QR code ou mon lien de contact Afin d'étendre mon réseau",

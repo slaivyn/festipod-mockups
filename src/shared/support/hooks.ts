@@ -1,6 +1,6 @@
 import { Before, After, BeforeAll, AfterAll, Status, setDefaultTimeout } from '@cucumber/cucumber';
-import { chromium, type Browser, type BrowserContext } from 'playwright';
-import { execSync } from 'child_process';
+import { chromium, type Browser, type BrowserContext, type Page, type Frame } from 'playwright';
+import { execSync, spawn, type ChildProcess } from 'child_process';
 import * as http from 'http';
 import * as fs from 'fs';
 import * as path from 'path';
@@ -23,8 +23,80 @@ let harnessServer: http.Server | null = null;
 let harnessPort = 0;
 let useRealBroker = false;
 
+// E2E: real app server
+let appServerProcess: ChildProcess | null = null;
+let appPort = 0;
+
 const WALLET_NAME = 'festipod-tests';
 const WALLET_PASSWORD = 'festipod-tests';
+
+/**
+ * Navigate through the NG broker to load an app in its iframe.
+ * Handles wallet login and returns the app's Frame.
+ */
+async function setupBrokerPage(page: Page, appUrl: string): Promise<Frame> {
+  const brokerRedirect = `https://nextgraph.net/redir/#/?o=${encodeURIComponent(appUrl)}`;
+  await page.goto(brokerRedirect, { waitUntil: 'domcontentloaded' });
+
+  // Automate wallet login if needed
+  const loginButton = page.getByText('Login', { exact: true });
+  if (await loginButton.isVisible({ timeout: 2000 }).catch(() => false)) {
+    await loginButton.click();
+    await page.waitForURL('**/wallet/login', { timeout: 5000 }).catch(() => {});
+
+    const walletLink = page.getByText('Click here to login with your wallet');
+    await walletLink.waitFor({ state: 'visible', timeout: 5000 });
+    await walletLink.click();
+    await page.waitForTimeout(1000);
+
+    const passwordInput = page.locator('input[type="password"]');
+    await passwordInput.waitFor({ state: 'visible', timeout: 5000 });
+    await passwordInput.fill(WALLET_PASSWORD);
+    await passwordInput.press('Enter');
+
+    // Wait for login to complete and app iframe to load
+    await page.waitForTimeout(3000);
+  }
+
+  // Verify iframe loaded after login
+  const iframeCount = await page.locator('iframe').count();
+  if (iframeCount === 0) {
+    const bodyText = await page.evaluate(() => document.body?.innerText?.substring(0, 300));
+    throw new Error(`No iframe found after login. Body: ${bodyText}`);
+  }
+
+  // Wait for our app iframe (broker loads it after successful auth)
+  let appFrame: Frame | null = null;
+  const deadline = Date.now() + 30000;
+  while (Date.now() < deadline) {
+    for (const f of page.frames()) {
+      if (f.url().startsWith(appUrl) || f.url().includes('127.0.0.1')) {
+        appFrame = f;
+        break;
+      }
+    }
+    if (appFrame) break;
+
+    for (const iframe of await page.locator('iframe').all()) {
+      const src = await iframe.getAttribute('src');
+      if (src && src.includes('127.0.0.1')) {
+        const el = await iframe.elementHandle();
+        appFrame = await el?.contentFrame() ?? null;
+        if (appFrame) break;
+      }
+    }
+    if (appFrame) break;
+
+    await page.waitForTimeout(500);
+  }
+
+  if (!appFrame) {
+    const frames = page.frames().map(f => f.url());
+    throw new Error(`App iframe not found after 30s. Frames: ${JSON.stringify(frames)}`);
+  }
+
+  return appFrame;
+}
 
 /**
  * Automated wallet creation + login on nextgraph.eu.
@@ -165,6 +237,35 @@ BeforeAll({ timeout: 10 * 60 * 1000 }, async function () {
       ],
     });
     console.log('[Hooks] Real broker mode ready');
+
+    // Start real app server for @e2e tests
+    appPort = await new Promise<number>((resolve) => {
+      const s = http.createServer();
+      s.listen(0, '127.0.0.1', () => {
+        const port = (s.address() as { port: number }).port;
+        s.close(() => resolve(port));
+      });
+    });
+    appServerProcess = spawn('bun', ['src/index.ts'], {
+      env: { ...process.env, PORT: String(appPort), NODE_ENV: 'production' },
+      stdio: 'pipe',
+      cwd: process.cwd(),
+    });
+    // Wait for app server to respond
+    await new Promise<void>((resolve, reject) => {
+      const deadline = Date.now() + 15000;
+      const check = () => {
+        http.get(`http://127.0.0.1:${appPort}`, (res) => {
+          res.resume();
+          resolve();
+        }).on('error', () => {
+          if (Date.now() > deadline) reject(new Error('App server startup timeout'));
+          else setTimeout(check, 200);
+        });
+      };
+      check();
+    });
+    console.log(`[E2E] App server on http://127.0.0.1:${appPort}`);
   } catch (err) {
     console.warn(`[Hooks] NG harness build/auth failed, falling back to mock: ${err}`);
     useRealBroker = false;
@@ -184,9 +285,11 @@ Before({ timeout: 60000 }, async function (this: FestipodWorld, scenario) {
   this.screenSourceContent = '';
   this.currentScreen = null;
 
-  // Launch Playwright page for @data scenarios
+  // Launch Playwright page for @data and @e2e scenarios
   const tags = scenario.pickle.tags.map(t => t.name);
-  if (tags.includes('@data')) {
+  const needsPlaywright = tags.includes('@data') || tags.includes('@e2e');
+
+  if (needsPlaywright) {
     this.page = await browserContext.newPage();
 
     // Capture console for debugging
@@ -194,72 +297,12 @@ Before({ timeout: 60000 }, async function (this: FestipodWorld, scenario) {
     this.page.on('console', (msg) => {
       if (msg.type() === 'error') console.error('[Browser console]', msg.text());
     });
+  }
 
+  if (tags.includes('@data')) {
     if (useRealBroker) {
-      // Navigate to broker redirect — broker loads our harness in an iframe
-      const appUrl = `http://127.0.0.1:${harnessPort}`;
-      const brokerRedirect = `https://nextgraph.net/redir/#/?o=${encodeURIComponent(appUrl)}`;
-
-      await this.page.goto(brokerRedirect, { waitUntil: 'domcontentloaded' });
-
-      // Automate wallet login if needed
-      const loginButton = this.page.getByText('Login', { exact: true });
-      if (await loginButton.isVisible({ timeout: 2000 }).catch(() => false)) {
-        await loginButton.click();
-        await this.page.waitForURL('**/wallet/login', { timeout: 5000 }).catch(() => {});
-
-        const walletLink = this.page.getByText('Click here to login with your wallet');
-        await walletLink.waitFor({ state: 'visible', timeout: 5000 });
-        await walletLink.click();
-        await this.page.waitForTimeout(1000);
-
-        const passwordInput = this.page.locator('input[type="password"]');
-        await passwordInput.waitFor({ state: 'visible', timeout: 5000 });
-        await passwordInput.fill(WALLET_PASSWORD);
-        await passwordInput.press('Enter');
-
-        // Wait for login to complete and app iframe to load
-        await this.page.waitForTimeout(3000);
-      }
-
-      // Verify iframe loaded after login
-      const iframeCount = await this.page.locator('iframe').count();
-      if (iframeCount === 0) {
-        const bodyText = await this.page.evaluate(() => document.body?.innerText?.substring(0, 300));
-        throw new Error(`No iframe found after login. Body: ${bodyText}`);
-      }
-
-      // Wait for our app iframe (broker loads it after successful auth)
-      let appFrame = null;
-      const deadline = Date.now() + 30000;
-      while (Date.now() < deadline) {
-        for (const f of this.page.frames()) {
-          if (f.url().startsWith(appUrl) || f.url().includes('127.0.0.1')) {
-            appFrame = f;
-            break;
-          }
-        }
-        if (appFrame) break;
-
-        for (const iframe of await this.page.locator('iframe').all()) {
-          const src = await iframe.getAttribute('src');
-          if (src && src.includes('127.0.0.1')) {
-            const el = await iframe.elementHandle();
-            appFrame = await el?.contentFrame();
-            if (appFrame) break;
-          }
-        }
-        if (appFrame) break;
-
-        await this.page.waitForTimeout(500);
-      }
-
-      if (!appFrame) {
-        const frames = this.page.frames().map(f => f.url());
-        throw new Error(`App iframe not found after 30s. Frames: ${JSON.stringify(frames)}`);
-      }
-
-      this.appFrame = appFrame;
+      const harnessUrl = `http://127.0.0.1:${harnessPort}`;
+      this.appFrame = await setupBrokerPage(this.page!, harnessUrl);
 
       // Wait for NG session + useShape + bridge
       await this.appFrame.waitForFunction(
@@ -268,15 +311,36 @@ Before({ timeout: 60000 }, async function (this: FestipodWorld, scenario) {
       );
     } else {
       // Mock mode: load harness directly
-      await this.page.setContent('<!DOCTYPE html><html><body><div id="root"></div></body></html>');
-      await this.page.addScriptTag({ path: path.resolve(HARNESS_OUT) });
+      await this.page!.setContent('<!DOCTYPE html><html><body><div id="root"></div></body></html>');
+      await this.page!.addScriptTag({ path: path.resolve(HARNESS_OUT) });
 
-      this.appFrame = this.page.mainFrame();
+      this.appFrame = this.page!.mainFrame();
       await this.appFrame.waitForFunction(
         () => (window as any).__testData?.ready === true,
         { timeout: 10000 },
       );
     }
+  }
+
+  if (tags.includes('@e2e')) {
+    if (!useRealBroker || !appPort) {
+      throw new Error('@e2e scenarios require real broker mode (NG harness + app server)');
+    }
+
+    const realAppUrl = `http://127.0.0.1:${appPort}`;
+    this.appFrame = await setupBrokerPage(this.page!, realAppUrl);
+
+    // Wait for React to render the app
+    await this.appFrame.waitForFunction(
+      () => {
+        const root = document.getElementById('root');
+        return root && root.innerHTML.length > 100;
+      },
+      { timeout: 30000 },
+    );
+
+    // Wait for NG to connect and providers to stabilize
+    await this.appFrame.waitForTimeout(3000);
   }
 });
 
@@ -307,6 +371,10 @@ AfterAll(async function () {
   if (browser) await browser.close();
   if (harnessServer) {
     await new Promise<void>((resolve) => harnessServer!.close(() => resolve()));
+  }
+  if (appServerProcess) {
+    appServerProcess.kill();
+    appServerProcess = null;
   }
   console.log('Festipod BDD tests completed.');
 });

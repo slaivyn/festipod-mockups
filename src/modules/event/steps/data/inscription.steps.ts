@@ -8,14 +8,20 @@ import type { FestipodWorld } from '../../../../shared/support/world';
 // --- Setup ---
 
 Given('un événement {string} existe', async function (this: FestipodWorld, eventTitle: string) {
-  const exists = await this.appFrame!.evaluate(
+  // Ensure wallet has data (seed if empty)
+  await this.appFrame!.evaluate(() => {
+    const td = (window as any).__testData;
+    if (td.events.size === 0) td.loadTestData();
+  });
+  // Wait for event to appear
+  await this.appFrame!.waitForFunction(
     (title) => {
       const td = (window as any).__testData;
       return [...td.events].some((e: any) => e.title === title);
     },
     eventTitle,
+    { timeout: 10000 },
   );
-  expect(exists, `Event "${eventTitle}" should exist in the data layer`).to.be.true;
 });
 
 Given('l\'utilisateur n\'est pas inscrit à l\'événement {string}', async function (this: FestipodWorld, eventTitle: string) {

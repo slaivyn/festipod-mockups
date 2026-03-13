@@ -11,6 +11,188 @@ export interface StepDefinitionInfo {
 
 export const stepDefinitions: StepDefinitionInfo[] = [
   {
+    "pattern": "le portefeuille est vide",
+    "keyword": "Given",
+    "file": "connexion.steps.ts",
+    "sourceCode": "Given('le portefeuille est vide', async function (this: FestipodWorld) {\n  // Verify starting state: the harness graph should have its own seeded data.\n  // We clear events/users/participations to simulate a truly empty wallet.\n  await this.appFrame!.evaluate(() => {\n    const td = (window as any).__testData;\n    // Delete all events\n    for (const e of [...td.events]) td.events.delete(e);\n    // Delete all users\n    for (const u of [...td.users]) td.users.delete(u);\n    // Delete all participations\n    for (const p of [...td.participations]) td.participations.delete(p);\n  });",
+    "lineNumber": 10
+  },
+  {
+    "pattern": "le portefeuille contient déjà des événements",
+    "keyword": "Given",
+    "file": "connexion.steps.ts",
+    "sourceCode": "Given('le portefeuille contient déjà des événements', async function (this: FestipodWorld) {\n  const count = await this.appFrame!.evaluate(() => {\n    const td = (window as any).__testData;\n    return td.events.size;\n  });",
+    "lineNumber": 32
+  },
+  {
+    "pattern": "je charge les données de test",
+    "keyword": "When",
+    "file": "connexion.steps.ts",
+    "sourceCode": "When('je charge les données de test', async function (this: FestipodWorld) {\n  // Store count before loading for the idempotency test\n  const countBefore = await this.appFrame!.evaluate(() => {\n    const td = (window as any).__testData;\n    return td.events.size;\n  });",
+    "lineNumber": 53
+  },
+  {
+    "pattern": "le portefeuille est connecté",
+    "keyword": "Then",
+    "file": "connexion.steps.ts",
+    "sourceCode": "Then('le portefeuille est connecté', async function (this: FestipodWorld) {\n  const hasSession = await this.appFrame!.evaluate(() => {\n    const td = (window as any).__testData;\n    return td.session !== undefined && td.session !== null;\n  });",
+    "lineNumber": 81
+  },
+  {
+    "pattern": "le portefeuille ne contient aucun événement de démonstration",
+    "keyword": "Then",
+    "file": "connexion.steps.ts",
+    "sourceCode": "Then('le portefeuille ne contient aucun événement de démonstration', async function (this: FestipodWorld) {\n  // Wallet should be empty — no auto-seeding.\n  // Also verify through the app's data context (same view as screens).\n  const result = await this.appFrame!.evaluate(() => {\n    const td = (window as any).__testData;\n    return {\n      walletEvents: td.events.size,\n      appEvents: td.appData?.events?.length ?? -1,\n      ngStatus: td.ngStatus,\n    };\n  });",
+    "lineNumber": 89
+  },
+  {
+    "pattern": "le portefeuille contient des événements",
+    "keyword": "Then",
+    "file": "connexion.steps.ts",
+    "sourceCode": "Then('le portefeuille contient des événements', async function (this: FestipodWorld) {\n  const count = await this.appFrame!.evaluate(() => {\n    const td = (window as any).__testData;\n    return td.events.size;\n  });",
+    "lineNumber": 106
+  },
+  {
+    "pattern": "le portefeuille contient des utilisateurs",
+    "keyword": "Then",
+    "file": "connexion.steps.ts",
+    "sourceCode": "Then('le portefeuille contient des utilisateurs', async function (this: FestipodWorld) {\n  const count = await this.appFrame!.evaluate(() => {\n    const td = (window as any).__testData;\n    return td.users.size;\n  });",
+    "lineNumber": 114
+  },
+  {
+    "pattern": "le nombre d'événements n'a pas changé",
+    "keyword": "Then",
+    "file": "connexion.steps.ts",
+    "sourceCode": "Then('le nombre d\\'événements n\\'a pas changé', async function (this: FestipodWorld) {\n  const countBefore = (this as any)._eventCountBefore as number;\n  const countAfter = await this.appFrame!.evaluate(() => {\n    const td = (window as any).__testData;\n    return td.events.size;\n  });",
+    "lineNumber": 122
+  },
+  {
+    "pattern": "les événements ont des identifiants NextGraph",
+    "keyword": "Then",
+    "file": "connexion.steps.ts",
+    "sourceCode": "Then('les événements ont des identifiants NextGraph', async function (this: FestipodWorld) {\n  const ids = await this.appFrame!.evaluate(() => {\n    const td = (window as any).__testData;\n    return [...td.events].map((e: any) => e['@id']);\n  });",
+    "lineNumber": 131
+  },
+  {
+    "pattern": "les utilisateurs ont des identifiants NextGraph",
+    "keyword": "Then",
+    "file": "connexion.steps.ts",
+    "sourceCode": "Then('les utilisateurs ont des identifiants NextGraph', async function (this: FestipodWorld) {\n  const ids = await this.appFrame!.evaluate(() => {\n    const td = (window as any).__testData;\n    return [...td.users].map((u: any) => u['@id']);\n  });",
+    "lineNumber": 142
+  },
+  {
+    "pattern": "l'écran gère la redirection automatique après connexion",
+    "keyword": "Then",
+    "file": "connexion.steps.ts",
+    "sourceCode": "Then('l\\'écran gère la redirection automatique après connexion', async function (this: FestipodWorld) {\n  const source = this.getRenderedText();\n  // LoginScreen must have a useEffect that navigates on status === 'connected'\n  const hasAutoNavigate =\n    source.includes('useEffect') &&\n    source.includes(\"status === 'connected'\") &&\n    source.includes(\"navigate\") &&\n    source.includes(\"'home'\");\n  expect(hasAutoNavigate, 'LoginScreen should auto-navigate to home when status becomes connected').to.be.true;\n});",
+    "lineNumber": 5
+  },
+  {
+    "pattern": "l'écran gère l'état de connexion en cours",
+    "keyword": "Then",
+    "file": "connexion.steps.ts",
+    "sourceCode": "Then('l\\'écran gère l\\'état de connexion en cours', async function (this: FestipodWorld) {\n  const source = this.getRenderedText();\n  const hasConnectingState =\n    source.includes(\"status === 'connecting'\") ||\n    source.includes(\"Connexion NextGraph en cours\");\n  expect(hasConnectingState, 'LoginScreen should handle connecting state').to.be.true;\n});",
+    "lineNumber": 16
+  },
+  {
+    "pattern": "l'écran n'importe pas de données de démonstration",
+    "keyword": "Then",
+    "file": "connexion.steps.ts",
+    "sourceCode": "Then('l\\'écran n\\'importe pas de données de démonstration', async function (this: FestipodWorld) {\n  const source = this.getRenderedText();\n  const importsSeedData = source.includes('seedData') || source.includes('seedEvents');\n  const usesFestipodData = source.includes('useFestipodData');\n  expect(importsSeedData, 'LoginScreen should not import seed data').to.be.false;\n  expect(usesFestipodData, 'LoginScreen should not use FestipodData context').to.be.false;\n});",
+    "lineNumber": 24
+  },
+  {
+    "pattern": "un événement {string} existe",
+    "keyword": "Given",
+    "file": "inscription.steps.ts",
+    "sourceCode": "Given('un événement {string} existe', async function (this: FestipodWorld, eventTitle: string) {\n  const exists = await this.appFrame!.evaluate(\n    (title) => {\n      const td = (window as any).__testData;\n      return [...td.events].some((e: any) => e.title === title);\n    },\n    eventTitle,\n  );\n  expect(exists, `Event \"${eventTitle}\" should exist in the data layer`).to.be.true;\n});",
+    "lineNumber": 10
+  },
+  {
+    "pattern": "l'utilisateur n'est pas inscrit à l'événement {string}",
+    "keyword": "Given",
+    "file": "inscription.steps.ts",
+    "sourceCode": "Given('l\\'utilisateur n\\'est pas inscrit à l\\'événement {string}', async function (this: FestipodWorld, eventTitle: string) {\n  await this.appFrame!.evaluate(\n    (title) => {\n      const td = (window as any).__testData;\n      const event = [...td.events].find((e: any) => e.title === title);\n      if (event) td.leaveEvent(event['@id'], td.currentUserId);\n    },\n    eventTitle,\n  );\n});",
+    "lineNumber": 21
+  },
+  {
+    "pattern": "l'utilisateur est inscrit à l'événement {string}",
+    "keyword": "Given",
+    "file": "inscription.steps.ts",
+    "sourceCode": "Given('l\\'utilisateur est inscrit à l\\'événement {string}', async function (this: FestipodWorld, eventTitle: string) {\n  await this.appFrame!.evaluate(\n    (title) => {\n      const td = (window as any).__testData;\n      const event = [...td.events].find((e: any) => e.title === title);\n      if (event) td.joinEvent(event['@id'], td.currentUserId);\n    },\n    eventTitle,\n  );\n});",
+    "lineNumber": 32
+  },
+  {
+    "pattern": "l'événement {string} a {int} participants au départ",
+    "keyword": "Given",
+    "file": "inscription.steps.ts",
+    "sourceCode": "Given('l\\'événement {string} a {int} participants au départ', async function (this: FestipodWorld, eventTitle: string, count: number) {\n  await this.appFrame!.evaluate(\n    ([title, c]: [string, number]) => {\n      const td = (window as any).__testData;\n      const event = [...td.events].find((e: any) => e.title === title);\n      if (event) td.updateEvent(event['@id'], { participantCount: c });",
+    "lineNumber": 43
+  },
+  {
+    "pattern": "l'utilisateur s'inscrit à l'événement {string}",
+    "keyword": "When",
+    "file": "inscription.steps.ts",
+    "sourceCode": "When('l\\'utilisateur s\\'inscrit à l\\'événement {string}', async function (this: FestipodWorld, eventTitle: string) {\n  await this.appFrame!.evaluate(\n    (title) => {\n      const td = (window as any).__testData;\n      const event = [...td.events].find((e: any) => e.title === title);\n      if (event) td.joinEvent(event['@id'], td.currentUserId);\n    },\n    eventTitle,\n  );\n});",
+    "lineNumber": 56
+  },
+  {
+    "pattern": "l'utilisateur se désinscrit de l'événement {string}",
+    "keyword": "When",
+    "file": "inscription.steps.ts",
+    "sourceCode": "When('l\\'utilisateur se désinscrit de l\\'événement {string}', async function (this: FestipodWorld, eventTitle: string) {\n  await this.appFrame!.evaluate(\n    (title) => {\n      const td = (window as any).__testData;\n      const event = [...td.events].find((e: any) => e.title === title);\n      if (event) td.leaveEvent(event['@id'], td.currentUserId);\n    },\n    eventTitle,\n  );\n});",
+    "lineNumber": 67
+  },
+  {
+    "pattern": "l'utilisateur essaie de s'inscrire une seconde fois à l'événement {string}",
+    "keyword": "When",
+    "file": "inscription.steps.ts",
+    "sourceCode": "When('l\\'utilisateur essaie de s\\'inscrire une seconde fois à l\\'événement {string}', async function (this: FestipodWorld, eventTitle: string) {\n  await this.appFrame!.evaluate(\n    (title) => {\n      const td = (window as any).__testData;\n      const event = [...td.events].find((e: any) => e.title === title);\n      if (event) td.joinEvent(event['@id'], td.currentUserId);\n    },\n    eventTitle,\n  );\n});",
+    "lineNumber": 78
+  },
+  {
+    "pattern": "l'utilisateur est participant de l'événement {string}",
+    "keyword": "Then",
+    "file": "inscription.steps.ts",
+    "sourceCode": "Then('l\\'utilisateur est participant de l\\'événement {string}', async function (this: FestipodWorld, eventTitle: string) {\n  const participating = await this.appFrame!.evaluate(\n    (title) => {\n      const td = (window as any).__testData;\n      const event = [...td.events].find((e: any) => e.title === title);\n      if (!event) return false;\n      return td.isParticipating(event['@id'], td.currentUserId);\n    },\n    eventTitle,\n  );\n  expect(participating, `User should be participating in \"${eventTitle}\"`).to.be.true;\n});",
+    "lineNumber": 91
+  },
+  {
+    "pattern": "l'utilisateur n'est plus participant de l'événement {string}",
+    "keyword": "Then",
+    "file": "inscription.steps.ts",
+    "sourceCode": "Then('l\\'utilisateur n\\'est plus participant de l\\'événement {string}', async function (this: FestipodWorld, eventTitle: string) {\n  const participating = await this.appFrame!.evaluate(\n    (title) => {\n      const td = (window as any).__testData;\n      const event = [...td.events].find((e: any) => e.title === title);\n      if (!event) return false;\n      return td.isParticipating(event['@id'], td.currentUserId);\n    },\n    eventTitle,\n  );\n  expect(participating, `User should NOT be participating in \"${eventTitle}\"`).to.be.false;\n});",
+    "lineNumber": 104
+  },
+  {
+    "pattern": "l'événement {string} compte {int} participants",
+    "keyword": "Then",
+    "file": "inscription.steps.ts",
+    "sourceCode": "Then('l\\'événement {string} compte {int} participants', async function (this: FestipodWorld, eventTitle: string, expectedCount: number) {\n  const count = await this.appFrame!.evaluate(\n    (title) => {\n      const td = (window as any).__testData;\n      const event = [...td.events].find((e: any) => e.title === title);\n      return event?.participantCount ?? -1;\n    },\n    eventTitle,\n  );\n  expect(count, `Event \"${eventTitle}\" participant count`).to.equal(expectedCount);\n});",
+    "lineNumber": 117
+  },
+  {
+    "pattern": "l'utilisateur apparaît dans la liste des participants de l'événement {string}",
+    "keyword": "Then",
+    "file": "inscription.steps.ts",
+    "sourceCode": "Then('l\\'utilisateur apparaît dans la liste des participants de l\\'événement {string}', async function (this: FestipodWorld, eventTitle: string) {\n  const found = await this.appFrame!.evaluate(\n    (title) => {\n      const td = (window as any).__testData;\n      const event = [...td.events].find((e: any) => e.title === title);\n      if (!event) return false;\n      return td.getEventParticipants(event['@id']).some((p: any) => p.user === td.currentUserId);\n    },\n    eventTitle,\n  );\n  expect(found, `User should appear in participants of \"${eventTitle}\"`).to.be.true;\n});",
+    "lineNumber": 129
+  },
+  {
+    "pattern": "l'utilisateur n'apparaît plus dans la liste des participants de l'événement {string}",
+    "keyword": "Then",
+    "file": "inscription.steps.ts",
+    "sourceCode": "Then('l\\'utilisateur n\\'apparaît plus dans la liste des participants de l\\'événement {string}', async function (this: FestipodWorld, eventTitle: string) {\n  const found = await this.appFrame!.evaluate(\n    (title) => {\n      const td = (window as any).__testData;\n      const event = [...td.events].find((e: any) => e.title === title);\n      if (!event) return false;\n      return td.getEventParticipants(event['@id']).some((p: any) => p.user === td.currentUserId);\n    },\n    eventTitle,\n  );\n  expect(found, `User should NOT appear in participants of \"${eventTitle}\"`).to.be.false;\n});",
+    "lineNumber": 142
+  },
+  {
+    "pattern": "l'inscription est idempotente pour l'événement {string}",
+    "keyword": "Then",
+    "file": "inscription.steps.ts",
+    "sourceCode": "Then('l\\'inscription est idempotente pour l\\'événement {string}', async function (this: FestipodWorld, eventTitle: string) {\n  const count = await this.appFrame!.evaluate(\n    (title) => {\n      const td = (window as any).__testData;\n      const event = [...td.events].find((e: any) => e.title === title);\n      if (!event) return 0;\n      return td.getEventParticipants(event['@id']).filter((p: any) => p.user === td.currentUserId).length;\n    },\n    eventTitle,\n  );\n  expect(count, 'User should have exactly one participation record').to.equal(1);\n});",
+    "lineNumber": 155
+  },
+  {
     "pattern": "je clique sur un événement",
     "keyword": "When",
     "file": "event.steps.ts",

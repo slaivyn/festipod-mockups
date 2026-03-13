@@ -2,15 +2,15 @@
  * Data-layer test harness (real NextGraph broker mode).
  *
  * Runs inside an iframe controlled by the NextGraph broker.
- * Uses real @ng-org/web init + @ng-org/orm useShape to test
- * the full data pipeline up to the broker.
+ * Uses the REAL app providers (NextGraphProvider + FestipodDataProvider)
+ * so tests face the same code paths as the app.
  *
  * Exposes window.__testData for Playwright-driven Cucumber steps.
  */
 import React, { useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import { ng, init as initNgWeb } from '@ng-org/web';
-import { initNg as initNgSignals } from '@ng-org/orm';
+import { NextGraphProvider, useNextGraph } from '../context/NextGraphContext';
+import { FestipodDataProvider, useFestipodData } from '../context/FestipodDataContext';
 import { useShape } from '@ng-org/orm/react';
 import type { DeepSignalSet } from '@ng-org/alien-deepsignals';
 import {
@@ -19,86 +19,47 @@ import {
   FpParticipationShapeType,
 } from '../shapes/orm/festipodShapes.shapeTypes';
 import type { FpEvent, FpUserProfile, FpParticipation } from '../shapes/orm/festipodShapes.typings';
+import { seedEvents, seedUsers, seedParticipations } from '../data/seedData';
+import { bootstrapWallet } from '../utils/ngBootstrap';
 
 // ============================================================================
-// Seed data — injected into the broker if the graph is empty
-// ============================================================================
-
-const SEED_EVENTS: Array<Omit<FpEvent, '@graph' | '@id'>> = [
-  { '@type': 'http://festipod.org/Event', title: 'Résidence Reconnexion', date: 'Lun. 16 - Ven. 20 fév.', location: 'Écocentre de Villarceaux', participantCount: 24 },
-  { '@type': 'http://festipod.org/Event', title: 'Marché des créateurs', date: 'Sam. 22 fév. · 10h', location: 'Place Bellecour, Lyon', participantCount: 12 },
-  { '@type': 'http://festipod.org/Event', title: 'Cercle de parole', date: 'Dim. 23 fév. · 14h', location: 'Maison des associations', participantCount: 45 },
-  { '@type': 'http://festipod.org/Event', title: 'Formation CNV', date: 'Sam. 1 mars · 9h30', location: 'Centre Iris, Paris', participantCount: 16 },
-  { '@type': 'http://festipod.org/Event', title: 'Festival Printemps', date: 'Ven. 14 - Dim. 16 mars', location: 'Domaine de Longchamp', participantCount: 30 },
-];
-
-// ============================================================================
-// NG initialization
-// ============================================================================
-
-let sessionReady = false;
-let ngSession: any = null;
-
-async function initNG() {
-  console.log('[HarnessNG] Initializing NextGraph...');
-  await initNgWeb(
-    async (event: any) => {
-      ngSession = event.session;
-      ngSession.ng ??= ng;
-      initNgSignals(ng, ngSession);
-      sessionReady = true;
-      console.log('[HarnessNG] NG session established, private_store_id:', ngSession.private_store_id);
-    },
-    true,  // singleton
-    [],    // access_requests
-  );
-}
-
-// Start init immediately (this will postMessage to parent broker)
-initNG().catch((err) => {
-  console.error('[HarnessNG] Init failed:', err);
-  // Signal failure so tests don't hang
-  (window as any).__testData = { ready: false, error: err.message };
-});
-
-// ============================================================================
-// Harness component — uses real useShape, exposes window.__testData
+// App — uses real providers (same tree as the real app)
 // ============================================================================
 
 function DataHarnessNG() {
-  const [ready, setReady] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-
-  // Wait for NG session before rendering useShape hooks
-  if (!sessionReady) {
-    return <WaitForSession onReady={() => setReady(true)} onError={setError} />;
-  }
-
-  return <ShapeConsumer />;
+  return (
+    <NextGraphProvider>
+      <FestipodDataProvider>
+        <HarnessRouter />
+      </FestipodDataProvider>
+    </NextGraphProvider>
+  );
 }
 
-function WaitForSession({ onReady, onError }: { onReady: () => void; onError: (e: string) => void }) {
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (sessionReady) {
-        clearInterval(interval);
-        onReady();
-      }
-    }, 100);
-    const timeout = setTimeout(() => {
-      clearInterval(interval);
-      if (!sessionReady) {
-        onError('NG session timeout after 30s');
-      }
-    }, 30000);
-    return () => { clearInterval(interval); clearTimeout(timeout); };
-  }, []);
+// Wait for NG connection before exposing the test bridge
+function HarnessRouter() {
+  const { status } = useNextGraph();
+
+  if (status === 'connected') {
+    return <ConnectedHarness />;
+  }
+
+  if (status === 'error') {
+    return <div id="harness-status">ERROR</div>;
+  }
 
   return <div id="harness-status">WAITING_FOR_SESSION</div>;
 }
 
-function ShapeConsumer() {
-  // Use "did:ng:i" scope = all data in private store (same as the app)
+// ============================================================================
+// Connected harness — exposes window.__testData through real providers
+// ============================================================================
+
+function ConnectedHarness() {
+  const ngCtx = useNextGraph();
+  const appData = useFestipodData();
+
+  // Raw DeepSignalSets for direct manipulation in tests
   const events = useShape(FpEventShapeType, 'did:ng:i') as DeepSignalSet<FpEvent>;
   const users = useShape(FpUserProfileShapeType, 'did:ng:i') as DeepSignalSet<FpUserProfile>;
   const participations = useShape(FpParticipationShapeType, 'did:ng:i') as DeepSignalSet<FpParticipation>;
@@ -106,32 +67,11 @@ function ShapeConsumer() {
   const [bridgeReady, setBridgeReady] = useState(false);
 
   useEffect(() => {
-    // Wait a tick for useShape to populate
+    // Small delay for useShape to populate
     const timer = setTimeout(() => {
-      const graph = `did:ng:${ngSession.private_store_id}`;
+      const session = ngCtx.session!;
 
-      // Seed events if the graph is empty
-      if (events.size === 0) {
-        console.log('[HarnessNG] Graph empty, seeding test events...');
-        for (const e of SEED_EVENTS) {
-          events.add({ ...e, '@graph': graph, '@id': '' } as FpEvent);
-        }
-      }
-
-      // Seed a test user if none exists
-      if (users.size === 0) {
-        console.log('[HarnessNG] No user profile, seeding test user...');
-        users.add({
-          '@graph': graph,
-          '@id': '',
-          '@type': 'http://festipod.org/UserProfile',
-          name: 'Test User',
-          initials: 'TU',
-          username: '@testuser',
-        } as FpUserProfile);
-      }
-
-      // Get current user ID (wait briefly for NG to assign @id)
+      // Get current user ID
       let currentUserId = '';
       const existingUsers = [...users];
       if (existingUsers.length > 0) {
@@ -141,12 +81,19 @@ function ShapeConsumer() {
       // Expose the test bridge
       (window as any).__testData = {
         ready: true,
+
+        // --- Raw DeepSignalSets (backward compatible with existing tests) ---
         events,
         users,
         participations,
         currentUserId,
-        session: ngSession,
+        session,
 
+        // --- App-level view (through real providers, same as what screens see) ---
+        appData,
+        ngStatus: ngCtx.status,
+
+        // --- Query helpers ---
         getEvent(id: string) {
           return [...events].find(e => e['@id'] === id);
         },
@@ -159,13 +106,15 @@ function ShapeConsumer() {
         getEventParticipants(eventId: string) {
           return [...participations].filter(p => p.event === eventId);
         },
+
+        // --- Mutations (direct ngSet access) ---
         joinEvent(eventId: string, userId: string) {
           const already = [...participations].some(p => p.event === eventId && p.user === userId);
           if (already) return;
           participations.add({
-            '@graph': `did:ng:${ngSession.private_store_id}`,
+            '@graph': `did:ng:${session.private_store_id}`,
             '@type': 'http://festipod.org/Participation',
-            '@id': '',  // auto-assigned by NG
+            '@id': '',
             event: eventId,
             user: userId,
             isConfirmed: true,
@@ -189,14 +138,21 @@ function ShapeConsumer() {
             }
           }
         },
+
+        /** Load the app's default seed data into the wallet */
+        loadTestData() {
+          return bootstrapWallet(events as any, users as any, participations as any);
+        },
       };
 
-      console.log('[HarnessNG] Ready — events:', events.size, 'users:', users.size, 'participations:', participations.size);
+      console.log('[HarnessNG] Ready — events:', events.size, 'users:', users.size,
+        'participations:', participations.size, '| ngStatus:', ngCtx.status,
+        '| appData.events:', appData.events.length);
       setBridgeReady(true);
-    }, 500);  // Small delay for useShape to populate
+    }, 500);
 
     return () => clearTimeout(timer);
-  }, [events, users, participations]);
+  }, [events, users, participations, ngCtx, appData]);
 
   return <div id="harness-status">{bridgeReady ? 'READY' : 'LOADING_SHAPES'}</div>;
 }
