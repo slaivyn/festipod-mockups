@@ -27,13 +27,11 @@ export function init(): Promise<void> {
     console.log('[NG session] init() called — registering callback');
     initPromise = initNgWeb(
         async (event: any) => {
-            console.log('[NG session] initNgWeb callback received, event:', JSON.stringify(Object.keys(event || {})));
             session = event.session;
             session!.ng ??= ng;
-            console.log('[NG session] Session established, private_store_id:', session!.private_store_id);
+            console.log('[NG session] Connected — private_store:', session!.private_store_id);
             resolveSessionPromise(session!);
             initNgSignals(ng, session!);
-            console.log('[NG session] ORM signals initialized');
         },
         true,
         []

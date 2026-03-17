@@ -76,3 +76,19 @@ Fonctionnalité: Connexion NextGraph et chargement des données
     Quand l'utilisateur navigue vers l'écran "home" sans historique
     Et l'utilisateur clique sur le bouton "Galerie"
     Alors l'application affiche la galerie
+
+  @e2e
+  Scénario: Le bouton "Charger données de test" est visible quand connecté
+    Alors la galerie affiche le bouton "Charger données de test"
+
+  @e2e
+  Scénario: Charger les données de test remplit le portefeuille
+    Quand l'utilisateur clique sur le bouton "Charger données de test"
+    Et l'utilisateur attend la fin du chargement
+    Et l'utilisateur navigue vers l'écran "home"
+    Alors l'écran d'accueil affiche des événements
+
+  @e2e
+  Scénario: Les données chargées persistent après reconnexion
+    Quand l'utilisateur navigue vers l'écran "home"
+    Alors l'écran d'accueil affiche des événements

@@ -31,14 +31,18 @@ Cucumber steps → Playwright (Chromium, persistent profile)
 
 Fully automated — no manual interaction required. CI-ready.
 
-### First Run (wallet creation)
+### First Run (wallet creation + bootstrap)
 1. `BeforeAll` detects no `.wallet-ready` marker in `.playwright-profile/`
 2. Launches headless Chromium with persistent profile
 3. Navigates to `https://nextgraph.eu/` → clicks "Create Wallet"
 4. Redirected to `account.nextgraph.eu` → clicks "I accept" (ToS)
 5. Redirected back → fills username/password form → submits
-6. Wallet created in localStorage → marker written
-7. This is also a real test of the app's auth/login feature
+6. Wallet created in localStorage
+7. **Logs in to the wallet** — this triggers the verifier bootstrap from the remote broker, populating localStorage with repo data
+8. Waits 10s for bootstrap to complete, then closes context
+9. Marker written
+
+Step 7 is critical: the NextGraph verifier starts with an empty `repos` HashMap. On first login, `verifier.sync()` bootstraps from the remote broker, downloading repo data (including store repos). This data is saved to localStorage via `session_save`. Without this initial login, subsequent sessions would have empty repos and all writes would fail with `RepoNotFound`.
 
 ### Subsequent Runs (automated login)
 1. Marker found → skip wallet creation
@@ -73,7 +77,7 @@ Required because broker at `nextgraph.eu` (public) loads harness from `http://12
 - Shut down in `AfterAll`
 
 ### ORM Subscriptions
-Harness creates subscriptions for all three shapes with scope `did:ng:i` (private store):
+Harness creates subscriptions for all three shapes with scope `did:ng:${session.private_store_id}` (opens the store repo for reads AND writes):
 - `FpEventShapeType` → events
 - `FpUserProfileShapeType` → users
 - `FpParticipationShapeType` → participations

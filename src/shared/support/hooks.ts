@@ -6,7 +6,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import type { FestipodWorld } from './world';
 
-setDefaultTimeout(30000);
+setDefaultTimeout(90000);
 
 let browser: Browser;
 let browserContext: BrowserContext;
@@ -164,10 +164,29 @@ async function ensureAuth(): Promise<void> {
     // Step 6: Wait for wallet to be created (redirects to #/wallet/login)
     console.log('[Auth] Step 6: Waiting for wallet creation to complete...');
     await page.waitForURL('**/#/wallet/login', { timeout: 30000 });
-    // Give localStorage time to persist
     await page.waitForTimeout(2000);
 
-    console.log('[Auth] Wallet created successfully');
+    // Step 7: Actually log in to trigger verifier bootstrap from remote broker.
+    // The verifier starts with empty repos and must sync from the broker.
+    // This first login populates localStorage with repo data so subsequent
+    // sessions can load repos immediately via verifier.load().
+    console.log('[Auth] Step 7: Logging in to bootstrap verifier repos...');
+    const walletLink = page.getByText('Click here to login with your wallet');
+    if (await walletLink.isVisible({ timeout: 5000 }).catch(() => false)) {
+      await walletLink.click();
+      await page.waitForTimeout(1000);
+    }
+
+    const loginPasswordInput = page.locator('input[type="password"]');
+    await loginPasswordInput.waitFor({ state: 'visible', timeout: 10000 });
+    await loginPasswordInput.fill(WALLET_PASSWORD);
+    await loginPasswordInput.press('Enter');
+
+    // Wait for the session to establish and repos to bootstrap
+    console.log('[Auth] Step 8: Waiting for verifier bootstrap to complete...');
+    await page.waitForTimeout(10000);
+
+    console.log('[Auth] Wallet created and bootstrapped successfully');
   } finally {
     await authContext.close();
   }

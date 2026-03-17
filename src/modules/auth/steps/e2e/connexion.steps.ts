@@ -94,6 +94,65 @@ When('l\'utilisateur clique sur le bouton {string}', async function (this: Festi
   await this.appFrame!.waitForTimeout(1000);
 });
 
+Then('la galerie affiche le bouton {string}', async function (this: FestipodWorld, buttonText: string) {
+  // The app starts at the Gallery in e2e mode — verify button is visible
+  const appeared = await this.appFrame!.waitForFunction(
+    (text: string) => {
+      const buttons = Array.from(document.querySelectorAll('button'));
+      return buttons.some(b => b.textContent?.includes(text));
+    },
+    buttonText,
+    { timeout: 10000 },
+  ).then(() => true).catch(() => false);
+
+  if (!appeared) {
+    const debug = await this.appFrame!.evaluate(() => ({
+      buttons: Array.from(document.querySelectorAll('button')).map(b => b.textContent?.trim()),
+      rootText: document.getElementById('root')?.textContent?.substring(0, 300),
+    }));
+    expect.fail(
+      `Button "${buttonText}" not found. Buttons: ${JSON.stringify(debug.buttons)}. Content: "${debug.rootText}"`,
+    );
+  }
+});
+
+When('l\'utilisateur attend la fin du chargement', async function (this: FestipodWorld) {
+  // Wait for the "Chargement..." button to disappear (bootstrap finished)
+  await this.appFrame!.waitForFunction(
+    () => {
+      const buttons = Array.from(document.querySelectorAll('button'));
+      return !buttons.some(b => b.textContent?.includes('Chargement...'));
+    },
+    { timeout: 60000 },
+  );
+  // Extra wait for ORM to flush all microtasks and broker to process
+  await this.appFrame!.waitForTimeout(2000);
+});
+
+Then('l\'écran d\'accueil affiche des événements', async function (this: FestipodWorld) {
+  const appeared = await this.appFrame!.waitForFunction(
+    () => {
+      const root = document.getElementById('root');
+      if (!root) return false;
+      const text = root.textContent || '';
+      // Home screen shows "Mes événements à venir" with event cards containing "inscrits" badges
+      return text.includes('Mes événements à venir') && text.includes('inscrits');
+    },
+    { timeout: 15000 },
+  ).then(() => true).catch(() => false);
+
+  if (!appeared) {
+    const debug = await this.appFrame!.evaluate(() => ({
+      hash: window.location.hash,
+      rootText: document.getElementById('root')?.textContent?.substring(0, 500),
+    }));
+    expect.fail(
+      `Expected home screen with events (containing "inscrits") but got hash="${debug.hash}", ` +
+      `content: "${debug.rootText}"`,
+    );
+  }
+});
+
 Then('l\'application affiche la galerie', async function (this: FestipodWorld) {
   const appeared = await this.appFrame!.waitForFunction(
     () => {

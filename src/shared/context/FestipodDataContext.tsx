@@ -15,7 +15,6 @@ import {
   seedFriendships,
 } from '../data/seedData';
 import { useNextGraph } from './NextGraphContext';
-import { sessionPromise } from '../utils/ngSession';
 import { useShapeWithDefaults } from '../hooks/useShapeWithDefaults';
 import {
   FpEventShapeType,
@@ -24,6 +23,7 @@ import {
 } from '../shapes/orm/festipodShapes.shapeTypes';
 import type { FpEvent, FpUserProfile, FpParticipation } from '../shapes/orm/festipodShapes.typings';
 import { bootstrapWallet, type BootstrapResult } from '../utils/ngBootstrap';
+import { ensureGraphNuri } from '../utils/ngGraph';
 
 // ============================================================================
 // Context interface
@@ -226,14 +226,19 @@ function useLocalData(empty?: boolean): FestipodDataContextValue {
 // ============================================================================
 
 function useNgData(): FestipodDataContextValue {
+  const { session } = useNextGraph();
+  // Use private store NURI as scope (same as expense-tracker-rdf).
+  // This opens the store repo in the verifier, enabling both reads and writes.
+  const privateNuri = session && `did:ng:${session.private_store_id}`;
+
   // useShapeWithDefaults: show EMPTY data until NG populates (no seed defaults)
   const emptyEvents: FpEventData[] = [];
   const emptyUsers: FpUserData[] = [];
   const emptyParticipations: FpParticipationData[] = [];
 
-  const eventsShape = useShapeWithDefaults(FpEventShapeType, emptyEvents, mapEvent, true);
-  const usersShape = useShapeWithDefaults(FpUserProfileShapeType, emptyUsers, mapUser, true);
-  const participationsShape = useShapeWithDefaults(FpParticipationShapeType, emptyParticipations, mapParticipation, true);
+  const eventsShape = useShapeWithDefaults(FpEventShapeType, privateNuri, emptyEvents, mapEvent, true);
+  const usersShape = useShapeWithDefaults(FpUserProfileShapeType, privateNuri, emptyUsers, mapUser, true);
+  const participationsShape = useShapeWithDefaults(FpParticipationShapeType, privateNuri, emptyParticipations, mapParticipation, true);
 
   const events = eventsShape.items;
   const users = usersShape.items;
@@ -269,8 +274,7 @@ function useNgData(): FestipodDataContextValue {
   const createEvent = useCallback((event: Omit<FpEventData, 'id'>): FpEventData => {
     console.log('[FestipodData] createEvent (NG):', event.title);
     (async () => {
-      const session = await sessionPromise;
-      const graph = `did:ng:${session.private_store_id}`;
+      const graph = await ensureGraphNuri(eventsShape.ngSet as any, usersShape.ngSet as any, participationsShape.ngSet as any);
       eventsShape.ngSet.add({
         "@graph": graph, "@type": "http://festipod.org/Event", "@id": "",
         title: event.title, description: event.description, date: event.date,
@@ -288,7 +292,7 @@ function useNgData(): FestipodDataContextValue {
       }
     })();
     return { ...event, id: `ng-pending-${Date.now()}` };
-  }, [eventsShape.ngSet, participationsShape.ngSet, currentUserId]);
+  }, [eventsShape.ngSet, usersShape.ngSet, participationsShape.ngSet, currentUserId]);
 
   const updateEvent = useCallback((id: string, updates: Partial<FpEventData>) => {
     console.log('[FestipodData] updateEvent (NG):', id, updates);
@@ -312,8 +316,7 @@ function useNgData(): FestipodDataContextValue {
       return;
     }
     (async () => {
-      const session = await sessionPromise;
-      const graph = `did:ng:${session.private_store_id}`;
+      const graph = await ensureGraphNuri(eventsShape.ngSet as any, usersShape.ngSet as any, participationsShape.ngSet as any);
       participationsShape.ngSet.add({
         "@graph": graph, "@type": "http://festipod.org/Participation", "@id": "",
         event: eventId, user: uid, isConfirmed: true,
@@ -324,7 +327,7 @@ function useNgData(): FestipodDataContextValue {
       }
       console.log('[FestipodData] joinEvent done');
     })();
-  }, [participationsShape.ngSet, eventsShape.ngSet, currentUserId]);
+  }, [participationsShape.ngSet, eventsShape.ngSet, usersShape.ngSet, currentUserId]);
 
   const leaveEvent = useCallback((eventId: string, userId?: string) => {
     const uid = userId || currentUserId;

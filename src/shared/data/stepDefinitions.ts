@@ -81,6 +81,76 @@ export const stepDefinitions: StepDefinitionInfo[] = [
     "lineNumber": 142
   },
   {
+    "pattern": "l'utilisateur navigue vers l'écran {string}",
+    "keyword": "When",
+    "file": "connexion.steps.ts",
+    "sourceCode": "When('l\\'utilisateur navigue vers l\\'écran {string}', async function (this: FestipodWorld, screenId: string) {\n  await this.appFrame!.evaluate((id: string) => {\n    window.location.hash = `#/demo/${id}`;\n  }, screenId);\n  // Wait for React to process the navigation\n  await this.appFrame!.waitForTimeout(1500);\n});",
+    "lineNumber": 19
+  },
+  {
+    "pattern": "l'utilisateur navigue vers l'écran {string} sans historique",
+    "keyword": "When",
+    "file": "connexion.steps.ts",
+    "sourceCode": "When('l\\'utilisateur navigue vers l\\'écran {string} sans historique', async function (this: FestipodWorld, screenId: string) {\n  // Use replaceState to navigate without creating a back-history entry\n  // (simulates the app being loaded directly at a DemoMode URL in the broker iframe)\n  await this.appFrame!.evaluate((id: string) => {\n    window.history.replaceState(null, '', `#/demo/${id}`);\n    window.dispatchEvent(new HashChangeEvent('hashchange'));\n  }, screenId);\n  await this.appFrame!.waitForTimeout(1500);\n});",
+    "lineNumber": 27
+  },
+  {
+    "pattern": "l'application est toujours dans l'iframe",
+    "keyword": "Then",
+    "file": "connexion.steps.ts",
+    "sourceCode": "Then('l\\'application est toujours dans l\\'iframe', async function (this: FestipodWorld) {\n  // Verify the app didn't redirect away (initNgWeb would redirect if not in iframe)\n  const url = await this.appFrame!.evaluate(() => window.location.href);\n  expect(url, 'App should still be on localhost, not redirected to broker').to.include('127.0.0.1');\n\n  // Verify the app rendered (not a blank page or error)\n  const hasContent = await this.appFrame!.evaluate(() => {\n    const root = document.getElementById('root');\n    return root && root.innerHTML.length > 100;\n  });",
+    "lineNumber": 37
+  },
+  {
+    "pattern": "l'application affiche l'écran {string}",
+    "keyword": "Then",
+    "file": "connexion.steps.ts",
+    "sourceCode": "Then('l\\'application affiche l\\'écran {string}', async function (this: FestipodWorld, expectedScreenId: string) {\n  const marker = SCREEN_MARKERS[expectedScreenId];\n\n  // Wait for the expected screen to appear (handles async redirects like login→home)\n  const appeared = await this.appFrame!.waitForFunction(\n    ([id, markerText]: [string, string | undefined]) => {\n      const hash = window.location.hash;\n      if (!hash.includes(`demo/${id}`)) return false;\n\n      const root = document.getElementById('root');\n      if (!root || root.innerHTML.length < 100) return false;\n\n      // If we have a marker, verify screen content too\n      if (markerText) {\n        return root.textContent?.includes(markerText) ?? false;\n      }\n      return true;\n    },\n    [expectedScreenId, marker] as [string, string | undefined],\n    { timeout: 10000 },\n  ).then(() => true).catch(() => false);\n\n  if (!appeared) {\n    // Gather debug info on failure\n    const debug = await this.appFrame!.evaluate(() => ({\n      hash: window.location.hash,\n      rootText: document.getElementById('root')?.textContent?.substring(0, 300),\n    }));\n    expect.fail(\n      `Expected screen \"${expectedScreenId}\" but got hash=\"${debug.hash}\", ` +\n      `content: \"${debug.rootText}\"`,\n    );\n  }\n});",
+    "lineNumber": 50
+  },
+  {
+    "pattern": "l'URL contient {string}",
+    "keyword": "Then",
+    "file": "connexion.steps.ts",
+    "sourceCode": "Then('l\\'URL contient {string}', async function (this: FestipodWorld, expected: string) {\n  const hash = await this.appFrame!.evaluate(() => window.location.hash);\n  expect(hash, `URL hash should contain \"${expected}\"`).to.include(expected);\n});",
+    "lineNumber": 85
+  },
+  {
+    "pattern": "l'utilisateur clique sur le bouton {string}",
+    "keyword": "When",
+    "file": "connexion.steps.ts",
+    "sourceCode": "When('l\\'utilisateur clique sur le bouton {string}', async function (this: FestipodWorld, buttonText: string) {\n  // Click button matching the text inside the app iframe\n  const button = this.appFrame!.locator(`button`, { hasText: buttonText });",
+    "lineNumber": 90
+  },
+  {
+    "pattern": "la galerie affiche le bouton {string}",
+    "keyword": "Then",
+    "file": "connexion.steps.ts",
+    "sourceCode": "Then('la galerie affiche le bouton {string}', async function (this: FestipodWorld, buttonText: string) {\n  // The app starts at the Gallery in e2e mode — verify button is visible\n  const appeared = await this.appFrame!.waitForFunction(\n    (text: string) => {\n      const buttons = Array.from(document.querySelectorAll('button'));\n      return buttons.some(b => b.textContent?.includes(text));\n    },\n    buttonText,\n    { timeout: 10000 },\n  ).then(() => true).catch(() => false);\n\n  if (!appeared) {\n    const debug = await this.appFrame!.evaluate(() => ({\n      buttons: Array.from(document.querySelectorAll('button')).map(b => b.textContent?.trim()),\n      rootText: document.getElementById('root')?.textContent?.substring(0, 300),\n    }));\n    expect.fail(\n      `Button \"${buttonText}\" not found. Buttons: ${JSON.stringify(debug.buttons)}. Content: \"${debug.rootText}\"`,\n    );\n  }\n});",
+    "lineNumber": 97
+  },
+  {
+    "pattern": "l'utilisateur attend la fin du chargement",
+    "keyword": "When",
+    "file": "connexion.steps.ts",
+    "sourceCode": "When('l\\'utilisateur attend la fin du chargement', async function (this: FestipodWorld) {\n  // Wait for the \"Chargement...\" button to disappear (bootstrap finished)\n  await this.appFrame!.waitForFunction(\n    () => {\n      const buttons = Array.from(document.querySelectorAll('button'));\n      return !buttons.some(b => b.textContent?.includes('Chargement...'));\n    },\n    { timeout: 30000 },\n  );\n  // Extra wait for ORM to flush all microtasks and broker to process\n  await this.appFrame!.waitForTimeout(2000);\n});",
+    "lineNumber": 119
+  },
+  {
+    "pattern": "l'écran d'accueil affiche des événements",
+    "keyword": "Then",
+    "file": "connexion.steps.ts",
+    "sourceCode": "Then('l\\'écran d\\'accueil affiche des événements', async function (this: FestipodWorld) {\n  const appeared = await this.appFrame!.waitForFunction(\n    () => {\n      const root = document.getElementById('root');\n      if (!root) return false;\n      const text = root.textContent || '';\n      // Home screen shows \"Mes événements à venir\" with event cards containing \"inscrits\" badges\n      return text.includes('Mes événements à venir') && text.includes('inscrits');\n    },\n    { timeout: 15000 },\n  ).then(() => true).catch(() => false);\n\n  if (!appeared) {\n    const debug = await this.appFrame!.evaluate(() => ({\n      hash: window.location.hash,\n      rootText: document.getElementById('root')?.textContent?.substring(0, 500),\n    }));\n    expect.fail(\n      `Expected home screen with events (containing \"inscrits\") but got hash=\"${debug.hash}\", ` +\n      `content: \"${debug.rootText}\"`,\n    );\n  }\n});",
+    "lineNumber": 132
+  },
+  {
+    "pattern": "l'application affiche la galerie",
+    "keyword": "Then",
+    "file": "connexion.steps.ts",
+    "sourceCode": "Then('l\\'application affiche la galerie', async function (this: FestipodWorld) {\n  const appeared = await this.appFrame!.waitForFunction(\n    () => {\n      const root = document.getElementById('root');\n      if (!root) return false;\n      const hash = window.location.hash;\n      // Gallery is at #/ or empty hash\n      const isGalleryHash = hash === '#/' || hash === '' || hash === '#';\n      // Gallery shows screen thumbnails — look for \"Tous les écrans\" or screen grid\n      const isGalleryContent = root.textContent?.includes('Wireframe') ?? false;\n      return isGalleryHash || isGalleryContent;\n    },\n    { timeout: 10000 },\n  ).then(() => true).catch(() => false);\n\n  if (!appeared) {\n    const debug = await this.appFrame!.evaluate(() => ({\n      hash: window.location.hash,\n      rootText: document.getElementById('root')?.textContent?.substring(0, 300),\n    }));\n    expect.fail(\n      `Expected Gallery but got hash=\"${debug.hash}\", content: \"${debug.rootText}\"`,\n    );\n  }\n});",
+    "lineNumber": 156
+  },
+  {
     "pattern": "l'écran gère la redirection automatique après connexion",
     "keyword": "Then",
     "file": "connexion.steps.ts",
@@ -105,7 +175,7 @@ export const stepDefinitions: StepDefinitionInfo[] = [
     "pattern": "un événement {string} existe",
     "keyword": "Given",
     "file": "inscription.steps.ts",
-    "sourceCode": "Given('un événement {string} existe', async function (this: FestipodWorld, eventTitle: string) {\n  const exists = await this.appFrame!.evaluate(\n    (title) => {\n      const td = (window as any).__testData;\n      return [...td.events].some((e: any) => e.title === title);\n    },\n    eventTitle,\n  );\n  expect(exists, `Event \"${eventTitle}\" should exist in the data layer`).to.be.true;\n});",
+    "sourceCode": "Given('un événement {string} existe', async function (this: FestipodWorld, eventTitle: string) {\n  // Ensure wallet has data (seed if empty)\n  await this.appFrame!.evaluate(() => {\n    const td = (window as any).__testData;\n    if (td.events.size === 0) td.loadTestData();\n  });",
     "lineNumber": 10
   },
   {
@@ -113,84 +183,84 @@ export const stepDefinitions: StepDefinitionInfo[] = [
     "keyword": "Given",
     "file": "inscription.steps.ts",
     "sourceCode": "Given('l\\'utilisateur n\\'est pas inscrit à l\\'événement {string}', async function (this: FestipodWorld, eventTitle: string) {\n  await this.appFrame!.evaluate(\n    (title) => {\n      const td = (window as any).__testData;\n      const event = [...td.events].find((e: any) => e.title === title);\n      if (event) td.leaveEvent(event['@id'], td.currentUserId);\n    },\n    eventTitle,\n  );\n});",
-    "lineNumber": 21
+    "lineNumber": 27
   },
   {
     "pattern": "l'utilisateur est inscrit à l'événement {string}",
     "keyword": "Given",
     "file": "inscription.steps.ts",
     "sourceCode": "Given('l\\'utilisateur est inscrit à l\\'événement {string}', async function (this: FestipodWorld, eventTitle: string) {\n  await this.appFrame!.evaluate(\n    (title) => {\n      const td = (window as any).__testData;\n      const event = [...td.events].find((e: any) => e.title === title);\n      if (event) td.joinEvent(event['@id'], td.currentUserId);\n    },\n    eventTitle,\n  );\n});",
-    "lineNumber": 32
+    "lineNumber": 38
   },
   {
     "pattern": "l'événement {string} a {int} participants au départ",
     "keyword": "Given",
     "file": "inscription.steps.ts",
     "sourceCode": "Given('l\\'événement {string} a {int} participants au départ', async function (this: FestipodWorld, eventTitle: string, count: number) {\n  await this.appFrame!.evaluate(\n    ([title, c]: [string, number]) => {\n      const td = (window as any).__testData;\n      const event = [...td.events].find((e: any) => e.title === title);\n      if (event) td.updateEvent(event['@id'], { participantCount: c });",
-    "lineNumber": 43
+    "lineNumber": 49
   },
   {
     "pattern": "l'utilisateur s'inscrit à l'événement {string}",
     "keyword": "When",
     "file": "inscription.steps.ts",
     "sourceCode": "When('l\\'utilisateur s\\'inscrit à l\\'événement {string}', async function (this: FestipodWorld, eventTitle: string) {\n  await this.appFrame!.evaluate(\n    (title) => {\n      const td = (window as any).__testData;\n      const event = [...td.events].find((e: any) => e.title === title);\n      if (event) td.joinEvent(event['@id'], td.currentUserId);\n    },\n    eventTitle,\n  );\n});",
-    "lineNumber": 56
+    "lineNumber": 62
   },
   {
     "pattern": "l'utilisateur se désinscrit de l'événement {string}",
     "keyword": "When",
     "file": "inscription.steps.ts",
     "sourceCode": "When('l\\'utilisateur se désinscrit de l\\'événement {string}', async function (this: FestipodWorld, eventTitle: string) {\n  await this.appFrame!.evaluate(\n    (title) => {\n      const td = (window as any).__testData;\n      const event = [...td.events].find((e: any) => e.title === title);\n      if (event) td.leaveEvent(event['@id'], td.currentUserId);\n    },\n    eventTitle,\n  );\n});",
-    "lineNumber": 67
+    "lineNumber": 73
   },
   {
     "pattern": "l'utilisateur essaie de s'inscrire une seconde fois à l'événement {string}",
     "keyword": "When",
     "file": "inscription.steps.ts",
     "sourceCode": "When('l\\'utilisateur essaie de s\\'inscrire une seconde fois à l\\'événement {string}', async function (this: FestipodWorld, eventTitle: string) {\n  await this.appFrame!.evaluate(\n    (title) => {\n      const td = (window as any).__testData;\n      const event = [...td.events].find((e: any) => e.title === title);\n      if (event) td.joinEvent(event['@id'], td.currentUserId);\n    },\n    eventTitle,\n  );\n});",
-    "lineNumber": 78
+    "lineNumber": 84
   },
   {
     "pattern": "l'utilisateur est participant de l'événement {string}",
     "keyword": "Then",
     "file": "inscription.steps.ts",
     "sourceCode": "Then('l\\'utilisateur est participant de l\\'événement {string}', async function (this: FestipodWorld, eventTitle: string) {\n  const participating = await this.appFrame!.evaluate(\n    (title) => {\n      const td = (window as any).__testData;\n      const event = [...td.events].find((e: any) => e.title === title);\n      if (!event) return false;\n      return td.isParticipating(event['@id'], td.currentUserId);\n    },\n    eventTitle,\n  );\n  expect(participating, `User should be participating in \"${eventTitle}\"`).to.be.true;\n});",
-    "lineNumber": 91
+    "lineNumber": 97
   },
   {
     "pattern": "l'utilisateur n'est plus participant de l'événement {string}",
     "keyword": "Then",
     "file": "inscription.steps.ts",
     "sourceCode": "Then('l\\'utilisateur n\\'est plus participant de l\\'événement {string}', async function (this: FestipodWorld, eventTitle: string) {\n  const participating = await this.appFrame!.evaluate(\n    (title) => {\n      const td = (window as any).__testData;\n      const event = [...td.events].find((e: any) => e.title === title);\n      if (!event) return false;\n      return td.isParticipating(event['@id'], td.currentUserId);\n    },\n    eventTitle,\n  );\n  expect(participating, `User should NOT be participating in \"${eventTitle}\"`).to.be.false;\n});",
-    "lineNumber": 104
+    "lineNumber": 110
   },
   {
     "pattern": "l'événement {string} compte {int} participants",
     "keyword": "Then",
     "file": "inscription.steps.ts",
     "sourceCode": "Then('l\\'événement {string} compte {int} participants', async function (this: FestipodWorld, eventTitle: string, expectedCount: number) {\n  const count = await this.appFrame!.evaluate(\n    (title) => {\n      const td = (window as any).__testData;\n      const event = [...td.events].find((e: any) => e.title === title);\n      return event?.participantCount ?? -1;\n    },\n    eventTitle,\n  );\n  expect(count, `Event \"${eventTitle}\" participant count`).to.equal(expectedCount);\n});",
-    "lineNumber": 117
+    "lineNumber": 123
   },
   {
     "pattern": "l'utilisateur apparaît dans la liste des participants de l'événement {string}",
     "keyword": "Then",
     "file": "inscription.steps.ts",
     "sourceCode": "Then('l\\'utilisateur apparaît dans la liste des participants de l\\'événement {string}', async function (this: FestipodWorld, eventTitle: string) {\n  const found = await this.appFrame!.evaluate(\n    (title) => {\n      const td = (window as any).__testData;\n      const event = [...td.events].find((e: any) => e.title === title);\n      if (!event) return false;\n      return td.getEventParticipants(event['@id']).some((p: any) => p.user === td.currentUserId);\n    },\n    eventTitle,\n  );\n  expect(found, `User should appear in participants of \"${eventTitle}\"`).to.be.true;\n});",
-    "lineNumber": 129
+    "lineNumber": 135
   },
   {
     "pattern": "l'utilisateur n'apparaît plus dans la liste des participants de l'événement {string}",
     "keyword": "Then",
     "file": "inscription.steps.ts",
     "sourceCode": "Then('l\\'utilisateur n\\'apparaît plus dans la liste des participants de l\\'événement {string}', async function (this: FestipodWorld, eventTitle: string) {\n  const found = await this.appFrame!.evaluate(\n    (title) => {\n      const td = (window as any).__testData;\n      const event = [...td.events].find((e: any) => e.title === title);\n      if (!event) return false;\n      return td.getEventParticipants(event['@id']).some((p: any) => p.user === td.currentUserId);\n    },\n    eventTitle,\n  );\n  expect(found, `User should NOT appear in participants of \"${eventTitle}\"`).to.be.false;\n});",
-    "lineNumber": 142
+    "lineNumber": 148
   },
   {
     "pattern": "l'inscription est idempotente pour l'événement {string}",
     "keyword": "Then",
     "file": "inscription.steps.ts",
     "sourceCode": "Then('l\\'inscription est idempotente pour l\\'événement {string}', async function (this: FestipodWorld, eventTitle: string) {\n  const count = await this.appFrame!.evaluate(\n    (title) => {\n      const td = (window as any).__testData;\n      const event = [...td.events].find((e: any) => e.title === title);\n      if (!event) return 0;\n      return td.getEventParticipants(event['@id']).filter((p: any) => p.user === td.currentUserId).length;\n    },\n    eventTitle,\n  );\n  expect(count, 'User should have exactly one participation record').to.equal(1);\n});",
-    "lineNumber": 155
+    "lineNumber": 161
   },
   {
     "pattern": "je clique sur un événement",

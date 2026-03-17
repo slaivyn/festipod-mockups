@@ -757,10 +757,112 @@ export const parsedFeatures: ParsedFeature[] = [
             "text": "les utilisateurs ont des identifiants NextGraph"
           }
         ]
+      },
+      {
+        "name": "L'écran de connexion redirige vers l'accueil si déjà connecté",
+        "tags": [],
+        "steps": [
+          {
+            "keyword": "Quand",
+            "text": "l'utilisateur navigue vers l'écran \"login\""
+          },
+          {
+            "keyword": "Alors",
+            "text": "l'application affiche l'écran \"home\""
+          }
+        ]
+      },
+      {
+        "name": "La navigation interne met à jour l'URL",
+        "tags": [],
+        "steps": [
+          {
+            "keyword": "Quand",
+            "text": "l'utilisateur navigue vers l'écran \"events\""
+          },
+          {
+            "keyword": "Alors",
+            "text": "l'URL contient \"demo/events\""
+          }
+        ]
+      },
+      {
+        "name": "L'application ne redirige pas vers le broker quand elle est dans l'iframe",
+        "tags": [],
+        "steps": [
+          {
+            "keyword": "Alors",
+            "text": "l'application est toujours dans l'iframe"
+          }
+        ]
+      },
+      {
+        "name": "Le bouton Galerie ramène à la galerie depuis le mode démo",
+        "tags": [],
+        "steps": [
+          {
+            "keyword": "Quand",
+            "text": "l'utilisateur navigue vers l'écran \"home\" sans historique"
+          },
+          {
+            "keyword": "Et",
+            "text": "l'utilisateur clique sur le bouton \"Galerie\""
+          },
+          {
+            "keyword": "Alors",
+            "text": "l'application affiche la galerie"
+          }
+        ]
+      },
+      {
+        "name": "Le bouton \"Charger données de test\" est visible quand connecté",
+        "tags": [],
+        "steps": [
+          {
+            "keyword": "Alors",
+            "text": "la galerie affiche le bouton \"Charger données de test\""
+          }
+        ]
+      },
+      {
+        "name": "Charger les données de test remplit le portefeuille",
+        "tags": [],
+        "steps": [
+          {
+            "keyword": "Quand",
+            "text": "l'utilisateur clique sur le bouton \"Charger données de test\""
+          },
+          {
+            "keyword": "Et",
+            "text": "l'utilisateur attend la fin du chargement"
+          },
+          {
+            "keyword": "Et",
+            "text": "l'utilisateur navigue vers l'écran \"home\""
+          },
+          {
+            "keyword": "Alors",
+            "text": "l'écran d'accueil affiche des événements"
+          }
+        ]
+      },
+      {
+        "name": "Les données chargées persistent après reconnexion",
+        "tags": [],
+        "steps": [
+          {
+            "keyword": "Quand",
+            "text": "l'utilisateur navigue vers l'écran \"home\""
+          },
+          {
+            "keyword": "Alors",
+            "text": "l'écran d'accueil affiche des événements"
+          }
+        ]
       }
     ],
     "filePath": "src/modules/auth/features/connexion-nextgraph.feature",
-    "rawContent": "# language: fr\n@AUTH @priority-1\nFonctionnalité: Connexion NextGraph et chargement des données\n  En tant qu'utilisateur\n  Je peux me connecter à mon portefeuille NextGraph\n  Et charger les données de test dans mon portefeuille\n  Afin d'utiliser l'application avec mes propres données\n\n  # --- UI layer: écran de connexion ---\n\n  @ui\n  Scénario: L'écran de connexion affiche le bouton NextGraph\n    Étant donné je suis sur la page \"connexion\"\n    Alors l'écran contient un bouton \"Se connecter avec NextGraph\"\n\n  @ui\n  Scénario: L'écran de connexion redirige automatiquement quand connecté\n    Étant donné je suis sur la page \"connexion\"\n    Alors l'écran gère la redirection automatique après connexion\n\n  @ui\n  Scénario: L'état initial est \"en cours\" quand une connexion est en attente\n    Étant donné je suis sur la page \"connexion\"\n    Alors l'écran gère l'état de connexion en cours\n\n  @ui\n  Scénario: Aucune donnée de démonstration n'est visible pendant la connexion\n    Étant donné je suis sur la page \"connexion\"\n    Alors l'écran n'importe pas de données de démonstration\n\n  # --- Data layer: comportement du portefeuille ---\n\n  @data\n  Scénario: Un portefeuille connecté est vide par défaut\n    Alors le portefeuille est connecté\n    Et le portefeuille ne contient aucun événement de démonstration\n\n  @data\n  Scénario: Charger les données de test dans le portefeuille\n    Étant donné que le portefeuille est vide\n    Quand je charge les données de test\n    Alors le portefeuille contient des événements\n    Et le portefeuille contient des utilisateurs\n\n  @data\n  Scénario: Les données de test ne sont pas rechargées si le portefeuille contient déjà des données\n    Étant donné que le portefeuille contient déjà des événements\n    Quand je charge les données de test\n    Alors le nombre d'événements n'a pas changé\n\n  @data\n  Scénario: Les données du portefeuille sont distinctes des données par défaut\n    Étant donné que le portefeuille est vide\n    Quand je charge les données de test\n    Alors les événements ont des identifiants NextGraph\n    Et les utilisateurs ont des identifiants NextGraph\n",
+    "rawContent": "# language: fr\n@AUTH @priority-1\nFonctionnalité: Connexion NextGraph et chargement des données\n  En tant qu'utilisateur\n  Je peux me connecter à mon portefeuille NextGraph\n  Et charger les données de test dans mon portefeuille\n  Afin d'utiliser l'application avec mes propres données\n\n  # --- UI layer: écran de connexion ---\n\n  @ui\n  Scénario: L'écran de connexion affiche le bouton NextGraph\n    Étant donné je suis sur la page \"connexion\"\n    Alors l'écran contient un bouton \"Se connecter avec NextGraph\"\n\n  @ui\n  Scénario: L'écran de connexion redirige automatiquement quand connecté\n    Étant donné je suis sur la page \"connexion\"\n    Alors l'écran gère la redirection automatique après connexion\n\n  @ui\n  Scénario: L'état initial est \"en cours\" quand une connexion est en attente\n    Étant donné je suis sur la page \"connexion\"\n    Alors l'écran gère l'état de connexion en cours\n\n  @ui\n  Scénario: Aucune donnée de démonstration n'est visible pendant la connexion\n    Étant donné je suis sur la page \"connexion\"\n    Alors l'écran n'importe pas de données de démonstration\n\n  # --- Data layer: comportement du portefeuille ---\n\n  @data\n  Scénario: Un portefeuille connecté est vide par défaut\n    Alors le portefeuille est connecté\n    Et le portefeuille ne contient aucun événement de démonstration\n\n  @data\n  Scénario: Charger les données de test dans le portefeuille\n    Étant donné que le portefeuille est vide\n    Quand je charge les données de test\n    Alors le portefeuille contient des événements\n    Et le portefeuille contient des utilisateurs\n\n  @data\n  Scénario: Les données de test ne sont pas rechargées si le portefeuille contient déjà des données\n    Étant donné que le portefeuille contient déjà des événements\n    Quand je charge les données de test\n    Alors le nombre d'événements n'a pas changé\n\n  @data\n  Scénario: Les données du portefeuille sont distinctes des données par défaut\n    Étant donné que le portefeuille est vide\n    Quand je charge les données de test\n    Alors les événements ont des identifiants NextGraph\n    Et les utilisateurs ont des identifiants NextGraph\n\n  # --- E2E layer: comportement réel dans le navigateur ---\n\n  @e2e\n  Scénario: L'écran de connexion redirige vers l'accueil si déjà connecté\n    Quand l'utilisateur navigue vers l'écran \"login\"\n    Alors l'application affiche l'écran \"home\"\n\n  @e2e\n  Scénario: La navigation interne met à jour l'URL\n    Quand l'utilisateur navigue vers l'écran \"events\"\n    Alors l'URL contient \"demo/events\"\n\n  @e2e\n  Scénario: L'application ne redirige pas vers le broker quand elle est dans l'iframe\n    Alors l'application est toujours dans l'iframe\n\n  @e2e\n  Scénario: Le bouton Galerie ramène à la galerie depuis le mode démo\n    Quand l'utilisateur navigue vers l'écran \"home\" sans historique\n    Et l'utilisateur clique sur le bouton \"Galerie\"\n    Alors l'application affiche la galerie\n\n  @e2e\n  Scénario: Le bouton \"Charger données de test\" est visible quand connecté\n    Alors la galerie affiche le bouton \"Charger données de test\"\n\n  @e2e\n  Scénario: Charger les données de test remplit le portefeuille\n    Quand l'utilisateur clique sur le bouton \"Charger données de test\"\n    Et l'utilisateur attend la fin du chargement\n    Et l'utilisateur navigue vers l'écran \"home\"\n    Alors l'écran d'accueil affiche des événements\n\n  @e2e\n  Scénario: Les données chargées persistent après reconnexion\n    Quand l'utilisateur navigue vers l'écran \"home\"\n    Alors l'écran d'accueil affiche des événements\n",
     "screenIds": [
       "login"
     ]

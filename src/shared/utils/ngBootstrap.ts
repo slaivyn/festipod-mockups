@@ -7,7 +7,7 @@
 
 import type { DeepSignalSet } from '@ng-org/alien-deepsignals';
 import type { FpEvent, FpUserProfile, FpParticipation } from '../shapes/orm/festipodShapes.typings';
-import { sessionPromise } from './ngSession';
+import { ensureGraphNuri } from './ngGraph';
 import {
   seedEvents,
   seedUsers,
@@ -20,14 +20,23 @@ export interface BootstrapResult {
   eventIdMap: Map<string, string>;
 }
 
+/**
+ * Flush ORM microtask batch and give the broker time to process.
+ *
+ * The ORM batches signal mutations into microtasks. A `Promise.resolve()`
+ * flushes the pending batch to the NG engine. The short delay lets the
+ * broker create the new repo/document before the next add.
+ */
+async function flushAndWait(ms = 100): Promise<void> {
+  await Promise.resolve();                       // flush ORM microtask batch
+  await new Promise(r => setTimeout(r, ms));     // let broker process
+}
+
 export async function bootstrapWallet(
   ngEvents: DeepSignalSet<FpEvent>,
   ngUsers: DeepSignalSet<FpUserProfile>,
   ngParticipations: DeepSignalSet<FpParticipation>,
 ): Promise<BootstrapResult> {
-  const session = await sessionPromise;
-  const graph = `did:ng:${session.private_store_id}`;
-
   // Already has data → returning user, nothing to seed
   if (ngEvents.size > 0 || ngUsers.size > 0) {
     console.log('[Bootstrap] Wallet already has data — events:', ngEvents.size,
@@ -37,7 +46,12 @@ export async function bootstrapWallet(
 
   console.log('[Bootstrap] First time for this wallet — seeding default data...');
 
-  // Seed users
+  // Create (or get) a document in the private store for our data.
+  // The ORM requires a real document NURI as @graph, not the store ID.
+  const graph = await ensureGraphNuri(ngEvents, ngUsers, ngParticipations);
+  console.log('[Bootstrap] Using graph NURI:', graph);
+
+  // Seed users — one at a time with ORM flush between each
   const userIdMap = new Map<string, string>();
   for (const u of seedUsers) {
     ngUsers.add({
@@ -50,12 +64,13 @@ export async function bootstrapWallet(
       role: u.role,
       isPublic: u.isPublic,
     } as FpUserProfile);
+    await flushAndWait();
     const added = [...ngUsers].find(nu => nu.username === u.username);
     if (added) userIdMap.set(u.id, added["@id"]);
   }
   console.log('[Bootstrap] Seeded', userIdMap.size, 'users');
 
-  // Seed events
+  // Seed events — one at a time with ORM flush between each
   const eventIdMap = new Map<string, string>();
   for (const e of seedEvents) {
     ngEvents.add({
@@ -72,12 +87,13 @@ export async function bootstrapWallet(
       hostName: e.hostName,
       hostInitials: e.hostInitials,
     } as FpEvent);
+    await flushAndWait();
     const added = [...ngEvents].find(ne => ne.title === e.title);
     if (added) eventIdMap.set(e.id, added["@id"]);
   }
   console.log('[Bootstrap] Seeded', eventIdMap.size, 'events');
 
-  // Seed participations with mapped IDs
+  // Seed participations with mapped IDs — one at a time
   let partCount = 0;
   for (const p of seedParticipations) {
     const eventIri = eventIdMap.get(p.eventId) || p.eventId;
@@ -90,6 +106,7 @@ export async function bootstrapWallet(
       user: userIri,
       isConfirmed: p.isConfirmed,
     } as FpParticipation);
+    await flushAndWait();
     partCount++;
   }
   console.log('[Bootstrap] Seeded', partCount, 'participations');

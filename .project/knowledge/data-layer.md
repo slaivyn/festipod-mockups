@@ -35,6 +35,25 @@ ORM bindings in `src/shared/shapes/orm/`:
 
 Regenerate with `bun run build:orm`.
 
+## NextGraph Read/Write Pattern
+
+The app follows the same pattern as the official expense-tracker-rdf example:
+
+- **Scope**: `useShape(shapeType, `did:ng:${session.private_store_id}`)` — opens the private store repo in the verifier
+- **@graph**: `did:ng:${session.private_store_id}` — writes target the same NURI
+
+This is critical: `orm_start_graph` with the private store NURI explicitly opens the repo in the verifier's `self.repos` HashMap. Without this, `orm_frontend_update` fails with `RepoNotFound`.
+
+**Do NOT use `did:ng:i` as scope** — it subscribes to the entire user site via a special code path that doesn't open individual repos, breaking all writes.
+
+### Key files
+
+- `src/shared/hooks/useShapeWithDefaults.ts` — Accepts `storeNuri` param, passes to `useShape`
+- `src/shared/utils/ngGraph.ts` — `ensureGraphNuri()` returns `@graph` for entity creation
+- `src/shared/utils/ngBootstrap.ts` — Seeds test data using `ensureGraphNuri()` for `@graph`
+
+See [decision record](.project/decisions/2026-03-17-1600-private-store-nuri-scope.md) for why.
+
 ## Context Providers
 
 ### NextGraphContext (`src/shared/context/NextGraphContext.tsx`)

@@ -21,6 +21,7 @@ import {
 import type { FpEvent, FpUserProfile, FpParticipation } from '../shapes/orm/festipodShapes.typings';
 import { seedEvents, seedUsers, seedParticipations } from '../data/seedData';
 import { bootstrapWallet } from '../utils/ngBootstrap';
+import { ensureGraphNuri } from '../utils/ngGraph';
 
 // ============================================================================
 // App — uses real providers (same tree as the real app)
@@ -59,10 +60,11 @@ function ConnectedHarness() {
   const ngCtx = useNextGraph();
   const appData = useFestipodData();
 
-  // Raw DeepSignalSets for direct manipulation in tests
-  const events = useShape(FpEventShapeType, 'did:ng:i') as DeepSignalSet<FpEvent>;
-  const users = useShape(FpUserProfileShapeType, 'did:ng:i') as DeepSignalSet<FpUserProfile>;
-  const participations = useShape(FpParticipationShapeType, 'did:ng:i') as DeepSignalSet<FpParticipation>;
+  // Use private store NURI as scope (opens the repo for reads AND writes)
+  const privateNuri = ngCtx.session && `did:ng:${ngCtx.session.private_store_id}`;
+  const events = useShape(FpEventShapeType, privateNuri) as DeepSignalSet<FpEvent>;
+  const users = useShape(FpUserProfileShapeType, privateNuri) as DeepSignalSet<FpUserProfile>;
+  const participations = useShape(FpParticipationShapeType, privateNuri) as DeepSignalSet<FpParticipation>;
 
   const [bridgeReady, setBridgeReady] = useState(false);
 
@@ -108,11 +110,12 @@ function ConnectedHarness() {
         },
 
         // --- Mutations (direct ngSet access) ---
-        joinEvent(eventId: string, userId: string) {
+        async joinEvent(eventId: string, userId: string) {
           const already = [...participations].some(p => p.event === eventId && p.user === userId);
           if (already) return;
+          const graph = await ensureGraphNuri(events as any, users as any, participations as any);
           participations.add({
-            '@graph': `did:ng:${session.private_store_id}`,
+            '@graph': graph,
             '@type': 'http://festipod.org/Participation',
             '@id': '',
             event: eventId,
