@@ -46,6 +46,26 @@ This is critical: `orm_start_graph` with the private store NURI explicitly opens
 
 **Do NOT use `did:ng:i` as scope** — it subscribes to the entire user site via a special code path that doesn't open individual repos, breaking all writes.
 
+### Deleting Objects
+
+`ngSet.delete(item)` updates the local reactive set but does **not** persist to the broker. Use `ng.sparql_update()` with SPARQL DELETE instead:
+
+```typescript
+import { ng } from '@ng-org/web';
+import { sessionPromise } from '../utils/ngSession';
+
+const session = await sessionPromise;
+await ng.sparql_update(
+  session.session_id,
+  `DELETE WHERE { GRAPH <${item["@graph"]}> { <${item["@id"]}> ?p ?o } }`,
+  item["@graph"],
+);
+```
+
+The broker sends back a `GraphOrmUpdate` with `op: "remove"` that reactively removes the item from the ORM set. **Do NOT combine with `ngSet.delete()`** — the two operations conflict in the CRDT.
+
+See [decision record](../decisions/2026-03-17-1800-sparql-delete-for-orm-objects.md) for details.
+
 ### Key files
 
 - `src/shared/hooks/useShapeWithDefaults.ts` — Accepts `storeNuri` param, passes to `useShape`
