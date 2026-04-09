@@ -1,10 +1,10 @@
 {
-  "name": "bun-react-template",
+  "name": "festipod-mockups",
   "version": "0.1.0",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "portless festipod bun --hot src/index.ts",
+    "dev": "portless festipod-mockups bun --hot src/index.ts",
     "start": "NODE_ENV=production bun src/index.ts",
     "build": "bun run build.ts",
     "test:cucumber": "bun run cucumber:run && bun run cucumber:report && bun run features:parse && bun run steps:extract",
