@@ -511,6 +511,208 @@ export const parsedFeatures: ParsedFeature[] = [
     ]
   },
   {
+    "id": "cycle-de-vie-evenement",
+    "name": "Cycle de vie d'un événement",
+    "description": "En tant qu'utilisateur connecté Je peux créer, consulter, modifier et participer à des événements Et ces actions persistent dans mon portefeuille NextGraph",
+    "tags": [
+      "@EVENT",
+      "@priority-1"
+    ],
+    "category": "EVENT",
+    "priority": 1,
+    "background": [
+      {
+        "keyword": "Étant donné que ",
+        "text": "l'utilisateur a chargé les données de test"
+      }
+    ],
+    "scenarios": [
+      {
+        "name": "Créer un événement depuis l'accueil",
+        "tags": [],
+        "steps": [
+          {
+            "keyword": "Quand",
+            "text": "l'utilisateur navigue vers l'écran \"home\""
+          },
+          {
+            "keyword": "Et",
+            "text": "l'utilisateur clique sur le bouton \"Relayer un événement\""
+          },
+          {
+            "keyword": "Et",
+            "text": "l'utilisateur remplit le formulaire de création d'événement:"
+          },
+          {
+            "keyword": "Et",
+            "text": "l'utilisateur clique sur le bouton \"Relayer l'événement\""
+          },
+          {
+            "keyword": "Alors",
+            "text": "l'application affiche l'écran \"event-detail\""
+          },
+          {
+            "keyword": "Et",
+            "text": "l'écran contient le texte \"Pique-nique au parc\""
+          }
+        ]
+      },
+      {
+        "name": "L'événement créé apparaît sur l'accueil",
+        "tags": [],
+        "steps": [
+          {
+            "keyword": "Quand",
+            "text": "l'utilisateur navigue vers l'écran \"home\""
+          },
+          {
+            "keyword": "Alors",
+            "text": "l'écran contient le texte \"Pique-nique au parc\""
+          }
+        ]
+      },
+      {
+        "name": "L'événement créé persiste après reconnexion",
+        "tags": [],
+        "steps": [
+          {
+            "keyword": "Quand",
+            "text": "l'utilisateur navigue vers l'écran \"home\""
+          },
+          {
+            "keyword": "Alors",
+            "text": "l'écran contient le texte \"Pique-nique au parc\""
+          }
+        ]
+      },
+      {
+        "name": "Consulter le détail d'un événement depuis l'accueil",
+        "tags": [],
+        "steps": [
+          {
+            "keyword": "Quand",
+            "text": "l'utilisateur navigue vers l'écran \"home\""
+          },
+          {
+            "keyword": "Et",
+            "text": "l'utilisateur clique sur l'événement \"Pique-nique au parc\""
+          },
+          {
+            "keyword": "Alors",
+            "text": "l'application affiche l'écran \"event-detail\""
+          },
+          {
+            "keyword": "Et",
+            "text": "l'écran contient le texte \"Pique-nique au parc\""
+          },
+          {
+            "keyword": "Et",
+            "text": "l'écran contient le texte \"Parc Bordelais\""
+          }
+        ]
+      },
+      {
+        "name": "S'inscrire à un événement existant",
+        "tags": [],
+        "steps": [
+          {
+            "keyword": "Quand",
+            "text": "l'utilisateur navigue vers l'écran \"events\""
+          },
+          {
+            "keyword": "Et",
+            "text": "l'utilisateur clique sur le premier événement"
+          },
+          {
+            "keyword": "Et",
+            "text": "l'utilisateur clique sur le bouton \"Participer\""
+          },
+          {
+            "keyword": "Alors",
+            "text": "l'écran contient le texte \"Inscrit\""
+          }
+        ]
+      },
+      {
+        "name": "Se désinscrire d'un événement",
+        "tags": [],
+        "steps": [
+          {
+            "keyword": "Quand",
+            "text": "l'utilisateur navigue vers l'écran \"events\""
+          },
+          {
+            "keyword": "Et",
+            "text": "l'utilisateur clique sur le premier événement"
+          },
+          {
+            "keyword": "Et",
+            "text": "l'utilisateur clique sur le bouton \"Inscrit\""
+          },
+          {
+            "keyword": "Alors",
+            "text": "l'écran contient le texte \"Participer\""
+          }
+        ]
+      },
+      {
+        "name": "Modifier le titre d'un événement créé",
+        "tags": [],
+        "steps": [
+          {
+            "keyword": "Quand",
+            "text": "l'utilisateur navigue vers l'écran \"home\""
+          },
+          {
+            "keyword": "Et",
+            "text": "l'utilisateur clique sur l'événement \"Pique-nique au parc\""
+          },
+          {
+            "keyword": "Et",
+            "text": "l'utilisateur clique sur le bouton de modification"
+          },
+          {
+            "keyword": "Et",
+            "text": "l'utilisateur modifie le champ \"Nom de l'événement\" avec \"Pique-nique d'été\""
+          },
+          {
+            "keyword": "Et",
+            "text": "l'utilisateur clique sur le bouton \"Enregistrer les modifications\""
+          },
+          {
+            "keyword": "Alors",
+            "text": "l'application affiche l'écran \"event-detail\""
+          },
+          {
+            "keyword": "Et",
+            "text": "l'écran contient le texte \"Pique-nique d'été\""
+          }
+        ]
+      },
+      {
+        "name": "La modification persiste après reconnexion",
+        "tags": [],
+        "steps": [
+          {
+            "keyword": "Quand",
+            "text": "l'utilisateur navigue vers l'écran \"home\""
+          },
+          {
+            "keyword": "Alors",
+            "text": "l'écran contient le texte \"Pique-nique d'été\""
+          },
+          {
+            "keyword": "Et",
+            "text": "l'écran ne contient pas le texte \"Pique-nique au parc\""
+          }
+        ]
+      }
+    ],
+    "filePath": "src/modules/event/features/cycle-de-vie-evenement.feature",
+    "rawContent": "# language: fr\n@EVENT @priority-1\nFonctionnalité: Cycle de vie d'un événement\n  En tant qu'utilisateur connecté\n  Je peux créer, consulter, modifier et participer à des événements\n  Et ces actions persistent dans mon portefeuille NextGraph\n\n  Contexte:\n    Étant donné que l'utilisateur a chargé les données de test\n\n  # --- Création ---\n\n  @e2e\n  Scénario: Créer un événement depuis l'accueil\n    Quand l'utilisateur navigue vers l'écran \"home\"\n    Et l'utilisateur clique sur le bouton \"Relayer un événement\"\n    Et l'utilisateur remplit le formulaire de création d'événement:\n      | champ                | valeur                        |\n      | Nom de l'événement   | Pique-nique au parc           |\n      | Date de début        | 2026-06-15                    |\n      | Heure de début       | 14:00                         |\n      | Lieu                 | Parc Bordelais, Bordeaux      |\n    Et l'utilisateur clique sur le bouton \"Relayer l'événement\"\n    Alors l'application affiche l'écran \"event-detail\"\n    Et l'écran contient le texte \"Pique-nique au parc\"\n\n  @e2e\n  Scénario: L'événement créé apparaît sur l'accueil\n    Quand l'utilisateur navigue vers l'écran \"home\"\n    Alors l'écran contient le texte \"Pique-nique au parc\"\n\n  @e2e\n  Scénario: L'événement créé persiste après reconnexion\n    Quand l'utilisateur navigue vers l'écran \"home\"\n    Alors l'écran contient le texte \"Pique-nique au parc\"\n\n  # --- Consultation ---\n\n  @e2e\n  Scénario: Consulter le détail d'un événement depuis l'accueil\n    Quand l'utilisateur navigue vers l'écran \"home\"\n    Et l'utilisateur clique sur l'événement \"Pique-nique au parc\"\n    Alors l'application affiche l'écran \"event-detail\"\n    Et l'écran contient le texte \"Pique-nique au parc\"\n    Et l'écran contient le texte \"Parc Bordelais\"\n\n  # --- Inscription / Désinscription ---\n\n  @e2e\n  Scénario: S'inscrire à un événement existant\n    Quand l'utilisateur navigue vers l'écran \"events\"\n    Et l'utilisateur clique sur le premier événement\n    Et l'utilisateur clique sur le bouton \"Participer\"\n    Alors l'écran contient le texte \"Inscrit\"\n\n  @e2e\n  Scénario: Se désinscrire d'un événement\n    Quand l'utilisateur navigue vers l'écran \"events\"\n    Et l'utilisateur clique sur le premier événement\n    Et l'utilisateur clique sur le bouton \"Inscrit\"\n    Alors l'écran contient le texte \"Participer\"\n\n  # --- Modification ---\n\n  @e2e\n  Scénario: Modifier le titre d'un événement créé\n    Quand l'utilisateur navigue vers l'écran \"home\"\n    Et l'utilisateur clique sur l'événement \"Pique-nique au parc\"\n    Et l'utilisateur clique sur le bouton de modification\n    Et l'utilisateur modifie le champ \"Nom de l'événement\" avec \"Pique-nique d'été\"\n    Et l'utilisateur clique sur le bouton \"Enregistrer les modifications\"\n    Alors l'application affiche l'écran \"event-detail\"\n    Et l'écran contient le texte \"Pique-nique d'été\"\n\n  @e2e\n  Scénario: La modification persiste après reconnexion\n    Quand l'utilisateur navigue vers l'écran \"home\"\n    Alors l'écran contient le texte \"Pique-nique d'été\"\n    Et l'écran ne contient pas le texte \"Pique-nique au parc\"\n",
+    "screenIds": []
+  },
+  {
     "id": "us-16",
     "name": "US-16 Indiquer un ou plusieurs points de rencontre",
     "description": "En tant qu'utilisateur Je peux indiquer un ou plusieurs points de rencontre En précisant le lieu et l'heure de cette rencontre Afin de croiser et faire connaissance d'autres participants",

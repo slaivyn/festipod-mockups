@@ -23,9 +23,6 @@ import {
 } from '../shapes/orm/festipodShapes.shapeTypes';
 import type { FpEvent, FpUserProfile, FpParticipation } from '../shapes/orm/festipodShapes.typings';
 import { bootstrapWallet, type BootstrapResult } from '../utils/ngBootstrap';
-import { ensureGraphNuri } from '../utils/ngGraph';
-import { sessionPromise } from '../utils/ngSession';
-import { ng } from '@ng-org/web';
 
 // ============================================================================
 // Context interface
@@ -273,28 +270,28 @@ function useNgData(): FestipodDataContextValue {
     '| selectedEvent:', selectedEvent?.title ?? '(none)');
 
   // --- Mutations (NG) ---
+  // privateNuri is both the useShape scope AND the @graph for writes
+  const graph = privateNuri || '';
+
   const createEvent = useCallback((event: Omit<FpEventData, 'id'>): FpEventData => {
     console.log('[FestipodData] createEvent (NG):', event.title);
-    (async () => {
-      const graph = await ensureGraphNuri(eventsShape.ngSet as any, usersShape.ngSet as any, participationsShape.ngSet as any);
-      eventsShape.ngSet.add({
-        "@graph": graph, "@type": "http://festipod.org/Event", "@id": "",
-        title: event.title, description: event.description, date: event.date,
-        location: event.location, distance: event.distance,
-        participantCount: event.participantCount || 1,
-        coverImage: event.coverImage, hostName: event.hostName, hostInitials: event.hostInitials,
-      } as FpEvent);
-      const addedEvent = [...eventsShape.ngSet].find(e => e.title === event.title);
-      if (addedEvent && currentUserId) {
-        participationsShape.ngSet.add({
-          "@graph": graph, "@type": "http://festipod.org/Participation", "@id": "",
-          event: addedEvent["@id"], user: currentUserId, isConfirmed: true,
-        } as FpParticipation);
-        setSelectedEventId(addedEvent["@id"]);
-      }
-    })();
-    return { ...event, id: `ng-pending-${Date.now()}` };
-  }, [eventsShape.ngSet, usersShape.ngSet, participationsShape.ngSet, currentUserId]);
+    eventsShape.ngSet.add({
+      "@graph": graph, "@type": "http://festipod.org/Event", "@id": "",
+      title: event.title, description: event.description, date: event.date,
+      location: event.location, distance: event.distance,
+      participantCount: event.participantCount || 1,
+      coverImage: event.coverImage, hostName: event.hostName, hostInitials: event.hostInitials,
+    } as FpEvent);
+    const addedEvent = [...eventsShape.ngSet].find(e => e.title === event.title);
+    if (addedEvent && currentUserId) {
+      participationsShape.ngSet.add({
+        "@graph": graph, "@type": "http://festipod.org/Participation", "@id": "",
+        event: addedEvent["@id"], user: currentUserId, isConfirmed: true,
+      } as FpParticipation);
+      setSelectedEventId(addedEvent["@id"]);
+    }
+    return { ...event, id: addedEvent?.["@id"] || `ng-pending-${Date.now()}` };
+  }, [graph, eventsShape.ngSet, participationsShape.ngSet, currentUserId]);
 
   const updateEvent = useCallback((id: string, updates: Partial<FpEventData>) => {
     console.log('[FestipodData] updateEvent (NG):', id, updates);
@@ -317,49 +314,27 @@ function useNgData(): FestipodDataContextValue {
       console.log('[FestipodData] Already participating, skipping');
       return;
     }
-    (async () => {
-      const graph = await ensureGraphNuri(eventsShape.ngSet as any, usersShape.ngSet as any, participationsShape.ngSet as any);
-      participationsShape.ngSet.add({
-        "@graph": graph, "@type": "http://festipod.org/Participation", "@id": "",
-        event: eventId, user: uid, isConfirmed: true,
-      } as FpParticipation);
-      const ngEvent = findNg(eventsShape.ngSet as any as Set<FpEvent>, e => e["@id"] === eventId);
-      if (ngEvent) {
-        ngEvent.participantCount = ngEvent.participantCount + 1;
-      }
-      console.log('[FestipodData] joinEvent done');
-    })();
-  }, [participationsShape.ngSet, eventsShape.ngSet, usersShape.ngSet, currentUserId]);
+    participationsShape.ngSet.add({
+      "@graph": graph, "@type": "http://festipod.org/Participation", "@id": "",
+      event: eventId, user: uid, isConfirmed: true,
+    } as FpParticipation);
+    const ngEvent = findNg(eventsShape.ngSet as any as Set<FpEvent>, e => e["@id"] === eventId);
+    if (ngEvent) {
+      ngEvent.participantCount = ngEvent.participantCount + 1;
+    }
+  }, [graph, participationsShape.ngSet, eventsShape.ngSet, currentUserId]);
 
   const leaveEvent = useCallback((eventId: string, userId?: string) => {
     const uid = userId || currentUserId;
     console.log('[FestipodData] leaveEvent (NG):', eventId, 'user:', uid);
     const ngPart = [...participationsShape.ngSet].find(p => p.event === eventId && p.user === uid);
     if (ngPart) {
-      const partId = ngPart["@id"];
-      const partGraph = ngPart["@graph"];
-      console.log('[FestipodData] Deleting participation:', partId, '@graph:', partGraph);
-      // Use ONLY sparql_update to delete — the broker will send back a GraphOrmUpdate
-      // that removes the item from the ORM set reactively. Avoid calling ngSet.delete()
-      // simultaneously as the two operations can conflict in the CRDT.
-      (async () => {
-        try {
-          const session = await sessionPromise;
-          await ng.sparql_update(
-            session.session_id,
-            `DELETE WHERE { GRAPH <${partGraph}> { <${partId}> ?p ?o } }`,
-            partGraph,
-          );
-          console.log('[FestipodData] SPARQL DELETE succeeded for participation:', partId);
-          // Update participantCount after confirmed deletion
-          const ngEvent = findNg(eventsShape.ngSet as any as Set<FpEvent>, e => e["@id"] === eventId);
-          if (ngEvent) {
-            ngEvent.participantCount = Math.max(0, ngEvent.participantCount - 1);
-          }
-        } catch (err) {
-          console.error('[FestipodData] SPARQL DELETE failed:', err);
-        }
-      })();
+      console.log('[FestipodData] Deleting participation via ngSet.delete():', ngPart["@id"]);
+      participationsShape.ngSet.delete(ngPart);
+      const ngEvent = findNg(eventsShape.ngSet as any as Set<FpEvent>, e => e["@id"] === eventId);
+      if (ngEvent) {
+        ngEvent.participantCount = Math.max(0, ngEvent.participantCount - 1);
+      }
     }
   }, [participationsShape.ngSet, eventsShape.ngSet, currentUserId]);
 

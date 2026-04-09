@@ -28,6 +28,15 @@ export function DemoMode({ initialScreenId, onBack, onNavigateToStory }: DemoMod
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const isMobile = useIsMobile();
 
+  // Sync with external hash navigation (e.g. e2e tests changing window.location.hash)
+  useEffect(() => {
+    if (initialScreenId !== currentScreenId) {
+      setCurrentScreenId(initialScreenId);
+      setHistory(prev => [...prev, initialScreenId]);
+      setHistoryIndex(prev => prev + 1);
+    }
+  }, [initialScreenId]);
+
   const currentScreen = getScreen(currentScreenId);
   const ScreenComponent = currentScreen?.component;
   const linkedStories = getStoriesForScreen(currentScreenId);
