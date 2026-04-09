@@ -17,7 +17,7 @@ export function Placeholder({
 }: PlaceholderProps) {
   return (
     <div
-      className={`sketchy-placeholder ${className}`}
+      className={`app-placeholder ${className}`}
       style={{ width, height, ...style }}
     >
       {label}

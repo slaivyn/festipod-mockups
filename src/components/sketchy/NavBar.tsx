@@ -14,23 +14,23 @@ interface NavBarProps {
 
 export function NavBar({ items, className = '' }: NavBarProps) {
   return (
-    <div className={`sketchy-navbar ${className}`}>
+    <div className={`app-navbar ${className}`}>
       {items.map((item, index) => (
         <div
           key={index}
-          className={`nav-item ${item.active ? 'active' : ''}`}
           onClick={item.onClick}
           style={{
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            gap: 4,
+            gap: 3,
             cursor: 'pointer',
-            opacity: item.active ? 1 : 0.6,
+            opacity: item.active ? 1 : 0.4,
+            color: item.active ? 'var(--app-accent)' : '#333',
           }}
         >
           <span style={{ fontSize: 20 }}>{item.icon}</span>
-          <span style={{ fontSize: 12 }}>{item.label}</span>
+          <span style={{ fontSize: 10, fontWeight: 600, letterSpacing: 0.3 }}>{item.label}</span>
         </div>
       ))}
     </div>

@@ -8,13 +8,13 @@ interface TextProps {
 }
 
 export function Title({ children, className = '', style }: TextProps) {
-  return <h1 className={`sketchy-title ${className}`} style={style}>{children}</h1>;
+  return <h1 className={`app-title ${className}`} style={style}>{children}</h1>;
 }
 
 export function Subtitle({ children, className = '', style }: TextProps) {
-  return <h2 className={`sketchy-subtitle ${className}`} style={style}>{children}</h2>;
+  return <h2 className={`app-subtitle ${className}`} style={style}>{children}</h2>;
 }
 
 export function Text({ children, className = '', style, onClick }: TextProps) {
-  return <p className={`sketchy-text ${className}`} style={style} onClick={onClick}>{children}</p>;
+  return <p className={`app-text ${className}`} style={style} onClick={onClick}>{children}</p>;
 }

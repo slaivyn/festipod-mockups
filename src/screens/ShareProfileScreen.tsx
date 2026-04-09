@@ -9,56 +9,52 @@ export function ShareProfileScreen({ navigate }: ScreenProps) {
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       <Header
         title="Partager mon profil"
-        left={<span onClick={() => navigate('profile')} style={{ cursor: 'pointer' }}>←</span>}
+        left={<span onClick={() => navigate('profile')} style={{ cursor: 'pointer', fontSize: 18 }}>‹</span>}
       />
 
-      {/* Content */}
       <div style={{ flex: 1, overflow: 'auto', padding: 16 }}>
-        {/* QR Code */}
         <Card style={{ textAlign: 'center', padding: 24 }}>
           <div style={{
             width: 180,
             height: 180,
             margin: '0 auto 16px',
-            border: '3px solid var(--sketch-black)',
-            borderRadius: 12,
+            border: '2px solid #e0e0e0',
+            borderRadius: 16,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            background: 'var(--sketch-white)',
+            background: '#fff',
             position: 'relative',
           }}>
-            {/* Simulated QR code pattern */}
             <div style={{
               width: 150,
               height: 150,
               background: `
-                linear-gradient(90deg, var(--sketch-black) 10%, transparent 10%, transparent 20%, var(--sketch-black) 20%, var(--sketch-black) 30%, transparent 30%, transparent 40%, var(--sketch-black) 40%, var(--sketch-black) 50%, transparent 50%, transparent 60%, var(--sketch-black) 60%, var(--sketch-black) 70%, transparent 70%, transparent 80%, var(--sketch-black) 80%, var(--sketch-black) 90%, transparent 90%),
-                linear-gradient(var(--sketch-black) 10%, transparent 10%, transparent 20%, var(--sketch-black) 20%, var(--sketch-black) 30%, transparent 30%, transparent 40%, var(--sketch-black) 40%, var(--sketch-black) 50%, transparent 50%, transparent 60%, var(--sketch-black) 60%, var(--sketch-black) 70%, transparent 70%, transparent 80%, var(--sketch-black) 80%, var(--sketch-black) 90%, transparent 90%)
+                linear-gradient(90deg, #1a1a1a 10%, transparent 10%, transparent 20%, #1a1a1a 20%, #1a1a1a 30%, transparent 30%, transparent 40%, #1a1a1a 40%, #1a1a1a 50%, transparent 50%, transparent 60%, #1a1a1a 60%, #1a1a1a 70%, transparent 70%, transparent 80%, #1a1a1a 80%, #1a1a1a 90%, transparent 90%),
+                linear-gradient(#1a1a1a 10%, transparent 10%, transparent 20%, #1a1a1a 20%, #1a1a1a 30%, transparent 30%, transparent 40%, #1a1a1a 40%, #1a1a1a 50%, transparent 50%, transparent 60%, #1a1a1a 60%, #1a1a1a 70%, transparent 70%, transparent 80%, #1a1a1a 80%, #1a1a1a 90%, transparent 90%)
               `,
               backgroundSize: '15px 15px',
               opacity: 0.8,
+              borderRadius: 8,
             }} />
-            {/* Center avatar */}
             <div style={{
               position: 'absolute',
-              background: 'var(--sketch-white)',
+              background: '#fff',
               padding: 4,
               borderRadius: '50%',
             }}>
-              <Avatar initials="MD" size="sm" />
+              <Avatar name="Marie Dupont" color="#E8590C" size="sm" />
             </div>
           </div>
 
-          <Text className="user-content" style={{ fontWeight: 'bold', margin: '0 0 4px 0' }}>Marie Dupont</Text>
-          <Text style={{ color: 'var(--sketch-gray)', margin: 0, fontSize: 14 }}>
+          <Text style={{ fontWeight: 'bold', margin: '0 0 4px 0' }}>Marie Dupont</Text>
+          <Text style={{ color: '#888', margin: 0, fontSize: 14 }}>
             Scannez pour me retrouver sur Festipod
           </Text>
         </Card>
 
         <Divider />
 
-        {/* Link section */}
         <Text style={{ fontWeight: 'bold', marginBottom: 12 }}>Mon lien de profil</Text>
         <Card style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           <Text style={{
@@ -68,6 +64,7 @@ export function ShareProfileScreen({ navigate }: ScreenProps) {
             overflow: 'hidden',
             textOverflow: 'ellipsis',
             whiteSpace: 'nowrap',
+            color: '#888',
           }}>
             {profileLink}
           </Text>
@@ -77,21 +74,16 @@ export function ShareProfileScreen({ navigate }: ScreenProps) {
 
         <Divider />
 
-        {/* Stats */}
         <Text style={{ fontWeight: 'bold', marginBottom: 12 }}>Statistiques de parrainage</Text>
         <Card>
           <div style={{ display: 'flex', justifyContent: 'space-around', textAlign: 'center' }}>
             <div>
-              <Text style={{ fontWeight: 'bold', fontSize: 24, margin: 0, color: 'var(--sketch-black)' }}>12</Text>
-              <Text style={{ fontSize: 12, color: 'var(--sketch-gray)', margin: 0 }}>
-                Personnes parrainées
-              </Text>
+              <Text style={{ fontWeight: 'bold', fontSize: 24, margin: 0, color: '#E8590C' }}>12</Text>
+              <Text style={{ fontSize: 12, color: '#888', margin: 0 }}>Personnes parrainées</Text>
             </div>
             <div>
-              <Text style={{ fontWeight: 'bold', fontSize: 24, margin: 0, color: 'var(--sketch-black)' }}>47</Text>
-              <Text style={{ fontSize: 12, color: 'var(--sketch-gray)', margin: 0 }}>
-                Scans du QR code
-              </Text>
+              <Text style={{ fontWeight: 'bold', fontSize: 24, margin: 0, color: '#E8590C' }}>47</Text>
+              <Text style={{ fontSize: 12, color: '#888', margin: 0 }}>Scans du QR code</Text>
             </div>
           </div>
         </Card>

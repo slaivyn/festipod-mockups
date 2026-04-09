@@ -1,132 +1,186 @@
 import React, { useState } from 'react';
-import { Header, Title, Text, Button, Avatar, Placeholder, Divider } from '../components/sketchy';
+import { Text, Button, Avatar, AvatarStack, Tag, RelevanceIcon } from '../components/sketchy';
 import type { ScreenProps } from './index';
 
+const PEOPLE = [
+  { name: 'Marie Leroy', color: '#E8590C', intentions: ['gouvernance coopérative', 'financement solidaire'] },
+  { name: 'Jean Morel', color: '#2B6CB0', intentions: ['low-tech', 'habitat participatif'] },
+  { name: 'Alice Duval', color: '#9C4DC7', intentions: ['communs numériques'] },
+  { name: 'Thomas Bazin', color: '#38A169', intentions: ['circuits courts', 'gouvernance coopérative'] },
+  { name: 'Camille Noir', color: '#D69E2E', intentions: ['éducation populaire'] },
+];
+
+const meetingPoints = [
+  { title: 'Gouvernance coopérative', host: PEOPLE[0], time: 'Ven. 22 · 9h00', spots: '4/8 places', relevance: 3 },
+  { title: "Café d'accueil", host: PEOPLE[3], time: 'Ven. 22 · 8h15', spots: 'ouvert', relevance: 0 },
+  { title: 'Débrief habitat participatif', host: PEOPLE[1], time: 'Sam. 23 · 12h30', spots: '3/6 places', relevance: 2 },
+];
+
+const intentionTopics = [
+  { label: 'gouvernance coopérative', count: 4, relevance: 3 },
+  { label: 'low-tech', count: 3, relevance: 0 },
+  { label: 'habitat participatif', count: 3, relevance: 2 },
+  { label: 'communs numériques', count: 2, relevance: 2 },
+  { label: 'financement solidaire', count: 2, relevance: 0 },
+  { label: 'circuits courts', count: 1, relevance: 0 },
+];
+
 export function EventDetailScreen({ navigate }: ScreenProps) {
-  const [isJoined, setIsJoined] = useState(false);
+  const [tab, setTab] = useState('présences');
+  const [isJoined, setIsJoined] = useState(true);
+  const [joinedMeetings, setJoinedMeetings] = useState<Set<number>>(new Set());
 
-  // In a real app, this would come from comparing current user with event creator
-  const isOwner = true;
-
-  const knownAttendees = [
-    { initials: 'MD', name: 'Marie' },
-    { initials: 'TM', name: 'Thomas' },
-  ];
-  const unknownCount = 22;
+  const toggleMeeting = (i: number) => {
+    const next = new Set(joinedMeetings);
+    if (next.has(i)) next.delete(i); else next.add(i);
+    setJoinedMeetings(next);
+  };
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-      <Header
-        title="Événement"
-        left={<span onClick={() => navigate('events')} style={{ cursor: 'pointer' }}>←</span>}
-        right={isOwner && <span onClick={() => navigate('update-event')} style={{ cursor: 'pointer' }}>✎</span>}
-      />
-
-      {/* Content */}
       <div style={{ flex: 1, overflow: 'auto' }}>
-        {/* Cover image */}
-        <Placeholder height={180} label="Photo de couverture" />
+        {/* Header */}
+        <div style={{ padding: '8px 16px', display: 'flex', alignItems: 'center', gap: 12 }}>
+          <button onClick={() => navigate('home')} style={{ background: 'none', border: 'none', fontSize: 22, cursor: 'pointer', color: '#333', padding: 0 }}>‹</button>
+          <div style={{ flex: 1 }}>
+            <div style={{ fontSize: 18, fontWeight: 700, color: '#1a1a1a' }}>Forum Ouvert Transition</div>
+            <div style={{ fontSize: 12, color: '#888' }}>22-23 Fév. · 89 km</div>
+          </div>
+          <span onClick={() => navigate('update-event')} style={{ cursor: 'pointer', fontSize: 18, color: '#888' }}>✎</span>
+        </div>
 
+        {/* Action buttons */}
+        <div style={{ margin: '4px 16px 12px', display: 'flex', gap: 8 }}>
+          <Button
+            variant={isJoined ? 'green' : 'primary'}
+            onClick={() => setIsJoined(!isJoined)}
+            style={{ flex: 1, padding: '12px 0' }}
+          >
+            {isJoined ? '✓ Je participe' : "J'y serai"}
+          </Button>
+          <Button
+            variant="accent-outline"
+            onClick={() => navigate('intentions')}
+            style={{ flex: 1, padding: '12px 0' }}
+          >
+            + Intention
+          </Button>
+        </div>
+
+        {/* Invite button */}
+        {isJoined && (
+          <div style={{ margin: '0 16px 12px' }}>
+            <Button onClick={() => navigate('invite')} style={{ width: '100%' }}>
+              Inviter des amis
+            </Button>
+          </div>
+        )}
+
+        {/* Tabs */}
+        <div style={{ display: 'flex', borderBottom: '2px solid #f0f0f0', margin: '0 16px' }}>
+          {['présences', 'rencontres', 'intentions'].map(t => (
+            <button
+              key={t}
+              onClick={() => setTab(t)}
+              className={`app-tab ${tab === t ? 'active' : ''}`}
+            >
+              {t}
+            </button>
+          ))}
+        </div>
+
+        {/* Tab content */}
         <div style={{ padding: 16 }}>
-          <Title className="user-content" style={{ marginBottom: 8 }}>Résidence Reconnexion</Title>
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 16 }}>
-            <Text style={{ margin: 0, fontSize: 15 }}>
-              📅 <span className="user-content">Lundi 16 - Vendredi 20 février 2026</span>
-            </Text>
-            <Text style={{ margin: 0, fontSize: 15 }}>
-              🕓 <span className="user-content">Semaine complète (arrivée dimanche possible)</span>
-            </Text>
-            <Text style={{ margin: 0, fontSize: 15 }}>
-              📍 <span className="user-content">Le Revel, Rogues (30)</span>
-              <span style={{ color: 'var(--sketch-gray)' }}> · 142 km</span>
-            </Text>
-          </div>
-
-          <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
-            <Button
-              variant={isJoined ? 'default' : 'primary'}
-              onClick={() => setIsJoined(!isJoined)}
-              style={{ flex: 1 }}
-            >
-              {isJoined ? '✓ Inscrit' : 'Participer'}
-            </Button>
-            <Button onClick={() => navigate('invite')}>Inviter</Button>
-          </div>
-
-          {isJoined && (
-            <Button
-              onClick={() => navigate('meeting-points')}
-              style={{ width: '100%', marginBottom: 16 }}
-            >
-              📍 Points de rencontre
-            </Button>
+          {tab === 'présences' && (
+            <div>
+              <div style={{ fontSize: 12, color: '#999', fontWeight: 600, marginBottom: 12 }}>MES CONNEXIONS ({PEOPLE.length})</div>
+              {PEOPLE.map((p, i) => (
+                <div
+                  key={i}
+                  onClick={() => navigate('user-profile')}
+                  style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '10px 0', borderBottom: '1px solid #f5f5f5', cursor: 'pointer' }}
+                >
+                  <Avatar name={p.name} color={p.color} size={38} />
+                  <div style={{ flex: 1 }}>
+                    <div style={{ fontSize: 14, fontWeight: 600, color: '#1a1a1a' }}>{p.name}</div>
+                    <div style={{ display: 'flex', gap: 4, marginTop: 4, flexWrap: 'wrap' }}>
+                      {p.intentions.map((intent, j) => (
+                        <Tag key={j} label={intent} bg="#f0f0f0" color="#666" />
+                      ))}
+                    </div>
+                  </div>
+                  <button style={{ background: 'none', border: '1.5px solid #ddd', borderRadius: 8, padding: '6px 10px', fontSize: 18, cursor: 'pointer', color: '#999' }}>💬</button>
+                </div>
+              ))}
+              <div style={{ marginTop: 16, padding: 14, background: '#f9f9f9', borderRadius: 12, textAlign: 'center' }}>
+                <div
+                  style={{ fontSize: 12, color: '#999', cursor: 'pointer' }}
+                  onClick={() => navigate('participants-list')}
+                >
+                  + 19 autres participants (profils publics)
+                </div>
+              </div>
+            </div>
           )}
 
-          <Divider />
-
-          {/* Host */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
-            <Avatar initials="RC" />
+          {tab === 'rencontres' && (
             <div>
-              <Text className="user-content" style={{ margin: 0, fontWeight: 'bold' }}>Reconnexion</Text>
-              <Text style={{ margin: 0, fontSize: 14, color: 'var(--sketch-gray)' }}>Relayé par</Text>
-            </div>
-          </div>
-
-          <Divider />
-
-          {/* Description */}
-          <Text style={{ fontWeight: 'bold', marginBottom: 8 }}>À propos</Text>
-          <Text className="user-content" style={{ lineHeight: 1.6 }}>
-            Une semaine collaborative pour se rencontrer, co-créer et faire avancer le projet de Réseau Social Universel.
-            Au programme : sessions plénières en intelligence collective, ateliers en forum ouvert, et randonnée
-            au Cirque de Navacelles. Hébergement sur place au Revel, écolieu à Rogues dans le Gard.
-          </Text>
-
-          <Divider />
-
-          {/* Attendees */}
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
-            <Text style={{ fontWeight: 'bold', margin: 0 }}>Participants (24)</Text>
-            <Text
-              style={{ margin: 0, fontSize: 14, cursor: 'pointer' }}
-              onClick={() => navigate('participants-list')}
-            >
-              Voir tout →
-            </Text>
-          </div>
-
-          <div style={{ display: 'flex', gap: 12 }}>
-            {knownAttendees.map((a, i) => (
-              <div
-                key={i}
-                style={{ textAlign: 'center', cursor: 'pointer' }}
-                onClick={() => navigate('user-profile')}
+              {meetingPoints.map((c, i) => (
+                <div key={i} style={{ padding: 14, border: '1.5px solid #eee', borderRadius: 14, marginBottom: 10 }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 4 }}>
+                    <div style={{ fontSize: 15, fontWeight: 700, color: '#1a1a1a', flex: 1 }}>{c.title}</div>
+                    <RelevanceIcon level={c.relevance} />
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 8 }}>
+                    <Avatar name={c.host.name} color={c.host.color} size={20} />
+                    <span style={{ fontSize: 12, color: '#888' }}>{c.host.name} · {c.time}</span>
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span style={{ fontSize: 12, color: '#999' }}>{c.spots}</span>
+                    <button
+                      onClick={() => toggleMeeting(i)}
+                      style={{
+                        background: joinedMeetings.has(i) ? '#22543D' : '#1a1a1a',
+                        color: '#fff',
+                        border: 'none',
+                        borderRadius: 8,
+                        padding: '7px 16px',
+                        fontSize: 12.5,
+                        fontWeight: 600,
+                        cursor: 'pointer',
+                      }}
+                    >
+                      {joinedMeetings.has(i) ? '✓ Rejoint' : 'Rejoindre'}
+                    </button>
+                  </div>
+                </div>
+              ))}
+              <button
+                onClick={() => navigate('meeting-points')}
+                style={{ width: '100%', padding: 14, border: '2px dashed #ddd', borderRadius: 14, background: 'none', fontSize: 14, fontWeight: 600, color: '#999', cursor: 'pointer', marginTop: 4, fontFamily: 'var(--font-app)' }}
               >
-                <Avatar initials={a.initials} size="sm" />
-                <Text className="user-content" style={{ margin: '4px 0 0 0', fontSize: 12 }}>{a.name}</Text>
-              </div>
-            ))}
-            <div
-              style={{ textAlign: 'center', cursor: 'pointer' }}
-              onClick={() => navigate('participants-list')}
-            >
-              <div style={{
-                width: 32,
-                height: 32,
-                borderRadius: '50%',
-                background: 'var(--sketch-light-gray)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: 12,
-              }}>
-                +{unknownCount}
-              </div>
-              <Text style={{ margin: '4px 0 0 0', fontSize: 12, color: 'var(--sketch-gray)' }}>inconnus</Text>
+                + Proposer un point de rencontre
+              </button>
             </div>
-          </div>
+          )}
+
+          {tab === 'intentions' && (
+            <div>
+              <div style={{ fontSize: 12, color: '#999', fontWeight: 600, marginBottom: 8 }}>SUJETS RECHERCHÉS PAR LES PARTICIPANTS</div>
+              {intentionTopics.map((item, i) => (
+                <div key={i} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '11px 0', borderBottom: '1px solid #f5f5f5' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <RelevanceIcon level={item.relevance} />
+                    <span style={{ fontSize: 14, fontWeight: item.relevance ? 600 : 400, color: item.relevance ? '#1a1a1a' : '#666' }}>{item.label}</span>
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <span style={{ fontSize: 12, color: '#bbb' }}>{item.count} pers.</span>
+                    <button style={{ background: 'none', border: '1px solid #ddd', borderRadius: 6, padding: '4px 8px', fontSize: 11, cursor: 'pointer', color: '#666', fontFamily: 'var(--font-app)' }}>voir</button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>

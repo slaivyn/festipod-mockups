@@ -1,36 +1,25 @@
 import React from 'react';
-import { Header, Avatar, Text, Input, Divider } from '../components/sketchy';
+import { Header, Avatar, Text, Input } from '../components/sketchy';
 import type { ScreenProps } from './index';
 
 export function ParticipantsListScreen({ navigate }: ScreenProps) {
   const participants = [
-    { initials: 'MD', name: 'Marie Dupont', username: '@mariedupont', known: true },
-    { initials: 'TM', name: 'Thomas Martin', username: '@thomas', known: true },
-    { known: false },
-    { known: false },
-    { known: false },
-    { known: false },
-    { known: false },
-    { known: false },
-    { known: false },
-    { known: false },
-    { known: false },
-    { known: false },
+    { name: 'Marie Dupont', color: '#E8590C', username: '@mariedupont', known: true },
+    { name: 'Thomas Martin', color: '#2B6CB0', username: '@thomas', known: true },
+    ...Array(10).fill({ known: false }),
   ];
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       <Header
         title="Participants (12)"
-        left={<span onClick={() => navigate('event-detail')} style={{ cursor: 'pointer' }}>←</span>}
+        left={<span onClick={() => navigate('event-detail')} style={{ cursor: 'pointer', fontSize: 18 }}>‹</span>}
       />
 
-      {/* Search bar */}
-      <div style={{ padding: 16, borderBottom: '1px solid var(--sketch-light-gray)' }}>
+      <div style={{ padding: 16, borderBottom: '1px solid #f0f0f0' }}>
         <Input placeholder="Rechercher un participant..." />
       </div>
 
-      {/* Participants list */}
       <div style={{ flex: 1, overflow: 'auto' }}>
         {participants.map((p, i) => (
           <div
@@ -42,23 +31,25 @@ export function ParticipantsListScreen({ navigate }: ScreenProps) {
               gap: 12,
               padding: '12px 16px',
               cursor: p.known ? 'pointer' : 'default',
-              borderBottom: '1px solid var(--sketch-light-gray)',
+              borderBottom: '1px solid #f5f5f5',
             }}
           >
-            <Avatar initials={p.known ? p.initials : '?'} size="sm" />
+            <Avatar
+              name={p.known ? p.name : '?'}
+              color={p.known ? (p as any).color : '#ccc'}
+              size="sm"
+            />
             <div style={{ flex: 1 }}>
               {p.known ? (
                 <>
-                  <Text className="user-content" style={{ margin: 0, fontWeight: 'bold' }}>{p.name}</Text>
-                  <Text className="user-content" style={{ margin: 0, fontSize: 13 }}>
-                    {p.username}
-                  </Text>
+                  <Text style={{ margin: 0, fontWeight: 'bold' }}>{(p as any).name}</Text>
+                  <Text style={{ margin: 0, fontSize: 13, color: '#888' }}>{(p as any).username}</Text>
                 </>
               ) : (
-                <Text style={{ margin: 0, color: 'var(--sketch-gray)' }}>Participant inconnu</Text>
+                <Text style={{ margin: 0, color: '#999' }}>Participant inconnu</Text>
               )}
             </div>
-            {p.known && <Text style={{ margin: 0, fontSize: 20, color: 'var(--sketch-gray)' }}>›</Text>}
+            {p.known && <Text style={{ margin: 0, fontSize: 20, color: '#ccc' }}>›</Text>}
           </div>
         ))}
       </div>

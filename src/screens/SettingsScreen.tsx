@@ -11,19 +11,18 @@ export function SettingsScreen({ navigate }: ScreenProps) {
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       <Header
         title="Paramètres"
-        left={<span onClick={() => navigate('home')} style={{ cursor: 'pointer' }}>←</span>}
+        left={<span onClick={() => navigate('profile')} style={{ cursor: 'pointer', fontSize: 18 }}>‹</span>}
       />
 
-      {/* Content */}
       <div style={{ flex: 1, overflow: 'auto' }}>
-        <Text style={{ padding: '16px 16px 8px', fontSize: 14, color: 'var(--sketch-gray)', margin: 0 }}>
-          PRÉFÉRENCES
+        <Text style={{ padding: '16px 16px 8px', fontSize: 12, color: '#999', margin: 0, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 0.8 }}>
+          Préférences
         </Text>
 
         <ListItem>
           <div style={{ flex: 1 }}>
             <Text style={{ margin: 0 }}>Notifications</Text>
-            <Text style={{ margin: 0, fontSize: 12, color: 'var(--sketch-gray)' }}>
+            <Text style={{ margin: 0, fontSize: 12, color: '#888' }}>
               Recevoir les invitations par e-mail
             </Text>
           </div>
@@ -33,7 +32,7 @@ export function SettingsScreen({ navigate }: ScreenProps) {
         <ListItem>
           <div style={{ flex: 1 }}>
             <Text style={{ margin: 0 }}>Mode sombre</Text>
-            <Text style={{ margin: 0, fontSize: 12, color: 'var(--sketch-gray)' }}>
+            <Text style={{ margin: 0, fontSize: 12, color: '#888' }}>
               Activer le thème sombre
             </Text>
           </div>
@@ -43,7 +42,7 @@ export function SettingsScreen({ navigate }: ScreenProps) {
         <ListItem>
           <div style={{ flex: 1 }}>
             <Text style={{ margin: 0 }}>Localisation</Text>
-            <Text style={{ margin: 0, fontSize: 12, color: 'var(--sketch-gray)' }}>
+            <Text style={{ margin: 0, fontSize: 12, color: '#888' }}>
               Autoriser l'accès à la position
             </Text>
           </div>
@@ -52,39 +51,38 @@ export function SettingsScreen({ navigate }: ScreenProps) {
 
         <Divider />
 
-        <Text style={{ padding: '16px 16px 8px', fontSize: 14, color: 'var(--sketch-gray)', margin: 0 }}>
-          COMPTE
+        <Text style={{ padding: '16px 16px 8px', fontSize: 12, color: '#999', margin: 0, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 0.8 }}>
+          Compte
         </Text>
 
         <ListItem onClick={() => navigate('profile')}>
           <Text style={{ margin: 0, flex: 1 }}>Modifier le profil</Text>
-          <span>→</span>
+          <span style={{ color: '#ccc' }}>›</span>
         </ListItem>
 
         <ListItem>
           <Text style={{ margin: 0, flex: 1 }}>Changer le mot de passe</Text>
-          <span>→</span>
+          <span style={{ color: '#ccc' }}>›</span>
         </ListItem>
 
         <ListItem>
           <Text style={{ margin: 0, flex: 1 }}>Confidentialité</Text>
-          <span>→</span>
+          <span style={{ color: '#ccc' }}>›</span>
         </ListItem>
 
         <Divider />
 
         <ListItem onClick={() => navigate('login')}>
-          <Text style={{ margin: 0, color: '#c00' }}>Se déconnecter</Text>
+          <Text style={{ margin: 0, color: '#E53E3E' }}>Se déconnecter</Text>
         </ListItem>
       </div>
 
-      {/* Bottom Nav */}
       <NavBar
         items={[
-          { icon: '⌂', label: 'Accueil', onClick: () => navigate('home') },
-          { icon: '◎', label: 'Découvrir', onClick: () => navigate('events') },
-          { icon: '+', label: 'Relayer', onClick: () => navigate('create-event') },
-          { icon: '☺', label: 'Profil', onClick: () => navigate('profile') },
+          { icon: '◎', label: 'Événements', onClick: () => navigate('home') },
+          { icon: '⬡', label: 'Réseau', onClick: () => navigate('friends-list') },
+          { icon: '◉', label: 'En direct', onClick: () => navigate('live') },
+          { icon: '○', label: 'Profil', onClick: () => navigate('profile') },
         ]}
       />
     </div>

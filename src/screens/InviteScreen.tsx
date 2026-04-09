@@ -5,17 +5,17 @@ import type { ScreenProps } from './index';
 interface Friend {
   id: string;
   name: string;
-  initials: string;
+  color: string;
   username: string;
 }
 
 const friends: Friend[] = [
-  { id: '1', name: 'Alice Martin', initials: 'AM', username: '@alice' },
-  { id: '2', name: 'Baptiste Morel', initials: 'BM', username: '@baptiste' },
-  { id: '3', name: 'Camille Dubois', initials: 'CD', username: '@camille' },
-  { id: '4', name: 'David Leroy', initials: 'DL', username: '@david' },
-  { id: '5', name: 'Emma Bernard', initials: 'EB', username: '@emma' },
-  { id: '6', name: 'François Petit', initials: 'FP', username: '@francois' },
+  { id: '1', name: 'Alice Martin', color: '#9C4DC7', username: '@alice' },
+  { id: '2', name: 'Baptiste Morel', color: '#38A169', username: '@baptiste' },
+  { id: '3', name: 'Camille Dubois', color: '#D69E2E', username: '@camille' },
+  { id: '4', name: 'David Leroy', color: '#E53E3E', username: '@david' },
+  { id: '5', name: 'Emma Bernard', color: '#2B6CB0', username: '@emma' },
+  { id: '6', name: 'François Petit', color: '#E8590C', username: '@francois' },
 ];
 
 export function InviteScreen({ navigate }: ScreenProps) {
@@ -35,27 +35,25 @@ export function InviteScreen({ navigate }: ScreenProps) {
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       <Header
         title="Inviter des amis"
-        left={<span onClick={() => navigate('event-detail')} style={{ cursor: 'pointer' }}>←</span>}
+        left={<span onClick={() => navigate('event-detail')} style={{ cursor: 'pointer', fontSize: 18 }}>‹</span>}
       />
 
-      {/* Search */}
-      <div style={{ padding: '12px 16px', borderBottom: '1px solid var(--sketch-light-gray)' }}>
+      <div style={{ padding: '12px 16px', borderBottom: '1px solid #f0f0f0' }}>
         <Input placeholder="Rechercher un ami..." />
       </div>
 
-      {/* Selected count */}
       {selected.size > 0 && (
         <div style={{
           padding: '8px 16px',
-          background: 'var(--sketch-light-gray)',
+          background: '#FFF7ED',
           fontSize: 14,
-          fontFamily: 'var(--font-sketch)',
+          color: '#C05621',
+          fontWeight: 600,
         }}>
           {selected.size} ami{selected.size > 1 ? 's' : ''} sélectionné{selected.size > 1 ? 's' : ''}
         </div>
       )}
 
-      {/* Friends list */}
       <div style={{ flex: 1, overflow: 'auto' }}>
         {friends.map((friend) => (
           <div
@@ -65,25 +63,22 @@ export function InviteScreen({ navigate }: ScreenProps) {
               display: 'flex',
               alignItems: 'center',
               padding: '12px 16px',
-              borderBottom: '1px solid var(--sketch-light-gray)',
+              borderBottom: '1px solid #f5f5f5',
               cursor: 'pointer',
-              background: selected.has(friend.id) ? 'var(--sketch-light-gray)' : 'transparent',
+              background: selected.has(friend.id) ? '#FFF7ED' : 'transparent',
             }}
           >
-            <Avatar initials={friend.initials} size="sm" />
+            <Avatar name={friend.name} color={friend.color} size="sm" />
             <div style={{ flex: 1, marginLeft: 12 }}>
-              <Text className="user-content" style={{ margin: 0, fontWeight: 'bold' }}>{friend.name}</Text>
-              <Text className="user-content" style={{ margin: 0, fontSize: 14 }}>
-                {friend.username}
-              </Text>
+              <Text style={{ margin: 0, fontWeight: 'bold' }}>{friend.name}</Text>
+              <Text style={{ margin: 0, fontSize: 13, color: '#888' }}>{friend.username}</Text>
             </div>
             <Checkbox checked={selected.has(friend.id)} />
           </div>
         ))}
       </div>
 
-      {/* Footer */}
-      <div style={{ padding: 16, borderTop: '2px solid var(--sketch-black)' }}>
+      <div style={{ padding: 16, borderTop: '1px solid #f0f0f0' }}>
         <Button
           variant="primary"
           style={{ width: '100%' }}

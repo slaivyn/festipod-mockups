@@ -4,44 +4,42 @@ import type { ScreenProps } from './index';
 
 export function UserProfileScreen({ navigate }: ScreenProps) {
   const upcomingEvents = [
-    { title: 'Résidence Reconnexion', date: '16-20 fév.', location: 'Le Revel, Rogues (30)', distance: 142, common: true },
-    { title: 'Atelier permaculture', date: '28 fév.', location: 'Ferme des Music, Vénissieux', distance: 12, common: false },
+    { title: 'Résidence Reconnexion', date: '16-20 fév.', location: 'Le Revel, Rogues (30)', distance: '142 km', common: true },
+    { title: 'Atelier permaculture', date: '28 fév.', location: 'Ferme des Music, Vénissieux', distance: '12 km', common: false },
   ];
 
   const pastEvents = [
-    { title: 'Forum Ouvert Transition', date: '22 jan.', location: 'Tiers-lieu L\'Hermitage', distance: 89, common: true },
-    { title: 'Rencontre des Colibris', date: '12 jan.', location: 'La Maison de l\'Environnement', distance: 7, common: true },
-    { title: 'Formation CNV', date: '8 jan.', location: 'MJC Montplaisir, Lyon', distance: 5, common: false },
-    { title: 'Café des possibles', date: '15 déc.', location: 'Café de la Mairie, Lyon 3', distance: 2, common: false },
+    { title: 'Forum Ouvert Transition', date: '22 jan.', location: "Tiers-lieu L'Hermitage", distance: '89 km', common: true },
+    { title: 'Rencontre des Colibris', date: '12 jan.', location: "La Maison de l'Environnement", distance: '7 km', common: true },
+    { title: 'Formation CNV', date: '8 jan.', location: 'MJC Montplaisir, Lyon', distance: '5 km', common: false },
+    { title: 'Café des possibles', date: '15 déc.', location: 'Café de la Mairie, Lyon 3', distance: '2 km', common: false },
   ];
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       <Header
         title="Profil"
-        left={<span onClick={() => navigate('event-detail')} style={{ cursor: 'pointer' }}>←</span>}
+        left={<span onClick={() => navigate('event-detail')} style={{ cursor: 'pointer', fontSize: 18 }}>‹</span>}
       />
 
-      {/* Content */}
       <div style={{ flex: 1, overflow: 'auto' }}>
-        {/* User profile header */}
         <div style={{ padding: 24, textAlign: 'center' }}>
-          <Avatar initials="JD" size="lg" />
-          <Title className="user-content" style={{ marginTop: 16, marginBottom: 4 }}>Jean Durand</Title>
-          <Text className="user-content" style={{ margin: 0 }}>@jeandurand</Text>
+          <Avatar name="Jean Durand" color="#2B6CB0" size="lg" />
+          <Title style={{ marginTop: 16, marginBottom: 4 }}>Jean Durand</Title>
+          <Text style={{ margin: 0, color: '#888' }}>@jeandurand</Text>
 
           <div style={{ display: 'flex', justifyContent: 'center', gap: 32, marginTop: 20 }}>
             <div style={{ textAlign: 'center' }}>
               <Text style={{ fontWeight: 'bold', margin: 0 }}>8</Text>
-              <Text style={{ fontSize: 12, color: 'var(--sketch-gray)', margin: 0 }}>Événements</Text>
+              <Text style={{ fontSize: 12, color: '#888', margin: 0 }}>Événements</Text>
             </div>
             <div style={{ textAlign: 'center' }}>
               <Text style={{ fontWeight: 'bold', margin: 0 }}>23</Text>
-              <Text style={{ fontSize: 12, color: 'var(--sketch-gray)', margin: 0 }}>Contacts</Text>
+              <Text style={{ fontSize: 12, color: '#888', margin: 0 }}>Contacts</Text>
             </div>
             <div style={{ textAlign: 'center' }}>
               <Text style={{ fontWeight: 'bold', margin: 0 }}>42</Text>
-              <Text style={{ fontSize: 12, color: 'var(--sketch-gray)', margin: 0 }}>Participations</Text>
+              <Text style={{ fontSize: 12, color: '#888', margin: 0 }}>Participations</Text>
             </div>
           </div>
 
@@ -53,24 +51,19 @@ export function UserProfileScreen({ navigate }: ScreenProps) {
 
         <Divider />
 
-        {/* Upcoming events */}
         <div style={{ padding: 16 }}>
           <Text style={{ fontWeight: 'bold', marginBottom: 12 }}>Événements à venir</Text>
-
           {upcomingEvents.map((event, i) => (
             <Card key={i} onClick={() => navigate('event-detail')} style={{ marginBottom: 12 }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 <div>
-                  <Text className="user-content" style={{ margin: 0, fontWeight: 'bold' }}>{event.title}</Text>
-                  <Text className="user-content" style={{ margin: '4px 0 0 0', fontSize: 14 }}>
-                    {event.date}
-                  </Text>
-                  <Text style={{ margin: '2px 0 0 0', fontSize: 14 }}>
-                    📍 <span className="user-content">{event.location}</span>
-                    <span style={{ color: 'var(--sketch-gray)' }}> · {event.distance} km</span>
+                  <Text style={{ margin: 0, fontWeight: 'bold' }}>{event.title}</Text>
+                  <Text style={{ margin: '4px 0 0 0', fontSize: 13, color: '#888' }}>{event.date}</Text>
+                  <Text style={{ margin: '2px 0 0 0', fontSize: 13, color: '#888' }}>
+                    📍 {event.location} · {event.distance}
                   </Text>
                 </div>
-                {event.common && <Badge>moi aussi</Badge>}
+                {event.common && <Badge style={{ background: '#FFF7ED', color: '#E8590C' }}>moi aussi</Badge>}
               </div>
             </Card>
           ))}
@@ -78,24 +71,19 @@ export function UserProfileScreen({ navigate }: ScreenProps) {
 
         <Divider />
 
-        {/* Past events */}
         <div style={{ padding: 16 }}>
           <Text style={{ fontWeight: 'bold', marginBottom: 12 }}>Événements passés</Text>
-
           {pastEvents.map((event, i) => (
             <Card key={i} onClick={() => navigate('event-detail')} style={{ marginBottom: 12 }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 <div>
-                  <Text className="user-content" style={{ margin: 0, fontWeight: 'bold' }}>{event.title}</Text>
-                  <Text className="user-content" style={{ margin: '4px 0 0 0', fontSize: 14 }}>
-                    {event.date}
-                  </Text>
-                  <Text style={{ margin: '2px 0 0 0', fontSize: 14 }}>
-                    📍 <span className="user-content">{event.location}</span>
-                    <span style={{ color: 'var(--sketch-gray)' }}> · {event.distance} km</span>
+                  <Text style={{ margin: 0, fontWeight: 'bold' }}>{event.title}</Text>
+                  <Text style={{ margin: '4px 0 0 0', fontSize: 13, color: '#888' }}>{event.date}</Text>
+                  <Text style={{ margin: '2px 0 0 0', fontSize: 13, color: '#888' }}>
+                    📍 {event.location} · {event.distance}
                   </Text>
                 </div>
-                {event.common && <Badge>moi aussi</Badge>}
+                {event.common && <Badge style={{ background: '#FFF7ED', color: '#E8590C' }}>moi aussi</Badge>}
               </div>
             </Card>
           ))}
@@ -103,17 +91,15 @@ export function UserProfileScreen({ navigate }: ScreenProps) {
 
         <Divider />
 
-        {/* Contact form section */}
         <div style={{ padding: 16 }}>
           <Text style={{ fontWeight: 'bold', marginBottom: 12 }}>Envoyer un message</Text>
           <div style={{
-            border: '2px solid var(--sketch-black)',
-            borderRadius: '255px 15px 225px 15px/15px 225px 15px 255px',
+            border: '1.5px solid #e0e0e0',
+            borderRadius: 12,
             padding: 12,
             minHeight: 80,
-            fontFamily: 'var(--font-sketch)',
             fontSize: 14,
-            color: 'var(--sketch-gray)',
+            color: '#bbb',
           }}>
             Écrivez votre message ici...
           </div>

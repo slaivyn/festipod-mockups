@@ -134,9 +134,9 @@ export function UserStoriesPage({ selectedStoryId, onBack, onSelectScreen }: Use
               style={{
                 background: 'none',
                 border: '2px solid var(--tool-border)',
-                borderRadius: '255px 15px 225px 15px/15px 225px 15px 255px',
+                borderRadius: '12px',
                 padding: isMobile ? '6px 12px' : '8px 16px',
-                fontFamily: 'var(--font-sketch)',
+                fontFamily: 'var(--font-app)',
                 fontSize: isMobile ? 12 : 14,
                 cursor: 'pointer',
                 color: 'var(--tool-text)',
@@ -148,7 +148,7 @@ export function UserStoriesPage({ selectedStoryId, onBack, onSelectScreen }: Use
           </div>
           <div>
             <h1 style={{
-              fontFamily: 'var(--font-sketch)',
+              fontFamily: 'var(--font-app)',
               fontSize: isMobile ? 22 : 28,
               margin: 0,
               color: 'var(--tool-text)',
@@ -156,7 +156,7 @@ export function UserStoriesPage({ selectedStoryId, onBack, onSelectScreen }: Use
               User Stories
             </h1>
             <p style={{
-              fontFamily: 'var(--font-sketch)',
+              fontFamily: 'var(--font-app)',
               fontSize: isMobile ? 13 : 16,
               color: 'var(--tool-text-muted)',
               margin: '8px 0 0 0',
@@ -187,7 +187,7 @@ export function UserStoriesPage({ selectedStoryId, onBack, onSelectScreen }: Use
               justifyContent: 'space-between',
               background: 'none',
               border: 'none',
-              fontFamily: 'var(--font-sketch)',
+              fontFamily: 'var(--font-app)',
               fontSize: 13,
               cursor: 'pointer',
               color: 'var(--tool-text)',
@@ -227,7 +227,7 @@ export function UserStoriesPage({ selectedStoryId, onBack, onSelectScreen }: Use
               {/* Category filters */}
               <div>
                 <span style={{
-                  fontFamily: 'var(--font-sketch)',
+                  fontFamily: 'var(--font-app)',
                   fontSize: 11,
                   color: 'var(--tool-text-muted)',
                   display: 'block',
@@ -251,7 +251,7 @@ export function UserStoriesPage({ selectedStoryId, onBack, onSelectScreen }: Use
               {/* Priority filters */}
               <div>
                 <span style={{
-                  fontFamily: 'var(--font-sketch)',
+                  fontFamily: 'var(--font-app)',
                   fontSize: 11,
                   color: 'var(--tool-text-muted)',
                   display: 'block',
@@ -280,7 +280,7 @@ export function UserStoriesPage({ selectedStoryId, onBack, onSelectScreen }: Use
                     alignSelf: 'flex-start',
                     background: 'none',
                     border: 'none',
-                    fontFamily: 'var(--font-sketch)',
+                    fontFamily: 'var(--font-app)',
                     fontSize: 12,
                     color: '#c00',
                     cursor: 'pointer',
@@ -308,7 +308,7 @@ export function UserStoriesPage({ selectedStoryId, onBack, onSelectScreen }: Use
           {/* Category filters */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
             <span style={{
-              fontFamily: 'var(--font-sketch)',
+              fontFamily: 'var(--font-app)',
               fontSize: 13,
               color: 'var(--tool-text-muted)',
               minWidth: 70,
@@ -329,7 +329,7 @@ export function UserStoriesPage({ selectedStoryId, onBack, onSelectScreen }: Use
           {/* Priority filters */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
             <span style={{
-              fontFamily: 'var(--font-sketch)',
+              fontFamily: 'var(--font-app)',
               fontSize: 13,
               color: 'var(--tool-text-muted)',
               minWidth: 70,
@@ -350,7 +350,7 @@ export function UserStoriesPage({ selectedStoryId, onBack, onSelectScreen }: Use
           {/* Screen filters */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
             <span style={{
-              fontFamily: 'var(--font-sketch)',
+              fontFamily: 'var(--font-app)',
               fontSize: 13,
               color: 'var(--tool-text-muted)',
               minWidth: 70,
@@ -376,7 +376,7 @@ export function UserStoriesPage({ selectedStoryId, onBack, onSelectScreen }: Use
                 alignSelf: 'flex-start',
                 background: 'none',
                 border: 'none',
-                fontFamily: 'var(--font-sketch)',
+                fontFamily: 'var(--font-app)',
                 fontSize: 13,
                 color: '#c00',
                 cursor: 'pointer',
@@ -394,7 +394,7 @@ export function UserStoriesPage({ selectedStoryId, onBack, onSelectScreen }: Use
       <div style={{ padding: isMobile ? 16 : 32 }}>
         {storiesByPriority.length === 0 ? (
           <p style={{
-            fontFamily: 'var(--font-sketch)',
+            fontFamily: 'var(--font-app)',
             fontSize: 16,
             color: 'var(--tool-text-muted)',
             textAlign: 'center',
@@ -406,7 +406,7 @@ export function UserStoriesPage({ selectedStoryId, onBack, onSelectScreen }: Use
           storiesByPriority.map(({ priority, stories }) => (
             <div key={priority} style={{ marginBottom: 40 }}>
               <h2 style={{
-                fontFamily: 'var(--font-sketch)',
+                fontFamily: 'var(--font-app)',
                 fontSize: 20,
                 margin: '0 0 16px 0',
                 display: 'flex',
@@ -419,7 +419,7 @@ export function UserStoriesPage({ selectedStoryId, onBack, onSelectScreen }: Use
                   padding: '4px 12px',
                   background: priorityColors[priority],
                   color: 'white',
-                  borderRadius: '255px 15px 225px 15px/15px 225px 15px 255px',
+                  borderRadius: '12px',
                   fontSize: 14,
                 }}>
                   P{priority}
@@ -470,9 +470,9 @@ function FilterChip({ label, color, selected, onClick }: FilterChipProps) {
         background: selected ? color : 'transparent',
         color: selected ? 'white' : color,
         border: `1px solid ${color}`,
-        borderRadius: '255px 15px 225px 15px/15px 225px 15px 255px',
+        borderRadius: '12px',
         padding: '4px 10px',
-        fontFamily: 'var(--font-sketch)',
+        fontFamily: 'var(--font-app)',
         fontSize: 12,
         cursor: 'pointer',
         transition: 'all 0.15s ease',
@@ -500,7 +500,7 @@ const StoryCard = React.forwardRef<HTMLDivElement, StoryCardProps>(
       ref={ref}
       style={{
         border: isSelected ? '3px solid #2563eb' : '2px solid var(--tool-border)',
-        borderRadius: '255px 15px 225px 15px/15px 225px 15px 255px',
+        borderRadius: '12px',
         padding: 16,
         background: isSelected ? '#eff6ff' : 'var(--tool-surface)',
         transition: 'all 0.2s ease',
@@ -513,15 +513,15 @@ const StoryCard = React.forwardRef<HTMLDivElement, StoryCardProps>(
           padding: '2px 8px',
           background: categoryColors[story.category],
           color: 'white',
-          borderRadius: '255px 15px 225px 15px/15px 225px 15px 255px',
+          borderRadius: '12px',
           fontSize: 11,
-          fontFamily: 'var(--font-sketch)',
+          fontFamily: 'var(--font-app)',
           flexShrink: 0,
         }}>
           {categoryLabels[story.category]}
         </span>
         <h3 style={{
-          fontFamily: 'var(--font-sketch)',
+          fontFamily: 'var(--font-app)',
           fontSize: 16,
           margin: 0,
           color: 'var(--tool-text)',
@@ -531,7 +531,7 @@ const StoryCard = React.forwardRef<HTMLDivElement, StoryCardProps>(
       </div>
 
       <p style={{
-        fontFamily: 'var(--font-sketch)',
+        fontFamily: 'var(--font-app)',
         fontSize: 13,
         color: 'var(--tool-text-muted)',
         margin: '0 0 12px 0',
@@ -549,9 +549,9 @@ const StoryCard = React.forwardRef<HTMLDivElement, StoryCardProps>(
               style={{
                 background: 'var(--tool-border-light)',
                 border: '1px solid var(--tool-border)',
-                borderRadius: '255px 15px 225px 15px/15px 225px 15px 255px',
+                borderRadius: '12px',
                 padding: '6px 12px',
-                fontFamily: 'var(--font-sketch)',
+                fontFamily: 'var(--font-app)',
                 fontSize: 13,
                 cursor: 'pointer',
                 color: 'var(--tool-text)',
@@ -563,7 +563,7 @@ const StoryCard = React.forwardRef<HTMLDivElement, StoryCardProps>(
         </div>
       ) : (
         <p style={{
-          fontFamily: 'var(--font-sketch)',
+          fontFamily: 'var(--font-app)',
           fontSize: 13,
           color: 'var(--tool-text-muted)',
           fontStyle: 'italic',

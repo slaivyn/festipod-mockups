@@ -1,23 +1,32 @@
 @import "tailwindcss";
 
-/* Sketchy wireframe theme - Font loaded via link tag in HTML */
+/* Modern clean theme - DM Sans */
 :root {
-  --sketch-black: #2d2d2d;
-  --sketch-gray: #666;
-  --sketch-light-gray: #e5e5e5;
-  --sketch-bg: #fafafa;
-  --sketch-white: #ffffff;
-  --sketch-accent: #4a90d9;
-  --sketch-line-width: 2px;
-  --font-sketch: 'Ubuntu', sans-serif;
+  --app-black: #1a1a1a;
+  --app-gray: #888;
+  --app-light-gray: #f0f0f0;
+  --app-bg: #ffffff;
+  --app-white: #ffffff;
+  --app-accent: #E8590C;
+  --app-accent-light: #FFF7ED;
+  --app-accent-border: #FDDCB5;
+  --app-accent-dark: #C05621;
+  --app-green: #22543D;
+  --app-green-light: #f7fff7;
+  --app-green-border: #c6f6d5;
+  --app-green-text: #68D391;
+  --app-radius: 16px;
+  --app-radius-sm: 12px;
+  --app-radius-xs: 8px;
+  --font-app: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
 
   /* Prototyping tool theme (outer app) */
-  --tool-bg: #fafafa;
+  --tool-bg: #f3f1ee;
   --tool-surface: #ffffff;
-  --tool-text: #2d2d2d;
+  --tool-text: #1a1a1a;
   --tool-text-muted: #666;
-  --tool-border: #2d2d2d;
-  --tool-border-light: #e5e5e5;
+  --tool-border: #e0e0e0;
+  --tool-border-light: #f0f0f0;
 }
 
 /* Dark mode for prototyping tool only */
@@ -35,7 +44,7 @@
 }
 
 body {
-  font-family: var(--font-sketch);
+  font-family: var(--font-app);
   background-color: var(--tool-bg);
   color: var(--tool-text);
   margin: 0;
@@ -43,249 +52,283 @@ body {
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-/* Sketchy border effect using border-radius variations */
-.sketchy-border {
-  border: var(--sketch-line-width) solid var(--sketch-black);
-  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
-  box-shadow:
-    2px 2px 0 var(--sketch-black),
-    -1px -1px 0 var(--sketch-black);
-}
-
-/* Alternative sketchy border - more subtle */
-.sketchy-border-light {
-  border: 1.5px solid var(--sketch-black);
-  border-radius: 3px 15px 4px 12px/12px 4px 15px 3px;
-}
-
-/* Hand-drawn line effect */
-.sketchy-line {
-  position: relative;
-}
-
-.sketchy-line::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: var(--sketch-black);
-  transform: rotate(-0.5deg);
-}
-
-/* Sketchy button styles */
-.sketchy-btn {
-  font-family: var(--font-sketch);
-  font-size: 16px;
-  padding: 10px 20px;
-  background: var(--sketch-white);
-  border: var(--sketch-line-width) solid var(--sketch-black);
-  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+/* Modern button styles */
+.app-btn {
+  font-family: var(--font-app);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 12px 20px;
+  background: var(--app-white);
+  border: 1.5px solid #e0e0e0;
+  border-radius: var(--app-radius-sm);
   cursor: pointer;
-  transition: transform 0.1s ease;
-  position: relative;
+  transition: all 0.15s ease;
+  color: var(--app-black);
 }
 
-.sketchy-btn:hover {
-  transform: translate(-1px, -1px);
-  box-shadow: 3px 3px 0 var(--sketch-black);
+.app-btn:hover {
+  background: #f9f9f9;
+  border-color: #ccc;
 }
 
-.sketchy-btn:active {
-  transform: translate(1px, 1px);
-  box-shadow: none;
+.app-btn:active {
+  transform: scale(0.98);
 }
 
-.sketchy-btn-primary {
-  background: var(--sketch-black);
-  color: var(--sketch-white);
+.app-btn-primary {
+  background: var(--app-accent);
+  color: var(--app-white);
+  border-color: var(--app-accent);
 }
 
-.sketchy-btn-primary:hover {
-  background: var(--sketch-gray);
+.app-btn-primary:hover {
+  background: #d14e0a;
+  border-color: #d14e0a;
 }
 
-/* Sketchy input styles */
-.sketchy-input {
-  font-family: var(--font-sketch);
-  font-size: 16px;
-  padding: 10px 14px;
-  background: var(--sketch-white);
-  border: var(--sketch-line-width) solid var(--sketch-black);
-  border-radius: 3px 15px 4px 12px/12px 4px 15px 3px;
+.app-btn-green {
+  background: var(--app-green);
+  color: var(--app-white);
+  border-color: var(--app-green);
+}
+
+/* Modern input styles */
+.app-input {
+  font-family: var(--font-app);
+  font-size: 14px;
+  padding: 12px 14px;
+  background: var(--app-white);
+  border: 1.5px solid #e0e0e0;
+  border-radius: var(--app-radius-sm);
   outline: none;
   width: 100%;
+  color: var(--app-black);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
-.sketchy-input:focus {
-  box-shadow: 2px 2px 0 var(--sketch-black);
+.app-input:focus {
+  border-color: var(--app-accent);
+  box-shadow: 0 0 0 3px rgba(232, 89, 12, 0.1);
 }
 
-.sketchy-input::placeholder {
-  color: var(--sketch-gray);
-  opacity: 0.7;
+.app-input::placeholder {
+  color: #bbb;
 }
 
-/* Sketchy card */
-.sketchy-card {
-  background: var(--sketch-white);
-  border: var(--sketch-line-width) solid var(--sketch-black);
-  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
-  padding: 20px;
+/* Modern card */
+.app-card {
+  background: var(--app-white);
+  border: 1px solid #eee;
+  border-radius: var(--app-radius);
+  padding: 16px;
   position: relative;
+  transition: box-shadow 0.15s ease;
 }
 
-/* Sketchy text styles */
-.sketchy-title {
-  font-family: var(--font-sketch);
-  font-size: 24px;
-  font-weight: normal;
+.app-card:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+/* Text styles */
+.app-title {
+  font-family: var(--font-app);
+  font-size: 22px;
+  font-weight: 700;
   margin: 0 0 10px 0;
+  color: var(--app-black);
+  letter-spacing: -0.5px;
 }
 
-.sketchy-subtitle {
-  font-family: var(--font-sketch);
-  font-size: 18px;
-  color: var(--sketch-gray);
+.app-subtitle {
+  font-family: var(--font-app);
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--app-black);
   margin: 0 0 8px 0;
 }
 
-.sketchy-text {
-  font-family: var(--font-sketch);
-  font-size: 16px;
+.app-text {
+  font-family: var(--font-app);
+  font-size: 14px;
   line-height: 1.5;
+  color: var(--app-black);
 }
 
-/* Sketchy placeholder box (for images/content) */
-.sketchy-placeholder {
-  background: var(--sketch-light-gray);
-  border: 2px dashed var(--sketch-gray);
-  border-radius: 4px;
+/* Placeholder box */
+.app-placeholder {
+  background: var(--app-light-gray);
+  border: 2px dashed #ddd;
+  border-radius: var(--app-radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--sketch-gray);
-  font-family: var(--font-sketch);
-}
-
-/* Sketchy divider */
-.sketchy-divider {
-  height: 2px;
-  background: var(--sketch-black);
-  margin: 16px 0;
-  transform: rotate(-0.3deg);
-  border-radius: 2px;
-}
-
-/* Sketchy checkbox */
-.sketchy-checkbox {
-  width: 20px;
-  height: 20px;
-  border: 2px solid var(--sketch-black);
-  border-radius: 2px 6px 3px 5px/5px 3px 6px 2px;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--sketch-white);
-}
-
-.sketchy-checkbox.checked::after {
-  content: '✓';
+  color: var(--app-gray);
+  font-family: var(--font-app);
   font-size: 14px;
-  font-weight: bold;
 }
 
-/* Sketchy toggle/switch */
-.sketchy-toggle {
+/* Divider */
+.app-divider {
+  height: 1px;
+  background: #f0f0f0;
+  margin: 16px 0;
+}
+
+/* Toggle */
+.app-toggle {
   width: 50px;
-  height: 26px;
-  border: 2px solid var(--sketch-black);
-  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+  height: 28px;
+  border: none;
+  border-radius: 14px;
   position: relative;
   cursor: pointer;
-  background: var(--sketch-white);
+  background: #e0e0e0;
+  transition: background 0.2s ease;
 }
 
-.sketchy-toggle::after {
+.app-toggle::after {
   content: '';
   position: absolute;
-  width: 18px;
-  height: 18px;
-  background: var(--sketch-black);
+  width: 22px;
+  height: 22px;
+  background: var(--app-white);
   border-radius: 50%;
-  top: 2px;
+  top: 3px;
   left: 3px;
   transition: left 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
 }
 
-.sketchy-toggle.on::after {
+.app-toggle.on {
+  background: var(--app-accent);
+}
+
+.app-toggle.on::after {
   left: 25px;
 }
 
-/* Sketchy icon placeholder */
-.sketchy-icon {
-  width: 24px;
-  height: 24px;
+/* Checkbox */
+.app-checkbox {
+  width: 22px;
+  height: 22px;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  background: var(--app-white);
+  transition: all 0.15s ease;
 }
 
-/* Sketchy nav bar */
-.sketchy-navbar {
+.app-checkbox.checked {
+  background: var(--app-accent);
+  border-color: var(--app-accent);
+}
+
+.app-checkbox.checked::after {
+  content: '✓';
+  font-size: 13px;
+  font-weight: bold;
+  color: white;
+}
+
+/* Nav bar */
+.app-navbar {
   display: flex;
   justify-content: space-around;
-  padding: 12px 8px;
-  background: var(--sketch-white);
-  border-top: 2px solid var(--sketch-black);
+  align-items: center;
+  padding: 10px 0 20px;
+  background: var(--app-white);
+  border-top: 1px solid #eee;
 }
 
-/* Sketchy header */
-.sketchy-header {
+/* Header */
+.app-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 16px;
-  background: var(--sketch-white);
-  border-bottom: 2px solid var(--sketch-black);
+  padding: 8px 16px;
+  background: var(--app-white);
 }
 
-/* Sketchy list item */
-.sketchy-list-item {
+/* List item */
+.app-list-item {
   display: flex;
   align-items: center;
   padding: 12px 16px;
-  border-bottom: 1px solid var(--sketch-light-gray);
+  border-bottom: 1px solid #f5f5f5;
   cursor: pointer;
 }
 
-.sketchy-list-item:hover {
-  background: var(--sketch-light-gray);
+.app-list-item:hover {
+  background: #fafafa;
 }
 
-/* Sketchy avatar */
-.sketchy-avatar {
-  width: 40px;
-  height: 40px;
-  border: 2px solid var(--sketch-black);
+/* Avatar */
+.app-avatar {
   border-radius: 50%;
-  background: var(--sketch-light-gray);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+  flex-shrink: 0;
+  letter-spacing: -0.3px;
+  position: relative;
 }
 
-/* Sketchy badge */
-.sketchy-badge {
+/* Badge / Tag */
+.app-badge {
   display: inline-block;
-  padding: 4px 10px;
+  padding: 3px 10px;
+  font-size: 11.5px;
+  font-weight: 500;
+  border-radius: 20px;
+  background: #f0f0f0;
+  color: #666;
+}
+
+.app-tag {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11.5px;
+  font-weight: 500;
+  color: #5a3e00;
+  background: #fff3d6;
+  letter-spacing: 0.1px;
+}
+
+/* Section label */
+.app-section-label {
   font-size: 12px;
-  border: 1.5px solid var(--sketch-black);
-  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
-  background: var(--sketch-white);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #999;
+  margin-bottom: 8px;
+}
+
+/* Tab bar */
+.app-tab {
+  flex: 1;
+  padding: 10px 0;
+  background: none;
+  border: none;
+  border-bottom: 2.5px solid transparent;
+  font-size: 13px;
+  font-weight: 600;
+  color: #999;
+  cursor: pointer;
+  text-transform: capitalize;
+  font-family: var(--font-app);
+  transition: all 0.15s ease;
+}
+
+.app-tab.active {
+  color: var(--app-accent);
+  border-bottom-color: var(--app-accent);
 }
 
 /* App layout */
@@ -316,25 +359,16 @@ body {
 .phone-thumbnail {
   width: 100%;
   aspect-ratio: 9/16;
-  border: 2px solid var(--sketch-black);
+  border: 1px solid #e0e0e0;
   border-radius: 20px;
   overflow: hidden;
-  background: var(--sketch-white);
+  background: var(--app-white);
 }
-
-/* ===========================================
-   Mobile Screen Accent Colors (Blue Pen Style)
-   Only applies within phone frames
-
-   Concept:
-   - Black = structural UI (labels, counters, buttons, borders)
-   - Blue = user-provided content only (names, event titles, descriptions, usernames)
-   =========================================== */
 
 /* Force phone screen to always use light mode colors */
 .phone-screen {
-  color: var(--sketch-black);
-  background: var(--sketch-white);
+  color: var(--app-black);
+  background: var(--app-white);
 }
 
 /* Dark mode: add outer glow to phone frame for visibility */
@@ -343,35 +377,14 @@ body {
   border-radius: 44px;
 }
 
-/* User content - displayed in blue */
-.phone-screen .user-content {
-  color: var(--sketch-accent);
-}
-
-/* Avatar initials (user's initials = user content) */
-.phone-screen .sketchy-avatar {
-  color: var(--sketch-accent);
-  border-color: var(--sketch-black);
-}
-
-/* Input text - only text inputs show blue (user types content) */
-/* Date/time inputs show default values which are not user content */
-.phone-screen .sketchy-input[type="text"],
-.phone-screen .sketchy-input:not([type]) {
-  color: var(--sketch-accent);
-}
-
-/* Date and time inputs show placeholder-like default values */
-.phone-screen .sketchy-input[type="date"],
-.phone-screen .sketchy-input[type="time"] {
-  color: var(--sketch-gray);
-}
-
-/* Textarea also uses gray for placeholder state */
-.phone-screen textarea.sketchy-input {
-  color: var(--sketch-gray);
-}
-
-.phone-screen .sketchy-input::placeholder {
-  color: var(--sketch-gray);
+/* Online indicator on avatar */
+.app-avatar .online-dot {
+  position: absolute;
+  bottom: -1px;
+  right: -1px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #34C759;
+  border: 2.5px solid #fff;
 }

@@ -110,8 +110,8 @@ export function DemoMode({ initialScreenId, onBack, onNavigateToStory }: DemoMod
               padding: '8px 16px',
               background: 'none',
               border: '2px solid var(--tool-border)',
-              borderRadius: '255px 15px 225px 15px/15px 225px 15px 255px',
-              fontFamily: 'var(--font-sketch)',
+              borderRadius: '12px',
+              fontFamily: 'var(--font-app)',
               cursor: 'pointer',
               color: 'var(--tool-text)',
             }}
@@ -124,7 +124,7 @@ export function DemoMode({ initialScreenId, onBack, onNavigateToStory }: DemoMod
         {/* Current screen & navigation */}
         <div style={{ padding: 16, borderBottom: '1px solid var(--tool-border-light)' }}>
           <div style={{
-            fontFamily: 'var(--font-sketch)',
+            fontFamily: 'var(--font-app)',
             fontSize: 12,
             color: 'var(--tool-text-muted)',
             marginBottom: 8,
@@ -132,7 +132,7 @@ export function DemoMode({ initialScreenId, onBack, onNavigateToStory }: DemoMod
             Écran actuel
           </div>
           <div style={{
-            fontFamily: 'var(--font-sketch)',
+            fontFamily: 'var(--font-app)',
             fontSize: 16,
             fontWeight: 'bold',
             marginBottom: 12,
@@ -149,8 +149,8 @@ export function DemoMode({ initialScreenId, onBack, onNavigateToStory }: DemoMod
                 flex: 1,
                 background: 'none',
                 border: '2px solid var(--tool-border)',
-                borderRadius: '255px 15px 225px 15px/15px 225px 15px 255px',
-                fontFamily: 'var(--font-sketch)',
+                borderRadius: '12px',
+                fontFamily: 'var(--font-app)',
                 cursor: canGoBack ? 'pointer' : 'default',
                 color: 'var(--tool-text)',
               }}
@@ -166,8 +166,8 @@ export function DemoMode({ initialScreenId, onBack, onNavigateToStory }: DemoMod
                 flex: 1,
                 background: 'none',
                 border: '2px solid var(--tool-border)',
-                borderRadius: '255px 15px 225px 15px/15px 225px 15px 255px',
-                fontFamily: 'var(--font-sketch)',
+                borderRadius: '12px',
+                fontFamily: 'var(--font-app)',
                 cursor: canGoForward ? 'pointer' : 'default',
                 color: 'var(--tool-text)',
               }}
@@ -186,7 +186,7 @@ export function DemoMode({ initialScreenId, onBack, onNavigateToStory }: DemoMod
             overflow: 'auto',
           }}>
             <div style={{
-              fontFamily: 'var(--font-sketch)',
+              fontFamily: 'var(--font-app)',
               fontSize: 12,
               color: 'var(--tool-text-muted)',
               padding: '12px 16px 8px',
@@ -219,9 +219,9 @@ export function DemoMode({ initialScreenId, onBack, onNavigateToStory }: DemoMod
                     padding: '1px 6px',
                     background: priorityColors[story.priority],
                     color: 'white',
-                    borderRadius: '255px 15px 225px 15px/15px 225px 15px 255px',
+                    borderRadius: '12px',
                     fontSize: 9,
-                    fontFamily: 'var(--font-sketch)',
+                    fontFamily: 'var(--font-app)',
                   }}>
                     P{story.priority}
                   </span>
@@ -230,15 +230,15 @@ export function DemoMode({ initialScreenId, onBack, onNavigateToStory }: DemoMod
                     padding: '1px 6px',
                     background: categoryColors[story.category],
                     color: 'white',
-                    borderRadius: '255px 15px 225px 15px/15px 225px 15px 255px',
+                    borderRadius: '12px',
                     fontSize: 9,
-                    fontFamily: 'var(--font-sketch)',
+                    fontFamily: 'var(--font-app)',
                   }}>
                     {categoryLabels[story.category]}
                   </span>
                 </div>
                 <div style={{
-                  fontFamily: 'var(--font-sketch)',
+                  fontFamily: 'var(--font-app)',
                   fontSize: 12,
                   lineHeight: 1.4,
                 }}>
@@ -256,7 +256,7 @@ export function DemoMode({ initialScreenId, onBack, onNavigateToStory }: DemoMod
           padding: '8px 0',
         }}>
           <div style={{
-            fontFamily: 'var(--font-sketch)',
+            fontFamily: 'var(--font-app)',
             fontSize: 12,
             color: 'var(--tool-text-muted)',
             padding: '8px 16px',
@@ -269,7 +269,7 @@ export function DemoMode({ initialScreenId, onBack, onNavigateToStory }: DemoMod
               onClick={() => navigate(s.id)}
               style={{
                 padding: '10px 16px',
-                fontFamily: 'var(--font-sketch)',
+                fontFamily: 'var(--font-app)',
                 fontSize: 14,
                 cursor: 'pointer',
                 background: s.id === currentScreenId ? 'var(--tool-border-light)' : 'transparent',
@@ -307,8 +307,8 @@ export function DemoMode({ initialScreenId, onBack, onNavigateToStory }: DemoMod
                 padding: '8px 12px',
                 background: 'none',
                 border: '2px solid var(--tool-border)',
-                borderRadius: '255px 15px 225px 15px/15px 225px 15px 255px',
-                fontFamily: 'var(--font-sketch)',
+                borderRadius: '12px',
+                fontFamily: 'var(--font-app)',
                 cursor: 'pointer',
                 color: 'var(--tool-text)',
                 fontSize: 14,
@@ -317,7 +317,7 @@ export function DemoMode({ initialScreenId, onBack, onNavigateToStory }: DemoMod
               ☰ Menu
             </button>
             <span style={{
-              fontFamily: 'var(--font-sketch)',
+              fontFamily: 'var(--font-app)',
               fontSize: 14,
               fontWeight: 'bold',
               color: 'var(--tool-text)',
@@ -335,8 +335,8 @@ export function DemoMode({ initialScreenId, onBack, onNavigateToStory }: DemoMod
                 padding: '8px 12px',
                 background: 'none',
                 border: '2px solid var(--tool-border)',
-                borderRadius: '255px 15px 225px 15px/15px 225px 15px 255px',
-                fontFamily: 'var(--font-sketch)',
+                borderRadius: '12px',
+                fontFamily: 'var(--font-app)',
                 cursor: 'pointer',
                 color: 'var(--tool-text)',
                 fontSize: 14,

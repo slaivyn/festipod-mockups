@@ -15,6 +15,8 @@ import { FriendsListScreen } from './FriendsListScreen';
 import { ShareProfileScreen } from './ShareProfileScreen';
 import { UpdateProfileScreen } from './UpdateProfileScreen';
 import { WelcomeScreen } from './WelcomeScreen';
+import { IntentionScreen } from './IntentionScreen';
+import { LiveScreen } from './LiveScreen';
 
 export interface Screen {
   id: string;
@@ -52,6 +54,14 @@ export const screenGroups: ScreenGroup[] = [
       { id: 'invite', name: 'Inviter des amis', component: InviteScreen },
       { id: 'participants-list', name: 'Liste des participants', component: ParticipantsListScreen },
       { id: 'meeting-points', name: 'Points de rencontre', component: MeetingPointsScreen },
+      { id: 'intentions', name: 'Déclarer une intention', component: IntentionScreen },
+    ],
+  },
+  {
+    id: 'live',
+    name: 'En direct',
+    screens: [
+      { id: 'live', name: 'En direct', component: LiveScreen },
     ],
   },
   {

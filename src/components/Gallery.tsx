@@ -43,7 +43,7 @@ export function Gallery({ onSelectScreen, onShowSpecs }: GalleryProps) {
         }}>
           <div>
             <h1 style={{
-              fontFamily: 'var(--font-sketch)',
+              fontFamily: 'var(--font-app)',
               fontSize: isMobile ? 24 : 28,
               margin: 0,
               color: 'var(--tool-text)',
@@ -51,7 +51,7 @@ export function Gallery({ onSelectScreen, onShowSpecs }: GalleryProps) {
               Festipod
             </h1>
             <p style={{
-              fontFamily: 'var(--font-sketch)',
+              fontFamily: 'var(--font-app)',
               fontSize: 14,
               color: 'var(--tool-text-muted)',
               margin: '8px 0 0 0',
@@ -73,9 +73,9 @@ export function Gallery({ onSelectScreen, onShowSpecs }: GalleryProps) {
                 background: 'var(--tool-text)',
                 color: 'var(--tool-bg)',
                 border: '2px solid var(--tool-border)',
-                borderRadius: '255px 15px 225px 15px/15px 225px 15px 255px',
+                borderRadius: '12px',
                 padding: isMobile ? '6px 12px' : '8px 16px',
-                fontFamily: 'var(--font-sketch)',
+                fontFamily: 'var(--font-app)',
                 fontSize: isMobile ? 12 : 14,
                 cursor: 'pointer',
               }}
@@ -89,7 +89,7 @@ export function Gallery({ onSelectScreen, onShowSpecs }: GalleryProps) {
                 display: 'flex',
                 alignItems: 'center',
                 gap: 12,
-                fontFamily: 'var(--font-sketch)',
+                fontFamily: 'var(--font-app)',
               }}>
                 <span style={{ fontSize: 14, color: 'var(--tool-text-muted)' }}>Zoom</span>
                 <input
@@ -118,7 +118,7 @@ export function Gallery({ onSelectScreen, onShowSpecs }: GalleryProps) {
           <div key={group.id} style={{ marginBottom: isMobile ? 24 : 32 }}>
             {/* Group header */}
             <h2 style={{
-              fontFamily: 'var(--font-sketch)',
+              fontFamily: 'var(--font-app)',
               fontSize: isMobile ? 16 : 18,
               margin: isMobile ? '0 0 12px 16px' : '0 0 16px 32px',
               color: 'var(--tool-text)',
@@ -182,7 +182,7 @@ function GalleryItem({ screen, scale, onClick }: GalleryItemProps) {
         </div>
       </div>
       <p style={{
-        fontFamily: 'var(--font-sketch)',
+        fontFamily: 'var(--font-app)',
         fontSize: 14,
         textAlign: 'center',
         marginTop: 8,

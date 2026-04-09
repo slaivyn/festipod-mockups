@@ -9,7 +9,7 @@ interface ListItemProps {
 export function ListItem({ children, onClick, className = '' }: ListItemProps) {
   return (
     <div
-      className={`sketchy-list-item ${className}`}
+      className={`app-list-item ${className}`}
       onClick={onClick}
     >
       {children}
