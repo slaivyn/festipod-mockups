@@ -14,7 +14,6 @@ export function MeetingPointsScreen({ navigate }: ScreenProps) {
   const [when, setWhen] = useState('');
   const [duration, setDuration] = useState('~30 min');
   const [lieu, setLieu] = useState('');
-  const [places, setPlaces] = useState('8');
   const [invited, setInvited] = useState<number[]>([0, 1, 2]);
 
   const removeInvited = (idx: number) => {
@@ -95,26 +94,6 @@ export function MeetingPointsScreen({ navigate }: ScreenProps) {
           placeholder="Café en face du tiers-lieu"
           style={{ marginBottom: 16 }}
         />
-
-        <label style={{ fontSize: 12, fontWeight: 600, color: '#999', textTransform: 'uppercase', letterSpacing: 0.8, display: 'block', marginBottom: 6 }}>Places</label>
-        <div style={{ display: 'flex', gap: 8, marginBottom: 20 }}>
-          {['4', '6', '8', '∞'].map(n => (
-            <button key={n} onClick={() => setPlaces(n)} style={{
-              width: 48,
-              height: 42,
-              borderRadius: 10,
-              border: places === n ? '2px solid #E8590C' : '1.5px solid #e0e0e0',
-              background: places === n ? '#FFF7ED' : '#fff',
-              fontSize: 15,
-              fontWeight: 600,
-              cursor: 'pointer',
-              color: places === n ? '#E8590C' : '#666',
-              fontFamily: 'var(--font-app)',
-            }}>
-              {n}
-            </button>
-          ))}
-        </div>
 
         <label style={{ fontSize: 12, fontWeight: 600, color: '#999', textTransform: 'uppercase', letterSpacing: 0.8, display: 'block', marginBottom: 8 }}>Inviter</label>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 20 }}>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, Avatar, Title, Text, Button, Card, Divider, NavBar } from '../components/sketchy';
+import { Header, Avatar, Title, Text, Button, Card, Divider, NavBar, Tag } from '../components/sketchy';
 import type { ScreenProps } from './index';
 
 export function ProfileScreen({ navigate }: ScreenProps) {
@@ -39,6 +39,32 @@ export function ProfileScreen({ navigate }: ScreenProps) {
           <div style={{ display: 'flex', gap: 8, marginTop: 20, justifyContent: 'center' }}>
             <Button variant="primary" onClick={() => navigate('update-profile')}>Modifier le profil</Button>
             <Button onClick={() => navigate('share-profile')}>Partager</Button>
+          </div>
+        </div>
+
+        <Divider />
+
+        {/* Mes intentions */}
+        <div style={{
+          margin: '12px 16px',
+          padding: '14px 16px',
+          background: 'linear-gradient(135deg, #FFF7ED, #FFFBF5)',
+          borderRadius: 16,
+          border: '1px solid #FDDCB5',
+        }}>
+          <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 1, color: '#C05621', marginBottom: 8 }}>
+            Mes intentions
+          </div>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, alignItems: 'center' }}>
+            <Tag label="gouvernance coopérative" />
+            <Tag label="communs numériques" />
+            <Tag label="habitat participatif" color="#4a3000" bg="#e8f5e9" />
+            <span
+              onClick={() => navigate('intentions')}
+              style={{ fontSize: 20, cursor: 'pointer', color: '#C05621', lineHeight: 1 }}
+            >
+              +
+            </span>
           </div>
         </div>
 

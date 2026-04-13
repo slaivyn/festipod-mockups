@@ -1,5 +1,5 @@
 import React from 'react';
-import { Title, Text, Card, NavBar, Avatar, AvatarStack, Tag, RelevanceIcon } from '../components/sketchy';
+import { Title, Text, Card, NavBar, Avatar, AvatarStack, RelevanceIcon } from '../components/sketchy';
 import type { ScreenProps } from './index';
 
 const PEOPLE = [
@@ -57,48 +57,12 @@ export function HomeScreen({ navigate }: ScreenProps) {
           </div>
         </div>
 
-        {/* Mes intentions */}
-        <div style={{
-          margin: '8px 16px 12px',
-          padding: '14px 16px',
-          background: 'linear-gradient(135deg, #FFF7ED, #FFFBF5)',
-          borderRadius: 16,
-          border: '1px solid #FDDCB5',
-        }}>
-          <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 1, color: '#C05621', marginBottom: 8 }}>
-            Mes intentions
-          </div>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, alignItems: 'center' }}>
-            <Tag label="gouvernance coopérative" />
-            <Tag label="communs numériques" />
-            <Tag label="habitat participatif" color="#4a3000" bg="#e8f5e9" />
-            <span
-              onClick={() => navigate('intentions')}
-              style={{ fontSize: 20, cursor: 'pointer', color: '#C05621', lineHeight: 1 }}
-            >
-              +
-            </span>
-          </div>
-        </div>
-
         {/* My events */}
         <div style={{ padding: '0 16px' }}>
           <div style={{ fontSize: 13, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 1, color: '#E8590C', marginBottom: 10 }}>
             J'y participe
           </div>
           {myEvents.map(ev => (
-            <EventCard key={ev.id} ev={ev} onClick={() => navigate('event-detail')} />
-          ))}
-
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 8, marginBottom: 10 }}>
-            <div style={{ fontSize: 13, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 1, color: '#999' }}>
-              A découvrir
-            </div>
-            <span onClick={() => navigate('events')} style={{ fontSize: 13, color: '#E8590C', cursor: 'pointer', fontWeight: 600 }}>
-              Voir tout →
-            </span>
-          </div>
-          {otherEvents.map(ev => (
             <EventCard key={ev.id} ev={ev} onClick={() => navigate('event-detail')} />
           ))}
 
@@ -115,11 +79,24 @@ export function HomeScreen({ navigate }: ScreenProps) {
               color: '#E8590C',
               cursor: 'pointer',
               marginTop: 8,
+              marginBottom: 16,
               fontFamily: 'var(--font-app)',
             }}
           >
             + Relayer un événement
           </button>
+
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
+            <div style={{ fontSize: 13, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 1, color: '#999' }}>
+              Événements à découvrir
+            </div>
+            <span onClick={() => navigate('events')} style={{ fontSize: 13, color: '#E8590C', cursor: 'pointer', fontWeight: 600 }}>
+              Voir tout →
+            </span>
+          </div>
+          {otherEvents.map(ev => (
+            <EventCard key={ev.id} ev={ev} onClick={() => navigate('event-detail')} />
+          ))}
         </div>
         <div style={{ height: 8 }} />
       </div>
