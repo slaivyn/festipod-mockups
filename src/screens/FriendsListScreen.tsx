@@ -55,7 +55,7 @@ export function FriendsListScreen({ navigate }: ScreenProps) {
         {displayedList.map((person, i) => (
           <div
             key={i}
-            onClick={() => navigate('user-profile')}
+            onClick={() => navigate('user-profile', { from: 'friends-list' })}
             style={{
               display: 'flex',
               alignItems: 'center',

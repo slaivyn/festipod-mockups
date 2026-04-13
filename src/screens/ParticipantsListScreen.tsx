@@ -25,7 +25,7 @@ export function ParticipantsListScreen({ navigate }: ScreenProps) {
         {participants.map((p, i) => (
           <div
             key={i}
-            onClick={p.known ? () => navigate('user-profile') : undefined}
+            onClick={p.known ? () => navigate('user-profile', { from: 'participants-list' }) : undefined}
             style={{
               display: 'flex',
               alignItems: 'center',

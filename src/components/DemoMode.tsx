@@ -23,6 +23,7 @@ interface DemoModeProps {
 
 export function DemoMode({ initialScreenId, onBack, onNavigateToStory }: DemoModeProps) {
   const [currentScreenId, setCurrentScreenId] = useState(initialScreenId);
+  const [screenParams, setScreenParams] = useState<Record<string, string> | undefined>(undefined);
   const [history, setHistory] = useState<string[]>([initialScreenId]);
   const [historyIndex, setHistoryIndex] = useState(0);
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -32,11 +33,12 @@ export function DemoMode({ initialScreenId, onBack, onNavigateToStory }: DemoMod
   const ScreenComponent = currentScreen?.component;
   const linkedStories = getStoriesForScreen(currentScreenId);
 
-  const navigate = (screenId: string) => {
+  const navigate = (screenId: string, params?: Record<string, string>) => {
     const newHistory = [...history.slice(0, historyIndex + 1), screenId];
     setHistory(newHistory);
     setHistoryIndex(newHistory.length - 1);
     setCurrentScreenId(screenId);
+    setScreenParams(params);
   };
 
   const canGoBack = historyIndex > 0;
@@ -365,7 +367,7 @@ export function DemoMode({ initialScreenId, onBack, onNavigateToStory }: DemoMod
               transformOrigin: 'center center',
             }}>
               <ScaledPhoneFrame isMobile={isMobile}>
-                {ScreenComponent && <ScreenComponent navigate={navigate} />}
+                {ScreenComponent && <ScreenComponent navigate={navigate} params={screenParams} />}
               </ScaledPhoneFrame>
             </div>
           </div>

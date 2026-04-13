@@ -3,7 +3,8 @@ import { ArrowLeft } from 'lucide-react';
 import { Header, Avatar, Title, Text, Button, Card, Badge, Divider } from '../components/sketchy';
 import type { ScreenProps } from './index';
 
-export function UserProfileScreen({ navigate }: ScreenProps) {
+export function UserProfileScreen({ navigate, params }: ScreenProps) {
+  const backTo = params?.from ?? 'home';
   const upcomingEvents = [
     { title: 'Résidence Reconnexion', date: '16-20 fév.', location: 'Le Revel, Rogues (30)', distance: '142 km', common: true },
     { title: 'Atelier permaculture', date: '28 fév.', location: 'Ferme des Music, Vénissieux', distance: '12 km', common: false },
@@ -20,7 +21,7 @@ export function UserProfileScreen({ navigate }: ScreenProps) {
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       <Header
         title="Profil"
-        left={<ArrowLeft size={20} onClick={() => navigate('event-detail')} style={{ cursor: 'pointer' }} />}
+        left={<ArrowLeft size={20} onClick={() => navigate(backTo)} style={{ cursor: 'pointer' }} />}
       />
 
       <div style={{ flex: 1, overflow: 'auto' }}>

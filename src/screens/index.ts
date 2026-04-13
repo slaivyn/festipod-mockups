@@ -31,7 +31,8 @@ export interface ScreenGroup {
 }
 
 export interface ScreenProps {
-  navigate: (screenId: string) => void;
+  navigate: (screenId: string, params?: Record<string, string>) => void;
+  params?: Record<string, string>;
 }
 
 export const screenGroups: ScreenGroup[] = [

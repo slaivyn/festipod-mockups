@@ -85,7 +85,7 @@ export function LiveScreen({ navigate }: ScreenProps) {
           <div style={{ fontSize: 12, fontWeight: 700, color: '#999', textTransform: 'uppercase', letterSpacing: 1, margin: '16px 0 10px' }}>Connexions présentes</div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
             {PEOPLE.slice(0, 5).map((p, i) => (
-              <div key={i} onClick={() => navigate('user-profile')} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, width: 60, cursor: 'pointer' }}>
+              <div key={i} onClick={() => navigate('user-profile', { from: 'live' })} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, width: 60, cursor: 'pointer' }}>
                 <Avatar name={p.name} color={p.color} size={42} online={i < 3} />
                 <span style={{ fontSize: 11, color: '#666', textAlign: 'center' }}>{p.name.split(' ')[0]}</span>
               </div>

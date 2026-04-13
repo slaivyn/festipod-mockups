@@ -127,7 +127,7 @@ export function EventDetailScreen({ navigate }: ScreenProps) {
               {PEOPLE.map((p, i) => (
                 <div
                   key={i}
-                  onClick={() => navigate('user-profile')}
+                  onClick={() => navigate('user-profile', { from: 'event-detail' })}
                   style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '10px 0', borderBottom: '1px solid #f5f5f5', cursor: 'pointer' }}
                 >
                   <Avatar name={p.name} color={p.color} size={38} />
