@@ -20,6 +20,8 @@ const friends: Friend[] = [
 
 export function InviteScreen({ navigate }: ScreenProps) {
   const [selected, setSelected] = useState<Set<string>>(new Set());
+  const [step, setStep] = useState<'select' | 'message'>('select');
+  const [message, setMessage] = useState('');
 
   const toggleFriend = (id: string) => {
     const newSelected = new Set(selected);
@@ -30,6 +32,99 @@ export function InviteScreen({ navigate }: ScreenProps) {
     }
     setSelected(newSelected);
   };
+
+  const selectedFriends = friends.filter((f) => selected.has(f.id));
+
+  if (step === 'message') {
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+        <Header
+          title="Ajouter un message"
+          left={<span onClick={() => setStep('select')} style={{ cursor: 'pointer', fontSize: 18 }}>‹</span>}
+        />
+
+        <div style={{ flex: 1, overflow: 'auto', padding: 16 }}>
+          <div style={{ marginBottom: 16 }}>
+            <Text style={{ margin: '0 0 8px', fontSize: 13, color: '#888', fontWeight: 600, textTransform: 'uppercase' }}>
+              Invitations pour
+            </Text>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+              {selectedFriends.map((friend) => (
+                <div
+                  key={friend.id}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 6,
+                    background: '#FFF7ED',
+                    border: '1.5px solid #FBD38D',
+                    borderRadius: 20,
+                    padding: '4px 10px',
+                  }}
+                >
+                  <Avatar name={friend.name} color={friend.color} size={22} />
+                  <Text style={{ margin: 0, fontSize: 13, color: '#C05621', fontWeight: 600 }}>
+                    {friend.name.split(' ')[0]}
+                  </Text>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div style={{ marginBottom: 8 }}>
+            <Text style={{ margin: '0 0 8px', fontSize: 13, color: '#888', fontWeight: 600, textTransform: 'uppercase' }}>
+              Message <span style={{ fontWeight: 400, fontSize: 12 }}>(optionnel)</span>
+            </Text>
+            <textarea
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              placeholder="Ajouter un message personnalisé à votre invitation..."
+              rows={5}
+              style={{
+                width: '100%',
+                padding: '10px 12px',
+                fontSize: 15,
+                fontFamily: 'inherit',
+                border: '2px solid #e2e8f0',
+                borderRadius: 8,
+                resize: 'none',
+                outline: 'none',
+                boxSizing: 'border-box',
+                color: '#2d3748',
+                lineHeight: 1.5,
+              }}
+            />
+          </div>
+        </div>
+
+        <div style={{ padding: 16, borderTop: '1px solid #f0f0f0', display: 'flex', flexDirection: 'column', gap: 8 }}>
+          <Button
+            variant="primary"
+            style={{ width: '100%' }}
+            onClick={() => navigate('event-detail')}
+          >
+            Envoyer {selected.size} invitation{selected.size !== 1 ? 's' : ''}
+          </Button>
+          {message.trim() === '' && (
+            <button
+              onClick={() => navigate('event-detail')}
+              style={{
+                background: 'none',
+                border: 'none',
+                color: '#888',
+                fontSize: 14,
+                cursor: 'pointer',
+                textAlign: 'center',
+                padding: '4px 0',
+              }}
+            >
+              Envoyer sans message
+            </button>
+          )}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
@@ -82,10 +177,10 @@ export function InviteScreen({ navigate }: ScreenProps) {
         <Button
           variant="primary"
           style={{ width: '100%' }}
-          onClick={() => navigate('event-detail')}
+          onClick={() => setStep('message')}
           disabled={selected.size === 0}
         >
-          Envoyer {selected.size > 0 ? `${selected.size} ` : ''}invitation{selected.size !== 1 ? 's' : ''}
+          Suivant →
         </Button>
       </div>
     </div>
