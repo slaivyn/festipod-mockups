@@ -1,4 +1,5 @@
 import React from 'react';
+import { ArrowLeft } from 'lucide-react';
 import { Header, Avatar, Text, Input } from '../components/sketchy';
 import type { ScreenProps } from './index';
 
@@ -13,7 +14,7 @@ export function ParticipantsListScreen({ navigate }: ScreenProps) {
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       <Header
         title="Participants (12)"
-        left={<span onClick={() => navigate('event-detail')} style={{ cursor: 'pointer', fontSize: 18 }}>‹</span>}
+        left={<ArrowLeft size={20} onClick={() => navigate('event-detail')} style={{ cursor: 'pointer' }} />}
       />
 
       <div style={{ padding: 16, borderBottom: '1px solid #f0f0f0' }}>

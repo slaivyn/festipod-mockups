@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { ArrowLeft } from 'lucide-react';
 import { Button, Input } from '../components/sketchy';
 import type { ScreenProps } from './index';
 
@@ -13,7 +14,7 @@ export function IntentionScreen({ navigate }: ScreenProps) {
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       <div style={{ flex: 1, overflow: 'auto' }}>
         <div style={{ padding: '8px 16px', display: 'flex', alignItems: 'center', gap: 12 }}>
-          <button onClick={() => navigate('event-detail')} style={{ background: 'none', border: 'none', fontSize: 22, cursor: 'pointer', color: '#333', padding: 0 }}>‹</button>
+          <button onClick={() => navigate('event-detail')} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#333', padding: 0, display: 'flex', alignItems: 'center' }}><ArrowLeft size={20} /></button>
           <span style={{ fontSize: 17, fontWeight: 700 }}>Déclarer une intention</span>
         </div>
         <div style={{ padding: 16 }}>

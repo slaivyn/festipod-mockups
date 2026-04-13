@@ -1,4 +1,5 @@
 import React from 'react';
+import { ArrowLeft } from 'lucide-react';
 import { Header, Text, Button, Card, Divider, Avatar } from '../components/sketchy';
 import type { ScreenProps } from './index';
 
@@ -9,7 +10,7 @@ export function ShareProfileScreen({ navigate }: ScreenProps) {
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       <Header
         title="Partager mon profil"
-        left={<span onClick={() => navigate('profile')} style={{ cursor: 'pointer', fontSize: 18 }}>‹</span>}
+        left={<ArrowLeft size={20} onClick={() => navigate('profile')} style={{ cursor: 'pointer' }} />}
       />
 
       <div style={{ flex: 1, overflow: 'auto', padding: 16 }}>

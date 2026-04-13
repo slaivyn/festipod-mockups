@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { ArrowLeft } from 'lucide-react';
 import { Header, Text, ListItem, Toggle, Divider, NavBar } from '../components/sketchy';
 import type { ScreenProps } from './index';
 
@@ -11,7 +12,7 @@ export function SettingsScreen({ navigate }: ScreenProps) {
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       <Header
         title="Paramètres"
-        left={<span onClick={() => navigate('profile')} style={{ cursor: 'pointer', fontSize: 18 }}>‹</span>}
+        left={<ArrowLeft size={20} onClick={() => navigate('profile')} style={{ cursor: 'pointer' }} />}
       />
 
       <div style={{ flex: 1, overflow: 'auto' }}>

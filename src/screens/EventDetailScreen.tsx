@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { ArrowLeft } from 'lucide-react';
 import { Text, Button, Avatar, AvatarStack, Tag, RelevanceIcon, Placeholder } from '../components/sketchy';
 import type { ScreenProps } from './index';
 
@@ -41,7 +42,7 @@ export function EventDetailScreen({ navigate }: ScreenProps) {
       <div style={{ flex: 1, overflow: 'auto' }}>
         {/* Header */}
         <div style={{ padding: '8px 16px', display: 'flex', alignItems: 'center', gap: 12 }}>
-          <button onClick={() => navigate('home')} style={{ background: 'none', border: 'none', fontSize: 22, cursor: 'pointer', color: '#333', padding: 0 }}>‹</button>
+          <button onClick={() => navigate('home')} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#333', padding: 0, display: 'flex', alignItems: 'center' }}><ArrowLeft size={20} /></button>
           <div style={{ flex: 1 }}>
             <div style={{ fontSize: 18, fontWeight: 700, color: '#1a1a1a' }}>Forum Ouvert Transition</div>
             <div style={{ fontSize: 12, color: '#888' }}>89 km</div>

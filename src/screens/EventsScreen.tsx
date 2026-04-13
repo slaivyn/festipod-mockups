@@ -1,4 +1,5 @@
 import React from 'react';
+import { ArrowLeft } from 'lucide-react';
 import { Header, Input, Card, Text, Badge, NavBar, AvatarStack, RelevanceIcon } from '../components/sketchy';
 import type { ScreenProps } from './index';
 
@@ -48,7 +49,7 @@ export function EventsScreen({ navigate }: ScreenProps) {
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       <Header
         title="Découvrir"
-        left={<span onClick={() => navigate('home')} style={{ cursor: 'pointer', fontSize: 18 }}>‹</span>}
+        left={<ArrowLeft size={20} onClick={() => navigate('home')} style={{ cursor: 'pointer' }} />}
       />
 
       {/* Search */}

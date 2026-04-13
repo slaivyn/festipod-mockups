@@ -1,4 +1,5 @@
 import React from 'react';
+import { ArrowLeft } from 'lucide-react';
 import { Header, Avatar, Title, Text, Button, Card, Badge, Divider } from '../components/sketchy';
 import type { ScreenProps } from './index';
 
@@ -19,7 +20,7 @@ export function UserProfileScreen({ navigate }: ScreenProps) {
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       <Header
         title="Profil"
-        left={<span onClick={() => navigate('event-detail')} style={{ cursor: 'pointer', fontSize: 18 }}>‹</span>}
+        left={<ArrowLeft size={20} onClick={() => navigate('event-detail')} style={{ cursor: 'pointer' }} />}
       />
 
       <div style={{ flex: 1, overflow: 'auto' }}>

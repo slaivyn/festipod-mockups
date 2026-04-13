@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { ArrowLeft } from 'lucide-react';
 import { Header, Input, Text, Avatar, Checkbox, Button } from '../components/sketchy';
 import type { ScreenProps } from './index';
 
@@ -40,7 +41,7 @@ export function InviteScreen({ navigate }: ScreenProps) {
       <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
         <Header
           title="Ajouter un message"
-          left={<span onClick={() => setStep('select')} style={{ cursor: 'pointer', fontSize: 18 }}>‹</span>}
+          left={<ArrowLeft size={20} onClick={() => setStep('select')} style={{ cursor: 'pointer' }} />}
         />
 
         <div style={{ flex: 1, overflow: 'auto', padding: 16 }}>
@@ -130,7 +131,7 @@ export function InviteScreen({ navigate }: ScreenProps) {
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       <Header
         title="Inviter des amis"
-        left={<span onClick={() => navigate('event-detail')} style={{ cursor: 'pointer', fontSize: 18 }}>‹</span>}
+        left={<ArrowLeft size={20} onClick={() => navigate('event-detail')} style={{ cursor: 'pointer' }} />}
       />
 
       <div style={{ padding: '12px 16px', borderBottom: '1px solid #f0f0f0' }}>

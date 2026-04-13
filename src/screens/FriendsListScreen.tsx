@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { ArrowLeft } from 'lucide-react';
 import { Header, Text, Avatar, Input, Button, Badge, NavBar } from '../components/sketchy';
 import type { ScreenProps } from './index';
 
@@ -27,7 +28,7 @@ export function FriendsListScreen({ navigate }: ScreenProps) {
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       <Header
         title="Mon réseau"
-        left={<span onClick={() => navigate('home')} style={{ cursor: 'pointer', fontSize: 18 }}>‹</span>}
+        left={<ArrowLeft size={20} onClick={() => navigate('home')} style={{ cursor: 'pointer' }} />}
       />
 
       {/* Tabs */}
