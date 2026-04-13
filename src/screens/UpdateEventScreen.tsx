@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Header, Text, Input, Button, Placeholder } from '../components/sketchy';
 import type { ScreenProps } from './index';
 
 export function UpdateEventScreen({ navigate }: ScreenProps) {
+  const [selectedThemes, setSelectedThemes] = useState<Set<string>>(new Set(['social']));
+
+  const toggleTheme = (id: string) => {
+    const next = new Set(selectedThemes);
+    if (next.has(id)) next.delete(id); else next.add(id);
+    setSelectedThemes(next);
+  };
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       <Header
@@ -75,8 +83,9 @@ export function UpdateEventScreen({ navigate }: ScreenProps) {
               ].map((theme) => (
                 <Button
                   key={theme.id}
-                  variant={theme.id === 'social' ? 'primary' : 'default'}
+                  variant={selectedThemes.has(theme.id) ? 'primary' : 'default'}
                   style={{ fontSize: 13 }}
+                  onClick={() => toggleTheme(theme.id)}
                 >
                   {theme.emoji} {theme.label}
                 </Button>

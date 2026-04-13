@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, Button, Avatar, AvatarStack, Tag, RelevanceIcon } from '../components/sketchy';
+import { Text, Button, Avatar, AvatarStack, Tag, RelevanceIcon, Placeholder } from '../components/sketchy';
 import type { ScreenProps } from './index';
 
 const PEOPLE = [
@@ -11,9 +11,9 @@ const PEOPLE = [
 ];
 
 const meetingPoints = [
-  { title: 'Gouvernance coopérative', host: PEOPLE[0], time: 'Ven. 22 · 9h00', spots: '4/8 places', relevance: 3 },
-  { title: "Café d'accueil", host: PEOPLE[3], time: 'Ven. 22 · 8h15', spots: 'ouvert', relevance: 0 },
-  { title: 'Débrief habitat participatif', host: PEOPLE[1], time: 'Sam. 23 · 12h30', spots: '3/6 places', relevance: 2 },
+  { title: 'Gouvernance coopérative', host: PEOPLE[0], time: 'Ven. 22 · 9h00', relevance: 3 },
+  { title: "Café d'accueil", host: PEOPLE[3], time: 'Ven. 22 · 8h15', relevance: 0 },
+  { title: 'Débrief habitat participatif', host: PEOPLE[1], time: 'Sam. 23 · 12h30', relevance: 2 },
 ];
 
 const intentionTopics = [
@@ -44,9 +44,38 @@ export function EventDetailScreen({ navigate }: ScreenProps) {
           <button onClick={() => navigate('home')} style={{ background: 'none', border: 'none', fontSize: 22, cursor: 'pointer', color: '#333', padding: 0 }}>‹</button>
           <div style={{ flex: 1 }}>
             <div style={{ fontSize: 18, fontWeight: 700, color: '#1a1a1a' }}>Forum Ouvert Transition</div>
-            <div style={{ fontSize: 12, color: '#888' }}>22-23 Fév. · 89 km</div>
+            <div style={{ fontSize: 12, color: '#888' }}>89 km</div>
           </div>
           <span onClick={() => navigate('update-event')} style={{ cursor: 'pointer', fontSize: 18, color: '#888' }}>✎</span>
+        </div>
+
+        {/* Cover photo */}
+        <Placeholder height={160} label="Photo de couverture" style={{ margin: '0 16px 12px', borderRadius: 12 }} />
+
+        {/* Event info */}
+        <div style={{ margin: '0 16px 12px', padding: 14, background: '#fafafa', borderRadius: 12, display: 'flex', flexDirection: 'column', gap: 8 }}>
+          <div style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
+            <span style={{ fontSize: 15 }}>📅</span>
+            <div>
+              <div style={{ fontSize: 13, fontWeight: 600, color: '#1a1a1a' }}>22 – 23 Fév. 2026</div>
+              <div style={{ fontSize: 12, color: '#888' }}>9h00 – 18h00</div>
+            </div>
+          </div>
+          <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
+            <span style={{ fontSize: 15 }}>📍</span>
+            <span style={{ fontSize: 13, color: '#1a1a1a' }}>Le Chapeau Rouge, Lyon (69)</span>
+          </div>
+          <div style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
+            <span style={{ fontSize: 15 }}>📝</span>
+            <span style={{ fontSize: 13, color: '#555', lineHeight: 1.5 }}>
+              Un forum ouvert pour explorer ensemble les transitions écologiques et sociales. Venez partager vos projets et rencontrer d'autres acteurs du changement.
+            </span>
+          </div>
+          <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginTop: 2 }}>
+            <Tag label="👥 Social" bg="#EBF4FF" color="#2B6CB0" />
+            <Tag label="🌿 Nature" bg="#F0FFF4" color="#276749" />
+            <Tag label="✨ Autre" bg="#FAF5FF" color="#6B46C1" />
+          </div>
         </div>
 
         {/* Action buttons */}
@@ -135,8 +164,7 @@ export function EventDetailScreen({ navigate }: ScreenProps) {
                     <Avatar name={c.host.name} color={c.host.color} size={20} />
                     <span style={{ fontSize: 12, color: '#888' }}>{c.host.name} · {c.time}</span>
                   </div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span style={{ fontSize: 12, color: '#999' }}>{c.spots}</span>
+                  <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
                     <button
                       onClick={() => toggleMeeting(i)}
                       style={{
