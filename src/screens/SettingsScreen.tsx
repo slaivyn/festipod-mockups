@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { ArrowLeft } from 'lucide-react';
-import { Header, Text, ListItem, Toggle, Divider, NavBar } from '../components/sketchy';
+import { Header, Text, ListItem, Toggle, Divider, BottomNav } from '../components/sketchy';
 import type { ScreenProps } from './index';
 
 export function SettingsScreen({ navigate }: ScreenProps) {
@@ -78,14 +78,7 @@ export function SettingsScreen({ navigate }: ScreenProps) {
         </ListItem>
       </div>
 
-      <NavBar
-        items={[
-          { icon: '◎', label: 'Événements', onClick: () => navigate('home') },
-          { icon: '⬡', label: 'Réseau', onClick: () => navigate('friends-list') },
-          { icon: '◉', label: 'En direct', onClick: () => navigate('live') },
-          { icon: '○', label: 'Profil', onClick: () => navigate('profile') },
-        ]}
-      />
+      <BottomNav active="profile" navigate={navigate} />
     </div>
   );
 }

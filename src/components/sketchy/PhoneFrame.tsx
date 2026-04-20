@@ -1,4 +1,5 @@
 import React from 'react';
+import { ToastContainer } from './Toast';
 
 interface PhoneFrameProps {
   children: React.ReactNode;
@@ -80,9 +81,11 @@ export function PhoneFrame({ children, scale = 1, className = '' }: PhoneFramePr
             overflow: 'auto',
             display: 'flex',
             flexDirection: 'column',
+            position: 'relative',
           }}
         >
           {children}
+          <ToastContainer />
         </div>
 
         {/* Home indicator */}

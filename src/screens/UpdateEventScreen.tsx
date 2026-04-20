@@ -1,14 +1,10 @@
-import React, { useState } from 'react';
-import { Header, Text, Input, Button, Placeholder } from '../components/sketchy';
+import { Header, Text, Input, Button, Placeholder, showToast } from '../components/sketchy';
 import type { ScreenProps } from './index';
 
 export function UpdateEventScreen({ navigate }: ScreenProps) {
-  const [selectedThemes, setSelectedThemes] = useState<Set<string>>(new Set(['social']));
-
-  const toggleTheme = (id: string) => {
-    const next = new Set(selectedThemes);
-    if (next.has(id)) next.delete(id); else next.add(id);
-    setSelectedThemes(next);
+  const save = () => {
+    showToast('Événement mis à jour', 'success');
+    navigate('event-detail');
   };
 
   return (
@@ -67,31 +63,6 @@ export function UpdateEventScreen({ navigate }: ScreenProps) {
               style={{ resize: 'none' }}
             />
           </div>
-
-          <div>
-            <Text style={{ marginBottom: 6, fontSize: 13, color: '#888' }}>Thématique *</Text>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-              {[
-                { id: 'culture', label: 'Culture', emoji: '🎭' },
-                { id: 'sport', label: 'Sport', emoji: '⚽' },
-                { id: 'nature', label: 'Nature', emoji: '🌿' },
-                { id: 'social', label: 'Social', emoji: '👥' },
-                { id: 'food', label: 'Gastronomie', emoji: '🍽️' },
-                { id: 'music', label: 'Musique', emoji: '🎵' },
-                { id: 'tech', label: 'Tech', emoji: '💻' },
-                { id: 'other', label: 'Autre', emoji: '✨' },
-              ].map((theme) => (
-                <Button
-                  key={theme.id}
-                  variant={selectedThemes.has(theme.id) ? 'primary' : 'default'}
-                  style={{ fontSize: 13 }}
-                  onClick={() => toggleTheme(theme.id)}
-                >
-                  {theme.emoji} {theme.label}
-                </Button>
-              ))}
-            </div>
-          </div>
         </div>
       </div>
 
@@ -99,7 +70,7 @@ export function UpdateEventScreen({ navigate }: ScreenProps) {
         <Button
           variant="primary"
           style={{ width: '100%' }}
-          onClick={() => navigate('event-detail')}
+          onClick={save}
         >
           Enregistrer les modifications
         </Button>

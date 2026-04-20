@@ -1,5 +1,4 @@
-import React from 'react';
-import { Header, Avatar, Title, Text, Button, Card, Divider, NavBar, Tag } from '../components/sketchy';
+import { Header, Avatar, Title, Text, Button, Card, Divider, BottomNav, Tag } from '../components/sketchy';
 import type { ScreenProps } from './index';
 
 export function ProfileScreen({ navigate }: ScreenProps) {
@@ -38,7 +37,6 @@ export function ProfileScreen({ navigate }: ScreenProps) {
 
           <div style={{ display: 'flex', gap: 8, marginTop: 20, justifyContent: 'center' }}>
             <Button variant="primary" onClick={() => navigate('update-profile')}>Modifier le profil</Button>
-            <Button onClick={() => navigate('share-profile')}>Partager</Button>
           </div>
         </div>
 
@@ -101,14 +99,7 @@ export function ProfileScreen({ navigate }: ScreenProps) {
         </div>
       </div>
 
-      <NavBar
-        items={[
-          { icon: '◎', label: 'Événements', onClick: () => navigate('home') },
-          { icon: '⬡', label: 'Réseau', onClick: () => navigate('friends-list') },
-          { icon: '◉', label: 'En direct', onClick: () => navigate('live') },
-          { icon: '○', label: 'Profil', active: true },
-        ]}
-      />
+      <BottomNav active="profile" navigate={navigate} />
     </div>
   );
 }

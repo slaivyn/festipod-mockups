@@ -377,6 +377,35 @@ body {
   border-radius: 44px;
 }
 
+/* Scrollbars inside the phone preview */
+.phone-screen,
+.phone-screen * {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.18) transparent;
+}
+
+.phone-screen ::-webkit-scrollbar,
+.phone-screen::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.phone-screen ::-webkit-scrollbar-track,
+.phone-screen::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.phone-screen ::-webkit-scrollbar-thumb,
+.phone-screen::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.16);
+  border-radius: 4px;
+}
+
+.phone-screen ::-webkit-scrollbar-thumb:hover,
+.phone-screen::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.28);
+}
+
 /* Online indicator on avatar */
 .app-avatar .online-dot {
   position: absolute;

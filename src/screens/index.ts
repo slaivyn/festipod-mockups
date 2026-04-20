@@ -16,7 +16,7 @@ import { ShareProfileScreen } from './ShareProfileScreen';
 import { UpdateProfileScreen } from './UpdateProfileScreen';
 import { WelcomeScreen } from './WelcomeScreen';
 import { IntentionScreen } from './IntentionScreen';
-import { LiveScreen } from './LiveScreen';
+import { ConnectScreen } from './ConnectScreen';
 
 export interface Screen {
   id: string;
@@ -59,13 +59,6 @@ export const screenGroups: ScreenGroup[] = [
     ],
   },
   {
-    id: 'live',
-    name: 'En direct',
-    screens: [
-      { id: 'live', name: 'En direct', component: LiveScreen },
-    ],
-  },
-  {
     id: 'user',
     name: 'Utilisateur',
     screens: [
@@ -73,6 +66,7 @@ export const screenGroups: ScreenGroup[] = [
       { id: 'update-profile', name: 'Modifier mon profil', component: UpdateProfileScreen },
       { id: 'user-profile', name: 'Profil d\'un utilisateur', component: UserProfileScreen },
       { id: 'friends-list', name: 'Mon réseau', component: FriendsListScreen },
+      { id: 'connect', name: 'Se connecter', component: ConnectScreen },
       { id: 'share-profile', name: 'Partager mon profil', component: ShareProfileScreen },
     ],
   },

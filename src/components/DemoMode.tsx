@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { PhoneFrame } from './sketchy';
 import { screens, getScreen } from '../screens';
-import { getStoriesForScreen, categoryLabels, categoryColors, priorityColors } from '../data';
-import { getStoryUrl } from '../router';
 import { ThemeToggle } from './ThemeToggle';
 
 function useIsMobile(breakpoint = 768) {
@@ -21,7 +19,7 @@ interface DemoModeProps {
   onNavigateToStory: (storyId: string) => void;
 }
 
-export function DemoMode({ initialScreenId, onBack, onNavigateToStory }: DemoModeProps) {
+export function DemoMode({ initialScreenId, onBack }: DemoModeProps) {
   const [currentScreenId, setCurrentScreenId] = useState(initialScreenId);
   const [screenParams, setScreenParams] = useState<Record<string, string> | undefined>(undefined);
   const [history, setHistory] = useState<string[]>([initialScreenId]);
@@ -31,7 +29,6 @@ export function DemoMode({ initialScreenId, onBack, onNavigateToStory }: DemoMod
 
   const currentScreen = getScreen(currentScreenId);
   const ScreenComponent = currentScreen?.component;
-  const linkedStories = getStoriesForScreen(currentScreenId);
 
   const navigate = (screenId: string, params?: Record<string, string>) => {
     const newHistory = [...history.slice(0, historyIndex + 1), screenId];
@@ -179,77 +176,6 @@ export function DemoMode({ initialScreenId, onBack, onNavigateToStory }: DemoMod
             </button>
           </div>
         </div>
-
-        {/* User Stories for this screen */}
-        {linkedStories.length > 0 && (
-          <div style={{
-            borderBottom: '1px solid var(--tool-border-light)',
-            maxHeight: '40%',
-            overflow: 'auto',
-          }}>
-            <div style={{
-              fontFamily: 'var(--font-app)',
-              fontSize: 12,
-              color: 'var(--tool-text-muted)',
-              padding: '12px 16px 8px',
-              position: 'sticky',
-              top: 0,
-              background: 'var(--tool-surface)',
-            }}>
-              User Stories ({linkedStories.length})
-            </div>
-            {linkedStories.map((story) => (
-              <a
-                key={story.id}
-                href={getStoryUrl(story.id)}
-                onClick={(e) => {
-                  e.preventDefault();
-                  onNavigateToStory(story.id);
-                }}
-                style={{
-                  display: 'block',
-                  padding: '8px 16px',
-                  borderBottom: '1px solid var(--tool-border-light)',
-                  textDecoration: 'none',
-                  color: 'var(--tool-text)',
-                  cursor: 'pointer',
-                }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
-                  <span style={{
-                    display: 'inline-block',
-                    padding: '1px 6px',
-                    background: priorityColors[story.priority],
-                    color: 'white',
-                    borderRadius: '12px',
-                    fontSize: 9,
-                    fontFamily: 'var(--font-app)',
-                  }}>
-                    P{story.priority}
-                  </span>
-                  <span style={{
-                    display: 'inline-block',
-                    padding: '1px 6px',
-                    background: categoryColors[story.category],
-                    color: 'white',
-                    borderRadius: '12px',
-                    fontSize: 9,
-                    fontFamily: 'var(--font-app)',
-                  }}>
-                    {categoryLabels[story.category]}
-                  </span>
-                </div>
-                <div style={{
-                  fontFamily: 'var(--font-app)',
-                  fontSize: 12,
-                  lineHeight: 1.4,
-                }}>
-                  {story.title}
-                </div>
-              </a>
-            ))}
-          </div>
-        )}
 
         {/* Screen list */}
         <div style={{

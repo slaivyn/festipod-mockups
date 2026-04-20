@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { ArrowLeft } from 'lucide-react';
-import { Header, Input, Text, Avatar, Checkbox, Button } from '../components/sketchy';
+import { Header, Input, Text, Avatar, Checkbox, Button, showToast } from '../components/sketchy';
 import type { ScreenProps } from './index';
 
 interface Friend {
@@ -35,6 +35,11 @@ export function InviteScreen({ navigate }: ScreenProps) {
   };
 
   const selectedFriends = friends.filter((f) => selected.has(f.id));
+
+  const send = () => {
+    showToast(`${selected.size} invitation${selected.size > 1 ? 's' : ''} envoyée${selected.size > 1 ? 's' : ''}`, 'success');
+    navigate('event-detail');
+  };
 
   if (step === 'message') {
     return (
@@ -102,13 +107,13 @@ export function InviteScreen({ navigate }: ScreenProps) {
           <Button
             variant="primary"
             style={{ width: '100%' }}
-            onClick={() => navigate('event-detail')}
+            onClick={send}
           >
             Envoyer {selected.size} invitation{selected.size !== 1 ? 's' : ''}
           </Button>
           {message.trim() === '' && (
             <button
-              onClick={() => navigate('event-detail')}
+              onClick={send}
               style={{
                 background: 'none',
                 border: 'none',

@@ -1,6 +1,5 @@
-import React from 'react';
 import { ArrowLeft } from 'lucide-react';
-import { Header, Input, Card, Text, Badge, NavBar, AvatarStack, RelevanceIcon } from '../components/sketchy';
+import { Header, Input, Card, Badge, BottomNav, AvatarStack, getEventPhotoUrl } from '../components/sketchy';
 import type { ScreenProps } from './index';
 
 const PEOPLE = [
@@ -21,24 +20,31 @@ const events = [
 
 function EventCard({ ev, onClick }: { ev: typeof events[0]; onClick: () => void }) {
   return (
-    <Card onClick={onClick} style={{ marginBottom: 12 }} accentColor={ev.color}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 6 }}>
-        <div style={{ fontSize: 15.5, fontWeight: 700, color: '#1a1a1a', lineHeight: 1.3, flex: 1 }}>{ev.name}</div>
-        <RelevanceIcon level={ev.relevance} />
-      </div>
-      <div style={{ fontSize: 12.5, color: '#888', marginBottom: 10 }}>
-        {ev.date} · {ev.location} · {ev.distance}
-      </div>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <AvatarStack people={ev.people} size={26} />
-          <span style={{ fontSize: 12, color: '#666' }}>{ev.people.length} connexions</span>
+    <Card onClick={onClick} style={{ marginBottom: 12, padding: 0, overflow: 'hidden' }} accentColor={ev.color}>
+      <div
+        style={{
+          height: 100,
+          backgroundImage: `url(${getEventPhotoUrl(ev.id)})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      />
+      <div style={{ padding: 14 }}>
+        <div style={{ fontSize: 15.5, fontWeight: 700, color: '#1a1a1a', lineHeight: 1.3, marginBottom: 6 }}>{ev.name}</div>
+        <div style={{ fontSize: 12.5, color: '#888', marginBottom: 10 }}>
+          {ev.date} · {ev.location} · {ev.distance}
         </div>
-        {ev.rdvs > 0 && (
-          <div style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 12, color: '#E8590C', fontWeight: 600 }}>
-            <span style={{ fontSize: 16 }}>●</span> {ev.rdvs} rdv{ev.rdvs > 1 && 's'}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+            <AvatarStack people={ev.people} size={26} />
+            <span style={{ fontSize: 12, color: '#666' }}>{ev.people.length} connexions</span>
           </div>
-        )}
+          {ev.rdvs > 0 && (
+            <div style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 12, color: '#E8590C', fontWeight: 600 }}>
+              <span style={{ fontSize: 16 }}>●</span> {ev.rdvs} rdv{ev.rdvs > 1 && 's'}
+            </div>
+          )}
+        </div>
       </div>
     </Card>
   );
@@ -72,14 +78,7 @@ export function EventsScreen({ navigate }: ScreenProps) {
         ))}
       </div>
 
-      <NavBar
-        items={[
-          { icon: '◎', label: 'Événements', onClick: () => navigate('home') },
-          { icon: '⬡', label: 'Réseau', onClick: () => navigate('friends-list') },
-          { icon: '◉', label: 'En direct', onClick: () => navigate('live') },
-          { icon: '○', label: 'Profil', onClick: () => navigate('profile') },
-        ]}
-      />
+      <BottomNav active="discover" navigate={navigate} />
     </div>
   );
 }

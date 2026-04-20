@@ -1,5 +1,4 @@
-import React from 'react';
-import { Header, Text, Input, Button, Avatar } from '../components/sketchy';
+import { Header, Text, Input, Button, Avatar, showToast } from '../components/sketchy';
 import type { ScreenProps } from './index';
 
 export function UpdateProfileScreen({ navigate }: ScreenProps) {
@@ -55,7 +54,10 @@ export function UpdateProfileScreen({ navigate }: ScreenProps) {
         <Button
           variant="primary"
           style={{ width: '100%' }}
-          onClick={() => navigate('profile')}
+          onClick={() => {
+            showToast('Profil mis à jour', 'success');
+            navigate('profile');
+          }}
         >
           Enregistrer
         </Button>
