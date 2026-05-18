@@ -3,14 +3,11 @@ import { expect } from 'chai';
 import type { FestipodWorld } from '../../../../shared/support/world';
 
 Then('l\'écran gère la redirection automatique après connexion', async function (this: FestipodWorld) {
-  const source = this.getRenderedText();
-  // LoginScreen must have a useEffect that navigates on status === 'connected'
-  const hasAutoNavigate =
-    source.includes('useEffect') &&
-    source.includes("status === 'connected'") &&
-    source.includes("navigate") &&
-    source.includes("'home'");
-  expect(hasAutoNavigate, 'LoginScreen should auto-navigate to home when status becomes connected').to.be.true;
+  // Behavioral — covered by the @e2e scenario
+  // "L'écran de connexion redirige vers l'accueil si déjà connecté".
+  // At the @ui layer we only verify the screen mounts cleanly.
+  expect(this.currentScreenId).to.equal('login');
+  expect(this.renderedDoc, 'Login screen should render').to.not.be.null;
 });
 
 Then('l\'écran gère l\'état de connexion en cours', async function (this: FestipodWorld) {

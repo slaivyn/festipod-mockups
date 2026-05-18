@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Header, Text, Input, Button, Avatar } from '../../../shared/components/sketchy';
+import { Header, Text, Input, Button, Avatar, showToast } from '../../../shared/components/sketchy';
 import { useFestipodData } from '../../../shared/context/FestipodDataContext';
-import type { ScreenProps } from '../../../screens';
+import { useNavigate } from '../../../app/router';
 
-export function UpdateProfileScreen({ navigate }: ScreenProps) {
+export function UpdateProfileScreen() {
+  const navigate = useNavigate();
   const { currentUser, updateProfile } = useFestipodData();
   const user = currentUser;
 
@@ -17,28 +18,21 @@ export function UpdateProfileScreen({ navigate }: ScreenProps) {
   const handleSave = () => {
     const fullName = `${firstName} ${lastName}`.trim();
     const initials = `${firstName[0] ?? ''}${lastName[0] ?? ''}`.toUpperCase();
-    updateProfile({
-      name: fullName,
-      initials,
-      username,
-      city,
-      bio,
-    });
-    navigate('profile');
+    updateProfile({ name: fullName, initials, username, city, bio });
+    showToast('Profil mis à jour', 'success');
+    navigate('/profile');
   };
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       <Header
         title="Modifier le profil"
-        left={<span onClick={() => navigate('profile')} style={{ cursor: 'pointer' }}>✕</span>}
+        left={<span onClick={() => navigate('/profile')} style={{ cursor: 'pointer', fontSize: 18 }}>✕</span>}
       />
 
-      {/* Content */}
       <div style={{ flex: 1, padding: 16, overflow: 'auto' }}>
-        {/* Photo */}
         <div style={{ textAlign: 'center', marginBottom: 24 }}>
-          <Avatar initials={user?.initials ?? '?'} size="lg" />
+          <Avatar initials={user?.initials ?? '?'} color="#E8590C" size="lg" />
           <Button style={{ marginTop: 12 }}>
             Changer la photo
           </Button>
@@ -46,29 +40,29 @@ export function UpdateProfileScreen({ navigate }: ScreenProps) {
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
           <div>
-            <Text style={{ marginBottom: 6, fontSize: 14 }}>Prénom *</Text>
+            <Text style={{ marginBottom: 6, fontSize: 13, color: '#888' }}>Prénom *</Text>
             <Input value={firstName} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFirstName(e.target.value)} />
           </div>
 
           <div>
-            <Text style={{ marginBottom: 6, fontSize: 14 }}>Nom *</Text>
+            <Text style={{ marginBottom: 6, fontSize: 13, color: '#888' }}>Nom *</Text>
             <Input value={lastName} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLastName(e.target.value)} />
           </div>
 
           <div>
-            <Text style={{ marginBottom: 6, fontSize: 14 }}>Pseudo</Text>
+            <Text style={{ marginBottom: 6, fontSize: 13, color: '#888' }}>Pseudo</Text>
             <Input value={username} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)} />
           </div>
 
           <div>
-            <Text style={{ marginBottom: 6, fontSize: 14 }}>Localisation</Text>
+            <Text style={{ marginBottom: 6, fontSize: 13, color: '#888' }}>Localisation</Text>
             <Input value={city} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCity(e.target.value)} placeholder="Ville, Pays" />
           </div>
 
           <div>
-            <Text style={{ marginBottom: 6, fontSize: 14 }}>Bio</Text>
+            <Text style={{ marginBottom: 6, fontSize: 13, color: '#888' }}>Bio</Text>
             <textarea
-              className="sketchy-input"
+              className="app-input"
               value={bio}
               onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setBio(e.target.value)}
               rows={3}
@@ -78,8 +72,7 @@ export function UpdateProfileScreen({ navigate }: ScreenProps) {
         </div>
       </div>
 
-      {/* Footer */}
-      <div style={{ padding: 16, borderTop: '2px solid var(--sketch-black)' }}>
+      <div style={{ padding: 16, borderTop: '1px solid #f0f0f0' }}>
         <Button
           variant="primary"
           style={{ width: '100%' }}

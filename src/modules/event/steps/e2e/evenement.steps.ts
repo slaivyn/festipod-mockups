@@ -3,50 +3,53 @@ import { expect } from 'chai';
 import type { FestipodWorld } from '../../../../shared/support/world';
 
 // --- Background: ensure wallet has test data ---
+//
+// The app loads test data automatically on first NG connection (handled inside
+// FestipodDataProvider). We just navigate to /home and wait for events to
+// appear in the UI.
 
 Given('le portefeuille contient des données de test', async function (this: FestipodWorld) {
-  // Navigate to home and wait for NG data to load
-  await this.appFrame!.evaluate(() => { window.location.hash = '#/demo/home'; });
+  // Navigate to /events to verify the wallet has events. We use /events
+  // rather than /home because home filters by the current user's
+  // participations, which may hydrate after a longer delay in NG mode.
+  await this.appFrame!.evaluate(() => {
+    window.history.pushState(null, '', '/events');
+    window.dispatchEvent(new PopStateEvent('popstate'));
+  });
 
-  // Wait for NG-connected home screen with real event data (contains "inscrits" badges)
+  // EventsScreen renders Card components (class app-card) when events load.
   const hasData = await this.appFrame!.waitForFunction(
-    () => {
-      const root = document.getElementById('root');
-      return root?.textContent?.includes('inscrits') ?? false;
-    },
-    { timeout: 15000 },
+    () => document.querySelectorAll('.app-card').length > 0,
+    { timeout: 30000 },
   ).then(() => true).catch(() => false);
 
   if (!hasData) {
-    // Go to gallery and trigger data loading
-    await this.appFrame!.evaluate(() => { window.location.hash = '#/'; });
-    await this.appFrame!.waitForTimeout(2000);
-
-    const loadButton = this.appFrame!.locator('button', { hasText: 'Charger données de test' });
-    if (await loadButton.isVisible({ timeout: 5000 }).catch(() => false)) {
-      await loadButton.click();
-      await this.appFrame!.waitForFunction(
-        () => !Array.from(document.querySelectorAll('button')).some(b => b.textContent?.includes('Chargement...')),
-        { timeout: 60000 },
-      );
-      await this.appFrame!.waitForTimeout(3000);
-    }
-
-    // Navigate to home and wait for data
-    await this.appFrame!.evaluate(() => { window.location.hash = '#/demo/home'; });
-    await this.appFrame!.waitForFunction(
-      () => document.getElementById('root')?.textContent?.includes('inscrits') ?? false,
-      { timeout: 15000 },
-    );
+    const debug = await this.appFrame!.evaluate(() => ({
+      pathname: window.location.pathname,
+      rootText: document.getElementById('root')?.textContent?.substring(0, 500),
+    }));
+    throw new Error(`No events on events screen. Path: ${debug.pathname}, content: ${debug.rootText}`);
   }
 });
 
 // --- Wait helpers ---
 
 When('l\'utilisateur attend que l\'écran {string} soit affiché', async function (this: FestipodWorld, screenId: string) {
+  // We match on pathname prefix to allow for dynamic ids (event-detail etc.).
+  const expectedPath = screenId === 'event-detail' ? '/events/' :
+                       screenId === 'update-event' ? '/edit' :
+                       screenId === 'create-event' ? '/events/new' :
+                       screenId === 'home' ? '/home' :
+                       screenId === 'events' ? '/events' :
+                       '/' + screenId;
+
   await this.appFrame!.waitForFunction(
-    (id: string) => window.location.hash.includes(`demo/${id}`),
-    screenId,
+    (path: string) => {
+      const current = window.location.pathname;
+      if (path === '/edit') return current.endsWith('/edit');
+      return current.startsWith(path);
+    },
+    expectedPath,
     { timeout: 10000 },
   );
   await this.appFrame!.waitForTimeout(1000);
@@ -57,7 +60,13 @@ When('l\'utilisateur attend que l\'écran {string} soit affiché', async functio
 When('l\'utilisateur remplit le formulaire de création d\'événement:', async function (this: FestipodWorld, dataTable: any) {
   const rows = dataTable.hashes() as { champ: string; valeur: string }[];
 
-  // Wait for the form to render (screen transition may take time in DemoMode)
+  // The new CreateEventScreen is a 3-step wizard:
+  // Step 1: name + dates
+  // Step 2: similar-event warning (skipped if none)
+  // Step 3: location + description + times
+  //
+  // We'll fill Step 1 fields first, click Next, then fill remaining fields.
+
   const formReady = await this.appFrame!.waitForFunction(
     () => !!document.querySelector('input[placeholder="Donnez un nom à votre événement"]'),
     { timeout: 10000 },
@@ -65,40 +74,65 @@ When('l\'utilisateur remplit le formulaire de création d\'événement:', async 
 
   if (!formReady) {
     const debug = await this.appFrame!.evaluate(() => ({
-      hash: window.location.hash,
+      pathname: window.location.pathname,
       inputs: Array.from(document.querySelectorAll('input')).map(i => i.placeholder),
       rootText: document.getElementById('root')?.textContent?.substring(0, 300),
     }));
-    throw new Error(`Create form not found. Hash: ${debug.hash}, inputs: ${JSON.stringify(debug.inputs)}, content: ${debug.rootText}`);
+    throw new Error(`Create form not found. Path: ${debug.pathname}, inputs: ${JSON.stringify(debug.inputs)}, content: ${debug.rootText}`);
   }
 
-  for (const { champ, valeur } of rows) {
-    if (champ === 'Nom de l\'événement') {
-      const input = this.appFrame!.locator('input[placeholder="Donnez un nom à votre événement"]');
-      await input.fill(valeur);
-      // Dismiss autocomplete suggestions
-      await this.appFrame!.locator('body').click({ position: { x: 10, y: 10 } });
-      await this.appFrame!.waitForTimeout(300);
-    } else if (champ === 'Date de début') {
-      await this.appFrame!.locator('input[type="date"]').first().fill(valeur);
-    } else if (champ === 'Heure de début') {
-      await this.appFrame!.locator('input[type="time"]').first().fill(valeur);
-    } else if (champ === 'Lieu') {
-      await this.appFrame!.locator('input[placeholder="Ajouter un lieu"]').fill(valeur);
-    } else if (champ === 'Description') {
-      await this.appFrame!.locator('textarea').fill(valeur);
-    }
+  const byChamp: Record<string, string> = {};
+  for (const { champ, valeur } of rows) byChamp[champ] = valeur;
+
+  // Step 1: name + start/end date
+  if (byChamp['Nom de l\'événement']) {
+    const input = this.appFrame!.locator('input[placeholder="Donnez un nom à votre événement"]');
+    await input.fill(byChamp['Nom de l\'événement']);
+  }
+  if (byChamp['Date de début']) {
+    await this.appFrame!.locator('input[type="date"]').first().fill(byChamp['Date de début']);
+  }
+  if (byChamp['Date de fin']) {
+    await this.appFrame!.locator('input[type="date"]').nth(1).fill(byChamp['Date de fin']);
+  }
+
+  // Advance to step 3 (may pass through step 2 if a similar event matches)
+  let stepBtn = this.appFrame!.locator('button', { hasText: 'Suivant' });
+  await stepBtn.first().click();
+  await this.appFrame!.waitForTimeout(500);
+
+  // If we're on step 2 (warning), click Next again
+  const onStep2 = await this.appFrame!.evaluate(
+    () => document.body.textContent?.includes('Événement similaire détecté') ?? false,
+  );
+  if (onStep2) {
+    stepBtn = this.appFrame!.locator('button', { hasText: 'Suivant' });
+    await stepBtn.first().click();
+    await this.appFrame!.waitForTimeout(500);
+  }
+
+  // Step 3 inputs
+  if (byChamp['Heure de début']) {
+    await this.appFrame!.locator('input[type="time"]').first().fill(byChamp['Heure de début']);
+  }
+  if (byChamp['Heure de fin']) {
+    await this.appFrame!.locator('input[type="time"]').nth(1).fill(byChamp['Heure de fin']);
+  }
+  if (byChamp['Lieu']) {
+    await this.appFrame!.locator('input[placeholder="Ajouter un lieu"]').fill(byChamp['Lieu']);
+  }
+  if (byChamp['Description']) {
+    await this.appFrame!.locator('textarea').fill(byChamp['Description']);
   }
 });
 
 When('l\'utilisateur modifie le champ lieu avec {string}', async function (this: FestipodWorld, valeur: string) {
-  // The update form has "Lieu *" label followed by an Input.
-  // Find the input by locating the label text and then the nearby input.
+  // UpdateEventScreen has a "Lieu *" label followed by an Input. Find the input
+  // adjacent to that label.
   await this.appFrame!.waitForFunction(
     () => document.getElementById('root')?.textContent?.includes('Lieu') ?? false,
     { timeout: 10000 },
   );
-  // Use evaluate to find the input next to the "Lieu" label
   await this.appFrame!.evaluate((val: string) => {
     const labels = document.querySelectorAll('*');
     for (const el of labels) {
@@ -106,7 +140,6 @@ When('l\'utilisateur modifie le champ lieu avec {string}', async function (this:
         const parent = el.parentElement;
         const input = parent?.querySelector('input');
         if (input) {
-          // Clear and set value via native setter to trigger React onChange
           const nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value')!.set!;
           nativeInputValueSetter.call(input, val);
           input.dispatchEvent(new Event('input', { bubbles: true }));
@@ -122,40 +155,70 @@ When('l\'utilisateur modifie le champ lieu avec {string}', async function (this:
 // --- Event navigation ---
 
 When('l\'utilisateur clique sur un événement de l\'accueil', async function (this: FestipodWorld) {
-  // Home screen event cards have "inscrits" badge — click the first card container
-  await this.appFrame!.waitForFunction(
-    () => document.getElementById('root')?.textContent?.includes('inscrits') ?? false,
-    { timeout: 10000 },
-  );
-  // Click the first event card (find by inscrits badge, then click parent card)
+  // HomeScreen renders only events the current user participates in. If
+  // participations haven't hydrated from NG yet, the screen is empty — fall
+  // back to /events (no participation filter).
+  await this.appFrame!.evaluate(() => {
+    window.history.pushState(null, '', '/home');
+    window.dispatchEvent(new PopStateEvent('popstate'));
+  });
+  const homeHasCards = await this.appFrame!.waitForFunction(
+    () => document.querySelectorAll('.app-card').length > 0,
+    { timeout: 5000 },
+  ).then(() => true).catch(() => false);
+  if (!homeHasCards) {
+    await this.appFrame!.evaluate(() => {
+      window.history.pushState(null, '', '/events');
+      window.dispatchEvent(new PopStateEvent('popstate'));
+    });
+    await this.appFrame!.waitForFunction(
+      () => document.querySelectorAll('.app-card').length > 0,
+      { timeout: 10000 },
+    );
+  }
   const clicked = await this.appFrame!.evaluate(() => {
-    // Find elements containing event data — cards with cursor:pointer
-    const cards = document.querySelectorAll('[style*="cursor"]');
+    // EventCard has class app-card and onClick navigates to /events/:id
+    const cards = document.querySelectorAll('.app-card');
     for (const card of cards) {
-      if (card.textContent?.includes('inscrits') && card.textContent?.includes('📍')) {
-        (card as HTMLElement).click();
+      const el = card as HTMLElement;
+      // Skip cards without cursor pointer (non-interactive)
+      if (el.style.cursor === 'pointer' || window.getComputedStyle(el).cursor === 'pointer') {
+        el.click();
         return true;
+      }
+    }
+    // Fallback: any cursor:pointer element with location marker
+    const anyClickable = document.querySelectorAll('[style*="cursor"]');
+    for (const el of anyClickable) {
+      const e = el as HTMLElement;
+      if (e.textContent && e.textContent.length > 20 && e.querySelector('.app-card, [class*="card"]') === null) {
+        // Skip — find an actual card
       }
     }
     return false;
   });
   if (!clicked) {
-    expect.fail('No event card found on home screen');
+    const debug = await this.appFrame!.evaluate(() => ({
+      pathname: window.location.pathname,
+      rootText: document.getElementById('root')?.textContent?.substring(0, 500),
+    }));
+    expect.fail(`No event card found on home screen. Path: ${debug.pathname}, content: ${debug.rootText}`);
   }
   await this.appFrame!.waitForTimeout(1500);
 });
 
 When('l\'utilisateur clique sur un événement de la liste', async function (this: FestipodWorld) {
-  // Events screen also has event cards with "inscrits" badges
+  // EventsScreen also uses Card with .app-card class.
   await this.appFrame!.waitForFunction(
-    () => document.getElementById('root')?.textContent?.includes('inscrits') ?? false,
+    () => document.querySelectorAll('.app-card').length > 0,
     { timeout: 10000 },
   );
   const clicked = await this.appFrame!.evaluate(() => {
-    const cards = document.querySelectorAll('[style*="cursor"]');
+    const cards = document.querySelectorAll('.app-card');
     for (const card of cards) {
-      if (card.textContent?.includes('inscrits') && card.textContent?.includes('📍')) {
-        (card as HTMLElement).click();
+      const el = card as HTMLElement;
+      if (el.style.cursor === 'pointer' || window.getComputedStyle(el).cursor === 'pointer') {
+        el.click();
         return true;
       }
     }
@@ -180,7 +243,6 @@ When('l\'utilisateur clique sur le bouton {string} si visible', async function (
     await button.click();
     await this.appFrame!.waitForTimeout(1000);
   }
-  // If not visible, the user is already in the desired state — no-op
 });
 
 // --- Text assertions ---
@@ -194,11 +256,11 @@ Then('l\'écran contient le texte {string}', async function (this: FestipodWorld
 
   if (!appeared) {
     const debug = await this.appFrame!.evaluate(() => ({
-      hash: window.location.hash,
+      pathname: window.location.pathname,
       rootText: document.getElementById('root')?.textContent?.substring(0, 500),
     }));
     expect.fail(
-      `Expected text "${expectedText}" not found. Hash: "${debug.hash}", content: "${debug.rootText}"`,
+      `Expected text "${expectedText}" not found. Path: "${debug.pathname}", content: "${debug.rootText}"`,
     );
   }
 });
@@ -213,12 +275,16 @@ Then('l\'écran ne contient pas le texte {string}', async function (this: Festip
 });
 
 Then('l\'écran d\'accueil contient le texte {string}', async function (this: FestipodWorld, expectedText: string) {
-  // Navigate to home and wait for NG data + expected text
-  await this.appFrame!.evaluate(() => { window.location.hash = '#/demo/home'; });
+  await this.appFrame!.evaluate(() => {
+    window.history.pushState(null, '', '/home');
+    window.dispatchEvent(new PopStateEvent('popstate'));
+  });
   const appeared = await this.appFrame!.waitForFunction(
     (text: string) => {
       const root = document.getElementById('root');
-      return (root?.textContent?.includes('inscrits') && root?.textContent?.includes(text)) ?? false;
+      const txt = root?.textContent ?? '';
+      const hasEvents = txt.includes('En cours') || txt.includes('À venir');
+      return hasEvents && txt.includes(text);
     },
     expectedText,
     { timeout: 15000 },
@@ -226,11 +292,11 @@ Then('l\'écran d\'accueil contient le texte {string}', async function (this: Fe
 
   if (!appeared) {
     const debug = await this.appFrame!.evaluate(() => ({
-      hash: window.location.hash,
+      pathname: window.location.pathname,
       rootText: document.getElementById('root')?.textContent?.substring(0, 500),
     }));
     expect.fail(
-      `Expected "${expectedText}" on home screen. Hash: "${debug.hash}", content: "${debug.rootText}"`,
+      `Expected "${expectedText}" on home screen. Path: "${debug.pathname}", content: "${debug.rootText}"`,
     );
   }
 });

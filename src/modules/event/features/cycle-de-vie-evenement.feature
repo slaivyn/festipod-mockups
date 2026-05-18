@@ -35,7 +35,6 @@ Fonctionnalité: Cycle de vie d'un événement
   Scénario: Consulter le détail d'un événement depuis l'accueil
     Quand l'utilisateur clique sur un événement de l'accueil
     Alors l'application affiche l'écran "event-detail"
-    Et l'écran contient le texte "À propos"
     Et l'écran contient le texte "Participants"
 
   # --- Inscription / Désinscription ---
@@ -45,25 +44,24 @@ Fonctionnalité: Cycle de vie d'un événement
     Quand l'utilisateur navigue vers l'écran "events"
     Et l'utilisateur clique sur un événement de la liste
     Et l'utilisateur attend que l'écran "event-detail" soit affiché
-    Et l'utilisateur clique sur le bouton "Participer" si visible
-    Alors l'écran contient le texte "Inscrit"
+    Et l'utilisateur clique sur le bouton "J'y serai" si visible
+    Alors l'écran contient le texte "Je participe"
 
   # ngSet.delete() updates UI but doesn't persist — NG ORM limitation.
-  # Needs investigation: screen content disappears after delete + re-render.
   @e2e @wip
   Scénario: Se désinscrire d'un événement
     Quand l'utilisateur navigue vers l'écran "events"
     Et l'utilisateur clique sur un événement de la liste
     Et l'utilisateur attend que l'écran "event-detail" soit affiché
-    Et l'utilisateur clique sur le bouton "Inscrit"
-    Alors l'écran contient le texte "Participer"
+    Et l'utilisateur clique sur le bouton "Je participe"
+    Alors l'écran contient le texte "J'y serai"
 
   @e2e @wip
   Scénario: La désinscription persiste après reconnexion
     Quand l'utilisateur navigue vers l'écran "events"
     Et l'utilisateur clique sur un événement de la liste
     Et l'utilisateur attend que l'écran "event-detail" soit affiché
-    Alors l'écran contient le texte "Participer"
+    Alors l'écran contient le texte "J'y serai"
 
   # --- Modification ---
 

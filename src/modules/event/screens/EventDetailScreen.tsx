@@ -1,45 +1,55 @@
-import React from 'react';
-import { Header, Title, Text, Button, Avatar, Placeholder, Divider } from '../../../shared/components/sketchy';
+import { ArrowLeft } from 'lucide-react';
+import { Button, Avatar, EventCover, EventMeetingPoints, showToast, Text, type MeetingPointData } from '../../../shared/components/sketchy';
 import { useFestipodData } from '../../../shared/context/FestipodDataContext';
-import type { ScreenProps } from '../../../screens';
+import { useNavigate, useParams } from '../../../app/router';
 
-export function EventDetailScreen({ navigate }: ScreenProps) {
+export function EventDetailScreen() {
+  const navigate = useNavigate();
+  const { eventId } = useParams();
   const {
-    selectedEvent,
-    selectedEventId,
+    getEvent,
     currentUserId,
     isParticipating,
     joinEvent,
     leaveEvent,
     getEventParticipants,
-    setSelectedUserId,
+    getEventMeetingPoints,
   } = useFestipodData();
 
-  const event = selectedEvent;
-  const joined = isParticipating(selectedEventId);
-  const participants = getEventParticipants(selectedEventId);
+  const event = eventId ? getEvent(eventId) : undefined;
+  const joined = eventId ? isParticipating(eventId) : false;
+  const participants = eventId ? getEventParticipants(eventId) : [];
+  const meetingPointsRaw = eventId ? getEventMeetingPoints(eventId) : [];
 
-  // In a real app, this would come from comparing current user with event creator
+  const meetingPoints: MeetingPointData[] = meetingPointsRaw.map(mp => ({
+    id: mp.id,
+    title: mp.location,
+    when: mp.time,
+    duration: '~60 min',
+    lieu: mp.location,
+  }));
+
   const isOwner = true;
-
   const knownParticipants = participants.filter(p => p.id !== currentUserId);
-  const unknownCount = Math.max(0, (event?.participantCount ?? 0) - participants.length);
 
   const handleToggleJoin = () => {
+    if (!eventId) return;
     if (joined) {
-      leaveEvent(selectedEventId);
+      leaveEvent(eventId);
+      showToast('Participation annulée', 'info');
     } else {
-      joinEvent(selectedEventId);
+      joinEvent(eventId);
+      showToast('Tu participes à cet événement', 'success');
     }
   };
 
   if (!event) {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-        <Header
-          title="Événement"
-          left={<span onClick={() => navigate('events')} style={{ cursor: 'pointer' }}>←</span>}
-        />
+        <div style={{ padding: '8px 16px', display: 'flex', alignItems: 'center', gap: 12 }}>
+          <button onClick={() => navigate('/events')} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, display: 'flex', alignItems: 'center' }}><ArrowLeft size={20} /></button>
+          <span style={{ fontSize: 18, fontWeight: 700 }}>Événement</span>
+        </div>
         <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <Text>Événement non trouvé</Text>
         </div>
@@ -49,124 +59,115 @@ export function EventDetailScreen({ navigate }: ScreenProps) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-      <Header
-        title="Événement"
-        left={<span onClick={() => navigate('events')} style={{ cursor: 'pointer' }}>←</span>}
-        right={isOwner && <span onClick={() => navigate('update-event')} style={{ cursor: 'pointer' }}>✎</span>}
-      />
-
-      {/* Content */}
       <div style={{ flex: 1, overflow: 'auto' }}>
-        {/* Cover image */}
-        <Placeholder height={180} label="Photo de couverture" />
-
-        <div style={{ padding: 16 }}>
-          <Title className="user-content" style={{ marginBottom: 8 }}>{event.title}</Title>
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 16 }}>
-            <Text style={{ margin: 0, fontSize: 15 }}>
-              📅 <span className="user-content">{event.date}</span>
-            </Text>
-            {event.startTime && (
-              <Text style={{ margin: 0, fontSize: 15 }}>
-                🕓 <span className="user-content">{event.startTime}{event.endTime ? ` - ${event.endTime}` : ''}</span>
-              </Text>
+        <div style={{ padding: '8px 16px', display: 'flex', alignItems: 'center', gap: 12 }}>
+          <button onClick={() => navigate('/events')} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#333', padding: 0, display: 'flex', alignItems: 'center' }}><ArrowLeft size={20} /></button>
+          <div style={{ flex: 1 }}>
+            <div className="user-content" style={{ fontSize: 18, fontWeight: 700 }}>{event.title}</div>
+            {event.distance != null && (
+              <div style={{ fontSize: 12, color: '#888' }}>{event.distance} km</div>
             )}
-            <Text style={{ margin: 0, fontSize: 15 }}>
-              📍 <span className="user-content">{event.location}</span>
-              {event.distance != null && (
-                <span style={{ color: 'var(--sketch-gray)' }}> · {event.distance} km</span>
+          </div>
+          {isOwner && (
+            <span onClick={() => navigate(`/events/${eventId}/edit`)} style={{ cursor: 'pointer', fontSize: 18, color: '#888' }}>✎</span>
+          )}
+        </div>
+
+        <div style={{ padding: '0 16px 12px' }}>
+          <EventCover eventId={event.id} height={100} />
+        </div>
+
+        <div style={{ margin: '0 16px 12px', padding: 14, background: '#fafafa', borderRadius: 12, display: 'flex', flexDirection: 'column', gap: 8 }}>
+          <div style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
+            <span style={{ fontSize: 15 }}>📅</span>
+            <div>
+              <div className="user-content" style={{ fontSize: 13, fontWeight: 600 }}>{event.date}</div>
+              {event.startTime && (
+                <div style={{ fontSize: 12, color: '#888' }}>
+                  {event.startTime}{event.endTime ? ` – ${event.endTime}` : ''}
+                </div>
               )}
-            </Text>
+            </div>
           </div>
-
-          <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
-            <Button
-              variant={joined ? 'default' : 'primary'}
-              onClick={handleToggleJoin}
-              style={{ flex: 1 }}
-            >
-              {joined ? '✓ Inscrit' : 'Participer'}
-            </Button>
-            <Button onClick={() => navigate('invite')}>Inviter</Button>
+          <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
+            <span style={{ fontSize: 15 }}>📍</span>
+            <span className="user-content" style={{ fontSize: 13 }}>{event.location}</span>
           </div>
+          {event.description && (
+            <div style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
+              <span style={{ fontSize: 15 }}>📝</span>
+              <span className="user-content" style={{ fontSize: 13, color: '#555', lineHeight: 1.5 }}>
+                {event.description}
+              </span>
+            </div>
+          )}
+        </div>
 
+        <div style={{ margin: '4px 16px 16px', display: 'flex', gap: 8 }}>
+          <Button
+            variant={joined ? 'green' : 'primary'}
+            onClick={handleToggleJoin}
+            style={{ flex: 1, padding: '12px 0' }}
+          >
+            {joined ? '✓ Je participe' : "J'y serai"}
+          </Button>
           {joined && (
             <Button
-              onClick={() => navigate('meeting-points')}
-              style={{ width: '100%', marginBottom: 16 }}
+              onClick={() => navigate(`/events/${eventId}/invite`)}
+              style={{ flex: 1, padding: '12px 0' }}
             >
-              📍 Points de rencontre
+              Inviter
             </Button>
           )}
+        </div>
 
-          <Divider />
+        {meetingPoints.length > 0 && (
+          <div style={{ padding: '0 16px 8px' }}>
+            <EventMeetingPoints
+              points={meetingPoints}
+              joinedIds={new Set()}
+              onToggle={() => {}}
+              expanded
+            />
+          </div>
+        )}
 
-          {/* Host */}
-          {event.hostName && (
-            <>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
-                <Avatar initials={event.hostInitials || event.hostName.substring(0, 2).toUpperCase()} />
-                <div>
-                  <Text className="user-content" style={{ margin: 0, fontWeight: 'bold' }}>{event.hostName}</Text>
-                  <Text style={{ margin: 0, fontSize: 14, color: 'var(--sketch-gray)' }}>Relayé par</Text>
-                </div>
-              </div>
-              <Divider />
-            </>
-          )}
+        <div style={{ padding: '0 16px 8px' }}>
+          <button
+            onClick={() => navigate(`/events/${eventId}/meeting-points`)}
+            style={{ width: '100%', padding: 12, border: '2px dashed #ddd', borderRadius: 12, background: 'none', fontSize: 13, fontWeight: 600, color: '#999', cursor: 'pointer', marginTop: 4, fontFamily: 'var(--font-app)' }}
+          >
+            + Proposer un point de rencontre
+          </button>
+        </div>
 
-          {/* Description */}
-          <Text style={{ fontWeight: 'bold', marginBottom: 8 }}>À propos</Text>
-          <Text className="user-content" style={{ lineHeight: 1.6 }}>
-            {event.description}
-          </Text>
-
-          <Divider />
-
-          {/* Attendees */}
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
-            <Text style={{ fontWeight: 'bold', margin: 0 }}>Participants ({event.participantCount})</Text>
-            <Text
-              style={{ margin: 0, fontSize: 14, cursor: 'pointer' }}
-              onClick={() => navigate('participants-list')}
+        <div style={{ padding: '16px' }}>
+          <div style={{ fontSize: 12, fontWeight: 700, color: '#999', textTransform: 'uppercase', letterSpacing: 1, marginBottom: 10 }}>
+            Participants ({event.participantCount})
+          </div>
+          {knownParticipants.map((p) => (
+            <div
+              key={p.id}
+              onClick={() => navigate(`/users/${p.id}`)}
+              style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '10px 0', borderBottom: '1px solid #f5f5f5', cursor: 'pointer' }}
             >
-              Voir tout →
-            </Text>
-          </div>
-
-          <div style={{ display: 'flex', gap: 12 }}>
-            {knownParticipants.slice(0, 3).map((p) => (
-              <div
-                key={p.id}
-                style={{ textAlign: 'center', cursor: 'pointer' }}
-                onClick={() => { setSelectedUserId(p.id); navigate('user-profile'); }}
-              >
-                <Avatar initials={p.initials} size="sm" />
-                <Text className="user-content" style={{ margin: '4px 0 0 0', fontSize: 12 }}>{p.name.split(' ')[0]}</Text>
+              <Avatar initials={p.initials} size={38} color="#2B6CB0" />
+              <div style={{ flex: 1 }}>
+                <div className="user-content" style={{ fontSize: 14, fontWeight: 600 }}>{p.name}</div>
+                {p.username && (
+                  <div style={{ fontSize: 12, color: '#888', marginTop: 2 }}>{p.username}</div>
+                )}
               </div>
-            ))}
-            {unknownCount > 0 && (
-              <div
-                style={{ textAlign: 'center', cursor: 'pointer' }}
-                onClick={() => navigate('participants-list')}
-              >
-                <div style={{
-                  width: 32,
-                  height: 32,
-                  borderRadius: '50%',
-                  background: 'var(--sketch-light-gray)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: 12,
-                }}>
-                  +{unknownCount}
-                </div>
-                <Text style={{ margin: '4px 0 0 0', fontSize: 12, color: 'var(--sketch-gray)' }}>inconnus</Text>
-              </div>
-            )}
-          </div>
+            </div>
+          ))}
+          {knownParticipants.length < event.participantCount && (
+            <div
+              style={{ marginTop: 12, padding: 12, background: '#f9f9f9', borderRadius: 12, textAlign: 'center', cursor: 'pointer' }}
+              onClick={() => navigate(`/events/${eventId}/participants`)}
+            >
+              <span style={{ fontSize: 12, color: '#999' }}>Voir tous les participants →</span>
+            </div>
+          )}
         </div>
       </div>
     </div>

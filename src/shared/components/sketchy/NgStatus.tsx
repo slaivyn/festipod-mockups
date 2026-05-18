@@ -12,8 +12,8 @@ export function NgStatus() {
           alignItems: 'center',
           gap: 4,
           fontSize: 11,
-          color: 'var(--sketch-gray)',
-          fontFamily: 'var(--font-sketch)',
+          color: '#888',
+          fontFamily: 'var(--font-app)',
         }}
         title="Mode démonstration — NextGraph non connecté"
       >
@@ -37,8 +37,8 @@ export function NgStatus() {
           alignItems: 'center',
           gap: 4,
           fontSize: 11,
-          color: 'var(--sketch-gray)',
-          fontFamily: 'var(--font-sketch)',
+          color: '#888',
+          fontFamily: 'var(--font-app)',
         }}
       >
         <span style={{
@@ -61,7 +61,7 @@ export function NgStatus() {
         gap: 4,
         fontSize: 11,
         color: '#4caf50',
-        fontFamily: 'var(--font-sketch)',
+        fontFamily: 'var(--font-app)',
       }}
       title="Connecté à NextGraph"
     >

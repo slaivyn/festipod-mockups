@@ -1,24 +1,24 @@
-import React from 'react';
 import { Button, Title, Text } from '../../../shared/components/sketchy';
-import type { ScreenProps } from '../../../screens';
+import { useNavigate } from '../../../app/router';
 
-export function WelcomeScreen({ navigate }: ScreenProps) {
+export function WelcomeScreen() {
+  const navigate = useNavigate();
   return (
     <div style={{ padding: 24, display: 'flex', flexDirection: 'column', height: '100%' }}>
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
         <Title style={{ textAlign: 'center', fontSize: 32, marginBottom: 24 }}>Festipod</Title>
 
-        <Text style={{ textAlign: 'center', fontSize: 18, marginBottom: 32, lineHeight: 1.5 }}>
+        <Text style={{ textAlign: 'center', fontSize: 18, marginBottom: 32, lineHeight: 1.5, color: '#555' }}>
           Découvrez des événements près de chez vous, relayés par des gens de confiance.
         </Text>
 
         <div style={{
-          background: 'var(--sketch-light-gray)',
+          background: '#f9f9f9',
           padding: 16,
-          borderRadius: 8,
+          borderRadius: 16,
           marginBottom: 24,
         }}>
-          <Text style={{ margin: 0, fontSize: 14, lineHeight: 1.6, color: 'var(--sketch-gray)' }}>
+          <Text style={{ margin: 0, fontSize: 14, lineHeight: 1.6, color: '#888' }}>
             Festipod est un projet collaboratif en construction. Nous croyons qu'on découvre
             les meilleurs événements grâce au bouche-à-oreille, pas via des algorithmes.
             Rejoignez les premiers utilisateurs et aidez-nous à créer une alternative
@@ -41,16 +41,16 @@ export function WelcomeScreen({ navigate }: ScreenProps) {
           </div>
         </div>
 
-        <Button variant="primary" onClick={() => navigate('login')} style={{ marginBottom: 12 }}>
+        <Button variant="primary" onClick={() => navigate('/login')} style={{ marginBottom: 12 }}>
           Rejoindre la communauté
         </Button>
 
-        <Text style={{ textAlign: 'center', fontSize: 13, color: 'var(--sketch-gray)' }}>
-          Déjà membre ? Se connecter
+        <Text style={{ textAlign: 'center', fontSize: 13, color: '#888' }}>
+          Déjà membre ? <span onClick={() => navigate('/login')} style={{ color: '#E8590C', cursor: 'pointer', fontWeight: 600 }}>Connexion</span>
         </Text>
       </div>
 
-      <Text style={{ textAlign: 'center', fontSize: 12, color: 'var(--sketch-gray)' }}>
+      <Text style={{ textAlign: 'center', fontSize: 12, color: '#bbb' }}>
         Version beta - 127 membres actifs
       </Text>
     </div>

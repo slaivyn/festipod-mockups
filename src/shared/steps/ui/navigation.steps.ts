@@ -37,7 +37,7 @@ function resolveScreenId(pageName: string): string {
 
 Given('je suis sur la page {string}', async function (this: FestipodWorld, pageName: string) {
   const screenId = resolveScreenId(pageName);
-  this.navigateTo(`#/demo/${screenId}`);
+  await this.navigateTo(`#/demo/${screenId}`);
 });
 
 Given('je suis connecté en tant qu\'utilisateur', async function (this: FestipodWorld) {
@@ -54,7 +54,7 @@ Given('je ne suis pas connecté', async function (this: FestipodWorld) {
 
 When('je navigue vers {string}', async function (this: FestipodWorld, pageName: string) {
   const screenId = resolveScreenId(pageName);
-  this.navigateTo(`#/demo/${screenId}`);
+  await this.navigateTo(`#/demo/${screenId}`);
 });
 
 When('je clique sur {string}', async function (this: FestipodWorld, elementName: string) {

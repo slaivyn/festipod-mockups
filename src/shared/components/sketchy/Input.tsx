@@ -5,7 +5,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {}
 export function Input({ className = '', ...props }: InputProps) {
   return (
     <input
-      className={`sketchy-input ${className}`}
+      className={`app-input ${className}`}
       {...props}
     />
   );

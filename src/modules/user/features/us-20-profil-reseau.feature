@@ -17,7 +17,7 @@ Fonctionnalité: US-20 Voir le profil des personnes faisant partie de mon résea
   Scénario: Voir mon réseau
     Étant donné que je suis sur la page "mon profil"
     Alors l'écran contient un texte "Amis"
-    Et l'écran contient un texte "Mes amis"
+    Et l'écran contient un texte "Mon réseau"
 
   Scénario: Voir un profil de mon réseau
     Étant donné que je suis sur la page "mon profil"

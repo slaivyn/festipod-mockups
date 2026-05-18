@@ -4,7 +4,7 @@ import type { FestipodWorld } from '../../support/world';
 
 Given('l\'écran {string} est affiché', async function (this: FestipodWorld, screenName: string) {
   const screenId = screenName.toLowerCase().replace(/ /g, '-');
-  this.navigateTo(`#/demo/${screenId}`);
+  await this.navigateTo(`#/demo/${screenId}`);
 });
 
 Given('le formulaire de création est vide', async function (this: FestipodWorld) {

@@ -1,4 +1,5 @@
-import React from 'react';
+// Screen registry — used by Storybook and tests
+// Screens no longer receive props; they use useNavigate/useParams hooks from the router.
 
 // Home module
 import { HomeScreen } from '../modules/home/screens/HomeScreen';
@@ -27,64 +28,28 @@ import { ShareProfileScreen } from '../modules/user/screens/ShareProfileScreen';
 export interface Screen {
   id: string;
   name: string;
-  component: React.ComponentType<ScreenProps>;
+  path: string;
+  component: React.ComponentType;
 }
 
-export interface ScreenGroup {
-  id: string;
-  name: string;
-  screens: Screen[];
-}
-
-export interface ScreenProps {
-  navigate: (screenId: string) => void;
-}
-
-export const screenGroups: ScreenGroup[] = [
-  {
-    id: 'home',
-    name: 'Accueil',
-    screens: [
-      { id: 'welcome', name: 'Bienvenue', component: WelcomeScreen },
-      { id: 'home', name: 'Accueil', component: HomeScreen },
-    ],
-  },
-  {
-    id: 'events',
-    name: 'Événements',
-    screens: [
-      { id: 'events', name: 'Découvrir', component: EventsScreen },
-      { id: 'event-detail', name: 'Détail événement', component: EventDetailScreen },
-      { id: 'create-event', name: 'Relayer événement', component: CreateEventScreen },
-      { id: 'update-event', name: 'Modifier événement', component: UpdateEventScreen },
-      { id: 'invite', name: 'Inviter des amis', component: InviteScreen },
-      { id: 'participants-list', name: 'Liste des participants', component: ParticipantsListScreen },
-      { id: 'meeting-points', name: 'Points de rencontre', component: MeetingPointsScreen },
-    ],
-  },
-  {
-    id: 'user',
-    name: 'Utilisateur',
-    screens: [
-      { id: 'profile', name: 'Mon profil', component: ProfileScreen },
-      { id: 'update-profile', name: 'Modifier mon profil', component: UpdateProfileScreen },
-      { id: 'user-profile', name: 'Profil d\'un utilisateur', component: UserProfileScreen },
-      { id: 'friends-list', name: 'Mon réseau', component: FriendsListScreen },
-      { id: 'share-profile', name: 'Partager mon profil', component: ShareProfileScreen },
-    ],
-  },
-  {
-    id: 'general',
-    name: 'Général',
-    screens: [
-      { id: 'login', name: 'Connexion', component: LoginScreen },
-      { id: 'settings', name: 'Paramètres', component: SettingsScreen },
-    ],
-  },
+export const screens: Screen[] = [
+  { id: 'welcome', name: 'Bienvenue', path: '/', component: WelcomeScreen },
+  { id: 'login', name: 'Connexion', path: '/login', component: LoginScreen },
+  { id: 'home', name: 'Accueil', path: '/home', component: HomeScreen },
+  { id: 'events', name: 'Découvrir', path: '/events', component: EventsScreen },
+  { id: 'create-event', name: 'Relayer événement', path: '/events/new', component: CreateEventScreen },
+  { id: 'event-detail', name: 'Détail événement', path: '/events/:id', component: EventDetailScreen },
+  { id: 'update-event', name: 'Modifier événement', path: '/events/:id/edit', component: UpdateEventScreen },
+  { id: 'invite', name: 'Inviter des amis', path: '/events/:id/invite', component: InviteScreen },
+  { id: 'participants', name: 'Participants', path: '/events/:id/participants', component: ParticipantsListScreen },
+  { id: 'meeting-points', name: 'Points de rencontre', path: '/events/:id/meeting-points', component: MeetingPointsScreen },
+  { id: 'profile', name: 'Mon profil', path: '/profile', component: ProfileScreen },
+  { id: 'edit-profile', name: 'Modifier profil', path: '/profile/edit', component: UpdateProfileScreen },
+  { id: 'friends', name: 'Mon réseau', path: '/profile/friends', component: FriendsListScreen },
+  { id: 'share-profile', name: 'Partager profil', path: '/profile/share', component: ShareProfileScreen },
+  { id: 'user-profile', name: 'Profil utilisateur', path: '/users/:id', component: UserProfileScreen },
+  { id: 'settings', name: 'Paramètres', path: '/settings', component: SettingsScreen },
 ];
-
-// Flat list of all screens for compatibility
-export const screens: Screen[] = screenGroups.flatMap(group => group.screens);
 
 export function getScreen(id: string): Screen | undefined {
   return screens.find(s => s.id === id);

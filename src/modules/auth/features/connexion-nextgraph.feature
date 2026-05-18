@@ -13,7 +13,9 @@ Fonctionnalité: Connexion NextGraph et chargement des données
     Étant donné je suis sur la page "connexion"
     Alors l'écran contient un bouton "Se connecter avec NextGraph"
 
-  @ui
+  @ui @wip
+  # Behavioral: requires simulating an NG status change. Better tested at the
+  # @e2e layer where a real connected session triggers the redirect.
   Scénario: L'écran de connexion redirige automatiquement quand connecté
     Étant donné je suis sur la page "connexion"
     Alors l'écran gère la redirection automatique après connexion
@@ -65,30 +67,13 @@ Fonctionnalité: Connexion NextGraph et chargement des données
   @e2e
   Scénario: La navigation interne met à jour l'URL
     Quand l'utilisateur navigue vers l'écran "events"
-    Alors l'URL contient "demo/events"
+    Alors l'URL contient "/events"
 
   @e2e
   Scénario: L'application ne redirige pas vers le broker quand elle est dans l'iframe
     Alors l'application est toujours dans l'iframe
 
   @e2e
-  Scénario: Le bouton Galerie ramène à la galerie depuis le mode démo
-    Quand l'utilisateur navigue vers l'écran "home" sans historique
-    Et l'utilisateur clique sur le bouton "Galerie"
-    Alors l'application affiche la galerie
-
-  @e2e
-  Scénario: Le bouton "Charger données de test" est visible quand connecté
-    Alors la galerie affiche le bouton "Charger données de test"
-
-  @e2e
-  Scénario: Charger les données de test remplit le portefeuille
-    Quand l'utilisateur clique sur le bouton "Charger données de test"
-    Et l'utilisateur attend la fin du chargement
-    Et l'utilisateur navigue vers l'écran "home"
-    Alors l'écran d'accueil affiche des événements
-
-  @e2e
-  Scénario: Les données chargées persistent après reconnexion
-    Quand l'utilisateur navigue vers l'écran "home"
+  Scénario: La liste des événements est peuplée après connexion
+    Quand l'utilisateur navigue vers l'écran "events"
     Alors l'écran d'accueil affiche des événements

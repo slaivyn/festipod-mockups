@@ -1,5 +1,3 @@
-import React from 'react';
-
 interface CheckboxProps {
   checked?: boolean;
   onChange?: (checked: boolean) => void;
@@ -9,7 +7,7 @@ interface CheckboxProps {
 export function Checkbox({ checked = false, onChange, className = '' }: CheckboxProps) {
   return (
     <div
-      className={`sketchy-checkbox ${checked ? 'checked' : ''} ${className}`}
+      className={`app-checkbox ${checked ? 'checked' : ''} ${className}`}
       onClick={() => onChange?.(!checked)}
     />
   );

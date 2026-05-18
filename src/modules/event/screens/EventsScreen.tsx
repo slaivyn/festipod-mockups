@@ -1,101 +1,87 @@
-import React from 'react';
-import { Header, Input, Card, Text, Badge, NavBar } from '../../../shared/components/sketchy';
+import { ArrowLeft } from 'lucide-react';
+import { Header, Input, Card, Badge, BottomNav, AvatarStack, getEventPhotoUrl, Text } from '../../../shared/components/sketchy';
 import { useFestipodData } from '../../../shared/context/FestipodDataContext';
-import type { ScreenProps } from '../../../screens';
+import { useNavigate } from '../../../app/router';
 
-function EventCard({ title, date, location, distance, attendees, onClick }: {
-  title: string;
-  date: string;
-  location: string;
-  distance: number;
-  attendees: number;
+const PEOPLE = [
+  { name: 'Marie Leroy', color: '#E8590C' },
+  { name: 'Jean Morel', color: '#2B6CB0' },
+  { name: 'Alice Duval', color: '#9C4DC7' },
+  { name: 'Thomas Bazin', color: '#38A169' },
+  { name: 'Camille Noir', color: '#D69E2E' },
+];
+
+const EVENT_COLORS = ['#E8590C', '#2B6CB0', '#9C4DC7', '#38A169', '#D69E2E'];
+
+function EventCard({
+  event,
+  onClick,
+}: {
+  event: { id: string; title: string; date: string; location: string; distance?: number; participantCount: number };
   onClick: () => void;
 }) {
+  const color = EVENT_COLORS[Number(event.id.replace(/\D/g, '') || 0) % EVENT_COLORS.length] ?? '#E8590C';
+  const people = PEOPLE.slice(0, Math.min(5, Math.max(1, event.participantCount)));
   return (
-    <Card onClick={onClick} style={{ marginBottom: 12 }}>
-      <Text className="user-content" style={{ margin: 0, fontWeight: 'bold' }}>{title}</Text>
-      <Text style={{ margin: '4px 0', fontSize: 14 }}>
-        📅 <span className="user-content">{date}</span>
-      </Text>
-      <Text style={{ margin: '0 0 8px 0', fontSize: 14 }}>
-        📍 <span className="user-content">{location}</span>
-        {distance != null && <span style={{ color: 'var(--sketch-gray)' }}> · {distance} km</span>}
-      </Text>
-      <Badge>{attendees} inscrits</Badge>
+    <Card onClick={onClick} style={{ marginBottom: 12, padding: 0, overflow: 'hidden' }} accentColor={color}>
+      <div
+        style={{
+          height: 100,
+          backgroundImage: `url(${getEventPhotoUrl(event.id)})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      />
+      <div style={{ padding: 14 }}>
+        <div className="user-content" style={{ fontSize: 15.5, fontWeight: 700, lineHeight: 1.3, marginBottom: 6 }}>{event.title}</div>
+        <div style={{ fontSize: 12.5, color: '#888', marginBottom: 10 }}>
+          {event.date} · {event.location}{event.distance != null && ` · ${event.distance} km`}
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+            <AvatarStack people={people} size={26} />
+            <span style={{ fontSize: 12, color: '#666' }}>{event.participantCount} inscrits</span>
+          </div>
+        </div>
+      </div>
     </Card>
   );
 }
 
-export function EventsScreen({ navigate }: ScreenProps) {
-  const { events, setSelectedEventId } = useFestipodData();
-
-  const handleEventClick = (eventId: string) => {
-    setSelectedEventId(eventId);
-    navigate('event-detail');
-  };
+export function EventsScreen() {
+  const navigate = useNavigate();
+  const { events } = useFestipodData();
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       <Header
         title="Découvrir"
-        left={<span onClick={() => navigate('home')} style={{ cursor: 'pointer' }}>←</span>}
+        left={<ArrowLeft size={20} onClick={() => navigate('/home')} style={{ cursor: 'pointer' }} />}
       />
 
-      {/* Search */}
-      <div style={{ padding: '12px 16px', borderBottom: '1px solid var(--sketch-light-gray)' }}>
+      <div style={{ padding: '12px 16px', borderBottom: '1px solid #f0f0f0' }}>
         <Input placeholder="Rechercher un événement..." />
       </div>
 
-      {/* Filter tabs */}
-      <div style={{
-        display: 'flex',
-        gap: 8,
-        padding: '12px 16px',
-        borderBottom: '1px solid var(--sketch-light-gray)',
-      }}>
-        <Badge style={{ background: 'var(--sketch-black)', color: 'var(--sketch-white)' }}>Tous</Badge>
+      <div style={{ display: 'flex', gap: 8, padding: '12px 16px', borderBottom: '1px solid #f0f0f0' }}>
+        <Badge style={{ background: '#1a1a1a', color: '#fff' }}>Tous</Badge>
         <Badge>Cette semaine</Badge>
         <Badge>Proches</Badge>
         <Badge>Amis</Badge>
       </div>
 
-      {/* Content */}
       <div style={{ flex: 1, padding: 16, overflow: 'auto' }}>
-        {/* Helper text */}
-        <div style={{
-          background: 'var(--sketch-light-gray)',
-          padding: 12,
-          borderRadius: 8,
-          marginBottom: 16,
-        }}>
-          <Text style={{ margin: 0, fontSize: 13, color: 'var(--sketch-gray)', lineHeight: 1.5 }}>
-            Événements relayés par vos contacts. Explorez, participez, et relayez
-            à votre tour pour faire grandir votre réseau.
+        {events.length === 0 && (
+          <Text style={{ textAlign: 'center', color: '#888', marginTop: 32 }}>
+            Aucun événement à afficher
           </Text>
-        </div>
-
-        {events.map((event) => (
-          <EventCard
-            key={event.id}
-            title={event.title}
-            date={event.date}
-            location={event.location}
-            distance={event.distance ?? 0}
-            attendees={event.participantCount}
-            onClick={() => handleEventClick(event.id)}
-          />
+        )}
+        {events.map(event => (
+          <EventCard key={event.id} event={event} onClick={() => navigate(`/events/${event.id}`)} />
         ))}
       </div>
 
-      {/* Bottom Nav */}
-      <NavBar
-        items={[
-          { icon: '⌂', label: 'Accueil', onClick: () => navigate('home') },
-          { icon: '◎', label: 'Découvrir', active: true },
-          { icon: '+', label: 'Relayer', onClick: () => navigate('create-event') },
-          { icon: '☺', label: 'Profil', onClick: () => navigate('profile') },
-        ]}
-      />
+      <BottomNav active="discover" />
     </div>
   );
 }

@@ -2,9 +2,7 @@
 
 # Festipod Project
 
-This project has two parts:
-1. **Festipod App** - Mobile app mockups with sketchy hand-drawn UI
-2. **Prototyping Tool** - Web app to view mockups, user stories, and BDD specs
+Mobile-first web app for discovering and sharing festival/event recommendations through trusted networks. Uses a sketchy hand-drawn UI style.
 
 ## Architecture
 
@@ -23,7 +21,7 @@ src/
       steps/                # BDD step definitions
         ui/                 # UI-layer steps
         data/               # Data-layer steps
-        e2e/                # E2E steps (planned)
+        e2e/                # E2E steps
     user/                   # User profiles, friends, sharing
       screens/              # ProfileScreen, FriendsListScreen, ShareProfileScreen, etc.
       features/
@@ -56,34 +54,38 @@ src/
     support/                # Cucumber hooks.ts, world.ts
     types/                  # TypeScript type definitions
     lib/                    # Utility functions (cn, etc.)
-  app/                      # Prototyping tool (app shell)
-    App.tsx                 # Root component with providers
-    router.tsx              # Hash-based routing
+  app/                      # App shell
+    App.tsx                 # Root component with providers + route switch
+    router.tsx              # Path-based routing (History API)
     frontend.tsx            # React entry point
-    components/             # Gallery, DemoMode, ThemeToggle, specs/
   screens/
-    index.ts                # Screen registry (imports from all modules)
+    index.ts                # Screen registry (used by Storybook)
 scripts/                    # Build scripts for parsing features
 docs/                       # Documentation
+.storybook/                 # Storybook configuration
 ```
 
 ## Key Commands
 
 ```bash
 bun run dev              # Start dev server with HMR
+bun run storybook        # Browse screens and components in Storybook
 bun run test:cucumber    # Run Cucumber tests
 bun run features:parse   # Regenerate features.ts from .feature files
 bun run steps:extract    # Extract step definitions for tooltips
 ```
 
+## Routing
+
+Path-based routing via `src/app/router.tsx`. Screens use `useNavigate()` and `useParams()` hooks. See AGENTS.md for the full route table.
+
 ## Conventions
 
-- Gherkin specs are in French (Étant donné, Quand, Alors)
+- Gherkin specs are in French (Etant donne, Quand, Alors)
 - UI labels are in French
 - User stories are prefixed US-1 to US-26
 - Screens use the sketchy component library, not Tailwind
-- Specs pages use Tailwind + Shadcn components with system font (not sketchy font)
-- GherkinHighlighter uses card-based layout, not code/text style
+- Max app width: 768px (tablet portrait)
 
 ---
 

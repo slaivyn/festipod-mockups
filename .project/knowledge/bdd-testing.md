@@ -47,12 +47,11 @@ Tagged with `@CATEGORY @priority-N` for filtering.
 
 ### How UI Steps Work
 
-Steps analyze screen **source code** (not rendered DOM):
-1. `world.ts` loads screen `.tsx` file content via `loadScreenSource()`
-2. Steps use regex patterns on JSX source to verify UI elements
-3. `screenFileMap` in `world.ts` maps screen IDs to file paths (e.g., `'home'` → `'src/modules/home/screens/HomeScreen.tsx'`)
-4. `screenFieldDetectors` define per-screen regex patterns for field verification
-5. `screenExpectedContent` lists expected text content per screen
+`@ui` steps render the screen with `LocalDataProvider` (seed data) and `RouterProvider` via happy-dom, then assert on the rendered DOM. The render helper lives in `src/shared/test-harness/renderHelper.tsx` and is invoked from `world.ts:renderCurrentScreen()` on every `navigateTo(...)`.
+
+See [test-layer-contracts](./test-layer-contracts.md) for what `@ui` is allowed to test and the patterns to follow (and avoid).
+
+Legacy: `screenFileMap`, `screenFieldDetectors`, `screenExpectedContent`, `screenRequiredFields` in `world.ts` are vestiges of an earlier source-code-grep approach. `hasText`/`hasField`/`hasElement` now prefer the rendered DOM and fall back to source so unmigrated steps keep working during the transition.
 
 ### Screen Name Resolution
 

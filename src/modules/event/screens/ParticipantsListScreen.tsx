@@ -1,34 +1,36 @@
-import React from 'react';
+import { ArrowLeft } from 'lucide-react';
 import { Header, Avatar, Text, Input } from '../../../shared/components/sketchy';
 import { useFestipodData } from '../../../shared/context/FestipodDataContext';
-import type { ScreenProps } from '../../../screens';
+import { useNavigate, useParams } from '../../../app/router';
 
-export function ParticipantsListScreen({ navigate }: ScreenProps) {
-  const { selectedEvent, selectedEventId, getEventParticipants, getFriends, setSelectedUserId } = useFestipodData();
-  const participants = getEventParticipants(selectedEventId);
-  const friends = getFriends();
-  const friendIds = new Set(friends.map(f => f.id));
+const COLORS = ['#E8590C', '#2B6CB0', '#9C4DC7', '#38A169', '#D69E2E', '#E53E3E'];
 
-  const totalCount = selectedEvent?.participantCount ?? participants.length;
+export function ParticipantsListScreen() {
+  const navigate = useNavigate();
+  const { eventId } = useParams();
+  const { getEvent, getEventParticipants } = useFestipodData();
+  const event = eventId ? getEvent(eventId) : undefined;
+  const participants = eventId ? getEventParticipants(eventId) : [];
+
+  const totalCount = event?.participantCount ?? participants.length;
   const unknownCount = Math.max(0, totalCount - participants.length);
 
-  // Build participant list: known participants + unknown placeholders
-  const participantRows = [
-    ...participants.map(p => ({
+  const rows = [
+    ...participants.map((p, i) => ({
       key: p.id,
       initials: p.initials,
       name: p.name,
       username: p.username,
+      color: COLORS[i % COLORS.length] ?? '#888',
       known: true,
-      isFriend: friendIds.has(p.id),
     })),
     ...Array.from({ length: unknownCount }, (_, i) => ({
       key: `unknown-${i}`,
       initials: '?',
       name: '',
       username: '',
+      color: '#ccc',
       known: false,
-      isFriend: false,
     })),
   ];
 
@@ -36,43 +38,41 @@ export function ParticipantsListScreen({ navigate }: ScreenProps) {
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       <Header
         title={`Participants (${totalCount})`}
-        left={<span onClick={() => navigate('event-detail')} style={{ cursor: 'pointer' }}>←</span>}
+        left={<ArrowLeft size={20} onClick={() => navigate(`/events/${eventId}`)} style={{ cursor: 'pointer' }} />}
       />
 
-      {/* Search bar */}
-      <div style={{ padding: 16, borderBottom: '1px solid var(--sketch-light-gray)' }}>
+      <div style={{ padding: 16, borderBottom: '1px solid #f0f0f0' }}>
         <Input placeholder="Rechercher un participant..." />
       </div>
 
-      {/* Participants list */}
       <div style={{ flex: 1, overflow: 'auto' }}>
-        {participantRows.map((p) => (
+        {rows.map((p) => (
           <div
             key={p.key}
-            onClick={p.known ? () => { setSelectedUserId(p.key); navigate('user-profile'); } : undefined}
+            onClick={p.known ? () => navigate(`/users/${p.key}`) : undefined}
             style={{
               display: 'flex',
               alignItems: 'center',
               gap: 12,
               padding: '12px 16px',
               cursor: p.known ? 'pointer' : 'default',
-              borderBottom: '1px solid var(--sketch-light-gray)',
+              borderBottom: '1px solid #f5f5f5',
             }}
           >
-            <Avatar initials={p.initials} size="sm" />
+            <Avatar initials={p.initials} color={p.color} size="sm" />
             <div style={{ flex: 1 }}>
               {p.known ? (
                 <>
-                  <Text className="user-content" style={{ margin: 0, fontWeight: 'bold' }}>{p.name}</Text>
-                  <Text className="user-content" style={{ margin: 0, fontSize: 13 }}>
-                    {p.username}
-                  </Text>
+                  <Text style={{ margin: 0, fontWeight: 'bold' }}>{p.name}</Text>
+                  {p.username && (
+                    <Text style={{ margin: 0, fontSize: 13, color: '#888' }}>{p.username}</Text>
+                  )}
                 </>
               ) : (
-                <Text style={{ margin: 0, color: 'var(--sketch-gray)' }}>Participant inconnu</Text>
+                <Text style={{ margin: 0, color: '#999' }}>Participant inconnu</Text>
               )}
             </div>
-            {p.known && <Text style={{ margin: 0, fontSize: 20, color: 'var(--sketch-gray)' }}>›</Text>}
+            {p.known && <Text style={{ margin: 0, fontSize: 20, color: '#ccc' }}>›</Text>}
           </div>
         ))}
       </div>

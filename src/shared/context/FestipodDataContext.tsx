@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useCallback, useEffect, type ReactNode } from 'react';
+import React, { createContext, useContext, useState, useCallback, useEffect, useRef, type ReactNode } from 'react';
 import type {
   FpEventData,
   FpUserData,
@@ -257,6 +257,31 @@ function useNgData(): FestipodDataContextValue {
     }
   }, [events.length, selectedEventId]);
 
+  // Dev auto-seed: if the wallet is still empty 3s after the session is ready,
+  // bootstrap with seed data. `bootstrapWallet()` self-checks (ngSet.size > 0
+  // → skip), so this is safe even if shapes finish hydrating after the timer.
+  // Gated on NODE_ENV so production users see their own (possibly empty) wallet.
+  const hasTriedAutoSeed = useRef(false);
+  useEffect(() => {
+    if (process.env.NODE_ENV === 'production') return;
+    if (hasTriedAutoSeed.current) return;
+    if (!privateNuri) return;
+    const t = setTimeout(() => {
+      hasTriedAutoSeed.current = true;
+      if (eventsShape.ngSet.size === 0 && usersShape.ngSet.size === 0) {
+        console.log('[FestipodData] Dev auto-seed: wallet empty, bootstrapping…');
+        bootstrapWallet(
+          eventsShape.ngSet as any,
+          usersShape.ngSet as any,
+          participationsShape.ngSet as any,
+        ).catch(err => console.error('[FestipodData] Auto-seed failed:', err));
+      } else {
+        console.log('[FestipodData] Dev auto-seed: wallet already has data — skip');
+      }
+    }, 3000);
+    return () => clearTimeout(t);
+  }, [privateNuri, eventsShape.ngSet, usersShape.ngSet, participationsShape.ngSet]);
+
   // --- Derived ---
   const currentUser = users.find(u => u.username === '@mariedupont') || users[0];
   const currentUserId = currentUser?.id || '';
@@ -389,7 +414,7 @@ function useNgData(): FestipodDataContextValue {
 // Provider — switches between local and NG
 // ============================================================================
 
-function LocalDataProvider({ children, empty }: { children: ReactNode; empty?: boolean }) {
+export function LocalDataProvider({ children, empty }: { children: ReactNode; empty?: boolean }) {
   const data = useLocalData(empty);
   return <FestipodDataContext.Provider value={data}>{children}</FestipodDataContext.Provider>;
 }

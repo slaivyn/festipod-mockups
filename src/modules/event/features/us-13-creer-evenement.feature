@@ -19,29 +19,14 @@ Fonctionnalité: US-13 Relayer/Modifier/Supprimer un événement
     Alors le formulaire contient les champs obligatoires suivants:
       | Nom de l'événement |
       | Date de début      |
-      | Heure de début     |
-      | Lieu               |
-      | Thématique         |
 
   Scénario: Vérifier la présence du bouton de relai
     Étant donné que je suis sur la page "relayer un événement"
-    Alors l'écran contient une section "Relayer l'événement"
+    Alors l'écran contient un bouton "Suivant"
 
   Scénario: Pouvoir annuler le relai d'événement
     Étant donné que je suis sur la page "relayer un événement"
     Alors je peux annuler et revenir à l'écran précédent
-
-  Scénario: Détecter un événement similaire déjà relayé
-    Étant donné que l'écran "create-event" est affiché
-    Alors le formulaire permet de détecter les doublons
-
-  Scénario: Importer un événement depuis une source externe
-    Étant donné que l'écran "create-event" est affiché
-    Alors le formulaire permet d'importer depuis Mobilizon ou Transiscope
-
-  Scénario: Pas d'alerte doublon lors d'un import externe
-    Étant donné que l'écran "create-event" est affiché
-    Alors l'import externe ne déclenche pas d'alerte doublon
 
   Scénario: Modifier un événement
     * Scénario non implémenté

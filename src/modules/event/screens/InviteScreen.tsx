@@ -1,49 +1,146 @@
-import React, { useState } from 'react';
-import { Header, Input, Text, Avatar, Checkbox, Button } from '../../../shared/components/sketchy';
+import { useState } from 'react';
+import { ArrowLeft } from 'lucide-react';
+import { Header, Input, Text, Avatar, Checkbox, Button, showToast } from '../../../shared/components/sketchy';
 import { useFestipodData } from '../../../shared/context/FestipodDataContext';
-import type { ScreenProps } from '../../../screens';
+import { useNavigate, useParams } from '../../../app/router';
 
-export function InviteScreen({ navigate }: ScreenProps) {
+export function InviteScreen() {
+  const navigate = useNavigate();
+  const { eventId } = useParams();
   const { getFriends } = useFestipodData();
   const friends = getFriends();
 
   const [selected, setSelected] = useState<Set<string>>(new Set());
+  const [step, setStep] = useState<'select' | 'message'>('select');
+  const [message, setMessage] = useState('');
 
   const toggleFriend = (id: string) => {
-    const newSelected = new Set(selected);
-    if (newSelected.has(id)) {
-      newSelected.delete(id);
-    } else {
-      newSelected.add(id);
-    }
-    setSelected(newSelected);
+    const next = new Set(selected);
+    if (next.has(id)) next.delete(id); else next.add(id);
+    setSelected(next);
   };
+
+  const selectedFriends = friends.filter(f => selected.has(f.id));
+
+  const send = () => {
+    showToast(`${selected.size} invitation${selected.size > 1 ? 's' : ''} envoyée${selected.size > 1 ? 's' : ''}`, 'success');
+    navigate(`/events/${eventId}`);
+  };
+
+  if (step === 'message') {
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+        <Header
+          title="Ajouter un message"
+          left={<ArrowLeft size={20} onClick={() => setStep('select')} style={{ cursor: 'pointer' }} />}
+        />
+
+        <div style={{ flex: 1, overflow: 'auto', padding: 16 }}>
+          <div style={{ marginBottom: 16 }}>
+            <Text style={{ margin: '0 0 8px', fontSize: 13, color: '#888', fontWeight: 600, textTransform: 'uppercase' }}>
+              Invitations pour
+            </Text>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+              {selectedFriends.map((friend) => (
+                <div
+                  key={friend.id}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 6,
+                    background: '#FFF7ED',
+                    border: '1.5px solid #FBD38D',
+                    borderRadius: 20,
+                    padding: '4px 10px',
+                  }}
+                >
+                  <Avatar initials={friend.initials} color="#E8590C" size={22} />
+                  <Text style={{ margin: 0, fontSize: 13, color: '#C05621', fontWeight: 600 }}>
+                    {friend.name.split(' ')[0]}
+                  </Text>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div style={{ marginBottom: 8 }}>
+            <Text style={{ margin: '0 0 8px', fontSize: 13, color: '#888', fontWeight: 600, textTransform: 'uppercase' }}>
+              Message <span style={{ fontWeight: 400, fontSize: 12 }}>(optionnel)</span>
+            </Text>
+            <textarea
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              placeholder="Ajouter un message personnalisé à votre invitation..."
+              rows={5}
+              style={{
+                width: '100%',
+                padding: '10px 12px',
+                fontSize: 15,
+                fontFamily: 'inherit',
+                border: '2px solid #e2e8f0',
+                borderRadius: 8,
+                resize: 'none',
+                outline: 'none',
+                boxSizing: 'border-box',
+                color: '#2d3748',
+                lineHeight: 1.5,
+              }}
+            />
+          </div>
+        </div>
+
+        <div style={{ padding: 16, borderTop: '1px solid #f0f0f0', display: 'flex', flexDirection: 'column', gap: 8 }}>
+          <Button
+            variant="primary"
+            style={{ width: '100%' }}
+            onClick={send}
+          >
+            Envoyer {selected.size} invitation{selected.size !== 1 ? 's' : ''}
+          </Button>
+          {message.trim() === '' && (
+            <button
+              onClick={send}
+              style={{
+                background: 'none',
+                border: 'none',
+                color: '#888',
+                fontSize: 14,
+                cursor: 'pointer',
+                textAlign: 'center',
+                padding: '4px 0',
+              }}
+            >
+              Envoyer sans message
+            </button>
+          )}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       <Header
         title="Inviter des amis"
-        left={<span onClick={() => navigate('event-detail')} style={{ cursor: 'pointer' }}>←</span>}
+        left={<ArrowLeft size={20} onClick={() => navigate(`/events/${eventId}`)} style={{ cursor: 'pointer' }} />}
       />
 
-      {/* Search */}
-      <div style={{ padding: '12px 16px', borderBottom: '1px solid var(--sketch-light-gray)' }}>
+      <div style={{ padding: '12px 16px', borderBottom: '1px solid #f0f0f0' }}>
         <Input placeholder="Rechercher un ami..." />
       </div>
 
-      {/* Selected count */}
       {selected.size > 0 && (
         <div style={{
           padding: '8px 16px',
-          background: 'var(--sketch-light-gray)',
+          background: '#FFF7ED',
           fontSize: 14,
-          fontFamily: 'var(--font-sketch)',
+          color: '#C05621',
+          fontWeight: 600,
         }}>
           {selected.size} ami{selected.size > 1 ? 's' : ''} sélectionné{selected.size > 1 ? 's' : ''}
         </div>
       )}
 
-      {/* Friends list */}
       <div style={{ flex: 1, overflow: 'auto' }}>
         {friends.map((friend) => (
           <div
@@ -53,32 +150,31 @@ export function InviteScreen({ navigate }: ScreenProps) {
               display: 'flex',
               alignItems: 'center',
               padding: '12px 16px',
-              borderBottom: '1px solid var(--sketch-light-gray)',
+              borderBottom: '1px solid #f5f5f5',
               cursor: 'pointer',
-              background: selected.has(friend.id) ? 'var(--sketch-light-gray)' : 'transparent',
+              background: selected.has(friend.id) ? '#FFF7ED' : 'transparent',
             }}
           >
-            <Avatar initials={friend.initials} size="sm" />
+            <Avatar initials={friend.initials} color="#2B6CB0" size="sm" />
             <div style={{ flex: 1, marginLeft: 12 }}>
               <Text className="user-content" style={{ margin: 0, fontWeight: 'bold' }}>{friend.name}</Text>
-              <Text className="user-content" style={{ margin: 0, fontSize: 14 }}>
-                {friend.username}
-              </Text>
+              {friend.username && (
+                <Text style={{ margin: 0, fontSize: 13, color: '#888' }}>{friend.username}</Text>
+              )}
             </div>
             <Checkbox checked={selected.has(friend.id)} />
           </div>
         ))}
       </div>
 
-      {/* Footer */}
-      <div style={{ padding: 16, borderTop: '2px solid var(--sketch-black)' }}>
+      <div style={{ padding: 16, borderTop: '1px solid #f0f0f0' }}>
         <Button
           variant="primary"
           style={{ width: '100%' }}
-          onClick={() => navigate('event-detail')}
+          onClick={() => setStep('message')}
           disabled={selected.size === 0}
         >
-          Envoyer {selected.size > 0 ? `${selected.size} ` : ''}invitation{selected.size !== 1 ? 's' : ''}
+          Suivant →
         </Button>
       </div>
     </div>

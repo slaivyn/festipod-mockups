@@ -3,6 +3,7 @@ import { getScreen, type Screen } from '../../screens/index';
 import type { Page, Frame } from 'playwright';
 import * as fs from 'fs';
 import * as path from 'path';
+import { renderScreen as renderUiScreen, unmountRender } from '../test-harness/renderHelper';
 
 export interface FestipodWorld extends World {
   currentRoute: string;
@@ -15,18 +16,23 @@ export interface FestipodWorld extends World {
   currentScreen: Screen | null;
   screenSourceContent: string;
 
+  // Rendered DOM (UI layer, render-based)
+  renderedDoc: Document | null;
+
   // Playwright (data layer)
   page: Page | null;
   appFrame: Frame | null;
 
-  navigateTo(route: string): void;
+  navigateTo(route: string): Promise<void>;
   getFormField(name: string): { required: boolean; value: string } | undefined;
   getCurrentScreenFields(): string[];
   setScreenFields(screenId: string): void;
 
   // Methods for screen content analysis
   loadScreenSource(screenId: string): void;
+  renderCurrentScreen(): Promise<void>;
   getRenderedText(): string;
+  getDomText(): string;
   hasText(text: string): boolean;
   hasField(fieldName: string): boolean;
   hasElement(selector: string): boolean;
@@ -228,6 +234,7 @@ class CustomWorld extends World implements FestipodWorld {
   // Screen analysis
   currentScreen: Screen | null = null;
   screenSourceContent: string = '';
+  renderedDoc: Document | null = null;
 
   // Playwright (data layer testing)
   page: Page | null = null;
@@ -237,15 +244,15 @@ class CustomWorld extends World implements FestipodWorld {
     super(options);
   }
 
-  navigateTo(route: string): void {
+  async navigateTo(route: string): Promise<void> {
     this.navigationHistory.push(route);
     this.currentRoute = route;
 
     if (route.startsWith('#/demo/')) {
       this.currentScreenId = route.replace('#/demo/', '');
       this.setScreenFields(this.currentScreenId);
-      // Load the screen source for content verification
       this.loadScreenSource(this.currentScreenId);
+      await this.renderCurrentScreen();
     } else if (route === '#/specs' || route.startsWith('#/specs/')) {
       this.currentScreenId = null;
     } else if (route === '#/stories' || route.startsWith('#/stories/')) {
@@ -253,6 +260,22 @@ class CustomWorld extends World implements FestipodWorld {
     } else {
       this.currentScreenId = null;
     }
+  }
+
+  async renderCurrentScreen(): Promise<void> {
+    if (!this.currentScreenId) return;
+    try {
+      this.renderedDoc = await renderUiScreen(this.currentScreenId);
+      const text = this.renderedDoc?.body?.textContent ?? '';
+      console.log(`[render] "${this.currentScreenId}" — body text length: ${text.length}, preview: ${text.substring(0, 100)}`);
+    } catch (err) {
+      this.renderedDoc = null;
+      console.warn(`[render] Failed to render "${this.currentScreenId}":`, (err as Error).message, (err as Error).stack);
+    }
+  }
+
+  getDomText(): string {
+    return this.renderedDoc?.body?.textContent ?? '';
   }
 
   getFormField(name: string) {
@@ -302,8 +325,10 @@ class CustomWorld extends World implements FestipodWorld {
   }
 
   hasText(text: string): boolean {
-    // Check if the text appears in the screen source
-    // This verifies the component contains the expected text
+    // Prefer the rendered DOM when available — that's what the user sees.
+    // Fall back to source inspection for tests that haven't been migrated.
+    const domText = this.getDomText();
+    if (domText && domText.includes(text)) return true;
     return this.screenSourceContent.includes(text);
   }
 
@@ -320,10 +345,15 @@ class CustomWorld extends World implements FestipodWorld {
   }
 
   hasElement(selector: string): boolean {
-    // Check for common patterns in JSX
+    // DOM first
+    if (this.renderedDoc) {
+      try {
+        if (this.renderedDoc.querySelector(selector)) return true;
+      } catch {
+        // selector might not be a valid CSS selector — fall through to source
+      }
+    }
     if (!this.screenSourceContent) return false;
-
-    // Check for element types like textarea, input, button
     if (selector === 'textarea') {
       return this.screenSourceContent.includes('<textarea') ||
              this.screenSourceContent.includes('textarea');
@@ -336,13 +366,14 @@ class CustomWorld extends World implements FestipodWorld {
       return this.screenSourceContent.includes('<Button') ||
              this.screenSourceContent.includes('<button');
     }
-
     return this.screenSourceContent.includes(selector);
   }
 
   cleanup(): void {
     this.screenSourceContent = '';
     this.currentScreen = null;
+    unmountRender();
+    this.renderedDoc = null;
   }
 }
 
